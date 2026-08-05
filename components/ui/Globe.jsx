@@ -132,7 +132,9 @@ export function Globe({ globeConfig, data }) {
 
     globeRef.current
       .ringsData([])
-      .ringColor((e) => (t) => e.color(t))
+      .ringLat((d) => d.lat)
+      .ringLng((d) => d.lng)
+      .ringColor((e) => (t) => e ? e.color(t) : "rgba(255,255,255,0)")
       .ringMaxRadius(defaultProps.maxRings)
       .ringPropagationSpeed(RING_PROPAGATION_SPEED)
       .ringRepeatPeriod(
@@ -217,6 +219,7 @@ export function World(props) {
 }
 
 export function hexToRgb(hex) {
+  if (!hex) return { r: 255, g: 255, b: 255 };
   var shorthandRegex = /^#?([a-f\d])([a-f\d])([a-f\d])$/i;
   hex = hex.replace(shorthandRegex, function (m, r, g, b) {
     return r + r + g + g + b + b;
@@ -229,7 +232,7 @@ export function hexToRgb(hex) {
         g: parseInt(result[2], 16),
         b: parseInt(result[3], 16),
       }
-    : null;
+    : { r: 255, g: 255, b: 255 };
 }
 
 export function genRandomNumbers(min, max, count) {
