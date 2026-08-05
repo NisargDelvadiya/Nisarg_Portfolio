@@ -1,22 +1,15 @@
 "use client";
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Button } from "./MovingBorders";
 
-type Card = {
-  id: number;
-  content: JSX.Element | React.ReactNode | string;
-  className: string;
-  thumbnail: string;
-};
+export const LayoutGrid = ({ cards }) => {
+  const [selected, setSelected] = useState(null);
+  const [lastSelected, setLastSelected] = useState(null);
 
-export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
-  const [selected, setSelected] = useState<Card | null>(null);
-  const [lastSelected, setLastSelected] = useState<Card | null>(null);
-
-  const handleClick = (card: Card) => {
+  const handleClick = (card) => {
     setLastSelected(selected);
     setSelected(card);
   };
@@ -27,19 +20,13 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
   };
 
   return (
-    // change md:grid-cols-3 to md:grid-cols-4, gap-4 to gap-10
     <div className="w-full h-full p-10 grid grid-cols-1 md:grid-cols-4 max-w-7xl mx-auto gap-10 ">
       {cards.map((card, i) => (
         <Button
           key={i}
           borderRadius="1.75rem"
-          //   default is 2000
           duration={10000}
-          //   add className={cn(card.className, "")}
-          className={cn(
-            card.className
-            // "bg-white dark:bg-slate-900 text-black dark:text-white border-neutral-200 dark:border-slate-800"
-          )}
+          className={cn(card.className)}
         >
           <div
             className={cn(
@@ -78,12 +65,11 @@ export const LayoutGrid = ({ cards }: { cards: Card[] }) => {
   );
 };
 
-const BlurImage = ({ card }: { card: Card }) => {
+const BlurImage = ({ card }) => {
   const [loaded, setLoaded] = useState(false);
   return (
     <Image
       src={card.thumbnail}
-      //   change image scale 500 to 100
       height="100"
       width="100"
       onLoad={() => setLoaded(true)}
@@ -96,7 +82,7 @@ const BlurImage = ({ card }: { card: Card }) => {
   );
 };
 
-const SelectedCard = ({ selected }: { selected: Card | null }) => {
+const SelectedCard = ({ selected }) => {
   return (
     <div className="bg-transparent h-full w-full flex flex-col justify-end rounded-lg shadow-2xl relative z-[60]">
       <motion.div
