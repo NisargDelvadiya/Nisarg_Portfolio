@@ -36,7 +36,7 @@ const renderSkillIcon = (iconName) => {
 /**
  * @component RecentProjects
  * @description Showcase section displaying developer's top projects with 3D pin tilt effect on desktop,
- * center-aligned skills and action buttons on mobile and iPad (< lg), and interactive button click effects.
+ * fluid 2-column grid layout for tablets and desktops, and responsive card scaling across all dimensions.
  */
 const RecentProjects = () => {
   return (
@@ -47,11 +47,11 @@ const RecentProjects = () => {
         <span className="text-purple">recent projects</span>
       </h2>
 
-      {/* Projects Grid Container (CSS Grid with compact cards) */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 max-w-7xl mx-auto px-4 sm:px-6 mt-10 justify-items-center">
+      {/* Projects Grid Container (2-Column Grid starting at md: 768px for perfect tablet & iPad layout) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 lg:gap-12 xl:gap-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 justify-items-center">
         {projects.map((projectItem) => (
           <div
-            className="lg:min-h-[29.5rem] md:min-h-[28rem] sm:min-h-[26.5rem] min-h-[25rem] flex items-center justify-center w-full max-w-[88vw] sm:max-w-[28rem] lg:max-w-[32rem]"
+            className="xl:min-h-[29.5rem] lg:min-h-[28.5rem] md:min-h-[27rem] sm:min-h-[26rem] min-h-[25rem] flex items-center justify-center w-full max-w-[90vw] sm:max-w-md md:max-w-[22rem] lg:max-w-[26rem] xl:max-w-[30rem]"
             key={projectItem.id}
           >
             {/* 3D Pin Container Wrapper */}
@@ -60,7 +60,7 @@ const RecentProjects = () => {
               href={projectItem.link}
             >
               {/* Project Preview Image Box (Uncropped Fully-Visible UI Photo) */}
-              <div className="relative flex items-center justify-center w-full max-w-[88vw] sm:max-w-[26rem] lg:max-w-[29rem] overflow-hidden h-44 sm:h-52 lg:h-56 mb-4 rounded-2xl border border-white/10 shadow-inner bg-[#13162D]">
+              <div className="relative flex items-center justify-center w-full overflow-hidden h-40 sm:h-44 md:h-48 lg:h-52 xl:h-56 mb-4 rounded-2xl border border-white/10 shadow-inner bg-[#13162D]">
                 <div
                   className="relative w-full h-full overflow-hidden rounded-2xl"
                   style={{ backgroundColor: "#13162D" }}
@@ -80,27 +80,27 @@ const RecentProjects = () => {
                 />
               </div>
 
-              {/* Project Title (Centered on Mobile/iPad < lg, Left-aligned on Desktop lg:) */}
-              <h3 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1 text-white max-w-full tracking-tight text-center lg:text-left">
+              {/* Project Title (Centered on Mobile/Tablet < lg, Left-aligned on Desktop lg:) */}
+              <h3 className="font-bold xl:text-2xl lg:text-xl md:text-lg text-base line-clamp-1 text-white max-w-full tracking-tight text-center lg:text-left">
                 {projectItem.title}
               </h3>
 
-              {/* Project Description (Centered on Mobile/iPad < lg, Left-aligned on Desktop lg:) */}
+              {/* Project Description */}
               <p
-                className="lg:text-base lg:font-normal font-light text-xs sm:text-sm line-clamp-3 my-2 sm:my-2.5 leading-relaxed text-center lg:text-left"
+                className="xl:text-base lg:text-sm font-light text-xs line-clamp-3 my-2 sm:my-2.5 leading-relaxed text-center lg:text-left"
                 style={{ color: "#BEC1DD" }}
               >
                 {projectItem.des}
               </p>
 
-              {/* Bottom Row: Tech Stack Icons & Action Links (Centered on Mobile/iPad < lg) */}
-              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-between mt-4 mb-1 gap-3 sm:gap-3 w-full">
-                {/* Tech Icons Stack (Centered on Mobile/iPad) */}
+              {/* Bottom Row: Tech Stack Icons & Action Links */}
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-between mt-4 mb-1 gap-3 w-full">
+                {/* Tech Icons Stack */}
                 <div className="flex items-center justify-center shrink-0" aria-label="Technologies used">
                   {projectItem.iconLists.map((icon, index) => (
                     <div
                       key={index}
-                      className="border border-white/[.2] rounded-full bg-black lg:w-10 lg:h-10 w-8 h-8 flex justify-center items-center shadow-inner shrink-0"
+                      className="border border-white/[.2] rounded-full bg-black lg:w-9 lg:h-9 xl:w-10 xl:h-10 w-8 h-8 flex justify-center items-center shadow-inner shrink-0"
                       style={{
                         transform: `translateX(-${5 * index + 2}px)`,
                       }}
@@ -111,7 +111,7 @@ const RecentProjects = () => {
                   ))}
                 </div>
 
-                {/* Action Links (Source Code & Live Demo - Exclusive Clickable Interactive Buttons) */}
+                {/* Action Links (Source Code & Live Demo) */}
                 <div className="flex items-center justify-center gap-2 shrink-0 z-20">
                   {/* GitHub Source Code Button */}
                   <a
@@ -120,7 +120,7 @@ const RecentProjects = () => {
                     rel="noopener noreferrer"
                     title={`View ${projectItem.title} Source Code on GitHub`}
                     aria-label={`View ${projectItem.title} Source Code on GitHub`}
-                    className="flex justify-center items-center cursor-pointer px-3 sm:px-3 py-1.5 rounded-lg bg-[#10132E] border border-white/10 hover:border-purple/50 active:scale-95 active:bg-purple/20 text-purple text-xs md:text-sm font-semibold gap-1.5 transition-all duration-150 shadow-md group/btn whitespace-nowrap shrink-0"
+                    className="flex justify-center items-center cursor-pointer px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#10132E] border border-white/10 hover:border-purple/50 active:scale-95 active:bg-purple/20 text-purple text-xs md:text-sm font-semibold gap-1.5 transition-all duration-150 shadow-md group/btn whitespace-nowrap shrink-0"
                   >
                     <span className="whitespace-nowrap">Source Code</span>
                     <FaGithub className="w-3.5 h-3.5 text-white shrink-0 transition-transform group-hover/btn:scale-110" aria-hidden="true" />
@@ -133,7 +133,7 @@ const RecentProjects = () => {
                     rel="noopener noreferrer"
                     title={`Visit ${projectItem.title} Live Website`}
                     aria-label={`Visit ${projectItem.title} Live Website`}
-                    className="flex justify-center items-center cursor-pointer px-3 sm:px-3 py-1.5 rounded-lg bg-[#10132E] border border-white/10 hover:border-purple/50 active:scale-95 active:bg-purple/20 text-purple text-xs md:text-sm font-semibold gap-1.5 transition-all duration-150 shadow-md group/btn whitespace-nowrap shrink-0"
+                    className="flex justify-center items-center cursor-pointer px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#10132E] border border-white/10 hover:border-purple/50 active:scale-95 active:bg-purple/20 text-purple text-xs md:text-sm font-semibold gap-1.5 transition-all duration-150 shadow-md group/btn whitespace-nowrap shrink-0"
                   >
                     <span className="whitespace-nowrap">Check Live Site</span>
                     <FaLocationArrow className="w-3 h-3 text-[#CBACF9] shrink-0 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" aria-hidden="true" />
