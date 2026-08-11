@@ -36,7 +36,7 @@ const renderSkillIcon = (iconName) => {
 /**
  * @component RecentProjects
  * @description Showcase section displaying developer's top projects with 3D pin tilt effect on desktop,
- * vertical 1-column alignment on mobile/tablets/laptops (< 1280px), and 2-column side-by-side grid on wide screens.
+ * vertical 1-column layout for project cards, and centered vertical stacking for tech skills icons and action buttons.
  */
 const RecentProjects = () => {
   return (
@@ -51,7 +51,7 @@ const RecentProjects = () => {
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-12 sm:gap-16 xl:gap-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 justify-items-center">
         {projects.map((projectItem) => (
           <div
-            className="flex items-center justify-center w-full max-w-[92vw] sm:max-w-md md:max-w-lg xl:max-w-[32rem] min-h-[25rem] sm:min-h-[27rem] xl:min-h-[29.5rem]"
+            className="flex items-center justify-center w-full max-w-[92vw] sm:max-w-md md:max-w-lg xl:max-w-[32rem] min-h-[26rem] sm:min-h-[28rem] xl:min-h-[30rem]"
             key={projectItem.id}
           >
             {/* 3D Pin Container Wrapper */}
@@ -59,7 +59,7 @@ const RecentProjects = () => {
               title={projectItem.link}
               href={projectItem.link}
             >
-              <div className="flex flex-col justify-between w-full h-full">
+              <div className="flex flex-col justify-between items-center w-full h-full text-center">
                 {/* Project Preview Image Box (Uncropped Fully-Visible UI Photo) */}
                 <div className="relative flex items-center justify-center w-full overflow-hidden h-44 sm:h-52 md:h-56 xl:h-60 mb-4 rounded-2xl border border-white/10 shadow-inner bg-[#13162D]">
                   <div
@@ -81,22 +81,22 @@ const RecentProjects = () => {
                   />
                 </div>
 
-                {/* Project Title */}
-                <h3 className="font-bold xl:text-2xl lg:text-xl md:text-lg text-base line-clamp-1 text-white max-w-full tracking-tight text-center sm:text-left">
+                {/* Project Title (Centered) */}
+                <h3 className="font-bold xl:text-2xl lg:text-xl md:text-lg text-base line-clamp-1 text-white max-w-full tracking-tight text-center">
                   {projectItem.title}
                 </h3>
 
-                {/* Project Description */}
+                {/* Project Description (Centered) */}
                 <p
-                  className="xl:text-base lg:text-sm font-light text-xs line-clamp-3 my-2 sm:my-2.5 leading-relaxed text-center sm:text-left"
+                  className="xl:text-base lg:text-sm font-light text-xs line-clamp-3 my-2 sm:my-2.5 leading-relaxed text-center"
                   style={{ color: "#BEC1DD" }}
                 >
                   {projectItem.des}
                 </p>
 
-                {/* Bottom Flex Container: Tech Icons & Buttons */}
-                <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between mt-4 mb-1 gap-3 w-full max-w-full">
-                  {/* Tech Icons Stack */}
+                {/* Bottom Flex Container: Skills & Action Buttons Stacked Vertically */}
+                <div className="flex flex-col items-center justify-center mt-4 mb-1 gap-3.5 w-full max-w-full">
+                  {/* Tech Icons Stack (Centered) */}
                   <div className="flex items-center justify-center shrink-0 ps-3" aria-label="Technologies used">
                     {projectItem.iconLists.map((icon, index) => (
                       <div
@@ -112,8 +112,8 @@ const RecentProjects = () => {
                     ))}
                   </div>
 
-                  {/* Action Links (Source Code & Live Demo Buttons) */}
-                  <div className="flex items-center justify-center gap-2 shrink-0 z-20">
+                  {/* Action Links (Source Code & Live Demo Buttons - Centered Vertically Underneath) */}
+                  <div className="flex items-center justify-center gap-2.5 shrink-0 z-20">
                     {/* GitHub Source Code Button */}
                     <a
                       href={projectItem.github || "https://github.com"}
