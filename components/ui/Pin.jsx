@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 /**
  * @component PinContainer
  * @description 3D Perspective Pin wrapper component. Renders 3D perspective tilt on desktop (lg:),
- * and flat card with active touch scaling feedback on mobile/iPad (< lg).
+ * and static flat card on mobile/iPad (< lg) where click effects are scoped exclusively to inner action buttons.
  */
 export const PinContainer = ({
   children,
@@ -30,7 +30,7 @@ export const PinContainer = ({
   return (
     <div
       className={cn(
-        "relative group/pin z-50 cursor-pointer w-full flex items-center justify-center",
+        "relative group/pin z-50 w-full flex items-center justify-center lg:cursor-pointer",
         containerClassName
       )}
       onMouseEnter={onMouseEnter}
@@ -54,8 +54,8 @@ export const PinContainer = ({
         </div>
       </div>
 
-      {/* Mobile & iPad View (< lg): Flat Card with Tactile Active Click/Tap Effect */}
-      <div className="block lg:hidden relative p-4 sm:p-5 md:p-6 rounded-3xl border border-white/15 hover:border-purple/50 active:scale-[0.97] active:brightness-110 transition-all duration-200 w-full bg-[#04071D] bg-gradient-to-br from-[#04071D] via-[#0B0E23] to-[#04071D] shadow-[0_12px_40px_rgba(0,0,0,0.85)]">
+      {/* Mobile & iPad View (< lg): Static Flat Card with NO card-level click/tap scaling effect */}
+      <div className="block lg:hidden relative p-4 sm:p-5 md:p-6 rounded-3xl border border-white/15 w-full bg-[#04071D] bg-gradient-to-br from-[#04071D] via-[#0B0E23] to-[#04071D] shadow-[0_12px_40px_rgba(0,0,0,0.85)] select-none">
         <div className={cn("relative z-50 w-full", className)}>{children}</div>
       </div>
 

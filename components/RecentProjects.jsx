@@ -36,7 +36,7 @@ const renderSkillIcon = (iconName) => {
 /**
  * @component RecentProjects
  * @description Showcase section displaying developer's top projects with 3D pin tilt effect on desktop,
- * tactile tap feedback on mobile/iPad, tech stack icons, repository links, and live demo links.
+ * center-aligned skills and action buttons on mobile and iPad (< lg), and interactive button click effects.
  */
 const RecentProjects = () => {
   return (
@@ -80,23 +80,23 @@ const RecentProjects = () => {
                 />
               </div>
 
-              {/* Project Title */}
-              <h3 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1 text-white max-w-full tracking-tight">
+              {/* Project Title (Centered on Mobile/iPad < lg, Left-aligned on Desktop lg:) */}
+              <h3 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1 text-white max-w-full tracking-tight text-center lg:text-left">
                 {projectItem.title}
               </h3>
 
-              {/* Project Description */}
+              {/* Project Description (Centered on Mobile/iPad < lg, Left-aligned on Desktop lg:) */}
               <p
-                className="lg:text-base lg:font-normal font-light text-xs sm:text-sm line-clamp-3 my-2 sm:my-2.5 leading-relaxed"
+                className="lg:text-base lg:font-normal font-light text-xs sm:text-sm line-clamp-3 my-2 sm:my-2.5 leading-relaxed text-center lg:text-left"
                 style={{ color: "#BEC1DD" }}
               >
                 {projectItem.des}
               </p>
 
-              {/* Bottom Row: Tech Stack Icons & Action Links */}
-              <div className="flex flex-wrap sm:flex-nowrap items-center justify-between mt-4 mb-1 gap-2 sm:gap-3 w-full">
-                {/* Tech Icons Stack */}
-                <div className="flex items-center shrink-0" aria-label="Technologies used">
+              {/* Bottom Row: Tech Stack Icons & Action Links (Centered on Mobile/iPad < lg) */}
+              <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-between mt-4 mb-1 gap-3 sm:gap-3 w-full">
+                {/* Tech Icons Stack (Centered on Mobile/iPad) */}
+                <div className="flex items-center justify-center shrink-0" aria-label="Technologies used">
                   {projectItem.iconLists.map((icon, index) => (
                     <div
                       key={index}
@@ -111,8 +111,8 @@ const RecentProjects = () => {
                   ))}
                 </div>
 
-                {/* Action Links (Source Code & Live Demo) */}
-                <div className="flex items-center gap-2 shrink-0 z-20">
+                {/* Action Links (Source Code & Live Demo - Exclusive Clickable Interactive Buttons) */}
+                <div className="flex items-center justify-center gap-2 shrink-0 z-20">
                   {/* GitHub Source Code Button */}
                   <a
                     href={projectItem.github || "https://github.com"}
@@ -120,7 +120,7 @@ const RecentProjects = () => {
                     rel="noopener noreferrer"
                     title={`View ${projectItem.title} Source Code on GitHub`}
                     aria-label={`View ${projectItem.title} Source Code on GitHub`}
-                    className="flex justify-center items-center cursor-pointer px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#10132E] border border-white/10 hover:border-purple/50 text-purple text-xs md:text-sm font-semibold gap-1.5 active:scale-95 transition-all duration-200 shadow-md group/btn whitespace-nowrap shrink-0"
+                    className="flex justify-center items-center cursor-pointer px-3 sm:px-3 py-1.5 rounded-lg bg-[#10132E] border border-white/10 hover:border-purple/50 active:scale-95 active:bg-purple/20 text-purple text-xs md:text-sm font-semibold gap-1.5 transition-all duration-150 shadow-md group/btn whitespace-nowrap shrink-0"
                   >
                     <span className="whitespace-nowrap">Source Code</span>
                     <FaGithub className="w-3.5 h-3.5 text-white shrink-0 transition-transform group-hover/btn:scale-110" aria-hidden="true" />
@@ -133,7 +133,7 @@ const RecentProjects = () => {
                     rel="noopener noreferrer"
                     title={`Visit ${projectItem.title} Live Website`}
                     aria-label={`Visit ${projectItem.title} Live Website`}
-                    className="flex justify-center items-center cursor-pointer px-2.5 sm:px-3 py-1.5 rounded-lg bg-[#10132E] border border-white/10 hover:border-purple/50 text-purple text-xs md:text-sm font-semibold gap-1.5 active:scale-95 transition-all duration-200 shadow-md group/btn whitespace-nowrap shrink-0"
+                    className="flex justify-center items-center cursor-pointer px-3 sm:px-3 py-1.5 rounded-lg bg-[#10132E] border border-white/10 hover:border-purple/50 active:scale-95 active:bg-purple/20 text-purple text-xs md:text-sm font-semibold gap-1.5 transition-all duration-150 shadow-md group/btn whitespace-nowrap shrink-0"
                   >
                     <span className="whitespace-nowrap">Check Live Site</span>
                     <FaLocationArrow className="w-3 h-3 text-[#CBACF9] shrink-0 transition-transform group-hover/btn:translate-x-0.5 group-hover/btn:-translate-y-0.5" aria-hidden="true" />

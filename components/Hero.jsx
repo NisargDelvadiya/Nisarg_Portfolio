@@ -2,47 +2,17 @@ import React from "react";
 import { FaLocationArrow } from "react-icons/fa6";
 
 import MagicButton from "./MagicButton";
-import { Spotlight } from "./ui/Spotlight";
 import { TextGenerateEffect } from "./ui/TextGenerateEffect";
 
 /**
  * @component Hero
- * @description Hero Section component featuring ambient Spotlight effects, animated text generation,
- * personal intro paragraph, and a call-to-action button linking to the About section.
+ * @description Clean, high-impact Hero Section featuring animated headline, personal developer intro,
+ * and call-to-action button linking to the About section.
  */
 const Hero = () => {
   return (
     <section className="pb-10 pt-20 md:pt-28 relative w-full" id="hero" aria-label="Hero Section">
-      {/* Ambient Spotlight Lighting Effects */}
-      <div aria-hidden="true" className="pointer-events-none">
-        <Spotlight
-          className="-top-40 -left-10 md:-left-32 md:-top-20 h-screen"
-          fill="white"
-        />
-        <Spotlight
-          className="h-[80vh] w-[50vw] top-10 left-full"
-          fill="purple"
-        />
-        <Spotlight
-          className="left-80 top-28 h-[80vh] w-[50vw]"
-          fill="blue"
-        />
-      </div>
-
-      {/* Grid Pattern Background Layer */}
-      <div
-        className="h-screen w-full dark:bg-black-100 bg-white dark:bg-grid-white/[0.03] bg-grid-black-100/[0.2]
-       absolute top-0 left-0 flex items-center justify-center pointer-events-none"
-        aria-hidden="true"
-      >
-        {/* Radial Mask for smooth edge fading */}
-        <div
-          className="absolute pointer-events-none inset-0 flex items-center justify-center dark:bg-black-100
-         bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"
-        />
-      </div>
-
-      {/* Hero Content Container (Wide, Expansive & Unrestricted) */}
+      {/* Hero Content Container */}
       <div className="flex justify-center relative mt-4 md:mt-6 mb-12 z-10 w-full">
         <div className="w-full max-w-5xl lg:max-w-6xl xl:max-w-7xl flex flex-col items-center justify-center px-4 sm:px-6">
           {/* Greeting Header */}
