@@ -47,11 +47,11 @@ const RecentProjects = () => {
         <span className="text-purple">recent projects</span>
       </h2>
 
-      {/* Projects Grid Container (CSS Grid for non-overlapping layout) */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 max-w-7xl mx-auto px-4 mt-12 justify-items-center">
+      {/* Projects Grid Container (CSS Grid with vertical space and non-clipping heights) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-28 max-w-7xl mx-auto px-4 sm:px-6 mt-12 justify-items-center">
         {projects.map((projectItem) => (
           <div
-            className="lg:min-h-[32.5rem] h-[26rem] sm:h-[30rem] flex items-center justify-center w-full max-w-[88vw] sm:max-w-[28rem] lg:max-w-[32rem]"
+            className="lg:min-h-[36.5rem] md:min-h-[34rem] sm:min-h-[32rem] min-h-[30rem] flex items-center justify-center w-full max-w-[88vw] sm:max-w-[28rem] lg:max-w-[32rem]"
             key={projectItem.id}
           >
             {/* 3D Pin Container Wrapper */}
@@ -60,7 +60,7 @@ const RecentProjects = () => {
               href={projectItem.link}
             >
               {/* Project Preview Image Box */}
-              <div className="relative flex items-center justify-center w-full max-w-[88vw] sm:max-w-[26rem] lg:max-w-[29rem] overflow-hidden h-[20vh] lg:h-[30vh] mb-6 sm:mb-8 rounded-2xl">
+              <div className="relative flex items-center justify-center w-full max-w-[88vw] sm:max-w-[26rem] lg:max-w-[29rem] overflow-hidden h-[20vh] sm:h-[24vh] lg:h-[28vh] mb-5 sm:mb-6 rounded-2xl border border-white/10">
                 <div
                   className="relative w-full h-full overflow-hidden rounded-2xl"
                   style={{ backgroundColor: "#13162D" }}
@@ -80,20 +80,20 @@ const RecentProjects = () => {
               </div>
 
               {/* Project Title */}
-              <h3 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1 text-white max-w-full">
+              <h3 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1 text-white max-w-full tracking-tight">
                 {projectItem.title}
               </h3>
 
               {/* Project Description */}
               <p
-                className="lg:text-base lg:font-normal font-light text-xs sm:text-sm line-clamp-3 my-3"
+                className="lg:text-base lg:font-normal font-light text-xs sm:text-sm line-clamp-3 my-3 leading-relaxed"
                 style={{ color: "#BEC1DD" }}
               >
                 {projectItem.des}
               </p>
 
               {/* Bottom Row: Tech Stack Icons & Action Links */}
-              <div className="flex flex-wrap sm:flex-nowrap items-center justify-between mt-5 mb-2 gap-3 w-full">
+              <div className="flex flex-wrap sm:flex-nowrap items-center justify-between mt-5 mb-1 gap-3 w-full">
                 {/* Tech Icons Stack */}
                 <div className="flex items-center shrink-0" aria-label="Technologies used">
                   {projectItem.iconLists.map((icon, index) => (

@@ -48,15 +48,15 @@ export const PinContainer = ({
           style={{
             transform: transform,
           }}
-          className="absolute left-1/2 p-5 sm:p-6 top-1/2 flex justify-start items-start rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.9)] border border-white/[0.1] group-hover/pin:border-purple/40 transition duration-700 overflow-hidden bg-[#04071D] bg-gradient-to-br from-[#04071D] via-[#0B0E23] to-[#04071D]"
+          className="absolute left-1/2 p-5 sm:p-7 md:p-8 top-1/2 flex justify-start items-start rounded-3xl shadow-[0_12px_40px_rgba(0,0,0,0.85)] border border-white/15 group-hover/pin:border-purple/60 transition duration-700 bg-[#04071D] bg-gradient-to-br from-[#04071D] via-[#0B0E23] to-[#04071D]"
         >
-          <div className={cn("relative z-50", className)}>{children}</div>
+          <div className={cn("relative z-50 w-full", className)}>{children}</div>
         </div>
       </div>
 
       {/* Mobile & iPad View (< lg): Flat Card with Tactile Active Click/Tap Effect */}
-      <div className="block lg:hidden relative p-4 sm:p-6 rounded-3xl border border-white/[0.1] hover:border-purple/30 active:scale-[0.97] active:brightness-110 transition-all duration-200 overflow-hidden w-full bg-[#04071D] bg-gradient-to-br from-[#04071D] via-[#0B0E23] to-[#04071D] shadow-xl">
-        <div className={cn("relative z-50", className)}>{children}</div>
+      <div className="block lg:hidden relative p-5 sm:p-7 md:p-8 rounded-3xl border border-white/15 hover:border-purple/50 active:scale-[0.97] active:brightness-110 transition-all duration-200 w-full bg-[#04071D] bg-gradient-to-br from-[#04071D] via-[#0B0E23] to-[#04071D] shadow-[0_12px_40px_rgba(0,0,0,0.85)]">
+        <div className={cn("relative z-50 w-full", className)}>{children}</div>
       </div>
 
       {/* Desktop Pin Floating Perspective Title & Beam (lg screens and up) */}
