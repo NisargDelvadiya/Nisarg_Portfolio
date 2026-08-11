@@ -40,18 +40,18 @@ const renderSkillIcon = (iconName) => {
  */
 const RecentProjects = () => {
   return (
-    <section className="py-20 relative" id="projects" aria-label="Recent Projects Section">
+    <section className="py-20 relative w-full overflow-hidden" id="projects" aria-label="Recent Projects Section">
       {/* Section Heading */}
       <h2 className="heading text-center">
         A small selection of{" "}
         <span className="text-purple">recent projects</span>
       </h2>
 
-      {/* Projects Grid Container */}
-      <div className="flex flex-wrap items-center justify-center p-4 gap-10 sm:gap-16 mt-10">
+      {/* Projects Grid Container (CSS Grid for non-overlapping layout) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-24 max-w-7xl mx-auto px-4 mt-12 justify-items-center">
         {projects.map((projectItem) => (
           <div
-            className="lg:min-h-[32.5rem] h-[25rem] sm:h-[28rem] flex items-center justify-center sm:w-96 w-[88vw]"
+            className="lg:min-h-[32.5rem] h-[26rem] sm:h-[30rem] flex items-center justify-center w-full max-w-[88vw] sm:max-w-[28rem] lg:max-w-[32rem]"
             key={projectItem.id}
           >
             {/* 3D Pin Container Wrapper */}
@@ -60,16 +60,16 @@ const RecentProjects = () => {
               href={projectItem.link}
             >
               {/* Project Preview Image Box */}
-              <div className="relative flex items-center justify-center sm:w-96 w-[88vw] overflow-hidden h-[20vh] lg:h-[30vh] mb-10">
+              <div className="relative flex items-center justify-center w-full max-w-[88vw] sm:max-w-[26rem] lg:max-w-[29rem] overflow-hidden h-[20vh] lg:h-[30vh] mb-6 sm:mb-8 rounded-2xl">
                 <div
-                  className="relative w-full h-full overflow-hidden lg:rounded-3xl"
+                  className="relative w-full h-full overflow-hidden rounded-2xl"
                   style={{ backgroundColor: "#13162D" }}
                 >
                   <img
                     src="/bg/bg.png"
                     alt="Project card background container"
                     aria-hidden="true"
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover opacity-80"
                   />
                 </div>
                 <img
@@ -80,23 +80,20 @@ const RecentProjects = () => {
               </div>
 
               {/* Project Title */}
-              <h3 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1 text-white">
+              <h3 className="font-bold lg:text-2xl md:text-xl text-base line-clamp-1 text-white max-w-full">
                 {projectItem.title}
               </h3>
 
               {/* Project Description */}
               <p
-                className="lg:text-base lg:font-normal font-light text-sm line-clamp-3"
-                style={{
-                  color: "#BEC1DD",
-                  margin: "1vh 0",
-                }}
+                className="lg:text-base lg:font-normal font-light text-xs sm:text-sm line-clamp-3 my-3"
+                style={{ color: "#BEC1DD" }}
               >
                 {projectItem.des}
               </p>
 
               {/* Bottom Row: Tech Stack Icons & Action Links */}
-              <div className="flex flex-wrap sm:flex-nowrap items-center justify-between mt-7 mb-3 gap-3">
+              <div className="flex flex-wrap sm:flex-nowrap items-center justify-between mt-5 mb-2 gap-3 w-full">
                 {/* Tech Icons Stack */}
                 <div className="flex items-center shrink-0" aria-label="Technologies used">
                   {projectItem.iconLists.map((icon, index) => (
