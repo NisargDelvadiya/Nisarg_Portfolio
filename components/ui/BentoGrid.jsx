@@ -204,7 +204,7 @@ export const BentoGridItem = ({
                   <div className="relative w-36 h-36 sm:w-48 sm:h-48 md:w-60 md:h-60 lg:w-72 lg:h-72 rounded-full overflow-hidden border-4 border-purple/60 bg-[#10132E] flex items-center justify-center shadow-2xl">
                     <img
                       src="/about/profile_pic.jpeg"
-                      alt="Nisarg Delvadiya Profile Photo"
+                      alt="Nisarg Profile Photo"
                       className="w-full h-full object-cover"
                     />
                   </div>
@@ -217,8 +217,8 @@ export const BentoGridItem = ({
                     download="Nisarg_Resume.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
-                    title="Download Nisarg Delvadiya's Resume PDF"
-                    aria-label="Download Nisarg Delvadiya's Resume PDF"
+                    title="Download Nisarg's Resume PDF"
+                    aria-label="Download Nisarg's Resume PDF"
                     className="z-20 cursor-pointer focus:outline-none"
                   >
                     <MagicButton

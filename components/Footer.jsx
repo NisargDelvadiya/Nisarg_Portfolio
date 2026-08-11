@@ -158,8 +158,8 @@ const Footer = () => {
                 href="https://github.com/NisargDelvadiya"
                 target="_blank"
                 rel="noopener noreferrer"
-                title="Visit Nisarg Delvadiya's GitHub profile"
-                aria-label="Visit Nisarg Delvadiya's GitHub profile"
+                title="Visit Nisarg's GitHub profile"
+                aria-label="Visit Nisarg's GitHub profile"
                 className="text-white-200 hover:text-purple transition-colors cursor-pointer"
               >
                 GitHub
@@ -168,8 +168,8 @@ const Footer = () => {
                 href="https://www.linkedin.com/in/nisarg-delvadiya/"
                 target="_blank"
                 rel="noopener noreferrer"
-                title="Visit Nisarg Delvadiya's LinkedIn profile"
-                aria-label="Visit Nisarg Delvadiya's LinkedIn profile"
+                title="Visit Nisarg's LinkedIn profile"
+                aria-label="Visit Nisarg's LinkedIn profile"
                 className="text-white-200 hover:text-purple transition-colors cursor-pointer"
               >
                 LinkedIn
@@ -185,8 +185,8 @@ const Footer = () => {
                 href="https://draft.blogger.com/profile/06497378480775646608"
                 target="_blank"
                 rel="noopener noreferrer"
-                title="Visit Nisarg Delvadiya's Blog"
-                aria-label="Visit Nisarg Delvadiya's Blog"
+                title="Visit Nisarg's Blog"
+                aria-label="Visit Nisarg's Blog"
                 className="text-white-200 hover:text-purple transition-colors cursor-pointer"
               >
                 Blog
@@ -285,7 +285,7 @@ const Footer = () => {
 
           {/* Copyright Line */}
           <p className="text-center">
-            &copy; 2026 • Made with ❤️ in Bharat 🇮🇳 | All Rights are Reserved
+            &copy; 2026 • Made with ❤️ in Bharat 🇮🇳 | Nisarg • All Rights Reserved
           </p>
         </div>
       </div>
@@ -319,21 +319,15 @@ const Footer = () => {
                   Last Updated: May 2026
                 </p>
                 <p>
-                  Welcome to MyTodo (&quot;the Application&quot;). By creating an
-                  account or using our task tracking dashboard, you agree to be
-                  bound by these Terms under the Information Technology Act,
-                  2000.
+                  Welcome to Nisarg&apos;s Developer Portfolio (&quot;the Website&quot;). By browsing, viewing, or interacting with this website, you agree to be bound by these Terms of Use in compliance with the Information Technology Act, 2000 of India.
                 </p>
 
                 <div className="flex flex-col gap-2 mt-2">
                   <h3 className="font-bold text-white">
-                    1. ACCOUNT INTEGRITY & SECURITY
+                    1. INTELLECTUAL PROPERTY & CONTENT USE
                   </h3>
                   <p>
-                    To save and track your missions, you must maintain a secure
-                    login configuration via our supported OAuth providers. You
-                    are entirely responsible for protecting your local Master
-                    Password and authentication metrics.
+                    All project showcases, source code demonstrations, user interface designs, images, and text contained on this website are the intellectual property of Nisarg unless explicitly noted otherwise. You may share links to this portfolio for recruitment, professional evaluation, or referral purposes.
                   </p>
                 </div>
 
@@ -342,58 +336,44 @@ const Footer = () => {
                     2. ACCEPTABLE PLATFORM USE
                   </h3>
                   <p>
-                    You explicitly agree not to introduce query injections,
-                    execute API scraping operations, or attempt to compromise
-                    our active cloud storage databases or backend infrastructure
-                    environments.
+                    You explicitly agree not to perform automated web scraping, execute denial-of-service attempts, probe backend endpoints, or attempt to compromise the hosting infrastructure and edge delivery networks of this website.
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <h3 className="font-bold text-white">
-                    3. LIMITATION OF LIABILITY
+                    3. THIRD-PARTY LINKS & EXTERNAL PROJECTS
                   </h3>
                   <p>
-                    The Application services are provided strictly &quot;as-is&quot;.
-                    Under no legal frameworks shall the developer be liable for
-                    accidental cloud synchronization lapses, data deletions, or
-                    server downtime occurrences.
+                    This website links to external live projects (such as LogDiary and MyTodo), GitHub repositories, and professional networks (LinkedIn). Nisarg is not responsible for the content, privacy policies, or practices of third-party domains.
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <h3 className="font-bold text-white">
-                    4. JURISDICTIONAL AUTHORITY
+                    4. LIMITATION OF LIABILITY
                   </h3>
                   <p>
-                    These operational terms are governed completely by the cyber
-                    laws of the Republic of India. Any digital disputes fall under
-                    the exclusive handling of local state court nodes.
+                    The content on this website is provided strictly &quot;as-is&quot; for informational and professional demonstration purposes. Under no circumstances shall the developer be liable for temporary hosting downtime, internet connectivity lapses, or third-party service outages.
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <h3 className="font-bold text-white">
-                    5. ACTIVITY TRACKING & AUDIT LOGS
+                    5. GOVERNING LAW & JURISDICTION
                   </h3>
                   <p>
-                    To maintain the security and integrity of the Application, we
-                    automatically track and log critical account actions (including
-                    but not limited to logins, profile updates, and task
-                    creations). By using the Application, you consent to this
-                    tracking. You have the right to export these logs at any time
-                    via your account dashboard.
+                    These operational terms are governed completely by the cyber laws of the Republic of India. Any legal inquiries or disputes fall under the jurisdiction of courts in Gujarat, Bharat.
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <h3 className="font-bold text-white">6. CONTACT DETAILS</h3>
                   <p>
-                    If you have any questions or require clarification regarding
-                    these Terms, please feel free to reach out:
+                    If you have any questions or require clarification regarding these Terms, please feel free to reach out:
                   </p>
                   <p className="pl-3 border-l-2 border-purple text-xs sm:text-sm">
-                    <strong>Name:</strong> Nisarg Jayesh Delvadiya<br />
+                    <strong>Name:</strong> Nisarg<br />
                     <strong>Email:</strong> nisarg.delvadiya1@zohomail.in<br />
                     <strong>Location:</strong> Vadodara, Gujarat, Bharat
                   </p>
@@ -423,91 +403,63 @@ const Footer = () => {
                   Last Updated: May 2026
                 </p>
                 <p>
-                  Your data protection parameters are explicitly managed in total
-                  alignment with the Digital Personal Data Protection Act (DPDP),
-                  2023 of India.
+                  Your privacy is deeply respected. Data protection parameters on Nisarg&apos;s Developer Portfolio Website are explicitly managed in total alignment with the Digital Personal Data Protection (DPDP) Act, 2023 of India.
                 </p>
 
                 <div className="flex flex-col gap-2 mt-2">
                   <h3 className="font-bold text-white">
-                    1. PURPOSEFUL DATA COLLECTION & USAGE
+                    1. ZERO PERSONAL DATA COLLECTION
                   </h3>
                   <p>
-                    We use Google and Zoho authentication services solely to verify
-                    your identity and securely sync your task vault across devices.
-                    We collect minimal identity tags including your name and email
-                    address. We do not request, access, or share any additional
-                    personal data from your accounts. We also register and hold
-                    your written mission text entries safely within your profile
-                    dashboard context.
+                    This website serves strictly as an informational portfolio and engineering showcase. We do not require account registration, collect user passwords, or harvest personal identity information on this domain.
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <h3 className="font-bold text-white">
-                    2. HASHING & STORAGE STANDARDS
+                    2. ESSENTIAL FUNCTIONAL COOKIES & GOOGLE TRANSLATE
                   </h3>
                   <p>
-                    All your tasks are encrypted end-to-end on your local device
-                    before hitting our remote database clusters. We cannot read
-                    your tasks. Active authentication relies on secure NextAuth
-                    integration.
+                    This portfolio operates on minimal, essential functional browser storage. We use functional cookies solely via Google Translate to remember your selected language preferences (<code className="text-purple">googtrans</code>) across site navigation. We do not employ third-party advertising, commercial tracking, or behavioral profiling cookies.
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <h3 className="font-bold text-white">
-                    3. DISTRIBUTION EXCLUSIONS
+                    3. COOKIE PREFERENCE MANAGEMENT
                   </h3>
                   <p>
-                    We maintain an absolute zero-sharing profile layout. Your
-                    identity paths, contact parameters, and custom task
-                    collections are never traded or exposed to third-party
-                    commercial analytics platforms.
+                    Upon visiting this website, you can manage your functional cookie preferences via our Cookie Consent banner. You may choose to accept essential cookies or dismiss the dialog at any time.
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <h3 className="font-bold text-white">
-                    4. RIGHT TO DATA ERASURE
+                    4. HOSTING & INFRASTRUCTURE SECURITY
                   </h3>
                   <p>
-                    In strict compliance with Indian data principal rights, choosing
-                    to terminate your workspace triggers a complete automated purge
-                    sequence, permanently erasing your identity files and task
-                    indexes from live database nodes.
+                    This portfolio is hosted on modern, global edge infrastructure with active HTTPS/SSL encryption to protect all web traffic between your browser and our servers.
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-2">
                   <h3 className="font-bold text-white">
-                    5. RIGHT TO DATA PORTABILITY & AUDIT LOGS
+                    5. RIGHTS UNDER THE DPDP ACT, 2023
                   </h3>
                   <p>
-                    In alignment with global privacy standards (like GDPR and
-                    CCPA), you have the absolute right to request and download a
-                    copy of your data. We maintain a secure Audit Log of your
-                    account activity (e.g., logins, task creation, profile
-                    updates) to prevent brute-force attacks and ensure
-                    accountability. You can download a complete timeline of this
-                    activity alongside your tasks at any time using the &quot;Export
-                    PDF&quot; feature.
+                    In compliance with Indian data principal rights, you have the right to request clarification regarding site operations or data handling parameters at any time.
                   </p>
                 </div>
 
                 <div className="flex flex-col gap-2">
-                  <h3 className="font-bold text-white">
-                    6. COOKIE USAGE & CONSENT
-                  </h3>
+                  <h3 className="font-bold text-white">6. CONTACT INFORMATION</h3>
                   <p>
-                    MyTodo respects your browser storage and operates purely on
-                    minimal, functional cookies. We use essential tokens (via
-                    NextAuth) to maintain your secure login session and functional
-                    cookies (via Google Translate) to remember your language
-                    preferences. We do not employ any third-party tracking,
-                    advertising, or behavioral analytics cookies. By using our
-                    application, you acknowledge the use of these strictly
-                    essential operations.
+                    If you have any questions or privacy inquiries regarding this portfolio:
+                  </p>
+                  <p className="pl-3 border-l-2 border-purple text-xs sm:text-sm">
+                    <strong>Name:</strong> Nisarg<br />
+                    <strong>Email:</strong> nisarg.delvadiya1@zohomail.in<br />
+                    <strong>Location:</strong> Vadodara, Gujarat, Bharat
                   </p>
                 </div>
               </div>

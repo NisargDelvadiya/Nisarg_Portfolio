@@ -1,4 +1,4 @@
-# Nisarg Delvadiya — Developer Portfolio 🚀
+# Nisarg — Developer Portfolio 🚀
 
 [![Next.js](https://img.shields.io/badge/Next.js_16-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)](https://nextjs.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS_v4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
@@ -178,7 +178,7 @@ Nisarg_Portfolio/
 
 ## 📄 License & Legal
 
-- **Developer**: Nisarg Jayesh Delvadiya
+- **Developer**: Nisarg
 - **Contact**: nisarg.delvadiya1@zohomail.in
 - **Location**: Vadodara, Gujarat, Bharat 🇮🇳
 - **Legal Compliance**: Information Technology Act, 2000 & Digital Personal Data Protection (DPDP) Act, 2023 of India.
@@ -187,5 +187,5 @@ Nisarg_Portfolio/
 ---
 
 <div align="center">
-  <sub>Made with ❤️ in Bharat 🇮🇳 • Nisarg Delvadiya &copy; 2026</sub>
+  <sub>Made with ❤️ in Bharat 🇮🇳 • Nisarg &copy; 2026</sub>
 </div>

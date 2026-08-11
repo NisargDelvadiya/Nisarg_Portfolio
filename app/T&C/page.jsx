@@ -5,7 +5,7 @@ import { FaArrowLeft } from "react-icons/fa";
 
 /**
  * @page TermsAndConditions
- * @description Terms & Conditions legal specification page for Nisarg Delvadiya's Developer Portfolio.
+ * @description Terms & Conditions legal specification page for Nisarg's Developer Portfolio.
  * Outlines intellectual property rights, acceptable use policies, WCAG accessibility compliance standards, and contact details.
  */
 export default function TermsAndConditions() {
@@ -52,13 +52,13 @@ export default function TermsAndConditions() {
           </div>
 
           <p>
-            Welcome to Nisarg Delvadiya&apos;s Developer Portfolio (&quot;the Website&quot;). By browsing, viewing, or interacting with this website, you agree to be bound by these Terms of Use in compliance with the Information Technology Act, 2000 of India.
+            Welcome to Nisarg&apos;s Developer Portfolio (&quot;the Website&quot;). By browsing, viewing, or interacting with this website, you agree to be bound by these Terms of Use in compliance with the Information Technology Act, 2000 of India.
           </p>
 
           <div className="flex flex-col gap-2">
             <h2 className="text-lg font-bold text-white">1. INTELLECTUAL PROPERTY & CONTENT USE</h2>
             <p>
-              All project showcases, source code demonstrations, user interface designs, images, and text contained on this website are the intellectual property of Nisarg Delvadiya unless explicitly noted otherwise. You may share links to this portfolio for recruitment, professional evaluation, or referral purposes.
+              All project showcases, source code demonstrations, user interface designs, images, and text contained on this website are the intellectual property of Nisarg unless explicitly noted otherwise. You may share links to this portfolio for recruitment, professional evaluation, or referral purposes.
             </p>
           </div>
 
@@ -72,7 +72,7 @@ export default function TermsAndConditions() {
           <div className="flex flex-col gap-2">
             <h2 className="text-lg font-bold text-white">3. THIRD-PARTY LINKS & EXTERNAL PROJECTS</h2>
             <p>
-              This website links to external live projects (such as LogDiary and MyTodo), GitHub repositories, and professional networks (LinkedIn). Nisarg Delvadiya is not responsible for the content, privacy policies, or practices of third-party domains.
+              This website links to external live projects (such as LogDiary and MyTodo), GitHub repositories, and professional networks (LinkedIn). Nisarg is not responsible for the content, privacy policies, or practices of third-party domains.
             </p>
           </div>
 
@@ -103,7 +103,7 @@ export default function TermsAndConditions() {
               If you have any questions, professional inquiries, or feedback regarding these Terms or Accessibility:
             </p>
             <div className="p-4 bg-white/5 border-l-4 border-purple rounded-r-xl text-xs sm:text-sm text-white flex flex-col gap-1 mt-1">
-              <p><strong>Name:</strong> Nisarg Jayesh Delvadiya</p>
+              <p><strong>Name:</strong> Nisarg</p>
               <p><strong>Email:</strong> nisarg.delvadiya1@zohomail.in</p>
               <p><strong>Location:</strong> Vadodara, Gujarat, Bharat</p>
             </div>
@@ -113,7 +113,7 @@ export default function TermsAndConditions() {
 
         {/* Footer info */}
         <p className="text-center text-xs text-white-200">
-          &copy; 2026 • Made with ❤️ in Bharat 🇮🇳 | All Rights are Reserved
+          &copy; 2026 • Made with ❤️ in Bharat 🇮🇳 | Nisarg • All Rights Reserved
         </p>
 
       </div>

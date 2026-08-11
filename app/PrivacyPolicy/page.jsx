@@ -3,6 +3,12 @@
 import React from "react";
 import { FaArrowLeft } from "react-icons/fa";
 
+/**
+ * @page PrivacyPolicy
+ * @description Privacy Policy page for Nisarg's Developer Portfolio.
+ * Outlines zero personal data collection, essential functional cookies (Google Translate),
+ * infrastructure security, and DPDP Act 2023 compliance.
+ */
 export default function PrivacyPolicy() {
   const handleBackToPortfolio = () => {
     if (typeof window !== "undefined") {
@@ -15,24 +21,26 @@ export default function PrivacyPolicy() {
 
   return (
     <main className="min-h-screen bg-black-100 text-white flex flex-col items-center py-12 px-4 sm:px-8 relative overflow-x-hidden">
-      {/* Background Grid */}
-      <div className="w-full absolute left-0 top-0 min-h-screen pointer-events-none opacity-30">
-        <img src="/bg/footer-grid.svg" alt="grid" className="w-full h-full object-cover" />
+      {/* Background Grid Pattern */}
+      <div className="w-full absolute left-0 top-0 min-h-screen pointer-events-none opacity-30" aria-hidden="true">
+        <img src="/bg/footer-grid.svg" alt="Background grid pattern" className="w-full h-full object-cover" />
       </div>
 
       <div className="max-w-4xl w-full relative z-10 flex flex-col gap-8">
         
-        {/* Back Link */}
+        {/* Back Link Button */}
         <button
           type="button"
           onClick={handleBackToPortfolio}
-          className="inline-flex items-center gap-2 text-purple hover:text-white font-semibold text-sm transition-colors w-max bg-white/5 hover:bg-white/10 px-4 py-2 rounded-xl border border-white/10 cursor-pointer"
+          title="Return to Portfolio main page"
+          aria-label="Return to Portfolio main page"
+          className="inline-flex items-center gap-2 text-purple hover:text-white font-semibold text-sm transition-colors w-max bg-white/5 hover:bg-white/10 px-4 py-2 rounded-xl border border-white/10 cursor-pointer focus:outline-none focus:ring-2 focus:ring-purple"
         >
-          <FaArrowLeft className="w-4 h-4" />
+          <FaArrowLeft className="w-4 h-4" aria-hidden="true" />
           Back to Portfolio
         </button>
 
-        {/* Main Content Container */}
+        {/* Main Privacy Policy Container */}
         <div className="backdrop-blur-xl bg-black-200/70 border border-white/10 rounded-3xl p-6 sm:p-10 shadow-2xl flex flex-col gap-6 text-zinc-300 leading-relaxed text-sm sm:text-base">
           
           <div className="border-b border-purple/30 pb-4">
@@ -45,7 +53,7 @@ export default function PrivacyPolicy() {
           </div>
 
           <p>
-            Your privacy is deeply respected. Data protection parameters on Nisarg Delvadiya&apos;s Developer Portfolio Website are explicitly managed in total alignment with the Digital Personal Data Protection (DPDP) Act, 2023 of India.
+            Your privacy is deeply respected. Data protection parameters on Nisarg&apos;s Developer Portfolio Website are explicitly managed in total alignment with the Digital Personal Data Protection (DPDP) Act, 2023 of India.
           </p>
 
           <div className="flex flex-col gap-2">
@@ -89,7 +97,7 @@ export default function PrivacyPolicy() {
               If you have any questions or privacy inquiries regarding this portfolio:
             </p>
             <div className="p-4 bg-white/5 border-l-4 border-purple rounded-r-xl text-xs sm:text-sm text-white flex flex-col gap-1 mt-1">
-              <p><strong>Name:</strong> Nisarg Jayesh Delvadiya</p>
+              <p><strong>Name:</strong> Nisarg</p>
               <p><strong>Email:</strong> nisarg.delvadiya1@zohomail.in</p>
               <p><strong>Location:</strong> Vadodara, Gujarat, Bharat</p>
             </div>
@@ -99,7 +107,7 @@ export default function PrivacyPolicy() {
 
         {/* Footer info */}
         <p className="text-center text-xs text-white-200">
-          &copy; 2026 • Made with ❤️ in Bharat 🇮🇳 | All Rights are Reserved
+          &copy; 2026 • Made with ❤️ in Bharat 🇮🇳 | Nisarg • All Rights Reserved
         </p>
 
       </div>
