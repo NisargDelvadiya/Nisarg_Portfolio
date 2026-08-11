@@ -128,18 +128,19 @@ export const BentoGridItem = ({
           {title && (
             <div
               className={cn(
-                "font-sans text-base sm:text-lg lg:text-3xl max-w-96 font-bold z-10 text-white",
-                id === 3 && "max-w-[50%] sm:max-w-96",
-                id === 4 && "drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]"
+                "font-sans text-base sm:text-lg lg:text-3xl font-bold z-10 text-white",
+                id === 1 && "max-w-[85%] sm:max-w-[75%] lg:max-w-[65%] pb-16 sm:pb-0",
+                id === 3 && "max-w-[42%] sm:max-w-[45%] md:max-w-[48%] lg:max-w-[50%]",
+                id === 4 && "drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] max-w-96"
               )}
             >
               {title}
             </div>
           )}
 
-          {/* Card 1: Service Contract Download Button */}
+          {/* Card 1: Service Contract Download Button (Positioned cleanly at bottom left) */}
           {id === 1 && (
-            <div className="mt-4 sm:absolute sm:bottom-5 sm:left-5 z-20">
+            <div className="absolute bottom-5 left-5 sm:bottom-6 sm:left-6 lg:bottom-8 lg:left-8 z-20">
               <a
                 href="/about/Website Development Service Contract (Version 1).pdf"
                 download="Website_Development_Service_Contract.pdf"
@@ -154,7 +155,7 @@ export const BentoGridItem = ({
                   icon={<FaDownload aria-hidden="true" />}
                   position="right"
                   containerClassName="!mt-0"
-                  otherClasses="bg-[#161A31] text-xs md:text-sm font-semibold px-5 py-2.5"
+                  otherClasses="bg-[#161A31] text-xs md:text-sm font-semibold px-4 sm:px-5 py-2.5"
                 />
               </a>
             </div>
@@ -165,13 +166,13 @@ export const BentoGridItem = ({
 
           {/* Card 3: Two-column Staggered Tech Stack Badges */}
           {id === 3 && (
-            <div className="flex gap-2 lg:gap-4 w-fit absolute right-2 top-1/2 -translate-y-1/2">
+            <div className="flex gap-2 sm:gap-3 lg:gap-4 w-fit absolute right-3 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-20">
               {/* Left Tech Column */}
               <div className="flex flex-col gap-2 lg:gap-3">
                 {leftLists.map((item, i) => (
                   <span
                     key={i}
-                    className="py-2 px-3 text-xs lg:text-sm opacity-70 lg:opacity-100 rounded-lg text-center bg-[#10132E] whitespace-nowrap text-white font-medium shadow-sm"
+                    className="py-1.5 sm:py-2 px-2.5 sm:px-3 text-xs sm:text-xs lg:text-sm opacity-90 lg:opacity-100 rounded-lg text-center bg-[#10132E] whitespace-nowrap text-white font-medium shadow-md border border-white/10"
                   >
                     {item}
                   </span>
@@ -182,7 +183,7 @@ export const BentoGridItem = ({
                 {rightLists.map((item, i) => (
                   <span
                     key={i}
-                    className="py-2 px-3 text-xs lg:text-sm opacity-70 lg:opacity-100 rounded-lg text-center bg-[#10132E] whitespace-nowrap text-white font-medium shadow-sm"
+                    className="py-1.5 sm:py-2 px-2.5 sm:px-3 text-xs sm:text-xs lg:text-sm opacity-90 lg:opacity-100 rounded-lg text-center bg-[#10132E] whitespace-nowrap text-white font-medium shadow-md border border-white/10"
                   >
                     {item}
                   </span>

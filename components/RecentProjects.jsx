@@ -47,11 +47,11 @@ const RecentProjects = () => {
         <span className="text-purple">recent projects</span>
       </h2>
 
-      {/* Projects Grid Container (CSS Grid with vertical space and non-clipping heights) */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 sm:gap-16 lg:gap-28 max-w-7xl mx-auto px-4 sm:px-6 mt-12 justify-items-center">
+      {/* Projects Grid Container (CSS Grid with compact cards) */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 max-w-7xl mx-auto px-4 sm:px-6 mt-10 justify-items-center">
         {projects.map((projectItem) => (
           <div
-            className="lg:min-h-[36.5rem] md:min-h-[34rem] sm:min-h-[32rem] min-h-[30rem] flex items-center justify-center w-full max-w-[88vw] sm:max-w-[28rem] lg:max-w-[32rem]"
+            className="lg:min-h-[29.5rem] md:min-h-[28rem] sm:min-h-[26.5rem] min-h-[25rem] flex items-center justify-center w-full max-w-[88vw] sm:max-w-[28rem] lg:max-w-[32rem]"
             key={projectItem.id}
           >
             {/* 3D Pin Container Wrapper */}
@@ -59,8 +59,8 @@ const RecentProjects = () => {
               title={projectItem.link}
               href={projectItem.link}
             >
-              {/* Project Preview Image Box */}
-              <div className="relative flex items-center justify-center w-full max-w-[88vw] sm:max-w-[26rem] lg:max-w-[29rem] overflow-hidden h-[20vh] sm:h-[24vh] lg:h-[28vh] mb-5 sm:mb-6 rounded-2xl border border-white/10">
+              {/* Project Preview Image Box (Shorter & Perfectly Centered Photo) */}
+              <div className="relative flex items-center justify-center w-full max-w-[88vw] sm:max-w-[26rem] lg:max-w-[29rem] overflow-hidden h-40 sm:h-48 lg:h-52 mb-4 rounded-2xl border border-white/10 shadow-inner">
                 <div
                   className="relative w-full h-full overflow-hidden rounded-2xl"
                   style={{ backgroundColor: "#13162D" }}
@@ -72,10 +72,11 @@ const RecentProjects = () => {
                     className="w-full h-full object-cover opacity-80"
                   />
                 </div>
+                {/* Perfectly Centered UI Screenshot Photo */}
                 <img
                   src={projectItem.img}
                   alt={`${projectItem.title} Preview Screenshot`}
-                  className="z-10 absolute inset-0 w-full h-full object-cover rounded-2xl p-2"
+                  className="z-10 absolute inset-0 m-auto w-[94%] h-[94%] object-cover object-center rounded-xl border border-white/10 shadow-2xl transition-transform duration-300 group-hover/pin:scale-[1.02]"
                 />
               </div>
 
@@ -86,14 +87,14 @@ const RecentProjects = () => {
 
               {/* Project Description */}
               <p
-                className="lg:text-base lg:font-normal font-light text-xs sm:text-sm line-clamp-3 my-3 leading-relaxed"
+                className="lg:text-base lg:font-normal font-light text-xs sm:text-sm line-clamp-3 my-2 sm:my-2.5 leading-relaxed"
                 style={{ color: "#BEC1DD" }}
               >
                 {projectItem.des}
               </p>
 
               {/* Bottom Row: Tech Stack Icons & Action Links */}
-              <div className="flex flex-wrap sm:flex-nowrap items-center justify-between mt-5 mb-1 gap-3 w-full">
+              <div className="flex flex-wrap sm:flex-nowrap items-center justify-between mt-4 mb-1 gap-3 w-full">
                 {/* Tech Icons Stack */}
                 <div className="flex items-center shrink-0" aria-label="Technologies used">
                   {projectItem.iconLists.map((icon, index) => (
