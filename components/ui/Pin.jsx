@@ -30,7 +30,7 @@ export const PinContainer = ({
   return (
     <div
       className={cn(
-        "relative group/pin z-50 w-full flex items-center justify-center lg:cursor-pointer",
+        "relative group/pin z-50 w-full h-full flex items-center justify-center lg:cursor-pointer",
         containerClassName
       )}
       onMouseEnter={onMouseEnter}
@@ -42,21 +42,25 @@ export const PinContainer = ({
           perspective: "1000px",
           transform: "rotateX(70deg) translateZ(0deg)",
         }}
-        className="hidden lg:block absolute left-1/2 top-1/2 ml-[0.09375rem] mt-4 -translate-x-1/2 -translate-y-1/2"
+        className="hidden lg:block absolute left-1/2 top-1/2 ml-[0.09375rem] mt-4 -translate-x-1/2 -translate-y-1/2 w-full h-full"
       >
         <div
           style={{
             transform: transform,
           }}
-          className="absolute left-1/2 p-4 sm:p-5 md:p-6 top-1/2 flex justify-start items-start rounded-3xl shadow-[0_12px_40px_rgba(0,0,0,0.85)] border border-white/15 group-hover/pin:border-purple/60 transition duration-700 bg-[#04071D] bg-gradient-to-br from-[#04071D] via-[#0B0E23] to-[#04071D]"
+          className="absolute left-1/2 p-5 sm:p-6 md:p-7 top-1/2 flex flex-col justify-between items-stretch rounded-3xl shadow-[0_12px_40px_rgba(0,0,0,0.85)] border border-white/15 group-hover/pin:border-purple/60 transition duration-700 bg-[#04071D] bg-gradient-to-br from-[#04071D] via-[#0B0E23] to-[#04071D] w-full h-full"
         >
-          <div className={cn("relative z-50 w-full", className)}>{children}</div>
+          <div className={cn("relative z-50 w-full h-full flex flex-col justify-between", className)}>
+            {children}
+          </div>
         </div>
       </div>
 
       {/* Mobile & iPad View (< lg): Static Flat Card with NO card-level click/tap scaling effect */}
-      <div className="block lg:hidden relative p-4 sm:p-5 md:p-6 rounded-3xl border border-white/15 w-full bg-[#04071D] bg-gradient-to-br from-[#04071D] via-[#0B0E23] to-[#04071D] shadow-[0_12px_40px_rgba(0,0,0,0.85)] select-none">
-        <div className={cn("relative z-50 w-full", className)}>{children}</div>
+      <div className="block lg:hidden relative p-5 sm:p-6 md:p-7 rounded-3xl border border-white/15 w-full h-full bg-[#04071D] bg-gradient-to-br from-[#04071D] via-[#0B0E23] to-[#04071D] shadow-[0_12px_40px_rgba(0,0,0,0.85)] select-none">
+        <div className={cn("relative z-50 w-full h-full flex flex-col justify-between", className)}>
+          {children}
+        </div>
       </div>
 
       {/* Desktop Pin Floating Perspective Title & Beam (lg screens and up) */}
