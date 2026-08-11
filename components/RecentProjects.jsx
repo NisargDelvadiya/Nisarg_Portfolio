@@ -59,8 +59,8 @@ const RecentProjects = () => {
               title={projectItem.link}
               href={projectItem.link}
             >
-              {/* Project Preview Image Box (Shorter & Perfectly Centered Photo) */}
-              <div className="relative flex items-center justify-center w-full max-w-[88vw] sm:max-w-[26rem] lg:max-w-[29rem] overflow-hidden h-40 sm:h-48 lg:h-52 mb-4 rounded-2xl border border-white/10 shadow-inner">
+              {/* Project Preview Image Box (Uncropped Fully-Visible UI Photo) */}
+              <div className="relative flex items-center justify-center w-full max-w-[88vw] sm:max-w-[26rem] lg:max-w-[29rem] overflow-hidden h-44 sm:h-52 lg:h-56 mb-4 rounded-2xl border border-white/10 shadow-inner bg-[#13162D]">
                 <div
                   className="relative w-full h-full overflow-hidden rounded-2xl"
                   style={{ backgroundColor: "#13162D" }}
@@ -72,11 +72,11 @@ const RecentProjects = () => {
                     className="w-full h-full object-cover opacity-80"
                   />
                 </div>
-                {/* Perfectly Centered UI Screenshot Photo */}
+                {/* 100% Fully Visible Uncropped UI Screenshot Photo */}
                 <img
                   src={projectItem.img}
                   alt={`${projectItem.title} Preview Screenshot`}
-                  className="z-10 absolute inset-0 m-auto w-[94%] h-[94%] object-cover object-center rounded-xl border border-white/10 shadow-2xl transition-transform duration-300 group-hover/pin:scale-[1.02]"
+                  className="z-10 absolute inset-0 m-auto w-[96%] h-[96%] object-contain object-center rounded-xl transition-transform duration-300 group-hover/pin:scale-[1.02] drop-shadow-2xl"
                 />
               </div>
 
@@ -94,7 +94,7 @@ const RecentProjects = () => {
               </p>
 
               {/* Bottom Row: Tech Stack Icons & Action Links */}
-              <div className="flex flex-wrap sm:flex-nowrap items-center justify-between mt-4 mb-1 gap-3 w-full">
+              <div className="flex flex-wrap sm:flex-nowrap items-center justify-between mt-4 mb-1 gap-2 sm:gap-3 w-full">
                 {/* Tech Icons Stack */}
                 <div className="flex items-center shrink-0" aria-label="Technologies used">
                   {projectItem.iconLists.map((icon, index) => (
