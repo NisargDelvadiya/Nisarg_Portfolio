@@ -68,17 +68,111 @@
 @layer base {
   * {
     @apply border-border !scroll-smooth;
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  *::-webkit-scrollbar, ::-webkit-scrollbar {
+    display: none !important;
+    width: 0 !important;
+    height: 0 !important;
+    background: transparent !important;
+  }
+  html {
+    @apply bg-black-100 text-white;
+    overflow-x: hidden;
+    overscroll-behavior: none;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-black-100 text-white;
+    top: 0px !important;
+    position: relative !important;
+    min-height: 100vh;
+    transform: translateZ(0);
+  }
+  html, body {
+    -ms-overflow-style: none !important;
+    scrollbar-width: none !important;
   }
   button {
     @apply active:outline-none;
+  }
+
+  /* GPU Compositing Optimization for Smooth Animations */
+  .gpu-accelerated {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+    will-change: transform, opacity;
+  }
+
+  /* Off-screen Content Render Optimization */
+  section {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 800px;
+  }
+
+  /* WCAG 2.1 AA Compliant Keyboard Focus Rings */
+  a:focus-visible,
+  button:focus-visible,
+  select:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  [tabindex]:focus-visible {
+    outline: 2px solid #CBACF9 !important;
+    outline-offset: 3px !important;
+    border-radius: 4px;
+  }
+
+  /* Hide Google Translate top banner frame, floating badges & popups */
+  .goog-te-banner-frame,
+  .goog-te-banner-frame.skiptranslate,
+  iframe.goog-te-banner-frame,
+  iframe.skiptranslate,
+  #goog-gt-tt,
+  .goog-te-balloon-frame,
+  .goog-te-spinner-pos,
+  .goog-te-gadget-icon,
+  .goog-te-gadget-simple,
+  .VIpgJd-yDvfNd-O2ktfe,
+  .VIpgJd-yDvfNd-aJuLic,
+  .VIpgJd-yDvfNd-Lg522e,
+  .VIpgJd-yDvfNd-v703Ac,
+  [class*="VIpgJd"],
+  div[id*="goog-gt-"] {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    height: 0 !important;
+    width: 0 !important;
+    pointer-events: none !important;
   }
 }
 
 @layer utilities {
   .heading {
     @apply font-bold text-4xl md:text-5xl text-center;
+  }
+  .animate-marquee-up {
+    animation: marquee-up 14s linear infinite;
+  }
+  .animate-marquee-down {
+    animation: marquee-down 14s linear infinite;
+  }
+}
+
+@keyframes marquee-up {
+  from {
+    transform: translateY(0%);
+  }
+  to {
+    transform: translateY(-50%);
+  }
+}
+
+@keyframes marquee-down {
+  from {
+    transform: translateY(-50%);
   }
 }

@@ -1,10 +1,39 @@
+/**
+ * @file data/index.js
+ * @description Centralized data configuration file for Nisarg Delvadiya's Developer Portfolio.
+ * Contains navigation items, tech stack arrays, bento grid configurations, project showcases, and work experience entries.
+ */
+
+/**
+ * Main navigation bar items used across the portfolio.
+ * @type {Array<{name: string, link: string}>}
+ */
 export const navItems = [
   { name: "About", link: "#about" },
   { name: "Projects", link: "#projects" },
-  { name: "Testimonials", link: "#testimonials" },
-  { name: "Contact", link: "#contact" },
+  { name: "Work Experience", link: "#experience" },
 ];
 
+/**
+ * Tech stack lists displayed in Card 3 of the Bento Grid.
+ * Split into two balanced columns for staggered vertical presentation.
+ */
+export const leftLists = ["Next.js", "MongoDB", "JavaScript"];
+export const rightLists = ["Tailwind CSS", "HTML5", "GitHub"];
+
+/**
+ * Bento Grid configuration items defining the layout, titles, descriptions, and media assets for each card.
+ * @type {Array<{
+ *   id: number,
+ *   title: string,
+ *   description: string,
+ *   className: string,
+ *   imgClassName: string,
+ *   titleClassName: string,
+ *   img: string,
+ *   spareImg: string
+ * }>}
+ */
 export const gridItems = [
   {
     id: 1,
@@ -13,7 +42,7 @@ export const gridItems = [
     className: "lg:col-span-3 md:col-span-6 md:row-span-4 lg:min-h-[60vh]",
     imgClassName: "w-full h-full",
     titleClassName: "justify-end",
-    img: "/b1.svg",
+    img: "/bg/b1.svg",
     spareImg: "",
   },
   {
@@ -38,24 +67,23 @@ export const gridItems = [
   },
   {
     id: 4,
-    title: "Tech enthusiast with a passion for development.",
-    description: "",
+    title: "Manipal University Jaipur",
+    description: "B.Tech - Information Technology (2024 – 2028)",
     className: "lg:col-span-2 md:col-span-3 md:row-span-1",
-    imgClassName: "",
+    imgClassName: "w-full h-full object-cover !object-bottom opacity-85 filter brightness-105 saturate-105",
     titleClassName: "justify-start",
-    img: "/grid.svg",
-    spareImg: "/b4.svg",
+    img: "/about/MUJ.jpg",
+    spareImg: "",
   },
-
   {
     id: 5,
-    title: "Currently building a JS Animation library",
-    description: "The Inside Scoop",
+    title: "",
+    description: "",
     className: "md:col-span-3 md:row-span-2",
-    imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
+    imgClassName: "absolute right-0 bottom-0 md:w-96 w-60 opacity-65 blur-[1px]",
     titleClassName: "justify-center md:justify-start lg:justify-center",
-    img: "/b5.svg",
-    spareImg: "/grid.svg",
+    img: "/bg/b5.svg",
+    spareImg: "/bg/grid.svg",
   },
   {
     id: 6,
@@ -69,149 +97,78 @@ export const gridItems = [
   },
 ];
 
+/**
+ * Featured Projects showcased in the Recent Projects section.
+ * Includes project titles, descriptions, preview images, tech stack icons, live links, and repository links.
+ * @type {Array<{
+ *   id: number,
+ *   title: string,
+ *   des: string,
+ *   img: string,
+ *   iconLists: string[],
+ *   link: string,
+ *   github: string
+ * }>}
+ */
 export const projects = [
   {
     id: 1,
-    title: "3D Solar System Planets to Explore",
-    des: "Explore the wonders of our solar system with this captivating 3D simulation of the planets using Three.js.",
-    img: "/p1.svg",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/fm.svg"],
-    link: "/ui.earth.com",
+    title: "MyTodo - Same Masks Same Tasks",
+    des: "MyTodo is a hyper-secure, full-stack task manager featuring true End-to-End Encryption (E2EE) and a bold Neo-Brutalist design, engineered to turn your chaotic daily chores into a beautifully organized command center.",
+    img: "/projects/p1.jpg",
+    iconLists: [
+      "nextjs",
+      "mongodb",
+      "javascript",
+      "tailwind",
+      "html",
+      "github",
+    ],
+    link: "https://www.mytodo.co.in",
+    github: "https://github.com/nisargdelvadiya/MyTodo",
   },
   {
     id: 2,
-    title: "Yoom - Video Conferencing App",
-    des: "Simplify your video conferencing experience with Yoom. Seamlessly connect with colleagues and friends.",
-    img: "/p2.svg",
-    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/stream.svg", "/c.svg"],
-    link: "/ui.yoom.com",
-  },
-  {
-    id: 3,
-    title: "AI Image SaaS - Canva Application",
-    des: "A REAL Software-as-a-Service app with AI features and a payments and credits system using the latest tech stack.",
-    img: "/p3.svg",
-    iconLists: ["/re.svg", "/tail.svg", "/ts.svg", "/three.svg", "/c.svg"],
-    link: "/ui.aiimg.com",
-  },
-  {
-    id: 4,
-    title: "Animated Apple Iphone 3D Website",
-    des: "Recreated the Apple iPhone 15 Pro website, combining GSAP animations and Three.js 3D effects..",
-    img: "/p4.svg",
-    iconLists: ["/next.svg", "/tail.svg", "/ts.svg", "/three.svg", "/gsap.svg"],
-    link: "/ui.apple.com",
+    title: "LogDiary - Your Cozy Corner of the Internet",
+    des: "LogDiary is a cozy, secure, and fully responsive digital diary built with Next.js, featuring a premium glassmorphism UI and multi-provider OAuth.",
+    img: "/projects/p2.jpg",
+    iconLists: [
+      "nextjs",
+      "mongodb",
+      "javascript",
+      "tailwind",
+      "html",
+      "github",
+    ],
+    link: "https://log-diary-200.vercel.app",
+    github: "https://github.com/NisargDelvadiya/LogDiary.git",
   },
 ];
 
-export const testimonials = [
-  {
-    quote:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-    name: "Michael Johnson",
-    title: "Director of AlphaStream Technologies",
-  },
-  {
-    quote:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-    name: "Michael Johnson",
-    title: "Director of AlphaStream Technologies",
-  },
-  {
-    quote:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-    name: "Michael Johnson",
-    title: "Director of AlphaStream Technologies",
-  },
-  {
-    quote:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-    name: "Michael Johnson",
-    title: "Director of AlphaStream Technologies",
-  },
-  {
-    quote:
-      "Collaborating with Adrian was an absolute pleasure. His professionalism, promptness, and dedication to delivering exceptional results were evident throughout our project. Adrian's enthusiasm for every facet of development truly stands out. If you're seeking to elevate your website and elevate your brand, Adrian is the ideal partner.",
-    name: "Michael Johnson",
-    title: "Director of AlphaStream Technologies",
-  },
-];
-
-export const companies = [
-  {
-    id: 1,
-    name: "cloudinary",
-    img: "/cloud.svg",
-    nameImg: "/cloudName.svg",
-  },
-  {
-    id: 2,
-    name: "appwrite",
-    img: "/app.svg",
-    nameImg: "/appName.svg",
-  },
-  {
-    id: 3,
-    name: "HOSTINGER",
-    img: "/host.svg",
-    nameImg: "/hostName.svg",
-  },
-  {
-    id: 4,
-    name: "stream",
-    img: "/s.svg",
-    nameImg: "/streamName.svg",
-  },
-  {
-    id: 5,
-    name: "docker.",
-    img: "/dock.svg",
-    nameImg: "/dockerName.svg",
-  },
-];
-
+/**
+ * Work Experience entries displayed in the Experience section.
+ * Includes role titles, descriptions, grid column sizing, and vector thumbnail paths.
+ * @type {Array<{
+ *   id: number,
+ *   title: string,
+ *   desc: string,
+ *   className: string,
+ *   thumbnail: string
+ * }>}
+ */
 export const workExperience = [
   {
     id: 1,
-    title: "Frontend Engineer Intern",
-    desc: "Assisted in the development of a web-based platform using React.js, enhancing interactivity.",
+    title: "Web Dev Intern",
+    desc: "Assisted in the development of responsive web applications using Next.js, enhancing performance and UI interactivity.",
     className: "md:col-span-2",
-    thumbnail: "/exp1.svg",
+    thumbnail: "/work_experience/exp1.svg",
   },
   {
     id: 2,
-    title: "Mobile App Dev - JSM Tech",
-    desc: "Designed and developed mobile app for both iOS & Android platforms using React Native.",
-    className: "md:col-span-2", // change to md:col-span-2
-    thumbnail: "/exp2.svg",
-  },
-  {
-    id: 3,
-    title: "Freelance App Dev Project",
-    desc: "Led the dev of a mobile app for a client, from initial concept to deployment on app stores.",
-    className: "md:col-span-2", // change to md:col-span-2
-    thumbnail: "/exp3.svg",
-  },
-  {
-    id: 4,
-    title: "Lead Frontend Developer",
-    desc: "Developed and maintained user-facing features using modern frontend technologies.",
+    title: "Freelance Web Dev Projects",
+    desc: "Architected and developed custom web applications for clients, from initial wireframing to cloud deployment.",
     className: "md:col-span-2",
-    thumbnail: "/exp4.svg",
-  },
-];
-
-export const socialMedia = [
-  {
-    id: 1,
-    img: "/git.svg",
-  },
-  {
-    id: 2,
-    img: "/twit.svg",
-  },
-  {
-    id: 3,
-    img: "/link.svg",
+    thumbnail: "/work_experience/exp3.svg",
   },
 ];

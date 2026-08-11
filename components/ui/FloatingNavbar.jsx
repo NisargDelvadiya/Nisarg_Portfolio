@@ -38,52 +38,48 @@ export const FloatingNav = ({
 
   return (
     <AnimatePresence mode="wait">
-      <motion.div
-        initial={{
-          opacity: 1,
-          y: -100,
-        }}
-        animate={{
-          y: visible ? 0 : -100,
-          opacity: visible ? 1 : 0,
-        }}
-        transition={{
-          duration: 0.2,
-        }}
-        className={cn(
-          // change rounded-full to rounded-lg
-          // remove dark:border-white/[0.2] dark:bg-black bg-white border-transparent
-          // change  pr-2 pl-8 py-2 to px-10 py-5
-          "flex max-w-fit md:min-w-[70vw] lg:min-w-fit fixed z-[5000] top-10 inset-x-0 mx-auto px-10 py-5 rounded-lg border border-black/.1 shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] items-center justify-center space-x-4",
-          className
-        )}
+      <div className="fixed top-4 sm:top-8 left-1/2 -translate-x-1/2 z-[5000] pointer-events-none">
+        <motion.nav
+          aria-label="Main Navigation"
+          initial={{
+            opacity: 1,
+            y: -100,
+          }}
+          animate={{
+            y: visible ? 0 : -100,
+            opacity: visible ? 1 : 0,
+          }}
+          transition={{
+            duration: 0.2,
+          }}
+          className={cn(
+            "pointer-events-auto flex max-w-[95vw] sm:max-w-fit px-3 sm:px-8 py-2.5 sm:py-4 rounded-full items-center justify-center space-x-1 sm:space-x-4",
+            className
+          )}
         style={{
-          backdropFilter: "blur(16px) saturate(180%)",
-          backgroundColor: "rgba(17, 25, 40, 0.75)",
-          borderRadius: "12px",
-          border: "1px solid rgba(255, 255, 255, 0.125)",
+          backdropFilter: "blur(24px) saturate(200%)",
+          WebkitBackdropFilter: "blur(24px) saturate(200%)",
+          backgroundColor: "rgba(17, 25, 40, 0.55)",
+          borderRadius: "9999px",
+          border: "1px solid rgba(255, 255, 255, 0.15)",
+          boxShadow: "0 0 30px rgba(203, 172, 249, 0.08), inset 0 0 20px rgba(255, 255, 255, 0.03)",
         }}
       >
         {navItems.map((navItem, idx) => (
           <Link
             key={`link=${idx}`}
             href={navItem.link}
+            aria-label={navItem.name}
             className={cn(
-              "relative dark:text-neutral-50 items-center  flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500"
+              "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 hover:text-purple transition-colors duration-200 px-2 sm:px-3 py-1.5 rounded-md active:scale-95 focus-visible:outline-none"
             )}
           >
-            <span className="block sm:hidden">{navItem.icon}</span>
-            {/* add !cursor-pointer */}
-            {/* remove hidden sm:block for the mobile responsive */}
-            <span className=" text-sm !cursor-pointer">{navItem.name}</span>
+            <span className="block sm:hidden text-xs" aria-hidden="true">{navItem.icon}</span>
+            <span className="text-xs sm:text-sm font-bold !cursor-pointer hover:text-purple whitespace-nowrap">{navItem.name}</span>
           </Link>
         ))}
-        {/* remove this login btn */}
-        {/* <button className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full">
-          <span>Login</span>
-          <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-blue-500 to-transparent  h-px" />
-        </button> */}
-      </motion.div>
+      </motion.nav>
+      </div>
     </AnimatePresence>
   );
 };

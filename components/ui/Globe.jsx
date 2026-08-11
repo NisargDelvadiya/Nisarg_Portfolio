@@ -1,22 +1,46 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
-import { Color, Scene, Fog, PerspectiveCamera, Vector3 } from "three";
+import { Color, BufferGeometry } from "three";
 import ThreeGlobe from "three-globe";
-import { useThree, Canvas, extend } from "@react-three/fiber";
+import { useThree, Canvas } from "@react-three/fiber";
 import { OrbitControls } from "@react-three/drei";
 import countries from "@/data/globe.json";
 
-extend({ ThreeGlobe });
-
 const RING_PROPAGATION_SPEED = 3;
-const aspect = 1.2;
 const cameraZ = 300;
 
 let numbersOfRings = [0];
 
+// Patch computeBoundingSphere to silently handle NaN during three-globe init.
+// three-globe creates internal geometries with empty position buffers during
+// construction, which causes Three.js to log a console error about NaN radius.
+// We suppress that specific warning and fix the radius to 0.
+const _origComputeBoundingSphere = BufferGeometry.prototype.computeBoundingSphere;
+BufferGeometry.prototype.computeBoundingSphere = function () {
+  const _origError = console.error;
+  console.error = (...args) => {
+    if (
+      typeof args[0] === "string" &&
+      args[0].includes("computeBoundingSphere")
+    ) {
+      return; // suppress NaN bounding sphere warning
+    }
+    _origError.apply(console, args);
+  };
+  try {
+    _origComputeBoundingSphere.call(this);
+  } finally {
+    console.error = _origError;
+  }
+  if (this.boundingSphere && isNaN(this.boundingSphere.radius)) {
+    this.boundingSphere.radius = 0;
+  }
+};
+
 export function Globe({ globeConfig, data }) {
-  const [globeData, setGlobeData] = useState(null);
+  const { scene } = useThree();
   const globeRef = useRef(null);
+  const [globeData, setGlobeData] = useState(null);
 
   const defaultProps = {
     pointSize: 1,
@@ -35,26 +59,65 @@ export function Globe({ globeConfig, data }) {
     ...globeConfig,
   };
 
+  // Build the globe imperatively — configure ALL data before adding to scene
   useEffect(() => {
-    if (globeRef.current) {
-      _buildData();
-      _buildMaterial();
-    }
-  }, [globeRef.current]);
+    const globe = new ThreeGlobe({ waitForGlobeReady: true, animateIn: true });
 
-  const _buildMaterial = () => {
-    if (!globeRef.current) return;
+    // Configure material
+    const globeMaterial = globe.globeMaterial();
+    globeMaterial.color = new Color(defaultProps.globeColor);
+    globeMaterial.emissive = new Color(defaultProps.emissive);
+    globeMaterial.emissiveIntensity = defaultProps.emissiveIntensity;
+    globeMaterial.shininess = defaultProps.shininess;
 
-    const globeMaterial = globeRef.current.globeMaterial();
-    globeMaterial.color = new Color(globeConfig.globeColor);
-    globeMaterial.emissive = new Color(globeConfig.emissive);
-    globeMaterial.emissiveIntensity = globeConfig.emissiveIntensity || 0.1;
-    globeMaterial.shininess = globeConfig.shininess || 0.9;
-  };
+    // Configure hex polygons
+    globe
+      .hexPolygonsData(countries.features)
+      .hexPolygonResolution(3)
+      .hexPolygonMargin(0.7)
+      .showAtmosphere(defaultProps.showAtmosphere)
+      .atmosphereColor(defaultProps.atmosphereColor)
+      .atmosphereAltitude(defaultProps.atmosphereAltitude)
+      .hexPolygonColor(() => defaultProps.polygonColor);
 
-  const _buildData = () => {
+    // Configure arcs — set accessors BEFORE data to avoid NaN
+    globe
+      .arcStartLat((d) => d.startLat)
+      .arcStartLng((d) => d.startLng)
+      .arcEndLat((d) => d.endLat)
+      .arcEndLng((d) => d.endLng)
+      .arcColor((e) => e.color)
+      .arcAltitude((e) => e.arcAlt)
+      .arcStroke(() => [0.32, 0.28, 0.3][Math.round(Math.random() * 2)])
+      .arcDashLength(defaultProps.arcLength)
+      .arcDashInitialGap((e) => e.order)
+      .arcDashGap(15)
+      .arcDashAnimateTime(() => defaultProps.arcTime)
+      .arcsData(data);
+
+    // Configure points
+    globe
+      .pointColor((e) => e.color)
+      .pointsMerge(true)
+      .pointAltitude(0.0)
+      .pointRadius(2)
+      .pointsData(data);
+
+    // Configure rings (start empty)
+    globe
+      .ringLat((d) => d.lat)
+      .ringLng((d) => d.lng)
+      .ringColor((e) => (t) => (e && e.color ? e.color(t) : "rgba(255,255,255,0)"))
+      .ringMaxRadius(defaultProps.maxRings)
+      .ringPropagationSpeed(RING_PROPAGATION_SPEED)
+      .ringRepeatPeriod(
+        (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings
+      )
+      .ringsData([]);
+
+    // Build point data for ring animation
     const arcs = data;
-    let points = [];
+    const points = [];
     for (let i = 0; i < arcs.length; i++) {
       const arc = arcs[i];
       const rgb = hexToRgb(arc.color);
@@ -76,72 +139,21 @@ export function Globe({ globeConfig, data }) {
 
     const filteredPoints = points.filter(
       (v, i, a) =>
-        a.findIndex((v2) =>
-          ["lat", "lng"].every(
-            (k) => v2[k] === v[k]
-          )
-        ) === i
+        a.findIndex((v2) => ["lat", "lng"].every((k) => v2[k] === v[k])) === i
     );
 
+    // Add to scene only after all data is configured
+    scene.add(globe);
+    globeRef.current = globe;
     setGlobeData(filteredPoints);
-  };
 
-  useEffect(() => {
-    if (globeRef.current && globeData) {
-      globeRef.current
-        .hexPolygonsData(countries.features)
-        .hexPolygonResolution(3)
-        .hexPolygonMargin(0.7)
-        .showAtmosphere(defaultProps.showAtmosphere)
-        .atmosphereColor(defaultProps.atmosphereColor)
-        .atmosphereAltitude(defaultProps.atmosphereAltitude)
-        .hexPolygonColor((e) => {
-          return defaultProps.polygonColor;
-        });
-      startAnimation();
-    }
-  }, [globeData]);
+    return () => {
+      scene.remove(globe);
+      globeRef.current = null;
+    };
+  }, []);
 
-  const startAnimation = () => {
-    if (!globeRef.current || !globeData) return;
-
-    globeRef.current
-      .arcsData(data)
-      .arcStartLat((d) => d.startLat * 1)
-      .arcStartLng((d) => d.startLng * 1)
-      .arcEndLat((d) => d.endLat * 1)
-      .arcEndLng((d) => d.endLng * 1)
-      .arcColor((e) => e.color)
-      .arcAltitude((e) => {
-        return e.arcAlt * 1;
-      })
-      .arcStroke((e) => {
-        return [0.32, 0.28, 0.3][Math.round(Math.random() * 2)];
-      })
-      .arcDashLength(defaultProps.arcLength)
-      .arcDashInitialGap((e) => e.order * 1)
-      .arcDashGap(15)
-      .arcDashAnimateTime((e) => defaultProps.arcTime);
-
-    globeRef.current
-      .pointsData(data)
-      .pointColor((e) => e.color)
-      .pointsMerge(true)
-      .pointAltitude(0.0)
-      .pointRadius(2);
-
-    globeRef.current
-      .ringsData([])
-      .ringLat((d) => d.lat)
-      .ringLng((d) => d.lng)
-      .ringColor((e) => (t) => e ? e.color(t) : "rgba(255,255,255,0)")
-      .ringMaxRadius(defaultProps.maxRings)
-      .ringPropagationSpeed(RING_PROPAGATION_SPEED)
-      .ringRepeatPeriod(
-        (defaultProps.arcTime * defaultProps.arcLength) / defaultProps.rings
-      );
-  };
-
+  // Animate rings periodically
   useEffect(() => {
     if (!globeRef.current || !globeData) return;
 
@@ -161,13 +173,9 @@ export function Globe({ globeConfig, data }) {
     return () => {
       clearInterval(interval);
     };
-  }, [globeRef.current, globeData]);
+  }, [globeData]);
 
-  return (
-    <>
-      <threeGlobe ref={globeRef} />
-    </>
-  );
+  return null;
 }
 
 export function WebGLRendererConfig() {
