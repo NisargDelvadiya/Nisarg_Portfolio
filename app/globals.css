@@ -89,7 +89,6 @@
     top: 0px !important;
     position: relative !important;
     min-height: 100vh;
-    transform: translateZ(0);
   }
   html, body {
     -ms-overflow-style: none !important;

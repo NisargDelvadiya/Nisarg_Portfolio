@@ -2,6 +2,7 @@ import { Inter } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import { ThemeProvider } from "./provider";
+import CookieConsent from "@/components/CookieConsent";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -52,6 +53,7 @@ export default function RootLayout({ children }) {
           disableTransitionOnChange
         >
           {children}
+          <CookieConsent />
           <Analytics />
         </ThemeProvider>
       </body>

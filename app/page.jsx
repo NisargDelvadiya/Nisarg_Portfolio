@@ -7,13 +7,12 @@ import Grid from "@/components/Grid";
 import RecentProjects from "@/components/RecentProjects";
 import Experience from "@/components/Experience";
 import Footer from "@/components/Footer";
-import CookieConsent from "@/components/CookieConsent";
 
 /**
  * @component Home
  * @description Main entry page for Nisarg Delvadiya's Developer Portfolio.
  * Configures manual scroll restoration on mount and renders Hero, Bento Grid, Recent Projects,
- * Work Experience, Footer, and Cookie Consent banner within a max-width container.
+ * Work Experience, and Footer links.
  */
 const Home = () => {
   // Ensure smooth top scroll position on page load / refresh
@@ -41,9 +40,6 @@ const Home = () => {
 
         {/* Footer Links & Contact Details */}
         <Footer />
-
-        {/* Privacy & Cookie Preference Banner */}
-        <CookieConsent />
       </div>
     </main>
   );

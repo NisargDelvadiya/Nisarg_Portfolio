@@ -5,8 +5,8 @@ import { FaCookieBite, FaTimes } from "react-icons/fa";
 
 /**
  * @component CookieConsent
- * @description Accessible cookie consent notification banner that asks user for preference regarding
- * strictly essential cookies (e.g. Google Translate language state) and persists choices in localStorage.
+ * @description Accessible cookie consent notification banner styled with rich dark glass aesthetics,
+ * sticky viewport positioning, safe-area inset support, and non-transparent background matching portfolio header.
  */
 const CookieConsent = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -47,16 +47,20 @@ const CookieConsent = () => {
       role="dialog"
       aria-live="polite"
       aria-label="Cookie Consent"
-      className="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-md z-[99999] animate-fade-in"
+      className="fixed bottom-4 left-4 right-4 sm:left-6 sm:right-auto sm:max-w-md z-[99999] animate-in slide-in-from-bottom-6 fade-in duration-300 pointer-events-auto"
+      style={{
+        bottom: "calc(1rem + env(safe-area-inset-bottom, 0px))",
+      }}
     >
-      <div className="backdrop-blur-2xl bg-[#10132E]/95 border border-purple/40 rounded-3xl p-5 sm:p-6 shadow-[0_10px_40px_rgba(0,0,0,0.8)] text-white flex flex-col gap-4 relative">
+      {/* Rich dark glass panel matching Portfolio Bento Cards & Header aesthetics */}
+      <div className="backdrop-blur-2xl bg-[#0B0E23]/95 border border-purple/50 rounded-3xl p-5 sm:p-6 shadow-[0_12px_45px_rgba(0,0,0,0.85)] text-white flex flex-col gap-4 relative">
         {/* Close Icon Button */}
         <button
           type="button"
           onClick={handleDecline}
           title="Dismiss cookie consent banner"
           aria-label="Dismiss cookie consent banner"
-          className="absolute top-4 right-4 text-white-200 hover:text-purple transition-colors p-1 rounded-full focus-visible:outline-none cursor-pointer"
+          className="absolute top-4 right-4 text-white-200 hover:text-purple transition-colors p-1.5 rounded-full focus-visible:outline-none cursor-pointer"
         >
           <FaTimes className="w-4 h-4" />
         </button>
