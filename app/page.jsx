@@ -24,7 +24,7 @@ const Home = () => {
   }, []);
 
   return (
-    <main className="relative bg-black-100 flex justify-center items-center flex-col mx-auto px-4 sm:px-8 lg:px-10 overflow-hidden">
+    <main className="relative bg-black-100 flex justify-center items-center flex-col mx-auto px-4 sm:px-8 lg:px-10 overflow-x-clip max-w-full w-full">
       <div className="max-w-7xl w-full">
         {/* Hero Section */}
         <Hero />
