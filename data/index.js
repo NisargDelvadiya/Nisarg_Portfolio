@@ -18,7 +18,7 @@ export const navItems = [
  * Tech stack lists displayed in Card 3 of the Bento Grid.
  * Split into two balanced columns for staggered vertical presentation.
  */
-export const leftLists = ["React.js", "Next.js", "Mongoose", "MongoDB"];
+export const leftLists = ["Next.js", "React.js", "MongoDB", "Mongoose"];
 export const rightLists = ["JavaScript", "Tailwind CSS", "HTML5", "GitHub"];
 
 /**
@@ -117,10 +117,10 @@ export const projects = [
     des: "MyTodo is a hyper-secure, full-stack task manager featuring true End-to-End Encryption (E2EE) and a bold Neo-Brutalist design, engineered to turn your chaotic daily chores into a beautifully organized command center.",
     img: "/projects/p1.jpg",
     iconLists: [
-      "react",
       "nextjs",
-      "mongoose",
+      "react",
       "mongodb",
+      "mongoose",
       "javascript",
       "tailwind",
       "html",
@@ -135,10 +135,10 @@ export const projects = [
     des: "LogDiary is a cozy, secure, and fully responsive digital diary built with Next.js, featuring a premium glassmorphism UI and multi-provider OAuth.",
     img: "/projects/p2.jpg",
     iconLists: [
-      "react",
       "nextjs",
-      "mongoose",
+      "react",
       "mongodb",
+      "mongoose",
       "javascript",
       "tailwind",
       "html",
