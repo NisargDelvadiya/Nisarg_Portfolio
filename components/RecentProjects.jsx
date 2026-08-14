@@ -7,7 +7,7 @@ import { PinContainer } from "./ui/Pin";
 
 /**
  * Helper function to map skill icon names to React Icons SVG components
- * @param {string} iconName - The tech stack key name (e.g. "nextjs", "mongodb")
+ * @param {string} iconName - The tech stack key name (e.g. "react", "nextjs", "mongoose", "mongodb")
  * @returns {JSX.Element|null} The corresponding React Icon component
  */
 const renderSkillIcon = (iconName) => {
