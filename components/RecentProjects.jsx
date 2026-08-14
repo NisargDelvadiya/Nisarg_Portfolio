@@ -1,6 +1,6 @@
 import React from "react";
 import { FaLocationArrow, FaGithub, FaHtml5 } from "react-icons/fa6";
-import { SiNextdotjs, SiMongodb, SiJavascript, SiTailwindcss } from "react-icons/si";
+import { SiNextdotjs, SiMongodb, SiJavascript, SiTailwindcss, SiReact, SiMongoose } from "react-icons/si";
 
 import { projects } from "@/data";
 import { PinContainer } from "./ui/Pin";
@@ -12,8 +12,14 @@ import { PinContainer } from "./ui/Pin";
  */
 const renderSkillIcon = (iconName) => {
   const name = iconName.toLowerCase();
+  if (name.includes("react")) {
+    return <SiReact className="w-4 h-4 md:w-5 md:h-5 text-[#61DAFB]" aria-label="React.js" />;
+  }
   if (name.includes("next")) {
     return <SiNextdotjs className="w-4 h-4 md:w-5 md:h-5 text-white" aria-label="Next.js" />;
+  }
+  if (name.includes("mongoose")) {
+    return <SiMongoose className="w-4 h-4 md:w-5 md:h-5 text-[#880000]" aria-label="Mongoose" />;
   }
   if (name.includes("mongo")) {
     return <SiMongodb className="w-4 h-4 md:w-5 md:h-5 text-[#47A248]" aria-label="MongoDB" />;
@@ -99,9 +105,9 @@ const RecentProjects = () => {
                     </p>
                   </div>
 
-                  {/* Bottom Flex Container: Skills & Action Buttons (Equal spacing) */}
-                  <div className="flex flex-col sm:flex-row items-center justify-center sm:justify-between mt-auto pt-4 pb-1 gap-3.5 w-full max-w-full">
-                    {/* Tech Icons Stack */}
+                  {/* Bottom Flex Container: Skills (Top Row) & Action Buttons (Next Line) */}
+                  <div className="flex flex-col items-center justify-center mt-auto pt-4 pb-1 gap-3.5 w-full max-w-full">
+                    {/* Tech Icons Stack (Line 1) */}
                     <div className="flex items-center justify-center shrink-0 ps-3" aria-label="Technologies used">
                       {projectItem.iconLists.map((icon, index) => (
                         <div
@@ -117,8 +123,8 @@ const RecentProjects = () => {
                       ))}
                     </div>
 
-                    {/* Action Links (Source Code & Live Demo Buttons) */}
-                    <div className="flex items-center justify-center gap-2.5 shrink-0 z-20">
+                    {/* Action Links (Line 2: Source Code & Live Demo Buttons) */}
+                    <div className="flex items-center justify-center gap-2.5 sm:gap-3 w-full flex-wrap z-20">
                       {/* GitHub Source Code Button */}
                       <a
                         href={projectItem.github || "https://github.com"}
