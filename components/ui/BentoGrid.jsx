@@ -81,7 +81,7 @@ export const BentoGridItem = ({
     >
       {/* Background Image Container */}
       <div className={`${id === 6 && "flex justify-center"} h-full`}>
-        <div className="w-full h-full absolute">
+        <div className="w-full h-full absolute inset-0 pointer-events-none overflow-hidden rounded-3xl z-0">
           {img && (
             <img
               src={img}
@@ -91,7 +91,7 @@ export const BentoGridItem = ({
           )}
         </div>
         <div
-          className={`absolute right-0 -bottom-5 ${
+          className={`absolute right-0 -bottom-5 pointer-events-none z-0 ${
             id === 5 && "w-full opacity-80"
           }`}
         >
@@ -195,8 +195,8 @@ export const BentoGridItem = ({
           {/* Card 5: Profile Photo & Download Resume Button */}
           {id === 5 && (
             <>
-              {/* Dark blurry backdrop overlay */}
-              <div className="absolute inset-0 bg-black-100/20 backdrop-blur-[2px] z-10 pointer-events-none rounded-3xl" />
+              {/* Dark subtle overlay */}
+              <div className="absolute inset-0 bg-black-100/10 pointer-events-none rounded-3xl" />
 
               <div className="w-full h-full flex flex-col md:flex-row items-center justify-center gap-6 sm:gap-8 md:gap-12 z-20 relative py-6 px-4">
                 {/* Profile Photo Avatar */}
