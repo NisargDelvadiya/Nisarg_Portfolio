@@ -8,7 +8,7 @@ const Lottie = dynamic(() => import("react-lottie"), { ssr: false });
 
 import { cn } from "@/lib/utils";
 import GridGlobe from "./GridGlobe";
-import { leftLists, rightLists } from "@/data";
+import { leftLists, centerLists, rightLists } from "@/data";
 import animationData from "@/data/confetti.json";
 import MagicButton from "../MagicButton";
 
@@ -60,7 +60,7 @@ export const BentoGridItem = ({
    * Copies developer email address to user clipboard and triggers confetti
    */
   const handleCopy = () => {
-    const text = "nisarg.delvadiya1@zohomail.in";
+    const text = "delvadiyanisarg9@gmail.com";
     if (typeof navigator !== "undefined" && navigator.clipboard) {
       navigator.clipboard.writeText(text);
     }
@@ -70,7 +70,7 @@ export const BentoGridItem = ({
   return (
     <div
       className={cn(
-        "row-span-1 relative overflow-hidden rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition duration-200 shadow-input dark:shadow-none justify-between flex flex-col space-y-4",
+        "row-span-1 relative overflow-hidden rounded-3xl border border-white/10 group/bento hover:shadow-xl transition duration-200 justify-between flex flex-col space-y-4",
         className
       )}
       style={{
@@ -79,21 +79,21 @@ export const BentoGridItem = ({
           "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
       }}
     >
-      {/* Background Image Container */}
+      {/* Background Graphic Wrappers */}
       <div className={`${id === 6 && "flex justify-center"} h-full`}>
-        <div className="w-full h-full absolute inset-0 pointer-events-none overflow-hidden rounded-3xl z-0">
+        <div className="w-full h-full absolute">
           {img && (
             <img
               src={img}
-              alt={title || "Bento visual"}
-              className={cn("object-cover object-center", imgClassName)}
+              alt="Bento card graphic background"
+              className={cn(imgClassName, "object-cover object-center")}
             />
           )}
         </div>
         <div
-          className={`absolute right-0 -bottom-5 pointer-events-none z-0 ${
+          className={`absolute right-0 -bottom-5 ${
             id === 5 && "w-full opacity-80"
-          }`}
+          } `}
         >
           {spareImg && (
             <img
@@ -115,7 +115,8 @@ export const BentoGridItem = ({
           {description && (
             <div
               className={cn(
-                "font-sans font-normal max-w-full md:text-sm lg:text-base text-xs text-[#C1C2D3] z-10",
+                "font-sans font-normal max-w-full md:text-sm lg:text-base text-xs text-[#C1C2D3]",
+                id === 3 ? "z-30 relative text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]" : "z-10",
                 id === 4 &&
                   "text-white/90 font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]"
               )}
@@ -128,10 +129,11 @@ export const BentoGridItem = ({
           {title && (
             <div
               className={cn(
-                "font-sans text-base sm:text-lg lg:text-3xl font-bold z-10 text-white",
-                id === 1 && "max-w-[85%] sm:max-w-[75%] lg:max-w-[65%] pb-16 sm:pb-0",
-                id === 3 && "max-w-[42%] sm:max-w-[45%] md:max-w-[48%] lg:max-w-[50%]",
-                id === 4 && "drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] max-w-96"
+                "font-sans text-base sm:text-lg lg:text-3xl font-bold text-white",
+                id === 1 && "max-w-[85%] sm:max-w-[75%] lg:max-w-[65%] pb-16 sm:pb-0 z-10",
+                id === 3 && "z-30 relative max-w-[55%] sm:max-w-[50%] lg:max-w-[45%] drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]",
+                id === 4 && "drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] max-w-96 z-10",
+                id !== 1 && id !== 3 && id !== 4 && "z-10"
               )}
             >
               {title}
@@ -164,26 +166,37 @@ export const BentoGridItem = ({
           {/* Card 2: Interactive 3D GitHub Globe */}
           {id === 2 && <GridGlobe />}
 
-          {/* Card 3: Two-column Staggered Tech Stack Badges */}
+          {/* Card 3: Three-column Staggered Tech Stack Badges */}
           {id === 3 && (
-            <div className="flex gap-2 sm:gap-3 lg:gap-4 w-fit absolute right-3 sm:right-4 lg:right-6 top-1/2 -translate-y-1/2 z-20">
+            <div className="flex gap-1.5 sm:gap-2 lg:gap-3 w-fit absolute right-2 sm:right-3 lg:right-4 top-1/2 -translate-y-1/2 z-10">
               {/* Left Tech Column */}
-              <div className="flex flex-col gap-2 lg:gap-3">
+              <div className="flex flex-col gap-1.5 sm:gap-2 lg:gap-3">
                 {leftLists.map((item, i) => (
                   <span
                     key={i}
-                    className="py-1.5 sm:py-2 px-2.5 sm:px-3 text-xs sm:text-xs lg:text-sm opacity-90 lg:opacity-100 rounded-lg text-center bg-[#10132E] whitespace-nowrap text-white font-medium shadow-md border border-white/10"
+                    className="py-1.5 sm:py-2 px-2 sm:px-3 text-xs sm:text-xs lg:text-sm rounded-lg text-center bg-[#10132E] whitespace-nowrap text-white font-medium shadow-md border border-white/10"
                   >
                     {item}
                   </span>
                 ))}
               </div>
-              {/* Right Tech Column (Offset Downward) */}
-              <div className="flex flex-col gap-2 lg:gap-3 mt-3">
+              {/* Center Tech Column (Offset Downward) */}
+              <div className="flex flex-col gap-1.5 sm:gap-2 lg:gap-3 mt-3">
+                {centerLists.map((item, i) => (
+                  <span
+                    key={i}
+                    className="py-1.5 sm:py-2 px-2 sm:px-3 text-xs sm:text-xs lg:text-sm rounded-lg text-center bg-[#10132E] whitespace-nowrap text-white font-medium shadow-md border border-white/10"
+                  >
+                    {item}
+                  </span>
+                ))}
+              </div>
+              {/* Right Tech Column */}
+              <div className="flex flex-col gap-1.5 sm:gap-2 lg:gap-3">
                 {rightLists.map((item, i) => (
                   <span
                     key={i}
-                    className="py-1.5 sm:py-2 px-2.5 sm:px-3 text-xs sm:text-xs lg:text-sm opacity-90 lg:opacity-100 rounded-lg text-center bg-[#10132E] whitespace-nowrap text-white font-medium shadow-md border border-white/10"
+                    className="py-1.5 sm:py-2 px-2 sm:px-3 text-xs sm:text-xs lg:text-sm rounded-lg text-center bg-[#10132E] whitespace-nowrap text-white font-medium shadow-md border border-white/10"
                   >
                     {item}
                   </span>

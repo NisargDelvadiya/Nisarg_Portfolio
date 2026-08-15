@@ -16,10 +16,11 @@ export const navItems = [
 
 /**
  * Tech stack lists displayed in Card 3 of the Bento Grid.
- * Split into two balanced columns for staggered vertical presentation.
+ * Split into three balanced columns for staggered vertical presentation.
  */
-export const leftLists = ["Next.js", "React.js", "MongoDB", "Mongoose"];
-export const rightLists = ["JavaScript", "Tailwind CSS", "HTML5", "GitHub", "Java"];
+export const leftLists = ["Next.js", "React.js", "MongoDB"];
+export const centerLists = ["Mongoose", "Java", "JavaScript"];
+export const rightLists = ["Tailwind CSS", "HTML5", "GitHub"];
 
 /**
  * Bento Grid configuration items defining the layout, titles, descriptions, and media assets for each card.
