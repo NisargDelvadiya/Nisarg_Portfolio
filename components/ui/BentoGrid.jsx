@@ -116,7 +116,7 @@ export const BentoGridItem = ({
             <div
               className={cn(
                 "font-sans font-normal max-w-full md:text-sm lg:text-base text-xs text-[#C1C2D3]",
-                id === 3 ? "z-30 relative text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)]" : "z-10",
+                id === 3 ? "z-30 relative text-white/90 drop-shadow-[0_2px_4px_rgba(0,0,0,0.9)] max-w-[40%] sm:max-w-[45%]" : "z-10",
                 id === 4 &&
                   "text-white/90 font-medium drop-shadow-[0_2px_4px_rgba(0,0,0,0.95)]"
               )}
@@ -129,9 +129,9 @@ export const BentoGridItem = ({
           {title && (
             <div
               className={cn(
-                "font-sans text-base sm:text-lg lg:text-3xl font-bold text-white",
+                "font-sans text-base sm:text-lg lg:text-2xl xl:text-3xl font-bold text-white",
                 id === 1 && "max-w-[85%] sm:max-w-[75%] lg:max-w-[65%] pb-16 sm:pb-0 z-10",
-                id === 3 && "z-30 relative max-w-[55%] sm:max-w-[50%] lg:max-w-[45%] drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]",
+                id === 3 && "z-30 relative max-w-[42%] sm:max-w-[45%] lg:max-w-[45%] drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]",
                 id === 4 && "drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] max-w-96 z-10",
                 id !== 1 && id !== 3 && id !== 4 && "z-10"
               )}
@@ -168,35 +168,35 @@ export const BentoGridItem = ({
 
           {/* Card 3: Three-column Staggered Tech Stack Badges */}
           {id === 3 && (
-            <div className="flex gap-1.5 sm:gap-2 lg:gap-3 w-fit absolute right-2 sm:right-3 lg:right-4 top-1/2 -translate-y-1/2 z-10">
+            <div className="flex gap-1 sm:gap-1.5 lg:gap-2.5 w-fit absolute right-1.5 sm:right-3 lg:right-5 top-1/2 -translate-y-1/2 z-10">
               {/* Left Tech Column */}
-              <div className="flex flex-col gap-1.5 sm:gap-2 lg:gap-3">
+              <div className="flex flex-col gap-1 sm:gap-1.5 lg:gap-2">
                 {leftLists.map((item, i) => (
                   <span
                     key={i}
-                    className="py-1.5 sm:py-2 px-2 sm:px-3 text-xs sm:text-xs lg:text-sm rounded-lg text-center bg-[#10132E] whitespace-nowrap text-white font-medium shadow-md border border-white/10"
+                    className="py-1 sm:py-1.5 px-1.5 sm:px-2.5 text-[10px] sm:text-xs rounded-lg text-center bg-[#10132E] whitespace-nowrap text-white font-medium shadow-md border border-white/10"
                   >
                     {item}
                   </span>
                 ))}
               </div>
               {/* Center Tech Column (Offset Downward) */}
-              <div className="flex flex-col gap-1.5 sm:gap-2 lg:gap-3 mt-3">
+              <div className="flex flex-col gap-1 sm:gap-1.5 lg:gap-2 mt-2">
                 {centerLists.map((item, i) => (
                   <span
                     key={i}
-                    className="py-1.5 sm:py-2 px-2 sm:px-3 text-xs sm:text-xs lg:text-sm rounded-lg text-center bg-[#10132E] whitespace-nowrap text-white font-medium shadow-md border border-white/10"
+                    className="py-1 sm:py-1.5 px-1.5 sm:px-2.5 text-[10px] sm:text-xs rounded-lg text-center bg-[#10132E] whitespace-nowrap text-white font-medium shadow-md border border-white/10"
                   >
                     {item}
                   </span>
                 ))}
               </div>
               {/* Right Tech Column */}
-              <div className="flex flex-col gap-1.5 sm:gap-2 lg:gap-3">
+              <div className="flex flex-col gap-1 sm:gap-1.5 lg:gap-2">
                 {rightLists.map((item, i) => (
                   <span
                     key={i}
-                    className="py-1.5 sm:py-2 px-2 sm:px-3 text-xs sm:text-xs lg:text-sm rounded-lg text-center bg-[#10132E] whitespace-nowrap text-white font-medium shadow-md border border-white/10"
+                    className="py-1 sm:py-1.5 px-1.5 sm:px-2.5 text-[10px] sm:text-xs rounded-lg text-center bg-[#10132E] whitespace-nowrap text-white font-medium shadow-md border border-white/10"
                   >
                     {item}
                   </span>
