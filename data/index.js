@@ -19,7 +19,7 @@ export const navItems = [
  * Split into two balanced columns for staggered vertical presentation.
  */
 export const leftLists = ["Next.js", "React.js", "MongoDB", "Mongoose"];
-export const rightLists = ["JavaScript", "Tailwind CSS", "HTML5", "GitHub"];
+export const rightLists = ["JavaScript", "Tailwind CSS", "HTML5", "GitHub", "Java"];
 
 /**
  * Bento Grid configuration items defining the layout, titles, descriptions, and media assets for each card.
