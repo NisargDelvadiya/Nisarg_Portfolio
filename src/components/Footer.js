@@ -145,28 +145,31 @@ export default function Footer() {
             <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-black italic tracking-tight uppercase leading-tight">
               HAVE A PROJECT IN MIND?
             </h2>
-            <div className="flex items-center gap-2 mt-2 w-full min-w-0">
+            <div className="flex flex-col gap-2.5 mt-2 w-full">
               <button
                 type="button"
                 onClick={handleCopyEmail}
                 title="Copy Mahin Gunjal's Email Address to Clipboard"
                 aria-label="Copy Email Address to Work With Me"
-                className={`group relative w-full flex items-center justify-between gap-2 px-3.5 sm:px-5 py-3 sm:py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border text-white font-extrabold text-xs sm:text-sm tracking-wider transition-all duration-200 active:scale-95 active:translate-y-0.5 cursor-pointer shadow-lg min-w-0 overflow-hidden ${
+                className={`group relative w-full flex flex-col items-center justify-center gap-2.5 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border text-white font-extrabold transition-all duration-200 active:scale-95 active:translate-y-0.5 cursor-pointer shadow-lg ${
                   isVenomMode
                     ? "border-purple-800/40 hover:border-purple-500"
                     : "border-white/15 hover:border-[#a31515]"
                 }`}
               >
-                <div className="flex items-center gap-2 min-w-0 shrink">
-                  <span className="text-base sm:text-xl shrink-0">✉️</span>
-                  <span className="text-gray-200 group-hover:text-white transition-colors truncate text-[11px] xs:text-xs sm:text-sm">
+                {/* Line 1: Email Address */}
+                <div className="flex items-center justify-center gap-2 w-full">
+                  <span className="text-base sm:text-lg">✉️</span>
+                  <span className="text-gray-200 group-hover:text-white transition-colors text-xs sm:text-sm font-bold break-all">
                     mahingunjal@gmail.com
                   </span>
                 </div>
+
+                {/* Line 2: Copy Email Badge */}
                 <span
-                  className={`px-2.5 sm:px-3 py-1 rounded-xl text-[10px] sm:text-xs font-black uppercase tracking-wider transition-all duration-200 shrink-0 ${
+                  className={`w-full py-2 rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wider text-center transition-all duration-200 shadow-md ${
                     copiedEmail
-                      ? "bg-[#3a4a61] text-white shadow-md shadow-slate-900/50"
+                      ? "bg-[#3a4a61] text-white shadow-slate-900/50"
                       : isVenomMode
                       ? "bg-purple-600 text-white group-hover:bg-purple-700"
                       : "bg-[#a31515] text-white group-hover:bg-[#821010]"
