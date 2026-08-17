@@ -1,0 +1,401 @@
+"use client";
+
+import React, { useState, useEffect } from "react";
+import { useTheme } from "@/context/ThemeContext";
+
+/**
+ * Supported languages for the Google Translate widget
+ */
+const ALL_LANGUAGES = [
+  { code: "en", name: "English" },
+  { code: "as", name: "Assamese" },
+  { code: "bn", name: "Bengali" },
+  { code: "doi", name: "Dogri" },
+  { code: "gu", name: "Gujarati" },
+  { code: "hi", name: "Hindi" },
+  { code: "kn", name: "Kannada" },
+  { code: "ks", name: "Kashmiri" },
+  { code: "gom", name: "Konkani" },
+  { code: "mai", name: "Maithili" },
+  { code: "ml", name: "Malayalam" },
+  { code: "mni-Mtei", name: "Manipuri (Meiteilon)" },
+  { code: "mr", name: "Marathi" },
+  { code: "ne", name: "Nepali" },
+  { code: "or", name: "Odia" },
+  { code: "pa", name: "Punjabi" },
+  { code: "sa", name: "Sanskrit" },
+  { code: "sat", name: "Santali" },
+  { code: "ta", name: "Tamil" },
+  { code: "te", name: "Telugu" },
+];
+
+export default function Footer() {
+  const [currentLanguage, setCurrentLanguage] = useState("en");
+  const [showConsent, setShowConsent] = useState(false);
+  const [copiedEmail, setCopiedEmail] = useState(false);
+  const { isVenomMode } = useTheme();
+
+  /** Copy Email to Clipboard */
+  const handleCopyEmail = () => {
+    const email = "mahingunjal@gmail.com";
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(email);
+    }
+    setCopiedEmail(true);
+    setTimeout(() => setCopiedEmail(false), 2500);
+  };
+
+  /** Handle consent response */
+  const handleAcceptConsent = () => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("user_language_consent", "granted");
+    }
+    setShowConsent(false);
+  };
+
+  const handleDeclineConsent = () => {
+    if (typeof window !== "undefined") {
+      localStorage.setItem("user_language_consent", "declined");
+    }
+    setShowConsent(false);
+  };
+
+  useEffect(() => {
+    // Developer Signature Console Watermark
+    console.log(
+      "%c 🕷️ Developed by Nisarg ",
+      "background: #a31515; color: #ffffff; font-size: 12px; font-weight: bold; padding: 6px 12px; border-radius: 6px;"
+    );
+
+    // Check local storage consent status
+    const consent = localStorage.getItem("user_language_consent");
+    if (!consent) {
+      setShowConsent(true);
+    }
+
+    // Google Translate Initialization Script
+    const addScript = () => {
+      if (document.getElementById("google-translate-script")) return;
+      const script = document.createElement("script");
+      script.id = "google-translate-script";
+      script.src =
+        "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      script.async = true;
+      document.body.appendChild(script);
+    };
+
+    window.googleTranslateElementInit = () => {
+      if (
+        window.google &&
+        window.google.translate &&
+        window.google.translate.TranslateElement
+      ) {
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: "en",
+            includedLanguages: ALL_LANGUAGES.map((l) => l.code).join(","),
+            autoDisplay: false,
+          },
+          "google_translate_element"
+        );
+      }
+    };
+
+    addScript();
+  }, []);
+
+  /** Programmatically change Google Translate language selection */
+  const changeLanguage = (langCode) => {
+    setCurrentLanguage(langCode);
+    const selectElem = document.querySelector(".goog-te-combo");
+    if (selectElem) {
+      selectElem.value = langCode;
+      selectElem.dispatchEvent(new Event("change"));
+    }
+  };
+
+  return (
+    <footer
+      className={`w-full relative pt-12 pb-10 px-4 sm:px-8 select-none transition-colors duration-300 ${
+        isVenomMode ? "bg-[#050508]" : "bg-white"
+      }`}
+      id="contact"
+      aria-label="Footer Section"
+    >
+      <div className="max-w-7xl mx-auto">
+        {/* Main Footer Dark Glassmorphic Container */}
+      <div
+        className={`relative z-10 backdrop-blur-xl border rounded-3xl p-6 sm:p-10 flex flex-col gap-10 transition-colors duration-300 ${
+          isVenomMode
+            ? "bg-black/95 border-purple-900/60 shadow-2xl shadow-purple-950/40"
+            : "bg-black/90 border-red-900/40 shadow-2xl shadow-red-950/20"
+        }`}
+      >
+        {/* Main Side-by-Side Grid Layout */}
+        <div className="flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-16">
+          {/* Left Side: Work With Me / Copy Email Column */}
+          <div className="flex flex-col items-start gap-3 text-left max-w-lg w-full">
+            <span
+              className={`font-black uppercase text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 ${
+                isVenomMode ? "text-purple-400" : "text-[#a31515]"
+              }`}
+            >
+              WORK WITH ME
+            </span>
+            <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-black italic tracking-tight uppercase leading-tight">
+              HAVE A PROJECT IN MIND?
+            </h2>
+            <div className="flex items-center gap-2 mt-2 w-full">
+              <button
+                type="button"
+                onClick={handleCopyEmail}
+                title="Copy Mahin Gunjal's Email Address to Clipboard"
+                aria-label="Copy Email Address to Work With Me"
+                className={`group relative w-full inline-flex items-center justify-between gap-3 px-5 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border text-white font-extrabold text-xs sm:text-sm tracking-wider transition-all duration-200 active:scale-95 active:translate-y-0.5 cursor-pointer shadow-lg ${
+                  isVenomMode
+                    ? "border-purple-800/40 hover:border-purple-500"
+                    : "border-white/15 hover:border-[#a31515]"
+                }`}
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="text-lg sm:text-xl">✉️</span>
+                  <span className="text-gray-200 group-hover:text-white transition-colors">
+                    mahingunjal@gmail.com
+                  </span>
+                </div>
+                <span
+                  className={`px-3 py-1 rounded-xl text-[10px] sm:text-xs font-black uppercase tracking-wider transition-all duration-200 shrink-0 ${
+                    copiedEmail
+                      ? "bg-[#3a4a61] text-white shadow-md shadow-slate-900/50"
+                      : isVenomMode
+                      ? "bg-purple-600 text-white group-hover:bg-purple-700"
+                      : "bg-[#a31515] text-white group-hover:bg-[#821010]"
+                  }`}
+                >
+                  {copiedEmail ? "COPIED! 📋" : "COPY EMAIL"}
+                </span>
+              </button>
+            </div>
+          </div>
+
+          {/* Right Side: Legal & Connect Links */}
+          <div className="flex flex-row items-start gap-12 sm:gap-20 shrink-0 self-start lg:self-center">
+            {/* Legal Column */}
+            <div className="flex flex-col gap-3">
+              <h3
+                className={`text-base font-bold text-white border-b pb-1.5 w-max transition-colors duration-300 ${
+                  isVenomMode ? "border-purple-800/60" : "border-[#a31515]/40"
+                }`}
+              >
+                Legal
+              </h3>
+              <a
+                href="/T&C"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Terms & Conditions (Opens in new tab)"
+                aria-label="Terms & Conditions (Opens in new tab)"
+                className={`text-left text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
+                  isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
+                }`}
+              >
+                Terms & Conditions
+              </a>
+              <a
+                href="/PrivacyPolicy"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Privacy Policy (Opens in new tab)"
+                aria-label="Privacy Policy (Opens in new tab)"
+                className={`text-left text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
+                  isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
+                }`}
+              >
+                Privacy Policy
+              </a>
+            </div>
+
+            {/* Connect Column */}
+            <div className="flex flex-col gap-3">
+              <h3
+                className={`text-base font-bold text-white border-b pb-1.5 w-max transition-colors duration-300 ${
+                  isVenomMode ? "border-purple-800/60" : "border-[#a31515]/40"
+                }`}
+              >
+                Connect
+              </h3>
+              <a
+                href="#"
+                onClick={(e) => e.preventDefault()}
+                title="GitHub Profile"
+                aria-label="GitHub Profile"
+                className={`text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
+                  isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
+                }`}
+              >
+                GitHub
+              </a>
+              <a
+                href="https://www.linkedin.com/in/mahin-gunjal-669006275/"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="LinkedIn Profile (Opens in new tab)"
+                aria-label="LinkedIn Profile (Opens in new tab)"
+                className={`text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
+                  isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
+                }`}
+              >
+                LinkedIn
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar: Language Selector & Copyright */}
+        <div className="border-t border-white/10 pt-6 flex flex-col items-center justify-center gap-4 text-xs sm:text-sm text-gray-400">
+          {/* Language Selector Dropdown */}
+          <div className="flex flex-row items-center justify-center gap-4">
+            <select
+              title="Select Website Language"
+              aria-label="Select Website Language"
+              onChange={(e) => changeLanguage(e.target.value)}
+              value={currentLanguage}
+              className={`notranslate bg-[#111111] text-white border rounded-xl px-4 py-2 text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 cursor-pointer shadow-lg transition-all ${
+                isVenomMode
+                  ? "border-purple-800/60 hover:border-purple-500 focus:ring-purple-500"
+                  : "border-[#a31515]/50 hover:border-[#a31515] focus:ring-[#a31515]"
+              }`}
+            >
+              {ALL_LANGUAGES.map((lang) => (
+                <option
+                  key={lang.code}
+                  value={lang.code}
+                  className="bg-[#111111] text-white"
+                >
+                  {lang.name}
+                </option>
+              ))}
+            </select>
+            <div
+              id="google_translate_element"
+              className="absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none"
+              aria-hidden="true"
+            />
+          </div>
+
+          {/* Copyright, UI Design Credit & Developer Watermark Line */}
+          <p className="text-center text-[11px] sm:text-xs md:text-sm text-gray-400 font-medium leading-relaxed max-w-3xl mx-auto">
+            &copy; 2026 • Made with ❤️ in Bharat 🇮🇳 | Mahin Gunjal • All Rights Reserved <span className="hidden sm:inline">|</span> <br className="sm:hidden" /> UI Design:{" "}
+            <a
+              href="https://www.instagram.com/srii_tech_?igsh=aHJra2h0Y3A1c3pj"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="UI Design Credit: @srii_tech_ on Instagram (Opens in new tab)"
+              aria-label="UI Design Credit: @srii_tech_ on Instagram (Opens in new tab)"
+              className={`text-white font-extrabold underline decoration-2 active:scale-95 transition-all duration-150 cursor-pointer inline-block ${
+                isVenomMode
+                  ? "hover:text-purple-400 decoration-purple-500"
+                  : "hover:text-[#a31515] decoration-[#a31515]"
+              }`}
+            >
+              @srii_tech_
+            </a>{" "}
+            | Developed by{" "}
+            <a
+              href="https://nisargjayeshdelvadiya.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Developed by Nisarg (Opens in new tab)"
+              aria-label="Developed by Nisarg (Opens in new tab)"
+              className={`text-white font-extrabold underline decoration-2 active:scale-95 transition-all duration-150 cursor-pointer inline-block ${
+                isVenomMode
+                  ? "hover:text-purple-400 decoration-purple-500"
+                  : "hover:text-[#a31515] decoration-[#a31515]"
+              }`}
+            >
+              Nisarg
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+
+      {/* Spider-Man Cookie Consent Popup Card */}
+      {showConsent && (
+        <div
+          className={`fixed bottom-6 right-6 z-[100000] max-w-sm sm:max-w-md w-full border-4 rounded-3xl p-6 text-gray-900 flex flex-col gap-4 select-none transition-colors duration-300 ${
+            isVenomMode
+              ? "bg-[#12121c] border-purple-600 shadow-[8px_8px_0px_#7e22ce] text-white"
+              : "bg-white border-[#a31515] shadow-[8px_8px_0px_#a31515] text-gray-900"
+          }`}
+        >
+          {/* Header Row: Emoji + Title + Close X Button */}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2.5">
+              <span className="text-2xl">🍪</span>
+              <h3
+                className={`font-black text-xl italic tracking-tight uppercase ${
+                  isVenomMode ? "text-white" : "text-gray-900"
+                }`}
+              >
+                COOKIES
+              </h3>
+            </div>
+            <button
+              type="button"
+              onClick={handleDeclineConsent}
+              className={`font-bold text-xl p-1 cursor-pointer transition-colors ${
+                isVenomMode
+                  ? "text-gray-400 hover:text-purple-400"
+                  : "text-gray-500 hover:text-[#a31515]"
+              }`}
+              title="Close Cookie Popup"
+              aria-label="Close Cookie Popup"
+            >
+              ✕
+            </button>
+          </div>
+
+          {/* Body Text */}
+          <p
+            className={`font-extrabold text-sm sm:text-base leading-snug ${
+              isVenomMode ? "text-gray-200" : "text-gray-800"
+            }`}
+          >
+            We use essential cookies strictly for secure authentication and functional cookies for language preferences. No tracking. No nonsense. Read our{" "}
+            <a
+              href="/PrivacyPolicy"
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Read Privacy Policy (Opens in new tab)"
+              aria-label="Read Privacy Policy (Opens in new tab)"
+              className={`underline decoration-2 font-black cursor-pointer ${
+                isVenomMode
+                  ? "text-purple-400 hover:text-purple-300"
+                  : "text-[#a31515] hover:text-[#821010]"
+              }`}
+            >
+              Privacy Policy
+            </a>{" "}
+            for details.
+          </p>
+
+          {/* Action Button: GOT IT! */}
+          <button
+            type="button"
+            onClick={handleAcceptConsent}
+            title="Accept Cookies and Language Preferences"
+            aria-label="Accept Cookies and Language Preferences"
+            className={`w-full py-3.5 font-black uppercase text-base tracking-wider rounded-2xl border-3 border-black shadow-[4px_4px_0px_#000000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#000000] transition-all cursor-pointer mt-1 ${
+              isVenomMode
+                ? "bg-[#7e22ce] hover:bg-[#6b21a8] text-white"
+                : "bg-[#a31515] hover:bg-[#821010] text-white"
+            }`}
+          >
+            GOT IT!
+          </button>
+        </div>
+      )}
+    </footer>
+  );
+}
