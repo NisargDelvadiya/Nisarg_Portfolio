@@ -114,7 +114,7 @@ export default function TermsAndConditions() {
               <p><strong>Name:</strong> Mahin Gunjal</p>
               <p><strong>Role:</strong> Web Designer & VFX Artist</p>
               <p><strong>Domain:</strong> mahingunjal.com</p>
-              <p><strong>Location:</strong> Baroda, Gujarat, Bharat 🇮🇳</p>
+              <p><strong>Location:</strong> Vadodara, Gujarat, Bharat 🇮🇳</p>
             </div>
           </div>
         </div>
