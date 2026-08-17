@@ -44,13 +44,17 @@ export default function ProjectsSection() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       // 1. Standing Spidey subtle up and down peek animation from corner
-      gsap.to(spideyCornerRef.current, {
-        y: -30,
-        duration: 3.2,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
+      gsap.fromTo(
+        spideyCornerRef.current,
+        { y: 0 },
+        {
+          y: -35,
+          duration: 3.2,
+          repeat: -1,
+          yoyo: true,
+          ease: "sine.inOut",
+        }
+      );
 
       // 2. Background web rotation
       gsap.to(webBgRef.current, {
@@ -87,12 +91,12 @@ export default function ProjectsSection() {
       {/* Standing Spider-Man Peeking from Corner */}
       <div
         ref={spideyCornerRef}
-        className="absolute bottom-0 -left-2 sm:left-0 md:left-1 z-30 pointer-events-none"
+        className="absolute bottom-2 sm:bottom-4 -left-2 sm:left-0 md:left-1 z-40 pointer-events-none"
       >
         <img
           src="/Assets/spidey_gif_2.png"
           alt="Spider-Man Corner Peek"
-          className={`w-20 sm:w-28 md:w-32 lg:w-36 h-auto object-contain drop-shadow-2xl translate-y-3 sm:translate-y-4 transition-all duration-300 ${
+          className={`w-20 sm:w-28 md:w-32 lg:w-36 h-auto object-contain drop-shadow-2xl transition-all duration-300 ${
             isVenomMode
               ? "grayscale brightness-[0.4] contrast-[220%] drop-shadow-[0_0_15px_#9333ea]"
               : ""
