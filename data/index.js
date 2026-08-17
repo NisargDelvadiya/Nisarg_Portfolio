@@ -120,9 +120,9 @@ export const projects = [
     iconLists: [
       "nextjs",
       "react",
-      "tailwind",
-      "gsap",
       "javascript",
+      "gsap",
+      "tailwind",
       "html",
       "github",
     ],
