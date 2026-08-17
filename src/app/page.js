@@ -9,6 +9,7 @@ import ProjectsSection from "@/components/ProjectsSection";
 import ExperiencesSection from "@/components/ExperiencesSection";
 import Footer from "@/components/Footer";
 import AudioPlayer from "@/components/AudioPlayer";
+import SectionNavigation from "@/components/SectionNavigation";
 import { useTheme } from "@/context/ThemeContext";
 
 export default function Home() {
@@ -31,6 +32,7 @@ export default function Home() {
       </main>
       <Footer />
       <AudioPlayer />
+      <SectionNavigation />
     </div>
   );
 }
