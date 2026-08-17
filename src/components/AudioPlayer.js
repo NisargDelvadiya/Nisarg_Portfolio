@@ -5,7 +5,6 @@ import { useTheme } from "@/context/ThemeContext";
 
 export default function AudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isMuted, setIsMuted] = useState(false);
   const audioRef = useRef(null);
   const { isVenomMode } = useTheme();
 
@@ -18,7 +17,6 @@ export default function AudioPlayer() {
     // Check saved music preference in localStorage
     const savedState = localStorage.getItem("bg_music_playing");
     if (savedState === "true") {
-      // Try to auto-play if previously enabled by user
       const playPromise = audioRef.current?.play();
       if (playPromise !== undefined) {
         playPromise
@@ -26,7 +24,6 @@ export default function AudioPlayer() {
             setIsPlaying(true);
           })
           .catch(() => {
-            // Autoplay blocked by browser policy until user gesture
             setIsPlaying(false);
           });
       }
@@ -36,11 +33,7 @@ export default function AudioPlayer() {
   const togglePlay = () => {
     if (!audioRef.current) return;
 
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-      localStorage.setItem("bg_music_playing", "false");
-    } else {
+    if (audioRef.current.paused) {
       audioRef.current
         .play()
         .then(() => {
@@ -50,8 +43,33 @@ export default function AudioPlayer() {
         .catch((err) => {
           console.log("Audio playback prevented:", err);
         });
+    } else {
+      audioRef.current.pause();
+      setIsPlaying(false);
+      localStorage.setItem("bg_music_playing", "false");
     }
   };
+
+  // Keyboard shortcut listener for Spacebar
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      const target = e.target;
+      const isInput =
+        target &&
+        (target.tagName === "INPUT" ||
+          target.tagName === "TEXTAREA" ||
+          target.tagName === "SELECT" ||
+          target.isContentEditable);
+
+      if ((e.code === "Space" || e.key === " ") && !isInput) {
+        e.preventDefault();
+        togglePlay();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
 
   return (
     <>
@@ -67,8 +85,8 @@ export default function AudioPlayer() {
         <button
           type="button"
           onClick={togglePlay}
-          title={isPlaying ? "Pause Background Theme Music" : "Play Background Theme Music"}
-          aria-label={isPlaying ? "Pause Background Theme Music" : "Play Background Theme Music"}
+          title={isPlaying ? "Pause Background Theme Music (Spacebar)" : "Play Background Theme Music (Spacebar)"}
+          aria-label={isPlaying ? "Pause Background Theme Music (Spacebar)" : "Play Background Theme Music (Spacebar)"}
           className={`group relative flex items-center gap-2.5 px-3.5 py-2.5 rounded-full border-2 shadow-2xl backdrop-blur-xl transition-all duration-300 active:scale-95 cursor-pointer ${
             isPlaying
               ? isVenomMode
@@ -94,6 +112,11 @@ export default function AudioPlayer() {
 
           <span className="text-xs font-black uppercase tracking-wider hidden sm:inline">
             {isPlaying ? "MUSIC ON" : "PLAY THEME"}
+          </span>
+
+          {/* Keyboard shortcut hint badge */}
+          <span className="hidden md:inline-block px-1.5 py-0.5 text-[9px] font-black rounded border opacity-75 border-current">
+            SPACE
           </span>
 
           {/* Glowing dot indicator */}
