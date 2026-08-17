@@ -248,6 +248,30 @@ export default function Footer() {
               >
                 LinkedIn
               </a>
+              <a
+                href="https://www.instagram.com/mahingunjal?igsh=MTlxOXF5YXphbXowcw=="
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Instagram Profile (Opens in new tab)"
+                aria-label="Instagram Profile (Opens in new tab)"
+                className={`text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
+                  isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
+                }`}
+              >
+                Instagram
+              </a>
+              <a
+                href="https://www.instagram.com/marvell.paglu?igsh=Y2hvbDVqMDhqMmM1"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Instagram (Marvel Paglu) Profile (Opens in new tab)"
+                aria-label="Instagram (Marvel Paglu) Profile (Opens in new tab)"
+                className={`text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
+                  isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
+                }`}
+              >
+                Instagram (Marvel Paglu)
+              </a>
             </div>
           </div>
         </div>
