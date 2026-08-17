@@ -119,4 +119,4 @@ npm run start
 
 ---
 
-&copy; 2026 • Made with ❤️ in Bharat 🇮🇳 | Mahin Gunjal • All Rights Reserved | UI Design: [@srii_tech_](https://www.instagram.com/srii_tech_?igsh=aHJra2h0Y3A1c3pj) | Developed by [Nisarg](https://nisargjayeshdelvadiya.com)
+&copy; 2026 • Made with ❤️ in Bharat 🇮🇳 | Mahin Gunjal • All Rights Reserved | UI Design Inspiration: [@srii_tech_](https://www.instagram.com/srii_tech_?igsh=aHJra2h0Y3A1c3pj) | Developed by [Nisarg](https://nisargjayeshdelvadiya.com)
