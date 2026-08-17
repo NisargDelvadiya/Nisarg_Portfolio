@@ -31,7 +31,7 @@ export default function PrivacyPolicy() {
             </div>
           </div>
 
-          {/* Back to Home Button */}
+          {/* Single Primary Back to Home Button */}
           <button
             type="button"
             onClick={handleBackToHome}
@@ -120,17 +120,10 @@ export default function PrivacyPolicy() {
         </div>
 
         {/* Footer Bar */}
-        <div className="flex items-center justify-between border-t border-gray-100 pt-6">
+        <div className="flex items-center justify-center border-t border-gray-100 pt-6 text-center">
           <p className="text-xs text-gray-500 font-bold">
             &copy; 2026 • Mahin Gunjal • All Rights Reserved
           </p>
-          <button
-            type="button"
-            onClick={handleBackToHome}
-            className="text-xs font-black uppercase tracking-wider text-[#a31515] hover:underline cursor-pointer"
-          >
-            Return to Home Page &rarr;
-          </button>
         </div>
       </div>
     </div>
