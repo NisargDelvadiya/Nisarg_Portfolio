@@ -1,6 +1,6 @@
 import React from "react";
 import { FaLocationArrow, FaGithub, FaHtml5 } from "react-icons/fa6";
-import { SiNextdotjs, SiMongodb, SiJavascript, SiTailwindcss, SiReact, SiMongoose } from "react-icons/si";
+import { SiNextdotjs, SiMongodb, SiJavascript, SiTailwindcss, SiReact, SiMongoose, SiGreensock } from "react-icons/si";
 
 import { projects } from "@/data";
 import { PinContainer } from "./ui/Pin";
@@ -23,6 +23,9 @@ const renderSkillIcon = (iconName) => {
   }
   if (name.includes("mongo")) {
     return <SiMongodb className="w-4 h-4 md:w-5 md:h-5 text-[#47A248]" aria-label="MongoDB" />;
+  }
+  if (name.includes("gsap") || name.includes("greensock")) {
+    return <SiGreensock className="w-4 h-4 md:w-5 md:h-5 text-[#88CE02]" aria-label="GSAP" />;
   }
   if (name.includes("java") || name.includes("js")) {
     return <SiJavascript className="w-4 h-4 md:w-5 md:h-5 text-[#F7DF1E] bg-black rounded-sm" aria-label="JavaScript" />;
@@ -125,18 +128,20 @@ const RecentProjects = () => {
 
                     {/* Action Links (Line 2: Source Code & Live Demo Buttons) */}
                     <div className="flex items-center justify-center gap-2.5 sm:gap-3 w-full flex-wrap z-20">
-                      {/* GitHub Source Code Button */}
-                      <a
-                        href={projectItem.github || "https://github.com"}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        title={`View ${projectItem.title} Source Code on GitHub`}
-                        aria-label={`View ${projectItem.title} Source Code on GitHub`}
-                        className="flex justify-center items-center cursor-pointer px-3 sm:px-3.5 py-1.5 rounded-lg bg-[#10132E] border border-white/10 hover:border-purple/50 active:scale-95 active:bg-purple/20 text-purple text-xs md:text-sm font-semibold gap-1.5 transition-all duration-150 shadow-md group/btn whitespace-nowrap shrink-0"
-                      >
-                        <span className="whitespace-nowrap">Source Code</span>
-                        <FaGithub className="w-3.5 h-3.5 text-white shrink-0 transition-transform group-hover/btn:scale-110" aria-hidden="true" />
-                      </a>
+                      {/* GitHub Source Code Button (Only rendered if github link is provided) */}
+                      {projectItem.github ? (
+                        <a
+                          href={projectItem.github}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          title={`View ${projectItem.title} Source Code on GitHub`}
+                          aria-label={`View ${projectItem.title} Source Code on GitHub`}
+                          className="flex justify-center items-center cursor-pointer px-3 sm:px-3.5 py-1.5 rounded-lg bg-[#10132E] border border-white/10 hover:border-purple/50 active:scale-95 active:bg-purple/20 text-purple text-xs md:text-sm font-semibold gap-1.5 transition-all duration-150 shadow-md group/btn whitespace-nowrap shrink-0"
+                        >
+                          <span className="whitespace-nowrap">Source Code</span>
+                          <FaGithub className="w-3.5 h-3.5 text-white shrink-0 transition-transform group-hover/btn:scale-110" aria-hidden="true" />
+                        </a>
+                      ) : null}
 
                       {/* Live Site Demo Button */}
                       <a

@@ -114,21 +114,20 @@ export const gridItems = [
 export const projects = [
   {
     id: 1,
-    title: "MyTodo - Same Masks Same Tasks",
-    des: "MyTodo is a hyper-secure, full-stack task manager featuring true End-to-End Encryption (E2EE) and a bold Neo-Brutalist design, engineered to turn your chaotic daily chores into a beautifully organized command center.",
-    img: "/projects/p1.jpg",
+    title: "Mahin Gunjal - Web Designer & VFX Artist",
+    des: "A high-performance, interactive Next.js portfolio for Web Designer & VFX Artist Mahin Gunjal, featuring a custom Spider-Man vs. Venom Symbiote theme toggle, GSAP animations, ambient audio controls, and PWA capabilities.",
+    img: "/projects/p3.jpg",
     iconLists: [
       "nextjs",
       "react",
-      "mongodb",
-      "mongoose",
-      "javascript",
       "tailwind",
+      "gsap",
+      "javascript",
       "html",
       "github",
     ],
-    link: "https://www.mytodo.co.in",
-    github: "https://github.com/nisargdelvadiya/MyTodo",
+    link: "https://mahin-portfolio-spidey.vercel.app",
+    github: "",
   },
   {
     id: 2,
@@ -147,6 +146,24 @@ export const projects = [
     ],
     link: "https://log-diary-200.vercel.app",
     github: "https://github.com/NisargDelvadiya/LogDiary.git",
+  },
+  {
+    id: 3,
+    title: "MyTodo - Same Masks Same Tasks",
+    des: "MyTodo is a hyper-secure, full-stack task manager featuring true End-to-End Encryption (E2EE) and a bold Neo-Brutalist design, engineered to turn your chaotic daily chores into a beautifully organized command center.",
+    img: "/projects/p1.jpg",
+    iconLists: [
+      "nextjs",
+      "react",
+      "mongodb",
+      "mongoose",
+      "javascript",
+      "tailwind",
+      "html",
+      "github",
+    ],
+    link: "https://www.mytodo.co.in",
+    github: "https://github.com/nisargdelvadiya/MyTodo",
   },
 ];
 
