@@ -145,26 +145,26 @@ export default function Footer() {
             <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-black italic tracking-tight uppercase leading-tight">
               HAVE A PROJECT IN MIND?
             </h2>
-            <div className="flex items-center gap-2 mt-2 w-full">
+            <div className="flex items-center gap-2 mt-2 w-full min-w-0">
               <button
                 type="button"
                 onClick={handleCopyEmail}
                 title="Copy Mahin Gunjal's Email Address to Clipboard"
                 aria-label="Copy Email Address to Work With Me"
-                className={`group relative w-full inline-flex items-center justify-between gap-3 px-5 py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border text-white font-extrabold text-xs sm:text-sm tracking-wider transition-all duration-200 active:scale-95 active:translate-y-0.5 cursor-pointer shadow-lg ${
+                className={`group relative w-full flex items-center justify-between gap-2 px-3.5 sm:px-5 py-3 sm:py-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border text-white font-extrabold text-xs sm:text-sm tracking-wider transition-all duration-200 active:scale-95 active:translate-y-0.5 cursor-pointer shadow-lg min-w-0 overflow-hidden ${
                   isVenomMode
                     ? "border-purple-800/40 hover:border-purple-500"
                     : "border-white/15 hover:border-[#a31515]"
                 }`}
               >
-                <div className="flex items-center gap-2.5">
-                  <span className="text-lg sm:text-xl">✉️</span>
-                  <span className="text-gray-200 group-hover:text-white transition-colors">
+                <div className="flex items-center gap-2 min-w-0 shrink">
+                  <span className="text-base sm:text-xl shrink-0">✉️</span>
+                  <span className="text-gray-200 group-hover:text-white transition-colors truncate text-[11px] xs:text-xs sm:text-sm">
                     mahingunjal@gmail.com
                   </span>
                 </div>
                 <span
-                  className={`px-3 py-1 rounded-xl text-[10px] sm:text-xs font-black uppercase tracking-wider transition-all duration-200 shrink-0 ${
+                  className={`px-2.5 sm:px-3 py-1 rounded-xl text-[10px] sm:text-xs font-black uppercase tracking-wider transition-all duration-200 shrink-0 ${
                     copiedEmail
                       ? "bg-[#3a4a61] text-white shadow-md shadow-slate-900/50"
                       : isVenomMode
@@ -348,7 +348,7 @@ export default function Footer() {
       {/* Spider-Man Cookie Consent Popup Card */}
       {showConsent && (
         <div
-          className={`fixed bottom-6 right-6 z-[100000] max-w-sm sm:max-w-md w-full border-4 rounded-3xl p-6 text-gray-900 flex flex-col gap-4 select-none transition-colors duration-300 ${
+          className={`fixed bottom-6 left-1/2 -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 z-[100000] w-[calc(100%-2.5rem)] max-w-sm sm:max-w-md border-4 rounded-3xl p-5 sm:p-6 text-gray-900 flex flex-col gap-4 select-none transition-colors duration-300 ${
             isVenomMode
               ? "bg-[#12121c] border-purple-600 shadow-[8px_8px_0px_#7e22ce] text-white"
               : "bg-white border-[#a31515] shadow-[8px_8px_0px_#a31515] text-gray-900"

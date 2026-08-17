@@ -263,8 +263,8 @@ export default function AboutSection() {
                   alt="Mahin Gunjal Profile"
                   className={`w-full h-full object-cover object-center transition-all duration-500 group-hover:grayscale-0 group-hover:scale-110 ${
                     isVenomMode
-                      ? "grayscale contrast-125 brightness-90"
-                      : "grayscale contrast-110"
+                      ? "grayscale-0 lg:grayscale contrast-125 brightness-90 lg:group-hover:brightness-100"
+                      : "grayscale-0 lg:grayscale contrast-110"
                   }`}
                 />
               </div>
