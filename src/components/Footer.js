@@ -225,10 +225,11 @@ export default function Footer() {
                 Connect
               </h3>
               <a
-                href="#"
-                onClick={(e) => e.preventDefault()}
-                title="GitHub Profile"
-                aria-label="GitHub Profile"
+                href="https://github.com/mahingunjal"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="GitHub Profile (Opens in new tab)"
+                aria-label="GitHub Profile (Opens in new tab)"
                 className={`text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
                   isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
                 }`}
