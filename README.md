@@ -43,7 +43,8 @@ MahinGunjal/
 │   │   ├── spidey_gif_1.png    # Skills section right pendulum graphic
 │   │   └── spidey_gif_2.png    # Projects section corner peeking graphic
 │   ├── favicon/                # Cross-browser favicons and webmanifest
-│   └── Mahin_Resume.pdf        # Downloadable resume document
+│   ├── Mahin_Resume.pdf        # Downloadable resume document
+│   └── Website Development Service Contract (Version 1 Client 1 Mahin).pdf # Client development service contract
 ├── src/
 │   ├── app/
 │   │   ├── PrivacyPolicy/
@@ -108,6 +109,15 @@ To test the optimized static production build:
 npm run build
 npm run start
 ```
+
+---
+
+## 📄 Client Service Agreement & Contract
+
+This portfolio project was executed under a formal client-developer service contract:
+- **Contract Document**: [`Website Development Service Contract (Version 1 Client 1 Mahin).pdf`](./public/Website%20Development%20Service%20Contract%20(Version%201%20Client%201%20Mahin).pdf)
+- **Developer & Service Provider**: Nisarg Delvadiya ([nisargjayeshdelvadiya.com](https://nisargjayeshdelvadiya.com))
+- **Client**: Mahin Gunjal ([mahingunjal.com](https://mahingunjal.com))
 
 ---
 
