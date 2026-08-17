@@ -157,7 +157,7 @@ export default function Hero() {
       )}
 
       {/* Spider Web Background Decor */}
-      <div className="absolute inset-0 pointer-events-none z-[25] overflow-hidden">
+      <div className="absolute inset-0 pointer-events-none z-5 overflow-hidden">
         <img
           ref={webTopRef}
           alt="Spider Web Top"
