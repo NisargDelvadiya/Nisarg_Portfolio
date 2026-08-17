@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
+import PWARegistration from "@/components/PWARegistration";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,12 +13,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+export const viewport = {
+  themeColor: "#a31515",
+};
+
 export const metadata = {
-  title: "Mahin's Portfolio",
+  title: "Mahin Gunjal — Web Designer & VFX Artist",
   description:
-    "I’m Mahin Gunjal, a passionate Web Designer and VFX Artist pursuing my Bachelor’s degree at ITM SLS Baroda University. I specialize in creating modern, responsive, and visually engaging websites that combine clean UI/UX design with interactive digital experiences. With a strong interest in web design, frontend development, UI/UX, creative design, and digital experiences, I enjoy transforming ideas into high-quality websites that are both functional and visually impactful. Alongside my web design journey, I am currently pursuing a VFX course at ZICA (Zee Institute of Creative Art), developing skills in visual effects, motion graphics, compositing, video editing, 3D design, and digital storytelling. My goal is to combine web development, creative design, and VFX to build immersive digital experiences. I’m passionate about exploring new creative technologies and delivering work that blends technology, design, animation, and visual storytelling.",
-  authors: [{ name: "Mahin" }],
-  keywords: ["Mahin", "Portfolio", "Web Designer", "VFX Artist", "JavaScript"],
+    "I’m Mahin Gunjal, a passionate Web Designer and VFX Artist pursuing my Bachelor’s degree at ITM SLS Vadodara University. I specialize in creating modern, responsive, and visually engaging websites that combine clean UI/UX design with interactive digital experiences. Alongside my web design journey, I am currently pursuing a VFX course at ZICA, developing skills in visual effects, motion graphics, compositing, video editing, 3D design, and digital storytelling.",
+  authors: [{ name: "Mahin Gunjal" }],
+  keywords: ["Mahin Gunjal", "Portfolio", "Web Designer", "VFX Artist", "JavaScript", "React", "Next.js"],
   icons: {
     icon: [
       { url: "/favicon/favicon-96x96.png?v=20260817", sizes: "96x96", type: "image/png" },
@@ -28,9 +33,11 @@ export const metadata = {
       { url: "/favicon/apple-touch-icon.png?v=20260817", sizes: "180x180", type: "image/png" },
     ],
   },
-  manifest: "/favicon/site.webmanifest?v=20260817",
+  manifest: "/manifest.json",
   appleWebApp: {
-    title: "Mahin_Portfolio",
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "Mahin Gunjal",
   },
 };
 
@@ -45,8 +52,12 @@ export default function RootLayout({ children }) {
         <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg?v=20260817" />
         <link rel="shortcut icon" href="/favicon/favicon.ico?v=20260817" />
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=20260817" />
-        <meta name="apple-mobile-web-app-title" content="Mahin_Portfolio" />
-        <link rel="manifest" href="/favicon/site.webmanifest?v=20260817" />
+        <meta name="theme-color" content="#a31515" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Mahin Gunjal" />
+        <link rel="manifest" href="/manifest.json" />
       </head>
       <body className="min-h-full flex flex-col relative transition-colors duration-300">
         <ThemeProvider>
@@ -57,6 +68,7 @@ export default function RootLayout({ children }) {
             Skip to main content
           </a>
           {children}
+          <PWARegistration />
         </ThemeProvider>
       </body>
     </html>
