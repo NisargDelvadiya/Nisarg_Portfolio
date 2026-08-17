@@ -80,37 +80,37 @@ export default function AudioPlayer() {
         preload="auto"
       />
 
-      {/* Floating Audio Control Button */}
-      <div className="fixed bottom-6 left-6 z-[9999] pointer-events-auto">
+      {/* Floating Audio Control Button - Responsive & High Z-Index */}
+      <div className="fixed bottom-4 left-4 sm:bottom-6 sm:left-6 z-[999999] pointer-events-auto select-none">
         <button
           type="button"
           onClick={togglePlay}
           title={isPlaying ? "Pause Background Theme Music (Spacebar)" : "Play Background Theme Music (Spacebar)"}
           aria-label={isPlaying ? "Pause Background Theme Music (Spacebar)" : "Play Background Theme Music (Spacebar)"}
-          className={`group relative flex items-center gap-2.5 px-3.5 py-2.5 rounded-full border-2 shadow-2xl backdrop-blur-xl transition-all duration-300 active:scale-95 cursor-pointer ${
+          className={`group relative flex items-center gap-2 px-3 py-2 sm:px-4 sm:py-2.5 rounded-full border-2 shadow-[0_8px_30px_rgba(0,0,0,0.4)] backdrop-blur-2xl transition-all duration-300 active:scale-95 cursor-pointer ${
             isPlaying
               ? isVenomMode
-                ? "bg-purple-950/90 border-purple-500 text-purple-200 shadow-[0_0_20px_rgba(168,85,247,0.5)]"
-                : "bg-black/90 border-[#a31515] text-white shadow-red-950/40"
+                ? "bg-purple-950 border-purple-500 text-purple-200 shadow-[0_0_25px_rgba(168,85,247,0.6)]"
+                : "bg-black border-[#a31515] text-white shadow-red-950/50"
               : isVenomMode
-              ? "bg-black/80 border-purple-900/60 text-purple-400 hover:border-purple-500"
-              : "bg-white/90 border-gray-300 text-gray-800 hover:border-[#a31515]"
+              ? "bg-[#0b0b14]/95 border-purple-700 text-purple-300 hover:border-purple-500"
+              : "bg-white/95 border-gray-400 text-gray-900 hover:border-[#a31515]"
           }`}
         >
           {/* Animated Equalizer / Icon indicator */}
-          <div className="relative flex items-center justify-center w-6 h-6 shrink-0">
+          <div className="relative flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 shrink-0">
             {isPlaying ? (
-              <div className="flex items-end justify-center gap-0.5 w-full h-4">
+              <div className="flex items-end justify-center gap-0.5 w-full h-3.5 sm:h-4">
                 <span className="w-1 bg-current rounded-full animate-[bounce_1s_infinite_100ms] h-full"></span>
                 <span className="w-1 bg-current rounded-full animate-[bounce_1s_infinite_300ms] h-2/3"></span>
                 <span className="w-1 bg-current rounded-full animate-[bounce_1s_infinite_200ms] h-4/5"></span>
               </div>
             ) : (
-              <span className="text-base">🎵</span>
+              <span className="text-sm sm:text-base">🎵</span>
             )}
           </div>
 
-          <span className="text-xs font-black uppercase tracking-wider hidden sm:inline">
+          <span className="text-[11px] sm:text-xs font-black uppercase tracking-wider inline-block">
             {isPlaying ? "MUSIC ON" : "PLAY THEME"}
           </span>
 
