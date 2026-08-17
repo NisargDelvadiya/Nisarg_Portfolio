@@ -75,7 +75,7 @@ export default function AudioPlayer() {
     <>
       <audio
         ref={audioRef}
-        src="/Assets/Spider_Man.mpeg"
+        src="/Assets/Spider_Man.mp3"
         loop
         preload="auto"
       />
