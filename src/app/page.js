@@ -8,6 +8,7 @@ import SkillsSection from "@/components/SkillsSection";
 import ProjectsSection from "@/components/ProjectsSection";
 import ExperiencesSection from "@/components/ExperiencesSection";
 import Footer from "@/components/Footer";
+import AudioPlayer from "@/components/AudioPlayer";
 import { useTheme } from "@/context/ThemeContext";
 
 export default function Home() {
@@ -29,6 +30,7 @@ export default function Home() {
         <ExperiencesSection />
       </main>
       <Footer />
+      <AudioPlayer />
     </div>
   );
 }
