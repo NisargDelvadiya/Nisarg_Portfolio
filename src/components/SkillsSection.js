@@ -143,7 +143,7 @@ export default function SkillsSection() {
         {skillsData.map((skill, index) => (
           <div
             key={index}
-            className={`group relative backdrop-blur-sm border rounded-2xl p-3.5 md:p-4.5 flex items-center justify-between overflow-hidden cursor-pointer transition-all duration-150 active:scale-95 active:translate-y-0.5 ${
+            className={`group relative backdrop-blur-sm border rounded-2xl p-3.5 md:p-4.5 flex items-center justify-between overflow-hidden transition-all duration-300 ${
               isVenomMode
                 ? "bg-[#12121c]/90 border-purple-900/50 shadow-md shadow-purple-950/40 hover:border-purple-500 hover:shadow-purple-950/60"
                 : "bg-white/90 border-gray-200/80 shadow-md shadow-gray-200/40 hover:border-[#a31515] hover:shadow-red-900/15"
