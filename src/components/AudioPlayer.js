@@ -114,10 +114,7 @@ export default function AudioPlayer() {
             {isPlaying ? "MUSIC ON" : "PLAY THEME"}
           </span>
 
-          {/* Keyboard shortcut hint badge */}
-          <span className="hidden md:inline-block px-1.5 py-0.5 text-[9px] font-black rounded border opacity-75 border-current">
-            SPACE
-          </span>
+
 
           {/* Glowing dot indicator */}
           <span
