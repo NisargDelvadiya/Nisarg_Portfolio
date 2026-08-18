@@ -3,6 +3,16 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useTheme } from "@/context/ThemeContext";
 
+/**
+ * AudioPlayer Component
+ * 
+ * Features:
+ * - Floating background theme song player (Spider-Man theme score)
+ * - Persisted playback state across page visits via localStorage
+ * - Spacebar keyboard shortcut toggling music on/off without interrupting inputs
+ * - Animated sound wave equalizer indicators
+ * - Full Spider-Man / Venom symbiote styling
+ */
 export default function AudioPlayer() {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
@@ -10,7 +20,7 @@ export default function AudioPlayer() {
 
   useEffect(() => {
     if (audioRef.current) {
-      // Keep volume low as requested
+      // Keep volume comfortable for ambient listening
       audioRef.current.volume = 0.25;
     }
 
@@ -98,34 +108,25 @@ export default function AudioPlayer() {
           }`}
         >
           {/* Animated Equalizer / Icon indicator */}
-          <div className="relative flex items-center justify-center w-5 h-5 sm:w-6 sm:h-6 shrink-0">
+          <div className="flex items-center gap-1 h-3.5 w-3.5 justify-center">
             {isPlaying ? (
-              <div className="flex items-end justify-center gap-0.5 w-full h-3.5 sm:h-4">
-                <span className="w-1 bg-current rounded-full animate-[bounce_1s_infinite_100ms] h-full"></span>
-                <span className="w-1 bg-current rounded-full animate-[bounce_1s_infinite_300ms] h-2/3"></span>
-                <span className="w-1 bg-current rounded-full animate-[bounce_1s_infinite_200ms] h-4/5"></span>
-              </div>
+              <span className="flex items-end gap-0.5 h-3">
+                <span className={`w-0.5 h-full animate-[bounce_0.6s_ease-in-out_infinite] ${isVenomMode ? "bg-purple-400" : "bg-[#a31515]"}`}></span>
+                <span className={`w-0.5 h-2/3 animate-[bounce_0.8s_ease-in-out_infinite_0.2s] ${isVenomMode ? "bg-purple-400" : "bg-[#a31515]"}`}></span>
+                <span className={`w-0.5 h-full animate-[bounce_0.7s_ease-in-out_infinite_0.4s] ${isVenomMode ? "bg-purple-400" : "bg-[#a31515]"}`}></span>
+              </span>
             ) : (
-              <span className="text-sm sm:text-base">🎵</span>
+              <span className="text-xs">▶</span>
             )}
           </div>
 
-          <span className="text-[11px] sm:text-xs font-black uppercase tracking-wider inline-block">
+          <span className="font-extrabold text-[10px] sm:text-xs tracking-wider uppercase">
             {isPlaying ? "MUSIC ON" : "PLAY THEME"}
           </span>
 
-
-
-          {/* Glowing dot indicator */}
-          <span
-            className={`w-2 h-2 rounded-full shrink-0 ${
-              isPlaying
-                ? isVenomMode
-                  ? "bg-purple-400 animate-pulse shadow-[0_0_8px_#a855f7]"
-                  : "bg-red-500 animate-pulse shadow-[0_0_8px_#ef4444]"
-                : "bg-gray-400"
-            }`}
-          ></span>
+          <span className="hidden lg:inline text-[9px] opacity-60 font-semibold border border-current px-1 rounded">
+            SPACE
+          </span>
         </button>
       </div>
     </>

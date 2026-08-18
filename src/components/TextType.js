@@ -3,6 +3,25 @@
 import { useEffect, useRef, useState, createElement, useMemo, useCallback } from 'react';
 import { gsap } from 'gsap';
 
+/**
+ * TextType Component
+ * 
+ * High-performance typing and deletion text animation component powered by GSAP and React state.
+ * Supports looping strings, custom cursor characters, blinking effects, and intersection observation.
+ * 
+ * @param {Object} props
+ * @param {string|string[]} props.text - String or array of strings to type sequentially.
+ * @param {string} [props.as='div'] - Element tag to render.
+ * @param {number} [props.typingSpeed=50] - Typing delay per character in ms.
+ * @param {number} [props.initialDelay=0] - Initial delay before typing starts.
+ * @param {number} [props.pauseDuration=2000] - Pause duration after sentence completes.
+ * @param {number} [props.deletingSpeed=30] - Deletion speed per character in ms.
+ * @param {boolean} [props.loop=true] - Whether to loop through the sentences indefinitely.
+ * @param {string} [props.className=''] - Tailwind CSS classes for the container.
+ * @param {boolean} [props.showCursor=true] - Whether to show the blinking cursor.
+ * @param {string} [props.cursorCharacter='|'] - Cursor symbol.
+ * @returns {JSX.Element}
+ */
 const TextType = ({
   text,
   as: Component = 'div',

@@ -1,35 +1,89 @@
 @import "tailwindcss";
 
+/* Smooth scrolling for anchor jumps and keyboard navigation */
 html {
   scroll-behavior: smooth;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
+/* Zero top shifting and bounce control */
 html,
 body {
   overscroll-behavior: none;
   overscroll-behavior-y: none;
   top: 0px !important;
-  position: relative !important;
+  position: static !important;
+  margin-top: 0px !important;
 }
 
-/* Hide Google Translate top banner, iframe header bar, tooltips, floating gadgets, and prevent body margin push */
+/* ==========================================================================
+   GOOGLE TRANSLATE COMPLETE HEADER & WIDGET SUPPRESSION
+   Ensures no translation toolbar, banner frame, iframe header, or body
+   margin/padding push ever displays for any language on any screen size.
+   ========================================================================== */
 .goog-te-banner-frame,
 .goog-te-banner-frame.skiptranslate,
 iframe.goog-te-banner-frame,
+iframe[class*="goog-te-banner-frame"],
+iframe[id*=":1.container"],
+iframe.goog-te-menu-frame,
 .VIpgJd-ZGain-r42b1d,
+.VIpgJd-ZGain-r42b1d-ofrv,
+.VIpgJd-ZGain-r42b1d-wOHMyf,
+.VIpgJd-ZGain-r42b1d-N7eqid,
 .goog-te-balloon-frame,
 #goog-gt-tt,
+#goog-gt-vt,
 .goog-te-spinner-pos,
 .goog-te-gadget-icon,
-.VIpgJd-ZGain-r42b1d-ofrv {
+.goog-te-gadget-simple,
+.goog-tooltip,
+.goog-tooltip:hover,
+.goog-text-highlight {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
   height: 0 !important;
   width: 0 !important;
+  max-height: 0 !important;
+  max-width: 0 !important;
   pointer-events: none !important;
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  margin: 0 !important;
+  padding: 0 !important;
 }
 
+/* Hide skiptranslate header wrapper inserted by Google Translate */
+body > .skiptranslate,
+#google_translate_element .skiptranslate > span {
+  display: none !important;
+}
+
+/* Keep the Google translate select combo element accessible in footer but hide raw gadget branding */
+.goog-te-gadget {
+  color: transparent !important;
+  font-size: 0px !important;
+}
+
+.goog-te-gadget .goog-te-combo {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  border: 1px solid rgba(255, 255, 255, 0.2) !important;
+  border-radius: 12px !important;
+  padding: 6px 12px !important;
+  font-size: 12px !important;
+  font-weight: 700 !important;
+  outline: none !important;
+  cursor: pointer !important;
+}
+
+/* ==========================================================================
+   PERFORMANCE & SMOOTH ANIMATIONS
+   ========================================================================== */
 @keyframes marqueeLeft {
   0% {
     transform: translate3d(0%, 0, 0);
@@ -55,6 +109,7 @@ iframe.goog-te-banner-frame,
   white-space: nowrap;
   animation: marqueeLeft 40s linear infinite;
   will-change: transform;
+  transform: translateZ(0);
 }
 
 .animate-marquee-right {
@@ -64,4 +119,12 @@ iframe.goog-te-banner-frame,
   white-space: nowrap;
   animation: marqueeRight 40s linear infinite;
   will-change: transform;
+  transform: translateZ(0);
+}
+
+/* GPU Acceleration utility */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }

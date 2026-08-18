@@ -4,6 +4,9 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useTheme } from "@/context/ThemeContext";
 
+/**
+ * Career timeline and milestones dataset
+ */
 const experiencesData = [
   {
     role: "Web Designer & WordPress Developer",
@@ -47,6 +50,15 @@ const experiencesData = [
   },
 ];
 
+/**
+ * ExperiencesSection Component
+ * 
+ * Features:
+ * - Alternating left/right vertical timeline connected by a central glowing web thread
+ * - Chronological work experience, internships, leadership roles & administrative experience
+ * - Interactive cards with subtle scale feedback on click
+ * - Smooth theme synchronization for Spider-Man / Venom styles
+ */
 export default function ExperiencesSection() {
   const sectionRef = useRef(null);
   const webBgRef = useRef(null);

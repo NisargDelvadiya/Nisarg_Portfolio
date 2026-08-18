@@ -3,6 +3,16 @@
 import { useState, useEffect } from "react";
 import { useTheme } from "@/context/ThemeContext";
 
+/**
+ * Navbar Component
+ * 
+ * Features:
+ * - Dynamic scroll listener providing glassmorphic backdrop on page scroll
+ * - Integrated theme toggle switch (Spider-Man Red Light Mode vs. Venom Dark Mode)
+ * - Brand logo linking to official domain
+ * - Smooth section navigation on anchor clicks
+ * - Mobile responsive sliding hamburger menu
+ */
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -17,7 +27,7 @@ export default function Navbar() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 

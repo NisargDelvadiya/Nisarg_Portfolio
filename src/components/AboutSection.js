@@ -7,6 +7,16 @@ import { useTheme } from "@/context/ThemeContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * AboutSection Component
+ * 
+ * Features:
+ * - GSAP ScrollTrigger physics: spider web lines drop with realistic bounce easing
+ * - Hanging pendulum animation on profile portrait (Mahin.jpeg)
+ * - Detailed biography & academic background (ITM SLS Baroda University & ZICA VFX course)
+ * - Interactive primary tech stack badge tags
+ * - Theme transitions between Spider-Man Light and Venom Dark symbiote mode
+ */
 export default function AboutSection() {
   const sectionRef = useRef(null);
   const leftWebRef = useRef(null);

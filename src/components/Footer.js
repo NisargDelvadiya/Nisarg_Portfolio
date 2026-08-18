@@ -4,7 +4,8 @@ import React, { useState, useEffect } from "react";
 import { useTheme } from "@/context/ThemeContext";
 
 /**
- * Supported languages for the Google Translate widget
+ * 20 Indian Official Languages Supported by the Custom Language Dropdown
+ * Integrated with the Google Translate Client API
  */
 const ALL_LANGUAGES = [
   { code: "en", name: "English" },
@@ -29,6 +30,17 @@ const ALL_LANGUAGES = [
   { code: "te", name: "Telugu" },
 ];
 
+/**
+ * Footer Component
+ * 
+ * Includes:
+ * 1. "Work With Me" Contact callout with one-click email clipboard copy
+ * 2. Legal navigation links (Terms & Conditions, Privacy Policy)
+ * 3. Social media and professional connect links (GitHub, LinkedIn, Instagram)
+ * 4. Multi-language selector powered by Google Translate with zero top-banner visual shift
+ * 5. DPDP Act 2023 compliant cookie & consent banner
+ * 6. Responsive design with Spider-Man & Venom theme support
+ */
 export default function Footer() {
   const [currentLanguage, setCurrentLanguage] = useState("en");
   const [showConsent, setShowConsent] = useState(false);
@@ -102,6 +114,37 @@ export default function Footer() {
     };
 
     addScript();
+
+    // Prevent Google Translate from setting inline top offsets or displaying header banners
+    const enforceZeroTop = () => {
+      if (document.body.style.top && document.body.style.top !== "0px") {
+        document.body.style.setProperty("top", "0px", "important");
+      }
+      if (document.documentElement.style.top && document.documentElement.style.top !== "0px") {
+        document.documentElement.style.setProperty("top", "0px", "important");
+      }
+    };
+
+    const observer = new MutationObserver(() => {
+      enforceZeroTop();
+    });
+
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["style", "class"],
+    });
+
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["style", "class"],
+    });
+
+    const interval = setInterval(enforceZeroTop, 500);
+
+    return () => {
+      observer.disconnect();
+      clearInterval(interval);
+    };
   }, []);
 
   /** Programmatically change Google Translate language selection */
@@ -124,229 +167,229 @@ export default function Footer() {
     >
       <div className="max-w-7xl mx-auto">
         {/* Main Footer Dark Glassmorphic Container */}
-      <div
-        className={`relative z-10 backdrop-blur-xl border rounded-3xl p-6 sm:p-10 flex flex-col gap-10 transition-colors duration-300 ${
-          isVenomMode
-            ? "bg-black/95 border-purple-900/60 shadow-2xl shadow-purple-950/40"
-            : "bg-black/90 border-red-900/40 shadow-2xl shadow-red-950/20"
-        }`}
-      >
-        {/* Main Side-by-Side Grid Layout */}
-        <div className="flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-16">
-          {/* Left Side: Work With Me / Copy Email Column */}
-          <div className="flex flex-col items-start gap-3 text-left max-w-lg w-full">
-            <span
-              className={`font-black uppercase text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 ${
-                isVenomMode ? "text-purple-400" : "text-[#a31515]"
-              }`}
-            >
-              WORK WITH ME
-            </span>
-            <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-black italic tracking-tight uppercase leading-tight">
-              HAVE A PROJECT IN MIND?
-            </h2>
-            <div className="flex flex-col gap-2.5 mt-2 w-full">
-              <button
-                type="button"
-                onClick={handleCopyEmail}
-                title="Copy Mahin Gunjal's Email Address to Clipboard"
-                aria-label="Copy Email Address to Work With Me"
-                className={`group relative w-full flex flex-col items-center justify-center gap-2.5 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border text-white font-extrabold transition-all duration-200 active:scale-95 active:translate-y-0.5 cursor-pointer shadow-lg ${
-                  isVenomMode
-                    ? "border-purple-800/40 hover:border-purple-500"
-                    : "border-white/15 hover:border-[#a31515]"
+        <div
+          className={`relative z-10 backdrop-blur-xl border rounded-3xl p-6 sm:p-10 flex flex-col gap-10 transition-colors duration-300 ${
+            isVenomMode
+              ? "bg-black/95 border-purple-900/60 shadow-2xl shadow-purple-950/40"
+              : "bg-black/90 border-red-900/40 shadow-2xl shadow-red-950/20"
+          }`}
+        >
+          {/* Main Side-by-Side Grid Layout */}
+          <div className="flex flex-col lg:flex-row items-start justify-between gap-10 lg:gap-16">
+            {/* Left Side: Work With Me / Copy Email Column */}
+            <div className="flex flex-col items-start gap-3 text-left max-w-lg w-full">
+              <span
+                className={`font-black uppercase text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 ${
+                  isVenomMode ? "text-purple-400" : "text-[#a31515]"
                 }`}
               >
-                {/* Line 1: Email Address */}
-                <div className="flex items-center justify-center gap-2 w-full">
-                  <span className="text-base sm:text-lg">✉️</span>
-                  <span className="text-gray-200 group-hover:text-white transition-colors text-xs sm:text-sm font-bold break-all">
-                    mahingunjal@gmail.com
-                  </span>
-                </div>
-
-                {/* Line 2: Copy Email Badge */}
-                <span
-                  className={`w-full py-2 rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wider text-center transition-all duration-200 shadow-md ${
-                    copiedEmail
-                      ? "bg-[#3a4a61] text-white shadow-slate-900/50"
-                      : isVenomMode
-                      ? "bg-purple-600 text-white group-hover:bg-purple-700"
-                      : "bg-[#a31515] text-white group-hover:bg-[#821010]"
+                WORK WITH ME
+              </span>
+              <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-black italic tracking-tight uppercase leading-tight">
+                HAVE A PROJECT IN MIND?
+              </h2>
+              <div className="flex flex-col gap-2.5 mt-2 w-full">
+                <button
+                  type="button"
+                  onClick={handleCopyEmail}
+                  title="Copy Mahin Gunjal's Email Address to Clipboard"
+                  aria-label="Copy Email Address to Work With Me"
+                  className={`group relative w-full flex flex-col items-center justify-center gap-2.5 p-4 rounded-2xl bg-white/5 hover:bg-white/10 border text-white font-extrabold transition-all duration-200 active:scale-95 active:translate-y-0.5 cursor-pointer shadow-lg ${
+                    isVenomMode
+                      ? "border-purple-800/40 hover:border-purple-500"
+                      : "border-white/15 hover:border-[#a31515]"
                   }`}
                 >
-                  {copiedEmail ? "COPIED! 📋" : "COPY EMAIL"}
-                </span>
-              </button>
-            </div>
-          </div>
+                  {/* Line 1: Email Address */}
+                  <div className="flex items-center justify-center gap-2 w-full">
+                    <span className="text-base sm:text-lg">✉️</span>
+                    <span className="text-gray-200 group-hover:text-white transition-colors text-xs sm:text-sm font-bold break-all">
+                      mahingunjal@gmail.com
+                    </span>
+                  </div>
 
-          {/* Right Side: Legal & Connect Links */}
-          <div className="flex flex-row items-start gap-12 sm:gap-20 shrink-0 self-start lg:self-center">
-            {/* Legal Column */}
-            <div className="flex flex-col gap-3">
-              <h3
-                className={`text-base font-bold text-white border-b pb-1.5 w-max transition-colors duration-300 ${
-                  isVenomMode ? "border-purple-800/60" : "border-[#a31515]/40"
-                }`}
-              >
-                Legal
-              </h3>
-              <a
-                href="/T&C"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Terms & Conditions (Opens in new tab)"
-                aria-label="Terms & Conditions (Opens in new tab)"
-                className={`text-left text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
-                  isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
-                }`}
-              >
-                Terms & Conditions
-              </a>
-              <a
-                href="/PrivacyPolicy"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Privacy Policy (Opens in new tab)"
-                aria-label="Privacy Policy (Opens in new tab)"
-                className={`text-left text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
-                  isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
-                }`}
-              >
-                Privacy Policy
-              </a>
+                  {/* Line 2: Copy Email Badge */}
+                  <span
+                    className={`w-full py-2 rounded-xl text-[11px] sm:text-xs font-black uppercase tracking-wider text-center transition-all duration-200 shadow-md ${
+                      copiedEmail
+                        ? "bg-[#3a4a61] text-white shadow-slate-900/50"
+                        : isVenomMode
+                        ? "bg-purple-600 text-white group-hover:bg-purple-700"
+                        : "bg-[#a31515] text-white group-hover:bg-[#821010]"
+                    }`}
+                  >
+                    {copiedEmail ? "COPIED! 📋" : "COPY EMAIL"}
+                  </span>
+                </button>
+              </div>
             </div>
 
-            {/* Connect Column */}
-            <div className="flex flex-col gap-3">
-              <h3
-                className={`text-base font-bold text-white border-b pb-1.5 w-max transition-colors duration-300 ${
-                  isVenomMode ? "border-purple-800/60" : "border-[#a31515]/40"
-                }`}
-              >
-                Connect
-              </h3>
-              <a
-                href="https://github.com/mahingunjal"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="GitHub Profile (Opens in new tab)"
-                aria-label="GitHub Profile (Opens in new tab)"
-                className={`text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
-                  isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
-                }`}
-              >
-                GitHub
-              </a>
-              <a
-                href="https://www.linkedin.com/in/mahin-gunjal-669006275/"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="LinkedIn Profile (Opens in new tab)"
-                aria-label="LinkedIn Profile (Opens in new tab)"
-                className={`text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
-                  isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
-                }`}
-              >
-                LinkedIn
-              </a>
-              <a
-                href="https://www.instagram.com/mahingunjal?igsh=MTlxOXF5YXphbXowcw=="
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Instagram Profile (Opens in new tab)"
-                aria-label="Instagram Profile (Opens in new tab)"
-                className={`text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
-                  isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
-                }`}
-              >
-                Instagram
-              </a>
-              <a
-                href="https://www.instagram.com/marvell.paglu?igsh=Y2hvbDVqMDhqMmM1"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Instagram (Marvel Paglu) Profile (Opens in new tab)"
-                aria-label="Instagram (Marvel Paglu) Profile (Opens in new tab)"
-                className={`text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
-                  isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
-                }`}
-              >
-                Instagram (Marvel Paglu)
-              </a>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Bar: Language Selector & Copyright */}
-        <div className="border-t border-white/10 pt-6 flex flex-col items-center justify-center gap-4 text-xs sm:text-sm text-gray-400">
-          {/* Language Selector Dropdown */}
-          <div className="flex flex-row items-center justify-center gap-4">
-            <select
-              title="Select Website Language"
-              aria-label="Select Website Language"
-              onChange={(e) => changeLanguage(e.target.value)}
-              value={currentLanguage}
-              className={`notranslate bg-[#111111] text-white border rounded-xl px-4 py-2 text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 cursor-pointer shadow-lg transition-all ${
-                isVenomMode
-                  ? "border-purple-800/60 hover:border-purple-500 focus:ring-purple-500"
-                  : "border-[#a31515]/50 hover:border-[#a31515] focus:ring-[#a31515]"
-              }`}
-            >
-              {ALL_LANGUAGES.map((lang) => (
-                <option
-                  key={lang.code}
-                  value={lang.code}
-                  className="bg-[#111111] text-white"
+            {/* Right Side: Legal & Connect Links */}
+            <div className="flex flex-row items-start gap-12 sm:gap-20 shrink-0 self-start lg:self-center">
+              {/* Legal Column */}
+              <div className="flex flex-col gap-3">
+                <h3
+                  className={`text-base font-bold text-white border-b pb-1.5 w-max transition-colors duration-300 ${
+                    isVenomMode ? "border-purple-800/60" : "border-[#a31515]/40"
+                  }`}
                 >
-                  {lang.name}
-                </option>
-              ))}
-            </select>
-            <div
-              id="google_translate_element"
-              className="absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none"
-              aria-hidden="true"
-            />
+                  Legal
+                </h3>
+                <a
+                  href="/T&C"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Terms & Conditions (Opens in new tab)"
+                  aria-label="Terms & Conditions (Opens in new tab)"
+                  className={`text-left text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
+                    isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
+                  }`}
+                >
+                  Terms & Conditions
+                </a>
+                <a
+                  href="/PrivacyPolicy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Privacy Policy (Opens in new tab)"
+                  aria-label="Privacy Policy (Opens in new tab)"
+                  className={`text-left text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
+                    isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
+                  }`}
+                >
+                  Privacy Policy
+                </a>
+              </div>
+
+              {/* Connect Column */}
+              <div className="flex flex-col gap-3">
+                <h3
+                  className={`text-base font-bold text-white border-b pb-1.5 w-max transition-colors duration-300 ${
+                    isVenomMode ? "border-purple-800/60" : "border-[#a31515]/40"
+                  }`}
+                >
+                  Connect
+                </h3>
+                <a
+                  href="https://github.com/mahingunjal"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="GitHub Profile (Opens in new tab)"
+                  aria-label="GitHub Profile (Opens in new tab)"
+                  className={`text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
+                    isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
+                  }`}
+                >
+                  GitHub
+                </a>
+                <a
+                  href="https://www.linkedin.com/in/mahin-gunjal-669006275/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="LinkedIn Profile (Opens in new tab)"
+                  aria-label="LinkedIn Profile (Opens in new tab)"
+                  className={`text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
+                    isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
+                  }`}
+                >
+                  LinkedIn
+                </a>
+                <a
+                  href="https://www.instagram.com/mahingunjal?igsh=MTlxOXF5YXphbXowcw=="
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Instagram Profile (Opens in new tab)"
+                  aria-label="Instagram Profile (Opens in new tab)"
+                  className={`text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
+                    isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
+                  }`}
+                >
+                  Instagram
+                </a>
+                <a
+                  href="https://www.instagram.com/marvell.paglu?igsh=Y2hvbDVqMDhqMmM1"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Instagram (Marvel Paglu) Profile (Opens in new tab)"
+                  aria-label="Instagram (Marvel Paglu) Profile (Opens in new tab)"
+                  className={`text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
+                    isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
+                  }`}
+                >
+                  Instagram (Marvel Paglu)
+                </a>
+              </div>
+            </div>
           </div>
 
-          {/* Copyright, UI Design Credit & Developer Watermark Line */}
-          <p className="text-center text-[11px] sm:text-xs md:text-sm text-gray-400 font-medium leading-relaxed max-w-3xl mx-auto">
-            &copy; 2026 • Made with ❤️ in Bharat 🇮🇳 | Mahin Gunjal • All Rights Reserved <span className="hidden sm:inline">|</span> <br className="sm:hidden" /> UI Design Inspiration:{" "}
-            <a
-              href="https://www.instagram.com/srii_tech_?igsh=aHJra2h0Y3A1c3pj"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="UI Design Credit: @srii_tech_ on Instagram (Opens in new tab)"
-              aria-label="UI Design Credit: @srii_tech_ on Instagram (Opens in new tab)"
-              className={`text-white font-extrabold underline decoration-2 active:scale-95 transition-all duration-150 cursor-pointer inline-block ${
-                isVenomMode
-                  ? "hover:text-purple-400 decoration-purple-500"
-                  : "hover:text-[#a31515] decoration-[#a31515]"
-              }`}
-            >
-              @srii_tech_
-            </a>{" "}
-            | Developed by{" "}
-            <a
-              href="https://nisargjayeshdelvadiya.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              title="Developed by Nisarg (Opens in new tab)"
-              aria-label="Developed by Nisarg (Opens in new tab)"
-              className={`text-white font-extrabold underline decoration-2 active:scale-95 transition-all duration-150 cursor-pointer inline-block ${
-                isVenomMode
-                  ? "hover:text-purple-400 decoration-purple-500"
-                  : "hover:text-[#a31515] decoration-[#a31515]"
-              }`}
-            >
-              Nisarg
-            </a>
-          </p>
+          {/* Bottom Bar: Language Selector & Copyright */}
+          <div className="border-t border-white/10 pt-6 flex flex-col items-center justify-center gap-4 text-xs sm:text-sm text-gray-400">
+            {/* Language Selector Dropdown */}
+            <div className="flex flex-row items-center justify-center gap-4">
+              <select
+                title="Select Website Language"
+                aria-label="Select Website Language"
+                onChange={(e) => changeLanguage(e.target.value)}
+                value={currentLanguage}
+                className={`notranslate bg-[#111111] text-white border rounded-xl px-4 py-2 text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 cursor-pointer shadow-lg transition-all ${
+                  isVenomMode
+                    ? "border-purple-800/60 hover:border-purple-500 focus:ring-purple-500"
+                    : "border-[#a31515]/50 hover:border-[#a31515] focus:ring-[#a31515]"
+                }`}
+              >
+                {ALL_LANGUAGES.map((lang) => (
+                  <option
+                    key={lang.code}
+                    value={lang.code}
+                    className="bg-[#111111] text-white"
+                  >
+                    {lang.name}
+                  </option>
+                ))}
+              </select>
+              <div
+                id="google_translate_element"
+                className="absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none"
+                aria-hidden="true"
+              />
+            </div>
+
+            {/* Copyright, UI Design Credit & Developer Watermark Line */}
+            <p className="text-center text-[11px] sm:text-xs md:text-sm text-gray-400 font-medium leading-relaxed max-w-3xl mx-auto">
+              &copy; 2026 • Made with ❤️ in Bharat 🇮🇳 | Mahin Gunjal • All Rights Reserved <span className="hidden sm:inline">|</span> <br className="sm:hidden" /> UI Design Inspiration:{" "}
+              <a
+                href="https://www.instagram.com/srii_tech_?igsh=aHJra2h0Y3A1c3pj"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="UI Design Credit: @srii_tech_ on Instagram (Opens in new tab)"
+                aria-label="UI Design Credit: @srii_tech_ on Instagram (Opens in new tab)"
+                className={`text-white font-extrabold underline decoration-2 active:scale-95 transition-all duration-150 cursor-pointer inline-block ${
+                  isVenomMode
+                    ? "hover:text-purple-400 decoration-purple-500"
+                    : "hover:text-[#a31515] decoration-[#a31515]"
+                }`}
+              >
+                @srii_tech_
+              </a>{" "}
+              | Developed by{" "}
+              <a
+                href="https://nisargjayeshdelvadiya.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                title="Developed by Nisarg (Opens in new tab)"
+                aria-label="Developed by Nisarg (Opens in new tab)"
+                className={`text-white font-extrabold underline decoration-2 active:scale-95 transition-all duration-150 cursor-pointer inline-block ${
+                  isVenomMode
+                    ? "hover:text-purple-400 decoration-purple-500"
+                    : "hover:text-[#a31515] decoration-[#a31515]"
+                }`}
+              >
+                Nisarg
+              </a>
+            </p>
+          </div>
         </div>
       </div>
-    </div>
 
       {/* Spider-Man Cookie Consent Popup Card */}
       {showConsent && (

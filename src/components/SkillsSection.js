@@ -7,6 +7,9 @@ import { useTheme } from "@/context/ThemeContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
+/**
+ * List of technical proficiencies across design, 3D, VFX, and web development
+ */
 const skillsData = [
   { name: "HTML", category: "FRONTEND", level: "ADVANCED" },
   { name: "CSS", category: "FRONTEND", level: "ADVANCED" },
@@ -23,6 +26,15 @@ const skillsData = [
   { name: "PROMPT ENGINEERING", category: "AI & AUTOMATION", level: "ADVANCED" },
 ];
 
+/**
+ * SkillsSection Component
+ * 
+ * Features:
+ * - Hanging upside-down Spider-Man / Venom pendulum swing animation
+ * - 2-column interactive skills matrix with smooth origin-left hover expansion
+ * - Background rotating web motif
+ * - Full dark / light mode responsive styling
+ */
 export default function SkillsSection() {
   const sectionRef = useRef(null);
   const webBgRef = useRef(null);

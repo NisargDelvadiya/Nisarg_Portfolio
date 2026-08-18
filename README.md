@@ -1,92 +1,282 @@
 # 🕷️ Mahin Gunjal — Web Designer & VFX Artist Portfolio
 
-A state-of-the-art, high-performance, interactive portfolio web application built for **Mahin Gunjal**, Web Designer and VFX Artist. Combining custom Spider-Man aesthetic themes, interactive GSAP physics animations, high-contrast neubrutalism design tokens, multi-language translation, and WCAG 2.1 Level AA/AAA accessibility standards.
+> A high-performance, interactive, and fully accessible portfolio web application crafted for **Mahin Gunjal**, Web Designer & VFX Artist. Built with **Next.js 16 (App Router)**, **React 19**, **Tailwind CSS v4**, **GSAP**, and integrated with **Vercel Analytics & Speed Insights**.
+
+---
+
+## 📑 Table of Contents
+
+- [Overview](#-overview)
+- [Architecture & Flow](#-architecture--flow)
+- [Key Features](#-key-features)
+- [Tech Stack & Dependencies](#-tech-stack--dependencies)
+- [Project Directory Structure](#-project-directory-structure)
+- [Core Components Breakdown](#-core-components-breakdown)
+- [Theme Engine (Spider-Man vs. Venom)](#-theme-engine-spider-man-vs-venom)
+- [Google Translate Integration & Suppression](#-google-translate-integration--suppression)
+- [SEO, JSON-LD Schema & Sitemap](#-seo-json-ld-schema--sitemap)
+- [Performance & Lighthouse Optimization](#-performance--lighthouse-optimization)
+- [Keyboard Accessibility & Shortcuts](#-keyboard-accessibility--shortcuts)
+- [Getting Started](#-getting-started)
+- [Available Scripts](#-available-scripts)
+- [Deployment](#-deployment)
+- [Legal & Compliance](#-legal--compliance)
+- [Credits & Author](#-credits--author)
+
+---
+
+## 🌟 Overview
+
+This portfolio serves as the professional digital presence and creative showcase of **Mahin Gunjal**. The design combines superhero themes (Classic Spider-Man Red vs. Venom Symbiote Purple/Dark), smooth physics-based pendulum animations, interactive cursor mask reveals, high-contrast neubrutalism cards, multi-language translation, and ambient theme music.
+
+---
+
+## 📐 Architecture & Flow
+
+```mermaid
+graph TD
+    A[Root Layout: layout.js] --> B[ThemeProvider: ThemeContext.js]
+    B --> C[Page: page.js]
+    B --> D[Vercel Analytics & SpeedInsights]
+    B --> E[PWA Service Worker: PWARegistration.js]
+    
+    C --> F[Navbar.js - Theme Toggle & Nav]
+    C --> G[Hero.js - Mask Reveal & CTAs]
+    C --> H[MarqueeBanner.js - Dual Angled Tickers]
+    C --> I[AboutSection.js - Bio & Pendulum]
+    C --> J[SkillsSection.js - Skills Matrix]
+    C --> K[ProjectsSection.js - Project Cards]
+    C --> L[ExperiencesSection.js - Milestones Timeline]
+    C --> M[Footer.js - Contact, Language & Cookie Consent]
+    C --> N[AudioPlayer.js - Theme Music Controller]
+    C --> O[SectionNavigation.js - Arrow Keys Handler]
+```
 
 ---
 
 ## ✨ Key Features
 
-- **Interactive Mask Reveal Hero**: Custom dual-layer hero canvas (`Spider_Man.png` suit mask revealing `Mahin_Man.jpeg` unmasked face on mouse movement).
-- **Touch & Mobile Auto-Fallback**: Automatically detects iPads and mobile devices (`ontouchstart`, `@media (hover: none)`) and displays `Mahin_Man.jpeg` directly.
-- **Dual Angled Marquee Ribbons**: Infinite CSS marquee ribbons angled across the page showcasing key competencies and design tools.
-- **GSAP Pendulum & Web Animations**: Gravity-driven hanging spider web graphics and a pendulum photo frame swinging with physics-based damping (`AboutSection.js` & `SkillsSection.js`).
-- **Tactile Click Feedback**: Integrated 3D press click animations (`active:scale-95 active:translate-y-0.5`) across all interactive cards, links, and buttons.
-- **Multi-Language Google Translate Widget**: Custom 20-language translation system (supporting Assamese, Bengali, Gujarati, Hindi, Kannada, Malayalam, Marathi, Odia, Punjabi, Tamil, Telugu, English, Sanskrit, etc.) with automated top iframe banner suppression.
-- **Neubrutalism Cookie Consent Card**: High-contrast Neubrutalism language & cookie consent card matching the website's signature Spider-Man Red (`#a31515`) theme.
-- **Dedicated Legal Specs**: Dedicated `/T&C` and `/PrivacyPolicy` pages compliant with the IT Act 2000 & DPDP Act 2023 of India, opening in new tabs with tab closure/navigation fallback.
-- **App Router Error & Skeleton Loading**: Custom Spider-Man pulsing spinner loading skeleton (`loading.js`), 404 Not Found page (`not-found.js`), and 500 Internal Server Error boundary (`error.js`).
-- **WCAG 2.1 AA/AAA Accessibility**: Keyboard skip-navigation link, semantic HTML5 landmarks (`<main id="main-content">`), 7:1+ contrast ratios, and screen-reader ARIA labeling.
+1. **Interactive Dual-Layer Mask Reveal Hero**:
+   - Moves dynamic `radial-gradient` mask on desktop cursor position (`Spider_Man.png` suit mask reveals `Mahin_Man.jpeg` unmasked face underneath).
+   - Auto-detects touch/mobile devices (`ontouchstart` and `hover: none`) and safely falls back to standard rendering.
+
+2. **Spider-Man Red & Venom Symbiote Dark Mode**:
+   - High-contrast dual theme engine managed by `ThemeContext.js`.
+   - Smoothly shifts color palettes (Spider-Man `#a31515` vs. Venom `#7e22ce` / `#050508`), shadows, glows, and image filters across the entire DOM with localStorage persistence.
+
+3. **Background Theme Audio Controller**:
+   - Floating audio widget streaming original Spider-Man score (`Spider_Man.mp3`).
+   - Spacebar global keyboard toggle listener (bypassed inside input/textarea fields).
+   - Animated visual audio equalizer indicator bars.
+
+4. **Multi-Language Google Translate Widget (20 Languages)**:
+   - Supports 20 Indian and international languages (English, Hindi, Gujarati, Marathi, Bengali, Tamil, Telugu, Kannada, Malayalam, Odia, Punjabi, Sanskrit, and more).
+   - **Zero Header Shift**: Completely hides Google Translate's iframe top bar, floating balloons, gadget branding, and prevents unwanted `body` top margin shifts.
+
+5. **GSAP Physics & Pendulum Animations**:
+   - ScrollTrigger-driven dropping web lines with bounce easing (`bounce.out`).
+   - Continuous hanging pendulum photo frame and Spider-Man upside-down swing loops.
+
+6. **Full Keyboard & Screen-Reader Accessibility (WCAG 2.1 AA/AAA)**:
+   - `<a href="#main-content">` skip navigation button.
+   - Arrow Up / Arrow Down keys navigate smoothly through sections.
+   - Contrast ratios exceeding 7:1 for crisp readability.
+
+7. **Vercel Analytics & Speed Insights**:
+   - Real-time real-user monitoring (RUM), page views, visitors, and Core Web Vitals (LCP, FID/INP, CLS).
+
+8. **Automated SEO & XML Sitemap**:
+   - Full OpenGraph & Twitter Card metadata with canonical URLs.
+   - Dynamic `sitemap.xml` generated via `src/app/sitemap.js`.
+   - Dynamic `robots.txt` generated via `src/app/robots.js`.
+   - Rich JSON-LD Structured Data Schema (`Person`, `WebSite`, `ProfilePage`).
 
 ---
 
-## 🛠️ Tech Stack & Libraries
+## 🛠️ Tech Stack & Dependencies
 
-- **Framework**: [Next.js 16.3.1](https://nextjs.org/) (App Router, Turbopack)
-- **Language**: JavaScript (ES6+)
-- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
-- **Animation Engine**: [GSAP](https://gsap.com/) (GreenSock Animation Platform)
-- **Icons**: [React Icons](https://react-icons.github.io/react-icons/)
-- **Typography**: Geist Sans & Geist Mono (Google Fonts)
+| Category | Technology / Library | Version | Description |
+| :--- | :--- | :--- | :--- |
+| **Framework** | [Next.js](https://nextjs.org/) | `16.3.1` | React App Router framework with Turbopack |
+| **UI Library** | [React](https://react.dev/) | `19.2.8` | Next-generation React core & DOM |
+| **Styling** | [Tailwind CSS](https://tailwindcss.com/) | `v4.x` | Modern utility-first CSS framework |
+| **Animations** | [GSAP](https://gsap.com/) | `3.15.0` | GreenSock Animation Platform & ScrollTrigger |
+| **Analytics** | [@vercel/analytics](https://www.npmjs.com/package/@vercel/analytics) | `latest` | Privacy-focused user and traffic analytics |
+| **Performance** | [@vercel/speed-insights](https://www.npmjs.com/package/@vercel/speed-insights) | `latest` | Core Web Vitals performance telemetry |
+| **Typography** | Geist Sans & Geist Mono | Next Fonts | Crisp geometric typography |
 
 ---
 
-## 📁 Directory & Folder Structure
+## 📁 Project Directory Structure
 
 ```
-MahinGunjal/
+Mahin_Portfolio/
 ├── public/
 │   ├── Assets/
-│   │   ├── Mahin.jpeg          # Profile photograph used in pendulum
-│   │   ├── Mahin_Man.jpeg      # Unmasked face layer used in Hero
-│   │   ├── Spider_Man.png      # Mask suit layer used in Hero
-│   │   ├── Web.png             # Spider web graphic
-│   │   ├── spidey_gif_1.png    # Skills section right pendulum graphic
-│   │   └── spidey_gif_2.png    # Projects section corner peeking graphic
-│   ├── favicon/                # Cross-browser favicons and webmanifest
-│   ├── Mahin_Resume.pdf        # Downloadable resume document
-│   └── Website Development Service Contract (Version 1 Client 1 Mahin).pdf # Client development service contract
+│   │   ├── Mahin.jpeg              # Profile portrait for About section pendulum
+│   │   ├── Mahin_Man.jpeg          # Unmasked portrait base layer in Hero
+│   │   ├── Spider_Man.png          # Masked suit overlay layer in Hero
+│   │   ├── Spider_Man.mp3          # Ambient theme background music
+│   │   ├── Web.png                 # Spider web decorative accent
+│   │   ├── spidey_gif_1.png        # Upside-down hanging Spider-Man graphic
+│   │   └── spidey_gif_2.png        # Peeking corner Spider-Man graphic
+│   ├── favicon/                    # Multi-size favicons (96x96, 192x192, 512x512, SVG)
+│   ├── Mahin_Resume.pdf            # Downloadable professional curriculum vitae
+│   ├── manifest.json               # PWA web app manifest
+│   └── sw.js                       # Service Worker for offline PWA caching
 ├── src/
 │   ├── app/
 │   │   ├── PrivacyPolicy/
-│   │   │   └── page.js         # Dedicated Privacy Policy legal page
+│   │   │   └── page.js             # DPDP Act 2023 compliant privacy policy
 │   │   ├── T&C/
-│   │   │   └── page.js         # Dedicated Terms & Conditions legal page
-│   │   ├── error.js            # Global 500 internal server error boundary
-│   │   ├── globals.css         # Tailwind tokens & Google Translate banner overrides
-│   │   ├── layout.js           # Root layout with WCAG skip link
-│   │   ├── loading.js          # Spider-Man spinner & skeleton wireframes
-│   │   ├── not-found.js        # Custom 404 Not Found error page
-│   │   └── page.js             # Main homepage assembling all section components
-│   └── components/
-│       ├── AboutSection.js     # Bio, primary tech stack, and pendulum photo frame
-│       ├── ExperiencesSection.js # Vertical web thread experience timeline
-│       ├── Footer.js           # Legal/Connect links, language selector, Cookie card
-│       ├── Hero.js             # Dual-layer mask reveal hero section
-│       ├── MarqueeBanner.js    # Angled infinite skill ribbons
-│       ├── Navbar.js           # Glassmorphic header & mobile hamburger menu
-│       ├── ProjectsSection.js  # Clickable project cards with corner Spider-Man
-│       ├── SkillsSection.js    # Technical skills grid with hanging Spidey pendulum
-│       └── TextType.js         # Smooth typing text animation utility
-├── .gitignore                  # Git ignore specifications
-├── next.config.mjs             # Next.js configuration
-├── package.json                # Dependencies and project scripts
-└── README.md                   # Project documentation
+│   │   │   └── page.js             # IT Act 2000 compliant terms & conditions
+│   │   ├── error.js                # Global 500 runtime error boundary
+│   │   ├── globals.css             # Tailwind imports & Google Translate CSS overrides
+│   │   ├── layout.js               # Root layout, fonts, SEO metadata, JSON-LD schema
+│   │   ├── loading.js              # Spider-Man spinner & skeleton wireframes
+│   │   ├── not-found.js            # Custom 404 page with Spider-Man graphics
+│   │   ├── page.js                 # Main landing page assembling all components
+│   │   ├── robots.js               # Dynamic robots.txt crawler route
+│   │   └── sitemap.js              # Dynamic XML sitemap generator
+│   ├── components/
+│   │   ├── AboutSection.js         # Bio, academic details, and pendulum photo
+│   │   ├── AudioPlayer.js          # Background theme audio player & shortcuts
+│   │   ├── ExperiencesSection.js   # Career timeline with connected web thread
+│   │   ├── Footer.js               # Email copy, language selector, DPDP cookie card
+│   │   ├── Hero.js                 # Interactive cursor-tracking mask reveal hero
+│   │   ├── MarqueeBanner.js        # Dual 3D-angled infinite ticker ribbons
+│   │   ├── Navbar.js               # Sticky glassmorphic navbar with theme toggle
+│   │   ├── ProjectsSection.js      # Featured project cards and external links
+│   │   ├── PWARegistration.js      # Service worker registration component
+│   │   ├── SectionNavigation.js    # Keyboard arrow navigation handler
+│   │   ├── SkillsSection.js        # Technical proficiencies grid
+│   │   └── TextType.js             # Typing text animation utility
+│   └── context/
+│       └── ThemeContext.js         # Spider-Man Light vs. Venom Dark state provider
+├── next.config.mjs                 # Next.js configuration
+├── package.json                    # Project dependencies & scripts
+└── README.md                       # Comprehensive codebase documentation
 ```
+
+---
+
+## 🧩 Core Components Breakdown
+
+### 1. `Hero.js`
+- Renders the interactive mask reveal effect via CSS radial gradient masking.
+- Handles mouse coordinates with bounding box checks.
+- Contains direct download CTA for `Mahin_Resume.pdf` and smooth scrolling to `#projects`.
+
+### 2. `AboutSection.js`
+- GSAP ScrollTrigger timeline triggering falling spider webs and profile pendulum drop.
+- Displays bio, education at ITM SLS Baroda University, and VFX specialization at ZICA.
+- Lists primary tech stack tags with tactile click feedback.
+
+### 3. `SkillsSection.js`
+- Displays 13+ technical skills (Blender, Autodesk Maya, After Effects, Premiere Pro, Figma, WordPress, Prompt Engineering, HTML/CSS).
+- Features hanging upside-down Spider-Man graphic with continuous sine pendulum rotation.
+- Features origin-left background expand hover effects on each skill card.
+
+### 4. `ProjectsSection.js`
+- Displays 2x2 responsive grid of featured software engineering and web application projects.
+- Includes corner peeking Spider-Man animation oscillating vertically.
+- Contains external links to GitHub repositories.
+
+### 5. `ExperiencesSection.js`
+- Alternating vertical timeline showcasing professional experience, internships, leadership roles, and administrative work.
+- Connected by a central glowing gradient thread node line.
+
+### 6. `Footer.js`
+- "Work With Me" section with one-click clipboard copy (`mahingunjal@gmail.com`).
+- Legal navigation to `/T&C` and `/PrivacyPolicy`.
+- Social connect links (GitHub, LinkedIn, Instagram).
+- Custom 20-language Google Translate select menu with automatic top-banner offset neutralization.
+- DPDP Act 2023 cookie consent banner.
+
+### 7. `AudioPlayer.js`
+- Controls ambient playback of `Spider_Man.mp3`.
+- Listens to global Spacebar keypresses to toggle play/pause without interfering with typing.
+- Persists music preference in `localStorage`.
+
+### 8. `SectionNavigation.js`
+- Listens to ArrowUp / ArrowDown key events to navigate sequentially through page sections (`#main-content`, `#about`, `#skills`, `#projects`, `#experiences`, `#contact`).
+
+---
+
+## 🎨 Theme Engine (Spider-Man vs. Venom)
+
+The theme engine is orchestrated through `ThemeContext.js` and consumed across components via the `useTheme()` hook.
+
+- **Spider-Man Red Mode**:
+  - Background: Clean `#ffffff` with dark glassmorphic cards
+  - Accent Color: `#a31515` (Crimson Red) & `#ef4444`
+  - Glows: Red shadows (`shadow-red-950/20`)
+
+- **Venom Symbiote Mode**:
+  - Background: Deep Obsidian `#050508` / `#0a0a10`
+  - Accent Color: `#7e22ce` / `#9333ea` (Symbiote Purple)
+  - Glows: Purple luminescent glows (`shadow-purple-950/40`)
+  - Image Filters: High contrast symbiote styling with purple aura drops
+
+---
+
+## 🌐 Google Translate Integration & Suppression
+
+Google Translate injects iframe toolbars and modifies `document.body.style.top = "40px"`. This portfolio uses a multi-layer strategy to completely suppress visual header shifts:
+
+1. **CSS Overrides (`globals.css`)**:
+   - Suppresses `.goog-te-banner-frame`, `.VIpgJd-ZGain-r42b1d`, `#goog-gt-tt`, `.goog-tooltip`, and `body > .skiptranslate`.
+   - Forces `html, body { top: 0px !important; margin-top: 0px !important; }`.
+
+2. **JavaScript MutationObserver (`Footer.js`)**:
+   - Actively observes inline style mutations on `document.body` and `document.documentElement`.
+   - Instantly resets any non-zero `top` style attribute to `0px !important`.
+
+---
+
+## 🔍 SEO, JSON-LD Schema & Sitemap
+
+- **Metadata Base**: `https://mahingunjal.com`
+- **Dynamic XML Sitemap**: Generated at `/sitemap.xml` through `src/app/sitemap.js`.
+- **Dynamic Robots**: Generated at `/robots.txt` through `src/app/robots.js`.
+- **Structured Data (JSON-LD)**: Schema.org `@graph` comprising `Person`, `WebSite`, and `ProfilePage` types.
+- **OpenGraph & Twitter**: 1200x630 high-resolution social preview image (`/Assets/Mahin.jpeg`).
+
+---
+
+## ⚡ Performance & Lighthouse Optimization
+
+- **Turbopack Build Engine**: Instant Hot Module Replacement (HMR) and optimized static page generation.
+- **Font Optimization**: `next/font/google` with `display: swap` for zero layout shift (CLS).
+- **GPU Acceleration**: `transform: translateZ(0)` and `will-change` on infinite tickers to offload animation rendering to the GPU.
+- **Passive Event Listeners**: Scroll and touch listeners configured with `{ passive: true }`.
+- **Lazy Loading**: Native browser lazy loading on non-critical images and assets.
+
+---
+
+## ⌨️ Keyboard Accessibility & Shortcuts
+
+| Key / Combination | Action |
+| :--- | :--- |
+| <kbd>Tab</kbd> (on initial load) | Focuses the "Skip to main content" WCAG link |
+| <kbd>Spacebar</kbd> | Toggles background theme music on/off |
+| <kbd>↓</kbd> (Down Arrow) | Smoothly scrolls to the next portfolio section |
+| <kbd>↑</kbd> (Up Arrow) | Smoothly scrolls to the previous portfolio section |
 
 ---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-
-Ensure you have [Node.js](https://nodejs.org/) (v18.0.0 or higher) and `npm` installed.
+- [Node.js](https://nodejs.org/) (v18.17.0 or higher recommended)
+- `npm` (v9.0.0 or higher)
 
 ### Installation
 
-1. Clone the repository:
+1. Clone repository:
    ```bash
-   git clone https://github.com/mahingunjal/portfolio.git
-   cd MahinGunjal
+   git clone https://github.com/NisargDelvadiya/Mahin_Portfolio.git
+   cd Mahin_Portfolio
    ```
 
 2. Install dependencies:
@@ -94,39 +284,47 @@ Ensure you have [Node.js](https://nodejs.org/) (v18.0.0 or higher) and `npm` ins
    npm install
    ```
 
-3. Run the development server:
+3. Start development server:
    ```bash
    npm run dev
    ```
 
-4. Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-### Production Build
-
-To test the optimized static production build:
-
-```bash
-npm run build
-npm run start
-```
+4. Open your browser and navigate to `http://localhost:3000`.
 
 ---
 
-## 📄 Client Service Agreement & Contract
+## 📜 Available Scripts
 
-This portfolio project was executed under a formal client-developer service contract:
-- **Contract Document**: [`Website Development Service Contract (Version 1 Client 1 Mahin).pdf`](./public/Website%20Development%20Service%20Contract%20(Version%201%20Client%201%20Mahin).pdf)
-- **Developer & Service Provider**: Nisarg Delvadiya ([nisargjayeshdelvadiya.com](https://nisargjayeshdelvadiya.com))
-- **Client**: Mahin Gunjal ([mahingunjal.com](https://mahingunjal.com))
-
----
-
-## ♿ WCAG 2.1 & Legal Compliance
-
-- **Keyboard Navigation**: Press `Tab` upon page load to reveal the **"Skip to main content"** shortcut link.
-- **Contrast & Motion**: High contrast ratios exceeding 7:1; respects user `prefers-reduced-motion` settings.
-- **Legal Frameworks**: Formulated under the **Information Technology Act, 2000** and **Digital Personal Data Protection (DPDP) Act, 2023** of India.
+| Command | Description |
+| :--- | :--- |
+| `npm run dev` | Starts local Next.js development server with Turbopack |
+| `npm run build` | Builds optimized production bundle |
+| `npm run start` | Runs production server locally after build |
+| `npm run lint` | Runs ESLint checks across codebase |
 
 ---
 
-&copy; 2026 • Made with ❤️ in Bharat 🇮🇳 | Mahin Gunjal • All Rights Reserved | UI Design Inspiration: [@srii_tech_](https://www.instagram.com/srii_tech_?igsh=aHJra2h0Y3A1c3pj) | Developed by [Nisarg](https://nisargjayeshdelvadiya.com)
+## 🚢 Deployment
+
+The easiest way to deploy this application is using [Vercel](https://vercel.com/):
+
+1. Push your latest code to GitHub.
+2. Import the repository into your Vercel Dashboard.
+3. Vercel automatically detects Next.js, configures build settings, and enables **Vercel Analytics** and **Speed Insights** automatically.
+4. Add your custom domain (e.g. `mahingunjal.com`).
+
+---
+
+## ⚖️ Legal & Compliance
+
+- **Digital Personal Data Protection (DPDP) Act 2023 of India**: Zero personal data harvesting, explicit functional cookie consent banner.
+- **Information Technology Act 2000 of India**: Intellectual property rights and terms of website use clearly outlined in `/T&C`.
+- **WCAG 2.1 Level AA/AAA**: High-contrast ratios, keyboard focus rings, semantic tags, and screen-reader ARIA descriptions.
+
+---
+
+## 👨‍💻 Credits & Author
+
+- **Portfolio Owner**: [Mahin Gunjal](https://mahingunjal.com) — Web Designer & VFX Artist
+- **Lead Developer**: [Nisarg Delvadiya](https://nisargjayeshdelvadiya.com)
+- **UI Design Inspiration**: [@srii_tech_](https://www.instagram.com/srii_tech_)

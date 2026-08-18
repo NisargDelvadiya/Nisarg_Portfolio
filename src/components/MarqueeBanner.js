@@ -3,6 +3,9 @@
 import React from "react";
 import { useTheme } from "@/context/ThemeContext";
 
+/**
+ * Top marquee ticker dataset
+ */
 const topSkills = [
   "WEB DESIGNER",
   "BLENDER",
@@ -21,6 +24,9 @@ const topSkills = [
   "CANVA",
 ];
 
+/**
+ * Bottom marquee ticker dataset
+ */
 const bottomSkills = [
   "VFX ARTIST",
   "ADOBE PHOTOSHOP",
@@ -39,9 +45,21 @@ const bottomSkills = [
   "ADOBE PREMIERE PRO",
 ];
 
+/**
+ * MarqueeBanner Component
+ * 
+ * Features:
+ * - High-speed dual opposing animated ticker bands with 3D rotation angles (+3deg and -4deg)
+ * - Infinite looping seamless marquee CSS animation with hardware GPU acceleration
+ * - Spidey web logo separator icons between skill badges
+ * - Full Venom symbiote & Spider-Man color synchronization
+ */
 export default function MarqueeBanner() {
   const { isVenomMode } = useTheme();
 
+  /**
+   * Helper function to render repeated list of items in the marquee track
+   */
   const renderMarqueeItems = (skillsList, isDark = false) => {
     return (
       <div className="flex shrink-0 items-center h-full whitespace-nowrap">

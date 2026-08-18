@@ -4,37 +4,49 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { useTheme } from "@/context/ThemeContext";
 
+/**
+ * Projects showcase dataset
+ */
 const projectsData = [
   {
     title: "MULTI-TENANT SAAS PLATFORM",
     description:
       "Engineered a containerized multi-tenant SaaS application featuring strict data isolation, dynamic tenancy resolution, and role-based access control.",
     tags: ["REACT", "NODE.JS", "POSTGRESQL", "DOCKER"],
-    link: "https://github.com",
+    link: "https://github.com/mahingunjal",
   },
   {
     title: "FULL-STACK PAYMENT GATEWAY",
     description:
       "Built a robust payment gateway system simulating real-time transaction state management, secure webhooks, and multi-method processing workflows.",
     tags: ["NODE.JS", "EXPRESS", "MONGODB", "REST APIS"],
-    link: "https://github.com",
+    link: "https://github.com/mahingunjal",
   },
   {
     title: "NOTICE HUB UNIVERSITY PORTAL",
     description:
       "Developed a centralized real-time notification platform to streamline university announcements, student communication, and campus updates.",
     tags: ["REACT", "TAILWIND CSS", "NODE.JS"],
-    link: "https://github.com",
+    link: "https://github.com/mahingunjal",
   },
   {
     title: "PRODUCTIVITY SUITE EXTENSION",
     description:
       "Created a feature-rich Chrome extension utilizing JavaScript and Chrome APIs to optimize personal daily task management and workflow tracking.",
     tags: ["JAVASCRIPT", "CHROME APIS", "TAILWIND"],
-    link: "https://github.com",
+    link: "https://github.com/mahingunjal",
   },
 ];
 
+/**
+ * ProjectsSection Component
+ * 
+ * Features:
+ * - 2x2 grid of featured software engineering & web development projects
+ * - Animated corner Spider-Man / Venom peek character with subtle floating oscillation
+ * - Continuous rotating web background graphic
+ * - High-contrast tag badges and interactive external GitHub redirection links
+ */
 export default function ProjectsSection() {
   const sectionRef = useRef(null);
   const webBgRef = useRef(null);
@@ -98,14 +110,14 @@ export default function ProjectsSection() {
           alt="Spider-Man Corner Peek"
           className={`w-20 sm:w-28 md:w-32 lg:w-36 h-auto object-contain drop-shadow-2xl transition-all duration-300 ${
             isVenomMode
-              ? "grayscale brightness-[0.4] contrast-[220%] drop-shadow-[0_0_15px_#9333ea]"
+              ? "grayscale brightness-[0.35] contrast-[250%] drop-shadow-[0_0_15px_#9333ea]"
               : ""
           }`}
         />
       </div>
 
       {/* Section Header */}
-      <div className="relative z-20 flex flex-col items-center gap-2 mb-14 text-center max-w-2xl">
+      <div className="relative z-20 flex flex-col items-center gap-2 mb-16 text-center max-w-2xl">
         <div className="flex items-center gap-2">
           <div
             className={`px-1.5 py-0.5 rounded-sm flex items-center justify-center shadow-sm transition-colors duration-300 ${
@@ -123,82 +135,77 @@ export default function ProjectsSection() {
             />
           </div>
           <span
-            className={`font-black uppercase text-xs md:text-sm tracking-[0.25em] transition-colors duration-300 ${
+            className={`font-black uppercase text-xs md:text-sm tracking-[0.2em] transition-colors duration-300 ${
               isVenomMode ? "text-purple-400" : "text-[#a31515]"
             }`}
           >
-            FEATURED WORKS
+            CREATIVE PORTFOLIO
           </span>
         </div>
+
         <h2
-          className={`text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter italic uppercase transition-colors duration-300 ${
+          className={`text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-none italic uppercase transition-colors duration-300 ${
             isVenomMode ? "text-white" : "text-gray-900"
           }`}
           style={{
             textShadow: isVenomMode
-              ? "3px 3px 0px #7e22ce, 5px 5px 0px #581c87"
-              : "3px 3px 0px #ef4444, 5px 5px 0px #a31515",
+              ? "3px 3px 0px #7e22ce, 6px 6px 0px #581c87"
+              : "3px 3px 0px #ef4444, 6px 6px 0px #a31515",
           }}
         >
-          PROJECTS
+          FEATURED PROJECTS
         </h2>
-        <div
-          className={`w-16 h-1 rounded-full mt-1 transition-colors duration-300 ${
-            isVenomMode ? "bg-purple-500" : "bg-[#a31515]"
-          }`}
-        ></div>
       </div>
 
-      {/* Projects Grid Container */}
-      <div className="relative z-20 max-w-4xl lg:max-w-5xl w-full mx-auto pl-0 md:pl-20 lg:pl-24 grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+      {/* Projects Grid Container (2x2 on desktop) */}
+      <div className="relative z-20 max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
         {projectsData.map((project, index) => (
-          <a
+          <div
             key={index}
-            href={project.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            title={`View ${project.title} project`}
-            aria-label={`View ${project.title} project`}
-            className={`group relative backdrop-blur-sm border-2 rounded-2xl p-5 md:p-6 flex flex-col justify-between overflow-hidden cursor-pointer transition-all duration-150 active:scale-95 active:translate-y-0.5 ${
+            className={`group relative flex flex-col justify-between p-6 sm:p-8 rounded-3xl border-3 shadow-xl transition-all duration-300 hover:-translate-y-1.5 active:scale-[0.98] ${
               isVenomMode
-                ? "bg-[#12121c]/90 border-purple-900/50 shadow-lg shadow-purple-950/40 hover:border-purple-500 hover:shadow-[0_0_25px_rgba(168,85,247,0.25)]"
-                : "bg-white/95 border-gray-200/80 shadow-lg shadow-gray-200/50 hover:border-[#a31515] hover:shadow-red-900/15"
+                ? "bg-[#0f0f18] border-purple-900/60 shadow-purple-950/20 hover:border-purple-500 hover:shadow-purple-900/40"
+                : "bg-white border-red-900/20 shadow-red-950/10 hover:border-[#a31515] hover:shadow-red-900/20"
             }`}
           >
-            {/* Top Row: Title & External Link Icon */}
-            <div>
-              <div className="flex items-start justify-between gap-4 mb-4">
-                <h3
-                  className={`font-black text-lg md:text-xl tracking-tight uppercase transition-colors duration-300 ${
-                    isVenomMode
-                      ? "text-white group-hover:text-purple-400"
-                      : "text-gray-900 group-hover:text-[#a31515]"
+            {/* Top Card Info */}
+            <div className="flex flex-col gap-4">
+              <div className="flex items-center justify-between">
+                <span
+                  className={`text-xs font-black tracking-widest uppercase transition-colors duration-300 ${
+                    isVenomMode ? "text-purple-400" : "text-[#a31515]"
                   }`}
                 >
-                  {project.title}
-                </h3>
-                <svg
-                  className={`w-5 h-5 shrink-0 transition-colors duration-300 ${
+                  PROJECT 0{index + 1}
+                </span>
+                <a
+                  href={project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title={`View ${project.title} on GitHub (Opens in new tab)`}
+                  aria-label={`View ${project.title} on GitHub (Opens in new tab)`}
+                  className={`w-9 h-9 rounded-full flex items-center justify-center border transition-all duration-200 active:scale-90 ${
                     isVenomMode
-                      ? "text-gray-400 group-hover:text-purple-400"
-                      : "text-gray-400 group-hover:text-[#a31515]"
+                      ? "border-purple-800 bg-purple-950/60 text-purple-300 hover:bg-purple-600 hover:text-white"
+                      : "border-red-200 bg-red-50 text-[#a31515] hover:bg-[#a31515] hover:text-white"
                   }`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2.5"
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                  />
-                </svg>
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14V3zm-9 4h6v2H5v10h10v-6h2v8H3V7h2z" />
+                  </svg>
+                </a>
               </div>
 
-              {/* Description Paragraph */}
+              <h3
+                className={`text-xl sm:text-2xl font-black italic tracking-tight uppercase leading-snug transition-colors duration-300 ${
+                  isVenomMode ? "text-white" : "text-gray-900"
+                }`}
+              >
+                {project.title}
+              </h3>
+
               <p
-                className={`font-medium text-xs md:text-sm leading-relaxed mb-6 transition-colors duration-300 ${
+                className={`text-xs sm:text-sm font-medium leading-relaxed transition-colors duration-300 ${
                   isVenomMode ? "text-gray-300" : "text-gray-600"
                 }`}
               >
@@ -206,26 +213,22 @@ export default function ProjectsSection() {
               </p>
             </div>
 
-            {/* Bottom Row: Tech Stack Pill Tags */}
-            <div
-              className={`flex flex-wrap gap-2 pt-4 border-t transition-colors duration-300 ${
-                isVenomMode ? "border-purple-900/40" : "border-gray-100"
-              }`}
-            >
-              {project.tags.map((tag, tIndex) => (
+            {/* Bottom Tech Tags */}
+            <div className="flex flex-wrap gap-2 pt-6 mt-4 border-t border-gray-100 dark:border-purple-950/60">
+              {project.tags.map((tag, tIdx) => (
                 <span
-                  key={tIndex}
-                  className={`px-3 py-1.5 rounded-xl border font-extrabold text-[10px] md:text-xs tracking-wider uppercase transition-colors duration-300 ${
+                  key={tIdx}
+                  className={`px-3 py-1 rounded-xl text-[10px] sm:text-xs font-bold tracking-wider uppercase transition-colors duration-300 ${
                     isVenomMode
-                      ? "border-purple-800/60 bg-purple-950/60 text-purple-300 group-hover:border-purple-400 group-hover:text-white"
-                      : "border-gray-200 bg-gray-50/60 text-gray-700 group-hover:border-red-200 group-hover:text-[#a31515]"
+                      ? "bg-purple-950/80 text-purple-300 border border-purple-800/60"
+                      : "bg-red-50 text-[#a31515] border border-red-100"
                   }`}
                 >
                   {tag}
                 </span>
               ))}
             </div>
-          </a>
+          </div>
         ))}
       </div>
     </section>

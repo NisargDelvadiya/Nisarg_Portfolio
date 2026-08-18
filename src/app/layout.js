@@ -2,27 +2,105 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/context/ThemeContext";
 import PWARegistration from "@/components/PWARegistration";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
 });
 
 export const viewport = {
   themeColor: "#a31515",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
 };
 
 export const metadata = {
-  title: "Mahin Gunjal — Web Designer & VFX Artist",
+  metadataBase: new URL("https://mahingunjal.com"),
+  title: {
+    default: "Mahin Gunjal — Web Designer & VFX Artist",
+    template: "%s | Mahin Gunjal",
+  },
   description:
-    "I’m Mahin Gunjal, a passionate Web Designer and VFX Artist pursuing my Bachelor’s degree at ITM SLS Vadodara University. I specialize in creating modern, responsive, and visually engaging websites that combine clean UI/UX design with interactive digital experiences. Alongside my web design journey, I am currently pursuing a VFX course at ZICA, developing skills in visual effects, motion graphics, compositing, video editing, 3D design, and digital storytelling.",
-  authors: [{ name: "Mahin Gunjal" }],
-  keywords: ["Mahin Gunjal", "Portfolio", "Web Designer", "VFX Artist", "JavaScript", "React", "Next.js"],
+    "Official Portfolio of Mahin Gunjal — Web Designer, Frontend Developer, and VFX Artist specializing in modern UI/UX, GSAP animations, 3D design, motion graphics, and digital storytelling.",
+  applicationName: "Mahin Gunjal Portfolio",
+  authors: [{ name: "Mahin Gunjal", url: "https://mahingunjal.com" }],
+  generator: "Next.js",
+  keywords: [
+    "Mahin Gunjal",
+    "Mahin",
+    "Web Designer",
+    "VFX Artist",
+    "Frontend Developer",
+    "UI UX Designer",
+    "3D Designer",
+    "Motion Graphics",
+    "React",
+    "Next.js",
+    "Tailwind CSS",
+    "GSAP Animations",
+    "Portfolio",
+    "Vadodara",
+    "Gujarat",
+    "India",
+  ],
+  creator: "Mahin Gunjal",
+  publisher: "Mahin Gunjal",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Mahin Gunjal — Web Designer & VFX Artist",
+    description:
+      "Explore the creative portfolio of Mahin Gunjal. Featuring modern web design, interactive GSAP animations, VFX projects, and 3D modeling.",
+    url: "https://mahingunjal.com",
+    siteName: "Mahin Gunjal Portfolio",
+    images: [
+      {
+        url: "/Assets/Mahin.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Mahin Gunjal — Web Designer & VFX Artist",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Mahin Gunjal — Web Designer & VFX Artist",
+    description:
+      "Explore the creative portfolio of Mahin Gunjal. Featuring modern web design, interactive GSAP animations, VFX projects, and 3D modeling.",
+    images: ["/Assets/Mahin.jpeg"],
+    creator: "@mahingunjal",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    nocache: false,
+    googleBot: {
+      index: true,
+      follow: true,
+      noimageindex: false,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
   icons: {
     icon: [
       { url: "/favicon/favicon-96x96.png?v=20260817", sizes: "96x96", type: "image/png" },
@@ -39,6 +117,62 @@ export const metadata = {
     statusBarStyle: "black-translucent",
     title: "Mahin Gunjal",
   },
+};
+
+/** Structured JSON-LD Schema for Rich Search Results */
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://mahingunjal.com/#person",
+      "name": "Mahin Gunjal",
+      "jobTitle": "Web Designer & VFX Artist",
+      "url": "https://mahingunjal.com",
+      "image": "https://mahingunjal.com/Assets/Mahin.jpeg",
+      "description":
+        "Passionate Web Designer and VFX Artist specializing in modern UI/UX design, interactive web experiences, and visual effects.",
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "ITM SLS Baroda University",
+      },
+      "knowsAbout": [
+        "Web Design",
+        "Frontend Development",
+        "VFX & Motion Graphics",
+        "UI/UX Design",
+        "3D Modeling",
+        "React",
+        "Next.js",
+        "GSAP",
+        "Blender",
+        "Adobe Creative Suite",
+      ],
+      "sameAs": [
+        "https://github.com/NisargDelvadiya",
+        "https://www.linkedin.com/in/mahin-gunjal-1a133528b",
+      ],
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://mahingunjal.com/#website",
+      "url": "https://mahingunjal.com",
+      "name": "Mahin Gunjal Portfolio",
+      "description": "Official Web Designer & VFX Artist Portfolio of Mahin Gunjal",
+      "publisher": {
+        "@id": "https://mahingunjal.com/#person",
+      },
+    },
+    {
+      "@type": "ProfilePage",
+      "@id": "https://mahingunjal.com/#profilepage",
+      "url": "https://mahingunjal.com",
+      "name": "Mahin Gunjal Portfolio Profile",
+      "mainEntity": {
+        "@id": "https://mahingunjal.com/#person",
+      },
+    },
+  ],
 };
 
 export default function RootLayout({ children }) {
@@ -58,6 +192,10 @@ export default function RootLayout({ children }) {
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <meta name="apple-mobile-web-app-title" content="Mahin Gunjal" />
         <link rel="manifest" href="/manifest.json" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
       </head>
       <body className="min-h-full flex flex-col relative transition-colors duration-300">
         <ThemeProvider>
@@ -69,6 +207,8 @@ export default function RootLayout({ children }) {
           </a>
           {children}
           <PWARegistration />
+          <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>

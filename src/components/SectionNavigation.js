@@ -2,6 +2,9 @@
 
 import { useEffect } from "react";
 
+/**
+ * Ordered landmark section IDs for keyboard arrow navigation
+ */
 const SECTION_IDS = [
   "main-content",
   "about",
@@ -11,6 +14,16 @@ const SECTION_IDS = [
   "contact",
 ];
 
+/**
+ * SectionNavigation Component
+ * 
+ * Provides keyboard shortcut accessibility:
+ * - Up Arrow (↑): Scrolls up smoothly to previous portfolio section
+ * - Down Arrow (↓): Scrolls down smoothly to next portfolio section
+ * Automatically ignores input elements and textarea fields to prevent conflict.
+ * 
+ * @returns {null} Invisible listener component
+ */
 export default function SectionNavigation() {
   useEffect(() => {
     let isNavigating = false;

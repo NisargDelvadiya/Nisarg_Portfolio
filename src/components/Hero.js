@@ -5,6 +5,17 @@ import gsap from "gsap";
 import TextType from "@/components/TextType";
 import { useTheme } from "@/context/ThemeContext";
 
+/**
+ * Hero Component
+ * 
+ * Features:
+ * - Interactive Spider-Man mask cursor reveal via CSS radial-gradient mask
+ * - Split hero layers: unmasked face (Mahin_Man.jpeg) and masked suit (Spider_Man.png)
+ * - Dynamic typing banner with TextType component
+ * - GSAP entrance animations & continuous rotating web background accents
+ * - Action buttons: Smooth scroll to Projects & direct download for Mahin_Resume.pdf
+ * - Full support for Spider-Man Red and Venom Symbiote Dark themes
+ */
 export default function Hero() {
   const [maskPos, setMaskPos] = useState(null);
   const [isTouchDevice, setIsTouchDevice] = useState(false);
@@ -33,7 +44,7 @@ export default function Hero() {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Title entrance
+      // Title entrance animation
       gsap.fromTo(
         [titleRef.current],
         {
@@ -83,6 +94,9 @@ export default function Hero() {
     return () => ctx.revert();
   }, []);
 
+  /**
+   * Track cursor movements across hero banner to position dynamic mask reveal
+   */
   const handleMouseMove = (e) => {
     if (isTouchDevice) return;
     const rect = e.currentTarget.getBoundingClientRect();
@@ -115,6 +129,7 @@ export default function Hero() {
         alt="Mahin Man Unmasked Layer"
         className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none z-10 transition-all duration-300"
         src="/Assets/Mahin_Man.jpeg"
+        fetchPriority="high"
         style={
           isVenomMode
             ? { filter: "grayscale(100%) brightness(0.85) contrast(125%)" }

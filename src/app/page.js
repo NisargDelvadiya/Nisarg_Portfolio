@@ -12,6 +12,23 @@ import AudioPlayer from "@/components/AudioPlayer";
 import SectionNavigation from "@/components/SectionNavigation";
 import { useTheme } from "@/context/ThemeContext";
 
+/**
+ * Home Page (Root Landing Page)
+ * 
+ * Aggregates all interactive portfolio components:
+ * - Navbar: Sticky navigation header with theme switch
+ * - Hero: Interactive cursor mask reveal hero with resume download
+ * - MarqueeBanner: High-speed dual skill tickers
+ * - AboutSection: Bio, academic credentials, and interactive tech stack
+ * - SkillsSection: Visual skills matrix with pendulum animations
+ * - ProjectsSection: Interactive showcase of featured web & SaaS projects
+ * - ExperiencesSection: Vertical milestone journey timeline
+ * - Footer: Email clipboard copy, legal links, Google translate selector, and DPDP cookie modal
+ * - AudioPlayer: Background theme audio controller
+ * - SectionNavigation: Up/down arrow key shortcuts
+ * 
+ * @returns {JSX.Element}
+ */
 export default function Home() {
   const { isVenomMode } = useTheme();
 
