@@ -89,6 +89,17 @@ const RecentProjects = () => {
                     alt={`${projectItem.title} Preview Screenshot`}
                     className="z-10 absolute inset-0 m-auto w-[96%] h-[96%] object-contain object-center rounded-xl transition-transform duration-300 group-hover/pin:scale-[1.02] drop-shadow-2xl"
                   />
+
+                  {/* Badge Tag (e.g. Freelance Work) */}
+                  {projectItem.badge && (
+                    <div className="z-20 absolute top-3 right-3 px-3 py-1 rounded-full text-xs font-semibold bg-[#10132E]/90 text-[#CBACF9] border border-[#CBACF9]/40 backdrop-blur-md shadow-lg flex items-center gap-1.5 transition-transform duration-200 hover:scale-105">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#CBACF9] opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-[#CBACF9]"></span>
+                      </span>
+                      <span>{projectItem.badge}</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Content Box (Flexible grow to fill equal height) */}

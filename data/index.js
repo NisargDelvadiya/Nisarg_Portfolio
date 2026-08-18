@@ -115,6 +115,7 @@ export const projects = [
   {
     id: 1,
     title: "Mahin Gunjal - Web Designer & VFX Artist",
+    badge: "Freelance Work",
     des: "A high-performance, interactive Next.js portfolio for Web Designer & VFX Artist Mahin Gunjal, featuring a custom Spider-Man vs. Venom Symbiote theme toggle, GSAP animations, ambient audio controls, and PWA capabilities.",
     img: "/projects/p3.jpg",
     iconLists: [

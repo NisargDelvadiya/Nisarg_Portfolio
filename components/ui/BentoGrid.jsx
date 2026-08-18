@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
-import { FaDownload } from "react-icons/fa";
+import { FaDownload, FaUsers } from "react-icons/fa6";
 import dynamic from "next/dynamic";
 
 // Dynamic import for Lottie animation to optimize client-side bundle size
@@ -130,7 +130,7 @@ export const BentoGridItem = ({
             <div
               className={cn(
                 "font-sans text-base sm:text-lg lg:text-2xl xl:text-3xl font-bold text-white",
-                id === 1 && "max-w-[85%] sm:max-w-[75%] lg:max-w-[65%] pb-16 sm:pb-0 z-10",
+                id === 1 && "max-w-[55%] sm:max-w-[60%] lg:max-w-[65%] pb-16 sm:pb-0 z-10",
                 id === 3 && "z-30 relative max-w-[42%] sm:max-w-[45%] lg:max-w-[45%] drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)]",
                 id === 4 && "drop-shadow-[0_2px_8px_rgba(0,0,0,0.95)] max-w-96 z-10",
                 id !== 1 && id !== 3 && id !== 4 && "z-10"
@@ -140,27 +140,48 @@ export const BentoGridItem = ({
             </div>
           )}
 
-          {/* Card 1: Service Contract Download Button (Positioned cleanly at bottom left) */}
+          {/* Card 1: Clients Worked With Counter Badge & Service Contract Download Button */}
           {id === 1 && (
-            <div className="absolute bottom-5 left-5 sm:bottom-6 sm:left-6 lg:bottom-8 lg:left-8 z-20">
-              <a
-                href="/about/Website Development Service Contract (Version 1).pdf"
-                download="Website_Development_Service_Contract.pdf"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Download Website Development Service Contract PDF"
-                aria-label="Download Website Development Service Contract PDF"
-                className="cursor-pointer focus:outline-none"
-              >
-                <MagicButton
-                  title="T&C for My Service"
-                  icon={<FaDownload aria-hidden="true" />}
-                  position="right"
-                  containerClassName="!mt-0"
-                  otherClasses="bg-[#161A31] text-xs md:text-sm font-semibold px-4 sm:px-5 py-2.5"
-                />
-              </a>
-            </div>
+            <>
+              {/* Counter Badge: Clients Worked With */}
+              <div className="absolute top-4 right-4 sm:top-6 sm:right-6 lg:top-8 lg:right-8 z-20 flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-2xl bg-[#10132E]/90 border border-white/10 backdrop-blur-md shadow-2xl transition-all duration-300 hover:border-purple/40 hover:scale-105">
+                <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-purple/20 text-[#CBACF9] border border-purple/30 font-extrabold text-lg sm:text-xl shadow-inner shrink-0">
+                  1
+                </div>
+                <div className="flex flex-col text-left">
+                  <div className="flex items-center gap-1.5">
+                    <FaUsers className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#CBACF9]" aria-hidden="true" />
+                    <span className="text-xs sm:text-sm font-bold text-white tracking-tight">
+                      Clients Worked With
+                    </span>
+                  </div>
+                  <span className="text-[10px] sm:text-xs text-[#BEC1DD]">
+                    1 Freelance Project
+                  </span>
+                </div>
+              </div>
+
+              {/* Service Contract Download Button */}
+              <div className="absolute bottom-5 left-5 sm:bottom-6 sm:left-6 lg:bottom-8 lg:left-8 z-20">
+                <a
+                  href="/about/Website Development Service Contract (Version 1).pdf"
+                  download="Website_Development_Service_Contract.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Download Website Development Service Contract PDF"
+                  aria-label="Download Website Development Service Contract PDF"
+                  className="cursor-pointer focus:outline-none"
+                >
+                  <MagicButton
+                    title="T&C for My Service"
+                    icon={<FaDownload aria-hidden="true" />}
+                    position="right"
+                    containerClassName="!mt-0"
+                    otherClasses="bg-[#161A31] text-xs md:text-sm font-semibold px-4 sm:px-5 py-2.5"
+                  />
+                </a>
+              </div>
+            </>
           )}
 
           {/* Card 2: Interactive 3D GitHub Globe */}
