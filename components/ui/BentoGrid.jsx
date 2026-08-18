@@ -140,25 +140,18 @@ export const BentoGridItem = ({
             </div>
           )}
 
-          {/* Card 1: Clients Worked With Counter Badge & Service Contract Download Button */}
+          {/* Card 1: +1 Clients Badge & Service Contract Download Button */}
           {id === 1 && (
             <>
-              {/* Counter Badge: Clients Worked With */}
-              <div className="absolute top-4 right-4 sm:top-6 sm:right-6 lg:top-8 lg:right-8 z-20 flex items-center gap-2.5 sm:gap-3 px-3 sm:px-4 py-1.5 sm:py-2.5 rounded-2xl bg-[#10132E]/90 border border-white/10 backdrop-blur-md shadow-2xl transition-all duration-300 hover:border-purple/40 hover:scale-105">
-                <div className="flex items-center justify-center w-8 h-8 sm:w-10 sm:h-10 rounded-xl bg-purple/20 text-[#CBACF9] border border-purple/30 font-extrabold text-lg sm:text-xl shadow-inner shrink-0">
-                  1
-                </div>
-                <div className="flex flex-col text-left">
-                  <div className="flex items-center gap-1.5">
-                    <FaUsers className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#CBACF9]" aria-hidden="true" />
-                    <span className="text-xs sm:text-sm font-bold text-white tracking-tight">
-                      Clients Worked With
-                    </span>
-                  </div>
-                  <span className="text-[10px] sm:text-xs text-[#BEC1DD]">
-                    1 Freelance Project
-                  </span>
-                </div>
+              {/* Badge: +1 Clients */}
+              <div className="absolute top-4 right-4 sm:top-6 sm:right-6 lg:top-8 lg:right-8 z-20 px-4 py-2 rounded-2xl bg-[#10132E]/90 border border-white/10 backdrop-blur-md shadow-2xl transition-all duration-300 hover:border-purple/40 hover:scale-105 flex items-center gap-2">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#CBACF9] opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#CBACF9]"></span>
+                </span>
+                <span className="font-sans text-base sm:text-lg lg:text-xl font-bold text-[#CBACF9] tracking-tight">
+                  +1 Clients
+                </span>
               </div>
 
               {/* Service Contract Download Button */}
