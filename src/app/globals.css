@@ -8,6 +8,32 @@ html {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* ==========================================================================
+   CUSTOM SPIDER-WEB CURSOR SYSTEM
+   ========================================================================== */
+html,
+body,
+* {
+  cursor: url('/Assets/web-cursor.svg') 3 3, url('/Assets/web-cursor.png') 4 4, auto;
+}
+
+/* Interactive hover state for links, buttons and clickable elements */
+a,
+button,
+[role="button"],
+input,
+select,
+textarea,
+summary,
+.cursor-pointer,
+[type="button"],
+[type="submit"],
+[type="reset"],
+label[for],
+select {
+  cursor: url('/Assets/web-cursor-pointer.svg') 4 4, url('/Assets/web-cursor-pointer.png') 4 4, pointer !important;
+}
+
 /* Zero top shifting and bounce control */
 html,
 body {

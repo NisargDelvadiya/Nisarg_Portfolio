@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40" fill="none">
+  <defs>
+    <filter id="glow-pointer" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#e11d48" flood-opacity="0.9"/>
+      <feDropShadow dx="0" dy="1" stdDeviation="1.2" flood-color="#000000" flood-opacity="0.9"/>
+    </filter>
+  </defs>
+  <g filter="url(#glow-pointer)">
+    <!-- Radial Strands -->
+    <line x1="4" y1="4" x2="36" y2="4" stroke="#ffe4e6" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="4" y1="4" x2="35" y2="15" stroke="#ffe4e6" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="4" y1="4" x2="31" y2="25" stroke="#ffe4e6" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="4" y1="4" x2="25" y2="31" stroke="#ffe4e6" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="4" y1="4" x2="15" y2="35" stroke="#ffe4e6" stroke-width="1.8" stroke-linecap="round"/>
+    <line x1="4" y1="4" x2="4" y2="36" stroke="#ffe4e6" stroke-width="1.8" stroke-linecap="round"/>
+
+    <!-- Concentric Web Arcs -->
+    <path d="M36,4 Q28,12 35,15 Q24,22 31,25 Q22,24 25,31 Q12,28 15,35 Q8,25 4,36" fill="none" stroke="#f43f5e" stroke-width="2.2" stroke-linecap="round"/>
+    <path d="M26,4 Q20,9 25,11 Q17,16 22,18 Q16,17 18,22 Q9,20 11,25 Q6,18 4,26" fill="none" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round"/>
+    <path d="M15,4 Q11,7 14,8 Q9,11 13,12 Q11,11 12,13 Q6,12 8,14 Q4,11 4,15" fill="none" stroke="#fbbf24" stroke-width="1.4" stroke-linecap="round"/>
+
+    <!-- Glowing Spider Origin Point -->
+    <circle cx="4" cy="4" r="4" fill="#e11d48" stroke="#ffffff" stroke-width="1.5"/>
+    <circle cx="4" cy="4" r="1.5" fill="#fbbf24"/>
+  </g>
+</svg>

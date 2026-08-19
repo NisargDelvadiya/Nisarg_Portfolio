@@ -123,10 +123,6 @@ export default function AudioPlayer() {
           <span className="font-extrabold text-[10px] sm:text-xs tracking-wider uppercase">
             {isPlaying ? "MUSIC ON" : "PLAY THEME"}
           </span>
-
-          <span className="hidden lg:inline text-[9px] opacity-60 font-semibold border border-current px-1 rounded">
-            SPACE
-          </span>
         </button>
       </div>
     </>
