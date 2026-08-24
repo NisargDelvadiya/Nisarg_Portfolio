@@ -1,22 +1,31 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  compress: true,
+  poweredByHeader: false,
+  images: {
+    formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 60 * 60 * 24 * 30, // 30 days
+  },
   async headers() {
     return [
       {
-        source: '/:path*',
+        // Immutable long-term caching for static images, icons, and files
+        source: '/(images|icons|files)/:path*',
         headers: [
           {
             key: 'Cache-Control',
-            value: 'no-store, no-cache, must-revalidate, proxy-revalidate',
+            value: 'public, max-age=31536000, immutable',
           },
+        ],
+      },
+      {
+        // Dynamic revalidation for main pages & app HTML
+        source: '/((?!images|icons|files|_next/static).*)',
+        headers: [
           {
-            key: 'Pragma',
-            value: 'no-cache',
-          },
-          {
-            key: 'Expires',
-            value: '0',
+            key: 'Cache-Control',
+            value: 'public, max-age=0, must-revalidate',
           },
         ],
       },
@@ -25,4 +34,3 @@ const nextConfig = {
 }
 
 export default nextConfig
-

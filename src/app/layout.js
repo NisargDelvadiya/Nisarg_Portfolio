@@ -31,10 +31,25 @@ export const metadata = {
   },
 }
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#0c0822',
+}
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+        {/* Preconnect for Google Fonts */}
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        
+        {/* Preload critical desktop background for instant paint */}
+        <link rel="preload" as="image" href="/images/wallpaper.png" fetchPriority="high" />
+
+        {/* Clean ServiceWorker cache cleanup */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
