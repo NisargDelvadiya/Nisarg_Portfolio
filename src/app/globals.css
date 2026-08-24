@@ -185,10 +185,9 @@ body {
 
 #contact {
   position: absolute;
-  top: 6rem;
+  top: 5.5rem;
   left: 28%;
-  width: fit-content;
-  max-width: 92vw;
+  width: min(500px, 92vw);
 }
 
 #photos {

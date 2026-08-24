@@ -22,8 +22,8 @@ const Contact = ({ controls, isMaximized }) => {
 
   return (
     <div
-      className={`flex flex-col bg-white dark:bg-[#1e1e22] text-gray-800 dark:text-white rounded-xl shadow-2xl overflow-hidden border border-black/10 dark:border-white/10 select-none transition-colors duration-200 ${
-        isMaximized ? 'w-full h-[calc(100vh-140px)]' : 'w-[520px] max-w-[94vw]'
+      className={`flex flex-col bg-white dark:bg-[#1e1e22] text-gray-800 dark:text-white rounded-xl shadow-2xl overflow-hidden border border-black/10 dark:border-white/10 select-none transition-colors duration-200 w-full ${
+        isMaximized ? 'h-[calc(100vh-140px)]' : ''
       }`}
     >
       {/* Window Header */}
@@ -36,25 +36,25 @@ const Contact = ({ controls, isMaximized }) => {
       </div>
 
       {/* Body Content */}
-      <main className="p-5 sm:p-7 space-y-5 flex-1 overflow-y-auto overscroll-contain bg-white dark:bg-[#18181c]">
+      <main className="p-4 sm:p-6 space-y-4 flex-1 overflow-y-auto overscroll-contain bg-white dark:bg-[#18181c] w-full box-border">
         <div>
-          <h3 className="text-xl font-bold text-gray-900 dark:text-white">Let's Connect</h3>
-          <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 mt-1">
+          <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white">Let's Connect</h3>
+          <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
             Feel free to reach out directly via email or on socials:
           </p>
         </div>
 
         {/* Copy Email Card */}
-        <div className="bg-gray-50 dark:bg-[#222228] border border-gray-200 dark:border-white/10 rounded-xl p-4 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 shadow-sm">
-          <div className="flex items-center gap-3 min-w-0 w-full sm:w-auto">
-            <div className="size-9 rounded-lg bg-blue-600/10 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center flex-shrink-0">
-              <svg className="size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <div className="bg-gray-50 dark:bg-[#222228] border border-gray-200 dark:border-white/10 rounded-xl p-3 sm:p-3.5 flex items-center justify-between gap-2.5 shadow-sm w-full box-border">
+          <div className="flex items-center gap-2.5 min-w-0 flex-1">
+            <div className="size-8 sm:size-9 rounded-lg bg-blue-600/10 dark:bg-blue-500/20 text-blue-600 dark:text-blue-400 flex items-center justify-center flex-shrink-0">
+              <svg className="size-4 sm:size-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-[11px] font-medium text-gray-400 dark:text-gray-400">Email Address</p>
-              <p className="text-xs sm:text-sm font-semibold text-gray-800 dark:text-gray-100 truncate font-mono select-text">
+              <p className="text-[10px] sm:text-[11px] font-medium text-gray-400 dark:text-gray-400">Email Address</p>
+              <p className="text-[11px] sm:text-xs md:text-sm font-semibold text-gray-800 dark:text-gray-100 truncate font-mono select-text">
                 {email}
               </p>
             </div>
@@ -64,7 +64,7 @@ const Contact = ({ controls, isMaximized }) => {
             type="button"
             data-clickable="true"
             onClick={handleCopyEmail}
-            className={`w-full sm:w-auto px-4 py-2 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-sm flex-shrink-0 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center justify-center gap-1 transition-all cursor-pointer shadow-sm flex-shrink-0 focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none ${
               copied
                 ? 'bg-green-600 text-white'
                 : 'bg-blue-600 hover:bg-blue-700 text-white active:scale-95'
@@ -73,27 +73,17 @@ const Contact = ({ controls, isMaximized }) => {
             aria-label="Copy email address"
           >
             {copied ? (
-              <>
-                <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
-                </svg>
-                <span>Copied! ✓</span>
-              </>
+              <span>Copied! ✓</span>
             ) : (
-              <>
-                <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
-                </svg>
-                <span>Copy Email</span>
-              </>
+              <span>Copy</span>
             )}
           </button>
         </div>
 
         {/* Social Links */}
-        <div className="space-y-2">
+        <div className="space-y-2 w-full">
           <p className="text-xs font-medium text-gray-500 dark:text-gray-400">Social Profiles</p>
-          <div className="grid grid-cols-2 gap-3 w-full">
+          <div className="grid grid-cols-2 gap-2.5 sm:gap-3 w-full box-border">
             {socials.map((social) => (
               <a
                 key={social.id}
@@ -102,7 +92,7 @@ const Contact = ({ controls, isMaximized }) => {
                 rel="noreferrer"
                 data-clickable="true"
                 style={{ backgroundColor: social.bg }}
-                className="flex items-center justify-center sm:justify-start gap-2.5 sm:gap-3 rounded-xl p-3 hover:-translate-y-0.5 hover:shadow-md transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
+                className="flex items-center justify-center gap-2 sm:gap-2.5 rounded-xl p-2.5 sm:p-3 hover:-translate-y-0.5 hover:shadow-md transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none min-w-0 w-full box-border"
                 title={`Open ${social.text}`}
                 aria-label={`Open ${social.text}`}
               >
