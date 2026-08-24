@@ -229,8 +229,8 @@ body {
   width: min(600px, 90vw);
 }
 
-/* Mobile & Small Tablet Responsive Overrides */
-@media (max-width: 640px) {
+/* Mobile & Tablet Responsive Overrides */
+@media (max-width: 768px) {
   #safari,
   #terminal,
   #contact,
@@ -243,8 +243,9 @@ body {
     right: 3% !important;
     width: 94vw !important;
     max-width: 94vw !important;
-    top: 3.25rem !important;
+    top: 4.5rem !important;
   }
 }
+
 
 

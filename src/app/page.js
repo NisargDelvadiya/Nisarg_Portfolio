@@ -31,7 +31,7 @@ export default function Home() {
       <Navbar />
 
       {/* Boundary container to prevent windows from going above navbar */}
-      <div id="desktop-bounds" className="absolute top-11 left-0 right-0 bottom-0 pointer-events-none" />
+      <div id="desktop-bounds" className="absolute top-16 md:top-11 left-0 right-0 bottom-0 pointer-events-none" />
 
       <Welcome />
       <Dock />
