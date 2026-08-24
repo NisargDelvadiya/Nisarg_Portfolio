@@ -65,11 +65,11 @@ const Finder = ({ controls, isMaximized }) => {
   return (
     <div
       className={`flex flex-col bg-white dark:bg-[#1e1e22] text-gray-800 dark:text-white rounded-xl shadow-2xl overflow-hidden border border-black/10 dark:border-white/10 select-none transition-colors duration-200 ${
-        isMaximized ? 'w-full h-[calc(100vh-140px)]' : 'w-[580px] max-w-[90vw] h-[330px]'
+        isMaximized ? 'w-full h-[calc(100vh-140px)]' : 'w-[580px] max-w-[94vw] h-[330px]'
       }`}
     >
       {/* Window Header */}
-      <div id="window-header" className="bg-gray-100/90 dark:bg-[#26262b] border-b border-gray-200 dark:border-white/10 px-4 py-2 flex items-center justify-between flex-shrink-0">
+      <div id="window-header" className="bg-gray-100/90 dark:bg-[#26262b] border-b border-gray-200 dark:border-white/10 px-3 sm:px-4 py-2 flex items-center justify-between flex-shrink-0">
         {controls}
 
         <div className="flex items-center gap-2">
@@ -94,10 +94,10 @@ const Finder = ({ controls, isMaximized }) => {
       {/* Main Body */}
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
-        <aside className="w-36 bg-gray-50 dark:bg-[#25252a]/95 border-r border-gray-200 dark:border-white/10 flex flex-col p-2.5 space-y-3 overflow-y-auto flex-shrink-0">
+        <aside className="w-28 sm:w-36 bg-gray-50 dark:bg-[#25252a]/95 border-r border-gray-200 dark:border-white/10 flex flex-col p-2 sm:p-2.5 space-y-3 overflow-y-auto flex-shrink-0">
           {/* Favorites */}
           <div>
-            <h3 className="text-[10px] sm:text-[11px] font-semibold text-gray-400 dark:text-gray-400 uppercase tracking-wider mb-2">Favorites</h3>
+            <h3 className="text-[9px] sm:text-[10px] font-semibold text-gray-400 dark:text-gray-400 uppercase tracking-wider mb-1.5">Favorites</h3>
             <ul className="space-y-0.5">
               {Object.entries(locations).map(([key, loc]) => {
                 const isActive = activeLocationKey === key && folderStack.length === 0
@@ -106,7 +106,7 @@ const Finder = ({ controls, isMaximized }) => {
                     key={key}
                     role="button"
                     tabIndex={0}
-                    className={`flex items-center gap-2 px-2.5 py-1.5 rounded-md cursor-pointer transition-colors text-xs font-medium ${
+                    className={`flex items-center gap-1.5 sm:gap-2 px-2 py-1 rounded-md cursor-pointer transition-colors text-[11px] sm:text-xs font-medium ${
                       isActive
                         ? 'bg-blue-600 text-white font-semibold shadow-sm'
                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200/70 dark:hover:bg-white/10'
@@ -124,7 +124,7 @@ const Finder = ({ controls, isMaximized }) => {
                     <img
                       src={loc.icon}
                       alt=""
-                      className={`w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0 ${isActive ? 'brightness-0 invert' : 'opacity-80'}`}
+                      className={`w-3.5 h-3.5 flex-shrink-0 ${isActive ? 'brightness-0 invert' : 'opacity-80'}`}
                       aria-hidden="true"
                     />
                     <span className="truncate">{loc.name}</span>
@@ -137,7 +137,7 @@ const Finder = ({ controls, isMaximized }) => {
           {/* Work Projects Section */}
           {workProjects.length > 0 && (
             <div>
-              <h3 className="text-[10px] sm:text-[11px] font-semibold text-gray-400 dark:text-gray-400 uppercase tracking-wider mb-2">Projects</h3>
+              <h3 className="text-[9px] sm:text-[10px] font-semibold text-gray-400 dark:text-gray-400 uppercase tracking-wider mb-1.5">Projects</h3>
               <ul className="space-y-0.5">
                 {workProjects.map((project) => {
                   const isProjectActive = folderStack.some((f) => f.id === project.id)
@@ -146,7 +146,7 @@ const Finder = ({ controls, isMaximized }) => {
                       key={project.id}
                       role="button"
                       tabIndex={0}
-                      className={`flex items-center gap-2 px-2.5 py-1.5 rounded-md cursor-pointer transition-colors text-xs font-medium truncate ${
+                      className={`flex items-center gap-1.5 sm:gap-2 px-2 py-1 rounded-md cursor-pointer transition-colors text-[11px] sm:text-xs font-medium truncate ${
                         isProjectActive
                           ? 'bg-blue-600 text-white font-semibold shadow-sm'
                           : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200/70 dark:hover:bg-white/10'
@@ -161,7 +161,7 @@ const Finder = ({ controls, isMaximized }) => {
                       title={project.name}
                       aria-label={`Open ${project.name} project`}
                     >
-                      <img src="/images/folder.png" alt="" className="w-3.5 h-3.5 sm:w-4 sm:h-4 flex-shrink-0" aria-hidden="true" />
+                      <img src="/images/folder.png" alt="" className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
                       <span className="truncate">{project.name}</span>
                     </li>
                   )
@@ -173,10 +173,10 @@ const Finder = ({ controls, isMaximized }) => {
 
         {/* Content Area */}
         <main
-          className="content relative overflow-hidden flex-1 bg-white dark:bg-[#18181c] p-4 sm:p-6 transition-colors duration-200"
+          className="content relative overflow-y-auto overscroll-contain flex-1 bg-white dark:bg-[#18181c] p-3 sm:p-5 transition-colors duration-200"
           onClick={() => setSelectedId(null)}
         >
-          <ul className="relative w-full h-full">
+          <ul className="relative w-full h-full min-h-[220px]">
             {currentFolder.children?.map((item) => {
               const isSelected = selectedId === item.id
               return (
@@ -186,11 +186,11 @@ const Finder = ({ controls, isMaximized }) => {
                   tabIndex={0}
                   aria-label={`${item.name}, ${item.kind === 'folder' ? 'folder' : 'file'}. Double click to open.`}
                   title={`Double click to open ${item.name}`}
-                  className={`finder-item absolute flex flex-col items-center justify-center gap-1.5 sm:gap-2 p-2 sm:p-2.5 w-24 sm:w-28 rounded-xl cursor-pointer transition-colors select-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none ${
+                  className={`finder-item absolute flex flex-col items-center justify-center gap-1 p-1.5 sm:p-2 w-20 sm:w-28 rounded-xl cursor-pointer transition-colors select-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none ${
                     isSelected
                       ? 'bg-blue-500/20 dark:bg-white/10 ring-1 ring-blue-400 dark:ring-white/20 shadow-sm'
                       : 'hover:bg-gray-100/80 dark:hover:bg-white/5'
-                  } ${item.position || 'top-8 left-8'}`}
+                  } ${item.position || 'top-6 left-6'}`}
                   onClick={(e) => {
                     e.stopPropagation()
                     handleItemClick(item)
@@ -204,10 +204,10 @@ const Finder = ({ controls, isMaximized }) => {
                   <img
                     src={item.icon}
                     alt=""
-                    className="size-12 sm:size-16 pointer-events-none drop-shadow-md object-contain"
+                    className="size-10 sm:size-14 pointer-events-none drop-shadow-md object-contain"
                     aria-hidden="true"
                   />
-                  <p className="text-[11px] sm:text-xs text-center font-medium text-gray-800 dark:text-gray-200 line-clamp-2 select-none pointer-events-none break-words leading-tight">
+                  <p className="text-[10px] sm:text-xs text-center font-medium text-gray-800 dark:text-gray-200 line-clamp-2 select-none pointer-events-none break-words leading-tight">
                     {item.name}
                   </p>
                 </li>

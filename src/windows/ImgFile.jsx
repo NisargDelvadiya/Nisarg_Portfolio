@@ -5,7 +5,7 @@ import WindowWrapper from '#hoc/WindowWrapper'
 
 /**
  * macOS Image Viewer Window
- * Displays project assets and full-fidelity image previews.
+ * Displays project assets and full-fidelity image previews with responsive container.
  */
 const ImgFile = ({ controls, windowData, isMaximized }) => {
   const data = windowData || {
@@ -16,20 +16,20 @@ const ImgFile = ({ controls, windowData, isMaximized }) => {
   return (
     <div
       className={`flex flex-col bg-white dark:bg-[#1e1e22] text-gray-800 dark:text-white rounded-xl shadow-2xl overflow-hidden border border-black/10 dark:border-white/10 select-none transition-colors duration-200 ${
-        isMaximized ? 'w-full h-[calc(100vh-140px)]' : 'w-[580px] max-w-[92vw]'
+        isMaximized ? 'w-full h-[calc(100vh-140px)]' : 'w-[580px] max-w-[94vw]'
       }`}
     >
       {/* Window Header */}
-      <div id="window-header" className="bg-gray-100 dark:bg-[#26262b] border-b border-gray-200 dark:border-white/10 px-4 py-2.5 flex items-center justify-between flex-shrink-0">
+      <div id="window-header" className="bg-gray-100 dark:bg-[#26262b] border-b border-gray-200 dark:border-white/10 px-3 sm:px-4 py-2 flex items-center justify-between flex-shrink-0">
         {controls}
-        <h2 className="font-semibold text-gray-700 dark:text-gray-200 text-xs truncate max-w-[220px] text-center flex-1">
+        <h2 className="font-semibold text-gray-700 dark:text-gray-200 text-xs sm:text-sm truncate max-w-[220px] text-center flex-1 px-2">
           {data.name || 'Image Preview'}
         </h2>
         <div className="w-14" />
       </div>
 
       {/* Image Preview Area */}
-      <main className="p-4 bg-gray-50 dark:bg-[#141416] flex items-center justify-center max-h-[70vh] overflow-auto">
+      <main className="p-3 sm:p-4 bg-gray-50 dark:bg-[#141416] flex items-center justify-center max-h-[70vh] overflow-auto overscroll-contain">
         <img
           src={data.imageUrl || data.image || '/images/project-1.png'}
           alt={data.name || 'Project Preview'}
