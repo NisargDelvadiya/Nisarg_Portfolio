@@ -8,7 +8,7 @@ import useWindowStore from '#store/windows'
 
 /**
  * macOS Interactive Dock Component
- * Features realistic GSAP magnification on hover, bounce animations on launch,
+ * Features realistic GSAP magnification on desktop hover, snappy tap/click bounce on mobile/iPad,
  * active window indicators, and full WCAG accessibility.
  */
 const Dock = () => {
@@ -19,6 +19,10 @@ const Dock = () => {
   useGSAP(() => {
     const dock = dockRef.current
     if (!dock) return
+
+    // Check if the device has a precision pointer (desktop mouse vs mobile/iPad touch)
+    const isDesktopPointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+    if (!isDesktopPointer) return
 
     const icons = dock.querySelectorAll('.dock-icon')
 
@@ -67,13 +71,39 @@ const Dock = () => {
 
   const handleAppClick = (app, e) => {
     const icon = e.currentTarget
-    gsap.to(icon, {
-      y: -20,
-      duration: 0.18,
-      yoyo: true,
-      repeat: 1,
-      ease: 'power2.out',
-    })
+    const isTouchOrMobile = !window.matchMedia('(hover: hover) and (pointer: fine)').matches
+
+    if (isTouchOrMobile) {
+      // Snappy tap & launch animation for mobile & iPad
+      gsap
+        .timeline()
+        .to(icon, {
+          scale: 0.85,
+          duration: 0.08,
+          ease: 'power2.out',
+        })
+        .to(icon, {
+          scale: 1.12,
+          y: -16,
+          duration: 0.16,
+          ease: 'back.out(2)',
+        })
+        .to(icon, {
+          scale: 1,
+          y: 0,
+          duration: 0.18,
+          ease: 'power2.out',
+        })
+    } else {
+      // Standard macOS launch bounce for desktop
+      gsap.to(icon, {
+        y: -20,
+        duration: 0.18,
+        yoyo: true,
+        repeat: 1,
+        ease: 'power2.out',
+      })
+    }
 
     if (app.canOpen) {
       openWindow(app.id)
@@ -109,12 +139,20 @@ const Dock = () => {
                 tabIndex={0}
                 aria-label={`Open ${app.name}`}
                 title={app.name}
-                className="dock-icon relative flex flex-col items-center origin-bottom cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none rounded-xl"
+                className="dock-icon relative flex flex-col items-center origin-bottom cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none rounded-xl active:scale-90 transition-transform duration-75"
                 onClick={(e) => handleAppClick(app, e)}
                 onKeyDown={(e) => handleKeyDown(app, e)}
-                onMouseEnter={() => setHoveredApp(app.id)}
+                onMouseEnter={() => {
+                  if (typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+                    setHoveredApp(app.id)
+                  }
+                }}
                 onMouseLeave={() => setHoveredApp(null)}
-                onFocus={() => setHoveredApp(app.id)}
+                onFocus={() => {
+                  if (typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+                    setHoveredApp(app.id)
+                  }
+                }}
                 onBlur={() => setHoveredApp(null)}
               >
                 {hoveredApp === app.id && (
