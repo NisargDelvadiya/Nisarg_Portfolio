@@ -233,9 +233,10 @@ body {
 
 #finder {
   position: absolute;
-  top: 4.5rem;
-  left: 10%;
-  width: min(800px, 90vw);
+  top: 5rem;
+  left: 18%;
+  width: fit-content;
+  max-width: 90vw;
 }
 
 #txtfile {

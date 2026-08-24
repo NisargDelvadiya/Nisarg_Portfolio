@@ -63,9 +63,13 @@ const Finder = ({ controls, isMaximized }) => {
   }
 
   return (
-    <div className="flex flex-col h-full bg-white dark:bg-[#1e1e22] text-gray-800 dark:text-white rounded-xl shadow-2xl overflow-hidden border border-black/10 dark:border-white/10 select-none transition-colors duration-200">
+    <div
+      className={`flex flex-col bg-white dark:bg-[#1e1e22] text-gray-800 dark:text-white rounded-xl shadow-2xl overflow-hidden border border-black/10 dark:border-white/10 select-none transition-colors duration-200 ${
+        isMaximized ? 'w-full h-[calc(100vh-140px)]' : 'w-[580px] max-w-[90vw] h-[330px]'
+      }`}
+    >
       {/* Window Header */}
-      <div id="window-header" className="bg-gray-100/90 dark:bg-[#26262b] border-b border-gray-200 dark:border-white/10 px-4 py-2.5 flex items-center justify-between flex-shrink-0">
+      <div id="window-header" className="bg-gray-100/90 dark:bg-[#26262b] border-b border-gray-200 dark:border-white/10 px-4 py-2 flex items-center justify-between flex-shrink-0">
         {controls}
 
         <div className="flex items-center gap-2">
@@ -88,9 +92,9 @@ const Finder = ({ controls, isMaximized }) => {
       </div>
 
       {/* Main Body */}
-      <div className={`flex flex-1 ${isMaximized ? 'h-[calc(100%-48px)]' : 'h-80 sm:h-96'}`}>
+      <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
-        <aside className="w-36 sm:w-48 bg-gray-50 dark:bg-[#25252a]/95 border-r border-gray-200 dark:border-white/10 flex flex-col p-3 sm:p-4 space-y-4 overflow-y-auto flex-shrink-0">
+        <aside className="w-36 bg-gray-50 dark:bg-[#25252a]/95 border-r border-gray-200 dark:border-white/10 flex flex-col p-2.5 space-y-3 overflow-y-auto flex-shrink-0">
           {/* Favorites */}
           <div>
             <h3 className="text-[10px] sm:text-[11px] font-semibold text-gray-400 dark:text-gray-400 uppercase tracking-wider mb-2">Favorites</h3>
