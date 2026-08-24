@@ -36,8 +36,10 @@ const WindowWrapper = (WrappedComponent, windowKey) => {
           force3D: true,
           cursor: 'default',
           activeCursor: 'grabbing',
+          dragClickables: false,
+          clickableTest: (el) => Boolean(el?.closest?.('button, a, input, #window-controls, [data-clickable="true"]')),
           zIndexBoost: false,
-          onPress: () => {
+          onPress: function () {
             focusWindow(windowKey)
           },
         })

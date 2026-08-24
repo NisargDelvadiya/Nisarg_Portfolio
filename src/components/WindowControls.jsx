@@ -2,21 +2,42 @@
 
 import React from 'react'
 
+/**
+ * macOS Window Traffic Light Controls
+ * Features fully interactive Close button (Red) and authentic Minimize/Maximize indicators.
+ */
 const WindowControls = ({ onClose }) => {
   return (
-    <div id="window-controls" className="group flex items-center gap-2" role="group" aria-label="Window management controls">
+    <div
+      id="window-controls"
+      data-clickable="true"
+      className="group flex items-center gap-2 z-50 pointer-events-auto"
+      role="group"
+      aria-label="Window management controls"
+      onPointerDown={(e) => e.stopPropagation()}
+      onMouseDown={(e) => e.stopPropagation()}
+      onTouchStart={(e) => e.stopPropagation()}
+    >
       {/* Red: Active Close */}
       <button
         type="button"
+        data-clickable="true"
         className="close size-3.5 rounded-full bg-[#ff6157] border border-[#e0443e] flex items-center justify-center cursor-pointer transition-transform active:scale-90 focus-visible:ring-2 focus-visible:ring-red-400 focus-visible:outline-none"
+        onPointerDown={(e) => e.stopPropagation()}
+        onMouseDown={(e) => e.stopPropagation()}
+        onTouchStart={(e) => e.stopPropagation()}
         onClick={(e) => {
           e.stopPropagation()
+          e.preventDefault()
           onClose?.()
         }}
         title="Close Window"
         aria-label="Close Window"
       >
-        <span aria-hidden="true" className="opacity-0 group-hover:opacity-100 text-[9px] font-bold text-[#4d0000] leading-none select-none">
+        <span
+          aria-hidden="true"
+          className="opacity-0 group-hover:opacity-100 text-[9px] font-bold text-[#4d0000] leading-none select-none pointer-events-none"
+        >
           ✕
         </span>
       </button>
