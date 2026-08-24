@@ -26,15 +26,16 @@ const WindowWrapper = (WrappedComponent, windowKey) => {
     useEffect(() => {
       if (typeof window === 'undefined') return
       if (windowState?.isOpen && containerRef.current) {
+        const header = containerRef.current.querySelector('#window-header')
+
         const [draggable] = Draggable.create(containerRef.current, {
-          trigger: containerRef.current,
+          trigger: header || containerRef.current,
           bounds: '#desktop-bounds',
           edgeResistance: 0.85,
           type: 'x,y',
           force3D: true,
-          cursor: 'grab',
+          cursor: 'default',
           activeCursor: 'grabbing',
-          dragClickables: false,
           zIndexBoost: false,
           onPress: () => {
             focusWindow(windowKey)

@@ -19,11 +19,6 @@ const Finder = ({ controls, isMaximized }) => {
   const currentFolder = folderStack.length > 0 ? folderStack[folderStack.length - 1] : rootLocation
   const workProjects = locations.work?.children || []
 
-  const isTouchDevice = () => {
-    if (typeof window === 'undefined') return false
-    return !window.matchMedia('(hover: hover) and (pointer: fine)').matches
-  }
-
   const handleLocationClick = (key) => {
     setActiveLocationKey(key)
     setFolderStack([])
@@ -58,17 +53,7 @@ const Finder = ({ controls, isMaximized }) => {
 
   const handleItemClick = (item) => {
     setSelectedId(item.id)
-    // On mobile & iPad touchscreens, tapping directly opens the file/folder
-    if (isTouchDevice()) {
-      handleItemOpen(item)
-    }
-  }
-
-  const handleItemKeyDown = (e, item) => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault()
-      handleItemOpen(item)
-    }
+    handleItemOpen(item)
   }
 
   return (
@@ -78,12 +63,14 @@ const Finder = ({ controls, isMaximized }) => {
       }`}
     >
       {/* Window Header */}
-      <div id="window-header" className="bg-gray-100/90 dark:bg-[#26262b] border-b border-gray-200 dark:border-white/10 px-3 sm:px-4 py-2 flex items-center justify-between flex-shrink-0">
+      <div id="window-header" className="bg-gray-100/90 dark:bg-[#26262b] border-b border-gray-200 dark:border-white/10 px-3 sm:px-4 py-2 flex items-center justify-between flex-shrink-0 cursor-grab active:cursor-grabbing">
         {controls}
 
         <div className="flex items-center gap-2">
           {folderStack.length > 0 && (
             <button
+              type="button"
+              data-clickable="true"
               onClick={handleBack}
               className="p-1 hover:bg-gray-200 dark:hover:bg-white/10 rounded cursor-pointer text-gray-600 dark:text-gray-300 transition-colors focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
               title="Navigate back to previous folder"
@@ -107,26 +94,20 @@ const Finder = ({ controls, isMaximized }) => {
           {/* Favorites */}
           <div>
             <h3 className="text-[9px] sm:text-[10px] font-semibold text-gray-400 dark:text-gray-400 uppercase tracking-wider mb-1.5">Favorites</h3>
-            <ul className="space-y-0.5">
+            <div className="space-y-0.5">
               {Object.entries(locations).map(([key, loc]) => {
                 const isActive = activeLocationKey === key && folderStack.length === 0
                 return (
-                  <li
+                  <button
+                    type="button"
                     key={key}
-                    role="button"
-                    tabIndex={0}
-                    className={`flex items-center gap-1.5 sm:gap-2 px-2 py-1 rounded-md cursor-pointer transition-colors text-[11px] sm:text-xs font-medium ${
+                    data-clickable="true"
+                    className={`w-full flex items-center gap-1.5 sm:gap-2 px-2 py-1 rounded-md cursor-pointer transition-colors text-[11px] sm:text-xs font-medium text-left ${
                       isActive
                         ? 'bg-blue-600 text-white font-semibold shadow-sm'
                         : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200/70 dark:hover:bg-white/10'
                     }`}
                     onClick={() => handleLocationClick(key)}
-                    onKeyDown={(e) => {
-                      if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault()
-                        handleLocationClick(key)
-                      }
-                    }}
                     title={loc.name}
                     aria-label={`Open ${loc.name}`}
                   >
@@ -137,45 +118,39 @@ const Finder = ({ controls, isMaximized }) => {
                       aria-hidden="true"
                     />
                     <span className="truncate">{loc.name}</span>
-                  </li>
+                  </button>
                 )
               })}
-            </ul>
+            </div>
           </div>
 
           {/* Work Projects Section */}
           {workProjects.length > 0 && (
             <div>
               <h3 className="text-[9px] sm:text-[10px] font-semibold text-gray-400 dark:text-gray-400 uppercase tracking-wider mb-1.5">Projects</h3>
-              <ul className="space-y-0.5">
+              <div className="space-y-0.5">
                 {workProjects.map((project) => {
                   const isProjectActive = folderStack.some((f) => f.id === project.id)
                   return (
-                    <li
+                    <button
+                      type="button"
                       key={project.id}
-                      role="button"
-                      tabIndex={0}
-                      className={`flex items-center gap-1.5 sm:gap-2 px-2 py-1 rounded-md cursor-pointer transition-colors text-[11px] sm:text-xs font-medium truncate ${
+                      data-clickable="true"
+                      className={`w-full flex items-center gap-1.5 sm:gap-2 px-2 py-1 rounded-md cursor-pointer transition-colors text-[11px] sm:text-xs font-medium truncate text-left ${
                         isProjectActive
                           ? 'bg-blue-600 text-white font-semibold shadow-sm'
                           : 'text-gray-700 dark:text-gray-300 hover:bg-gray-200/70 dark:hover:bg-white/10'
                       }`}
                       onClick={() => handleSidebarProjectClick(project)}
-                      onKeyDown={(e) => {
-                        if (e.key === 'Enter' || e.key === ' ') {
-                          e.preventDefault()
-                          handleSidebarProjectClick(project)
-                        }
-                      }}
                       title={project.name}
                       aria-label={`Open ${project.name} project`}
                     >
                       <img src="/images/folder.png" alt="" className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
                       <span className="truncate">{project.name}</span>
-                    </li>
+                    </button>
                   )
                 })}
-              </ul>
+              </div>
             </div>
           )}
         </aside>
@@ -185,17 +160,17 @@ const Finder = ({ controls, isMaximized }) => {
           className="content relative overflow-y-auto overscroll-contain flex-1 bg-white dark:bg-[#18181c] p-3 sm:p-5 transition-colors duration-200"
           onClick={() => setSelectedId(null)}
         >
-          <ul className="flex flex-col sm:flex-row flex-wrap items-start gap-4 sm:gap-6 w-full">
+          <div className="flex flex-col sm:flex-row flex-wrap items-start gap-4 sm:gap-6 w-full">
             {currentFolder.children?.map((item) => {
               const isSelected = selectedId === item.id
               return (
-                <li
+                <button
+                  type="button"
                   key={item.id}
-                  role="button"
-                  tabIndex={0}
-                  aria-label={`${item.name}, ${item.kind === 'folder' ? 'folder' : 'file'}. Click or double click to open.`}
-                  title={`Open ${item.name}`}
-                  className={`finder-item flex flex-col items-center justify-center gap-1 p-2 sm:p-2.5 w-24 sm:w-28 rounded-xl cursor-pointer transition-colors select-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none active:scale-95 ${
+                  data-clickable="true"
+                  aria-label={`Open ${item.name}`}
+                  title={`Click to open ${item.name}`}
+                  className={`finder-item flex flex-col items-center justify-center gap-1 p-2 sm:p-2.5 w-24 sm:w-28 rounded-xl cursor-pointer transition-all select-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none active:scale-95 ${
                     isSelected
                       ? 'bg-blue-500/20 dark:bg-white/10 ring-1 ring-blue-400 dark:ring-white/20 shadow-sm'
                       : 'hover:bg-gray-100/80 dark:hover:bg-white/5'
@@ -204,11 +179,6 @@ const Finder = ({ controls, isMaximized }) => {
                     e.stopPropagation()
                     handleItemClick(item)
                   }}
-                  onDoubleClick={(e) => {
-                    e.stopPropagation()
-                    handleItemOpen(item)
-                  }}
-                  onKeyDown={(e) => handleItemKeyDown(e, item)}
                 >
                   <img
                     src={item.icon}
@@ -219,10 +189,10 @@ const Finder = ({ controls, isMaximized }) => {
                   <p className="text-[11px] sm:text-xs text-center font-medium text-gray-800 dark:text-gray-200 line-clamp-2 select-none pointer-events-none break-words leading-tight mt-1">
                     {item.name}
                   </p>
-                </li>
+                </button>
               )
             })}
-          </ul>
+          </div>
         </main>
       </div>
     </div>
