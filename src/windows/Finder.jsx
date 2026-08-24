@@ -176,7 +176,7 @@ const Finder = ({ controls, isMaximized }) => {
           className="content relative overflow-y-auto overscroll-contain flex-1 bg-white dark:bg-[#18181c] p-3 sm:p-5 transition-colors duration-200"
           onClick={() => setSelectedId(null)}
         >
-          <ul className="relative w-full h-full min-h-[220px]">
+          <ul className="flex flex-col sm:flex-row flex-wrap items-start gap-4 sm:gap-6 w-full">
             {currentFolder.children?.map((item) => {
               const isSelected = selectedId === item.id
               return (
@@ -186,11 +186,11 @@ const Finder = ({ controls, isMaximized }) => {
                   tabIndex={0}
                   aria-label={`${item.name}, ${item.kind === 'folder' ? 'folder' : 'file'}. Double click to open.`}
                   title={`Double click to open ${item.name}`}
-                  className={`finder-item absolute flex flex-col items-center justify-center gap-1 p-1.5 sm:p-2 w-20 sm:w-28 rounded-xl cursor-pointer transition-colors select-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none ${
+                  className={`finder-item flex flex-col items-center justify-center gap-1 p-2 sm:p-2.5 w-24 sm:w-28 rounded-xl cursor-pointer transition-colors select-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none ${
                     isSelected
                       ? 'bg-blue-500/20 dark:bg-white/10 ring-1 ring-blue-400 dark:ring-white/20 shadow-sm'
                       : 'hover:bg-gray-100/80 dark:hover:bg-white/5'
-                  } ${item.position || 'top-6 left-6'}`}
+                  }`}
                   onClick={(e) => {
                     e.stopPropagation()
                     handleItemClick(item)
@@ -204,10 +204,10 @@ const Finder = ({ controls, isMaximized }) => {
                   <img
                     src={item.icon}
                     alt=""
-                    className="size-10 sm:size-14 pointer-events-none drop-shadow-md object-contain"
+                    className="size-11 sm:size-14 pointer-events-none drop-shadow-md object-contain"
                     aria-hidden="true"
                   />
-                  <p className="text-[10px] sm:text-xs text-center font-medium text-gray-800 dark:text-gray-200 line-clamp-2 select-none pointer-events-none break-words leading-tight">
+                  <p className="text-[11px] sm:text-xs text-center font-medium text-gray-800 dark:text-gray-200 line-clamp-2 select-none pointer-events-none break-words leading-tight mt-1">
                     {item.name}
                   </p>
                 </li>
