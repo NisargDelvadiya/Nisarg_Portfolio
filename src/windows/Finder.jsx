@@ -19,6 +19,11 @@ const Finder = ({ controls, isMaximized }) => {
   const currentFolder = folderStack.length > 0 ? folderStack[folderStack.length - 1] : rootLocation
   const workProjects = locations.work?.children || []
 
+  const isTouchDevice = () => {
+    if (typeof window === 'undefined') return false
+    return !window.matchMedia('(hover: hover) and (pointer: fine)').matches
+  }
+
   const handleLocationClick = (key) => {
     setActiveLocationKey(key)
     setFolderStack([])
@@ -36,11 +41,7 @@ const Finder = ({ controls, isMaximized }) => {
     setSelectedId(null)
   }
 
-  const handleItemClick = (item) => {
-    setSelectedId(item.id)
-  }
-
-  const handleItemDoubleClick = (item) => {
+  const handleItemOpen = (item) => {
     if (item.kind === 'folder' && item.children) {
       setFolderStack((prev) => [...prev, item])
       setSelectedId(null)
@@ -55,10 +56,18 @@ const Finder = ({ controls, isMaximized }) => {
     }
   }
 
+  const handleItemClick = (item) => {
+    setSelectedId(item.id)
+    // On mobile & iPad touchscreens, tapping directly opens the file/folder
+    if (isTouchDevice()) {
+      handleItemOpen(item)
+    }
+  }
+
   const handleItemKeyDown = (e, item) => {
     if (e.key === 'Enter' || e.key === ' ') {
       e.preventDefault()
-      handleItemDoubleClick(item)
+      handleItemOpen(item)
     }
   }
 
@@ -184,9 +193,9 @@ const Finder = ({ controls, isMaximized }) => {
                   key={item.id}
                   role="button"
                   tabIndex={0}
-                  aria-label={`${item.name}, ${item.kind === 'folder' ? 'folder' : 'file'}. Double click to open.`}
-                  title={`Double click to open ${item.name}`}
-                  className={`finder-item flex flex-col items-center justify-center gap-1 p-2 sm:p-2.5 w-24 sm:w-28 rounded-xl cursor-pointer transition-colors select-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none ${
+                  aria-label={`${item.name}, ${item.kind === 'folder' ? 'folder' : 'file'}. Click or double click to open.`}
+                  title={`Open ${item.name}`}
+                  className={`finder-item flex flex-col items-center justify-center gap-1 p-2 sm:p-2.5 w-24 sm:w-28 rounded-xl cursor-pointer transition-colors select-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none active:scale-95 ${
                     isSelected
                       ? 'bg-blue-500/20 dark:bg-white/10 ring-1 ring-blue-400 dark:ring-white/20 shadow-sm'
                       : 'hover:bg-gray-100/80 dark:hover:bg-white/5'
@@ -197,7 +206,7 @@ const Finder = ({ controls, isMaximized }) => {
                   }}
                   onDoubleClick={(e) => {
                     e.stopPropagation()
-                    handleItemDoubleClick(item)
+                    handleItemOpen(item)
                   }}
                   onKeyDown={(e) => handleItemKeyDown(e, item)}
                 >

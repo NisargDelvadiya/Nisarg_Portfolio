@@ -86,6 +86,7 @@ const WindowWrapper = (WrappedComponent, windowKey) => {
         className="will-change-transform select-none"
         style={{ zIndex: windowState.zIndex }}
         onMouseDown={() => focusWindow(windowKey)}
+        onTouchStart={() => focusWindow(windowKey)}
       >
         <WrappedComponent
           {...props}
