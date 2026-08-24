@@ -39,7 +39,7 @@ const Navbar = () => {
       className="fixed top-0 left-0 right-0 w-full h-11 bg-gradient-to-b from-[#181238]/65 to-[#0c0822]/50 backdrop-blur-3xl saturate-180 border-b border-white/[0.14] shadow-[inset_0_-1px_0_rgba(255,255,255,0.06),0_4px_24px_rgba(0,0,0,0.3)] z-[9999] flex items-center justify-between px-3 sm:px-6 md:px-8 text-sm text-white select-none transition-colors duration-300"
     >
       {/* Left Menu Section */}
-      <nav aria-label="Desktop menu" className="flex items-center gap-4 sm:gap-8 md:gap-10 overflow-x-auto no-scrollbar">
+      <nav aria-label="Desktop menu" className="flex items-center gap-4 sm:gap-8 md:gap-10 overflow-x-auto no-scrollbar bg-transparent">
         {/* Apple Icon & Brand */}
         <a
           href="https://nisargjayeshdelvadiya.com/"
