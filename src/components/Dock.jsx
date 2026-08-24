@@ -91,7 +91,7 @@ const Dock = () => {
     <section id="dock" role="toolbar" aria-label="macOS Application Dock">
       <div
         ref={dockRef}
-        className="dock-container gap-1.5 sm:gap-2 p-1.5 sm:p-2 overflow-x-auto max-w-[96vw]"
+        className="dock-container gap-1.5 sm:gap-2 p-1.5 sm:p-2 overflow-visible max-w-[96vw]"
       >
         {dockApps.map((app) => {
           const isOpen = windows[app.id]?.isOpen
