@@ -3,10 +3,33 @@
 import { useEffect } from "react";
 import Link from "next/link";
 
-export default function GlobalError({ error, reset }) {
+/**
+ * Route-Level Error Boundary (error.js)
+ * 
+ * Captures route-level errors gracefully, providing interactive diagnostics and recovery actions.
+ */
+export default function ErrorPage({ error, reset }) {
   useEffect(() => {
-    console.error("Internal Server Error caught by boundary:", error);
+    try {
+      console.error("Route Error caught by error.js:", error);
+    } catch {
+      // Safe fallback
+    }
   }, [error]);
+
+  const handleReset = () => {
+    try {
+      if (typeof reset === "function") {
+        reset();
+      } else if (typeof window !== "undefined") {
+        window.location.reload();
+      }
+    } catch {
+      if (typeof window !== "undefined") {
+        window.location.href = "/";
+      }
+    }
+  };
 
   return (
     <div className="w-full min-h-screen bg-white text-gray-900 flex flex-col items-center justify-center p-6 select-none relative overflow-hidden">
@@ -58,7 +81,7 @@ export default function GlobalError({ error, reset }) {
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-2">
           <button
             type="button"
-            onClick={() => reset()}
+            onClick={handleReset}
             className="w-full sm:w-auto px-6 py-3 bg-[#fbbf24] hover:bg-[#f59e0b] text-black font-black uppercase text-xs tracking-wider rounded-2xl border-2 border-black shadow-[4px_4px_0px_#000000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[2px_2px_0px_#000000] transition-all cursor-pointer"
           >
             🔄 Retry Execution

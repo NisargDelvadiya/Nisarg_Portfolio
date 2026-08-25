@@ -10,12 +10,13 @@ import ExperiencesSection from "@/components/ExperiencesSection";
 import Footer from "@/components/Footer";
 import AudioPlayer from "@/components/AudioPlayer";
 import SectionNavigation from "@/components/SectionNavigation";
+import ErrorBoundary from "@/components/ErrorBoundary";
 import { useTheme } from "@/context/ThemeContext";
 
 /**
  * Home Page (Root Landing Page)
  * 
- * Aggregates all interactive portfolio components:
+ * Aggregates all interactive portfolio components with ErrorBoundary fault isolation:
  * - Navbar: Sticky navigation header with theme switch
  * - Hero: Interactive cursor mask reveal hero with resume download
  * - MarqueeBanner: High-speed dual skill tickers
@@ -38,18 +39,47 @@ export default function Home() {
         isVenomMode ? "bg-[#050508] text-white" : "bg-white text-gray-900"
       }`}
     >
-      <Navbar />
+      <ErrorBoundary sectionName="Navigation Bar">
+        <Navbar />
+      </ErrorBoundary>
+
       <main id="main-content" role="main" tabIndex={-1} className="outline-none">
-        <Hero />
-        <MarqueeBanner />
-        <AboutSection />
-        <SkillsSection />
-        <ProjectsSection />
-        <ExperiencesSection />
+        <ErrorBoundary sectionName="Hero Banner">
+          <Hero />
+        </ErrorBoundary>
+
+        <ErrorBoundary sectionName="Marquee Skills Banner">
+          <MarqueeBanner />
+        </ErrorBoundary>
+
+        <ErrorBoundary sectionName="About Section">
+          <AboutSection />
+        </ErrorBoundary>
+
+        <ErrorBoundary sectionName="Skills Matrix">
+          <SkillsSection />
+        </ErrorBoundary>
+
+        <ErrorBoundary sectionName="Projects Section">
+          <ProjectsSection />
+        </ErrorBoundary>
+
+        <ErrorBoundary sectionName="Experiences Timeline">
+          <ExperiencesSection />
+        </ErrorBoundary>
       </main>
-      <Footer />
-      <AudioPlayer />
-      <SectionNavigation />
+
+      <ErrorBoundary sectionName="Footer & Contact">
+        <Footer />
+      </ErrorBoundary>
+
+      <ErrorBoundary sectionName="Audio Player">
+        <AudioPlayer />
+      </ErrorBoundary>
+
+      <ErrorBoundary sectionName="Section Navigation Controls">
+        <SectionNavigation />
+      </ErrorBoundary>
     </div>
   );
 }

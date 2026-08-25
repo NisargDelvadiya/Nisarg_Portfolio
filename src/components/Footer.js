@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useSyncExternalStore } from "react";
 import { useTheme } from "@/context/ThemeContext";
 
 /**
@@ -30,6 +30,37 @@ const ALL_LANGUAGES = [
   { code: "te", name: "Telugu" },
 ];
 
+// Defensive snapshot for user language consent
+const getConsentSnapshot = () => {
+  try {
+    if (typeof window !== "undefined") {
+      const consent = window.localStorage.getItem("user_language_consent");
+      return !consent; // true = show modal if not yet answered
+    }
+  } catch {
+    // Safe fallback
+  }
+  return false;
+};
+
+const getConsentServerSnapshot = () => false;
+
+const subscribeConsent = (callback) => {
+  try {
+    if (typeof window !== "undefined") {
+      window.addEventListener("storage", callback);
+      window.addEventListener("consent-change", callback);
+      return () => {
+        window.removeEventListener("storage", callback);
+        window.removeEventListener("consent-change", callback);
+      };
+    }
+  } catch {
+    // Safe fallback
+  }
+  return () => {};
+};
+
 /**
  * Footer Component
  * 
@@ -43,73 +74,114 @@ const ALL_LANGUAGES = [
  */
 export default function Footer() {
   const [currentLanguage, setCurrentLanguage] = useState("en");
-  const [showConsent, setShowConsent] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
   const { isVenomMode } = useTheme();
 
-  /** Copy Email to Clipboard */
-  const handleCopyEmail = () => {
+  const showConsent = useSyncExternalStore(
+    subscribeConsent,
+    getConsentSnapshot,
+    getConsentServerSnapshot
+  );
+
+  /** Copy Email to Clipboard with fallback */
+  const handleCopyEmail = async () => {
     const email = "mahingunjal@gmail.com";
-    if (typeof navigator !== "undefined" && navigator.clipboard) {
-      navigator.clipboard.writeText(email);
+    try {
+      if (typeof navigator !== "undefined" && navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(email);
+        setCopiedEmail(true);
+        setTimeout(() => setCopiedEmail(false), 2500);
+        return;
+      }
+      // Fallback method for older browsers or restricted sandboxes
+      const textarea = document.createElement("textarea");
+      textarea.value = email;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textarea);
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2500);
+    } catch (err) {
+      console.warn("Footer: Clipboard copy failed:", err);
+      // Still give UI feedback so user knows email is selected
+      setCopiedEmail(true);
+      setTimeout(() => setCopiedEmail(false), 2500);
     }
-    setCopiedEmail(true);
-    setTimeout(() => setCopiedEmail(false), 2500);
   };
 
   /** Handle consent response */
   const handleAcceptConsent = () => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("user_language_consent", "granted");
+    try {
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem("user_language_consent", "granted");
+        window.dispatchEvent(new Event("consent-change"));
+      }
+    } catch (err) {
+      console.warn("Footer: Consent storage failed:", err);
     }
-    setShowConsent(false);
   };
 
   const handleDeclineConsent = () => {
-    if (typeof window !== "undefined") {
-      localStorage.setItem("user_language_consent", "declined");
+    try {
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem("user_language_consent", "declined");
+        window.dispatchEvent(new Event("consent-change"));
+      }
+    } catch (err) {
+      console.warn("Footer: Consent decline storage failed:", err);
     }
-    setShowConsent(false);
   };
 
   useEffect(() => {
     // Developer Signature Console Watermark
-    console.log(
-      "%c 🕷️ Developed by Nisarg ",
-      "background: #a31515; color: #ffffff; font-size: 12px; font-weight: bold; padding: 6px 12px; border-radius: 6px;"
-    );
-
-    // Check local storage consent status
-    const consent = localStorage.getItem("user_language_consent");
-    if (!consent) {
-      setShowConsent(true);
+    try {
+      console.log(
+        "%c 🕷️ Developed by Nisarg ",
+        "background: #a31515; color: #ffffff; font-size: 12px; font-weight: bold; padding: 6px 12px; border-radius: 6px;"
+      );
+    } catch {
+      // Ignore console logging issues
     }
 
-    // Google Translate Initialization Script
+    // Google Translate Initialization Script with error protection
     const addScript = () => {
-      if (document.getElementById("google-translate-script")) return;
-      const script = document.createElement("script");
-      script.id = "google-translate-script";
-      script.src =
-        "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
-      script.async = true;
-      document.body.appendChild(script);
+      try {
+        if (typeof document === "undefined" || document.getElementById("google-translate-script")) return;
+        const script = document.createElement("script");
+        script.id = "google-translate-script";
+        script.src =
+          "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+        script.async = true;
+        script.onerror = () => {
+          console.warn("Footer: Google Translate script failed to load (offline or blocked by adblocker).");
+        };
+        document.body.appendChild(script);
+      } catch (err) {
+        console.warn("Footer: Error attaching translate script:", err);
+      }
     };
 
     window.googleTranslateElementInit = () => {
-      if (
-        window.google &&
-        window.google.translate &&
-        window.google.translate.TranslateElement
-      ) {
-        new window.google.translate.TranslateElement(
-          {
-            pageLanguage: "en",
-            includedLanguages: ALL_LANGUAGES.map((l) => l.code).join(","),
-            autoDisplay: false,
-          },
-          "google_translate_element"
-        );
+      try {
+        if (
+          window.google &&
+          window.google.translate &&
+          window.google.translate.TranslateElement
+        ) {
+          new window.google.translate.TranslateElement(
+            {
+              pageLanguage: "en",
+              includedLanguages: ALL_LANGUAGES.map((l) => l.code).join(","),
+              autoDisplay: false,
+            },
+            "google_translate_element"
+          );
+        }
+      } catch (err) {
+        console.warn("Footer: Google Translate initialization error:", err);
       }
     };
 
@@ -117,43 +189,64 @@ export default function Footer() {
 
     // Prevent Google Translate from setting inline top offsets or displaying header banners
     const enforceZeroTop = () => {
-      if (document.body.style.top && document.body.style.top !== "0px") {
-        document.body.style.setProperty("top", "0px", "important");
-      }
-      if (document.documentElement.style.top && document.documentElement.style.top !== "0px") {
-        document.documentElement.style.setProperty("top", "0px", "important");
+      try {
+        if (document.body && document.body.style.top && document.body.style.top !== "0px") {
+          document.body.style.setProperty("top", "0px", "important");
+        }
+        if (document.documentElement && document.documentElement.style.top && document.documentElement.style.top !== "0px") {
+          document.documentElement.style.setProperty("top", "0px", "important");
+        }
+      } catch {
+        // Safe fallback
       }
     };
 
-    const observer = new MutationObserver(() => {
-      enforceZeroTop();
-    });
+    let observer = null;
+    try {
+      if (typeof MutationObserver !== "undefined" && document.body && document.documentElement) {
+        observer = new MutationObserver(() => {
+          enforceZeroTop();
+        });
 
-    observer.observe(document.body, {
-      attributes: true,
-      attributeFilter: ["style", "class"],
-    });
+        observer.observe(document.body, {
+          attributes: true,
+          attributeFilter: ["style", "class"],
+        });
 
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["style", "class"],
-    });
+        observer.observe(document.documentElement, {
+          attributes: true,
+          attributeFilter: ["style", "class"],
+        });
+      }
+    } catch (err) {
+      console.warn("Footer: MutationObserver setup error:", err);
+    }
 
     const interval = setInterval(enforceZeroTop, 500);
 
     return () => {
-      observer.disconnect();
+      if (observer) {
+        try {
+          observer.disconnect();
+        } catch {
+          // Ignore observer teardown error
+        }
+      }
       clearInterval(interval);
     };
   }, []);
 
   /** Programmatically change Google Translate language selection */
   const changeLanguage = (langCode) => {
-    setCurrentLanguage(langCode);
-    const selectElem = document.querySelector(".goog-te-combo");
-    if (selectElem) {
-      selectElem.value = langCode;
-      selectElem.dispatchEvent(new Event("change"));
+    try {
+      setCurrentLanguage(langCode);
+      const selectElem = document.querySelector(".goog-te-combo");
+      if (selectElem) {
+        selectElem.value = langCode;
+        selectElem.dispatchEvent(new Event("change"));
+      }
+    } catch (err) {
+      console.warn("Footer: Error switching translation language:", err);
     }
   };
 
@@ -258,6 +351,18 @@ export default function Footer() {
                   }`}
                 >
                   Privacy Policy
+                </a>
+                <a
+                  href="/sitemap"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  title="Portfolio Sitemap Directory (Opens in new tab)"
+                  aria-label="Portfolio Sitemap Directory (Opens in new tab)"
+                  className={`text-left text-gray-300 active:scale-95 active:translate-y-0.5 transition-all duration-150 cursor-pointer text-xs md:text-sm ${
+                    isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
+                  }`}
+                >
+                  Sitemap
                 </a>
               </div>
 

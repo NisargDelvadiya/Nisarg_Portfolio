@@ -6,23 +6,47 @@ import { useEffect } from "react";
  * PWARegistration Component
  * 
  * Automatically registers the Progressive Web App (PWA) Service Worker located at `/sw.js`
- * upon window load for offline caching, asset caching, and standalone install capabilities.
+ * upon window load with defensive exception handling.
  * 
  * @returns {null} Invisible background worker component
  */
 export default function PWARegistration() {
   useEffect(() => {
-    if (typeof window !== "undefined" && "serviceWorker" in navigator) {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker
-          .register("/sw.js")
-          .then((registration) => {
-            console.log("PWA ServiceWorker registered successfully with scope:", registration.scope);
-          })
-          .catch((error) => {
-            console.log("PWA ServiceWorker registration failed:", error);
-          });
-      });
+    try {
+      if (
+        typeof window !== "undefined" &&
+        "serviceWorker" in navigator &&
+        window.location.protocol.startsWith("http")
+      ) {
+        const handleLoad = () => {
+          try {
+            navigator.serviceWorker
+              .register("/sw.js")
+              .then((registration) => {
+                if (process.env.NODE_ENV === "development") {
+                  console.log(
+                    "PWA ServiceWorker registered with scope:",
+                    registration.scope
+                  );
+                }
+              })
+              .catch((error) => {
+                console.warn("PWA ServiceWorker registration issue:", error);
+              });
+          } catch (err) {
+            console.warn("PWA ServiceWorker execution error:", err);
+          }
+        };
+
+        if (document.readyState === "complete") {
+          handleLoad();
+        } else {
+          window.addEventListener("load", handleLoad);
+          return () => window.removeEventListener("load", handleLoad);
+        }
+      }
+    } catch (err) {
+      console.warn("PWARegistration: Initialization error:", err);
     }
   }, []);
 

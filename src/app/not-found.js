@@ -2,10 +2,19 @@
 
 import Link from "next/link";
 
+/**
+ * 404 Not Found Page (not-found.js)
+ * 
+ * Displayed whenever an invalid or missing route is requested.
+ */
 export default function NotFound() {
   const handleRetry = () => {
-    if (typeof window !== "undefined") {
-      window.location.reload();
+    try {
+      if (typeof window !== "undefined") {
+        window.location.reload();
+      }
+    } catch {
+      // Safe fallback
     }
   };
 

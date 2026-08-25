@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import { useTheme } from "@/context/ThemeContext";
 
 /**
@@ -8,7 +8,8 @@ import { useTheme } from "@/context/ThemeContext";
  * 
  * Features:
  * - Floating background theme song player (Spider-Man theme score)
- * - Persisted playback state across page visits via localStorage
+ * - Defensive audio play/pause exception handling (gracefully handles browser autoplay policies)
+ * - Safe localStorage state synchronization with try/catch
  * - Spacebar keyboard shortcut toggling music on/off without interrupting inputs
  * - Animated sound wave equalizer indicators
  * - Full Spider-Man / Venom symbiote styling
@@ -18,68 +19,100 @@ export default function AudioPlayer() {
   const audioRef = useRef(null);
   const { isVenomMode } = useTheme();
 
-  useEffect(() => {
-    if (audioRef.current) {
-      // Keep volume comfortable for ambient listening
-      audioRef.current.volume = 0.25;
-    }
+  const togglePlay = useCallback(() => {
+    if (!audioRef.current) return;
 
-    // Check saved music preference in localStorage
-    const savedState = localStorage.getItem("bg_music_playing");
-    if (savedState === "true") {
-      const playPromise = audioRef.current?.play();
-      if (playPromise !== undefined) {
-        playPromise
-          .then(() => {
-            setIsPlaying(true);
-          })
-          .catch(() => {
-            setIsPlaying(false);
-          });
+    try {
+      if (audioRef.current.paused) {
+        const playPromise = audioRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise
+            .then(() => {
+              setIsPlaying(true);
+              try {
+                if (typeof window !== "undefined") {
+                  window.localStorage.setItem("bg_music_playing", "true");
+                }
+              } catch (err) {
+                console.warn("AudioPlayer: Failed to persist play state:", err);
+              }
+            })
+            .catch((err) => {
+              // Gracefully handle autoplay or playback interruptions
+              setIsPlaying(false);
+              console.warn("AudioPlayer: Playback attempt was prevented:", err);
+            });
+        }
+      } else {
+        audioRef.current.pause();
+        setIsPlaying(false);
+        try {
+          if (typeof window !== "undefined") {
+            window.localStorage.setItem("bg_music_playing", "false");
+          }
+        } catch (err) {
+          console.warn("AudioPlayer: Failed to persist pause state:", err);
+        }
       }
+    } catch (err) {
+      console.warn("AudioPlayer: Unexpected audio playback error:", err);
+      setIsPlaying(false);
     }
   }, []);
 
-  const togglePlay = () => {
-    if (!audioRef.current) return;
+  useEffect(() => {
+    try {
+      if (audioRef.current) {
+        // Keep volume comfortable for ambient listening
+        audioRef.current.volume = 0.25;
+      }
 
-    if (audioRef.current.paused) {
-      audioRef.current
-        .play()
-        .then(() => {
-          setIsPlaying(true);
-          localStorage.setItem("bg_music_playing", "true");
-        })
-        .catch((err) => {
-          console.log("Audio playback prevented:", err);
-        });
-    } else {
-      audioRef.current.pause();
-      setIsPlaying(false);
-      localStorage.setItem("bg_music_playing", "false");
+      // Check saved music preference in localStorage safely
+      if (typeof window !== "undefined") {
+        const savedState = window.localStorage.getItem("bg_music_playing");
+        if (savedState === "true" && audioRef.current) {
+          const playPromise = audioRef.current.play();
+          if (playPromise !== undefined) {
+            playPromise
+              .then(() => {
+                setIsPlaying(true);
+              })
+              .catch(() => {
+                // Browsers often block initial autoplay without user interaction
+                setIsPlaying(false);
+              });
+          }
+        }
+      }
+    } catch (err) {
+      console.warn("AudioPlayer: Initialization exception:", err);
     }
-  };
+  }, []);
 
-  // Keyboard shortcut listener for Spacebar
+  // Keyboard shortcut listener for Spacebar with defensive checks
   useEffect(() => {
     const handleKeyDown = (e) => {
-      const target = e.target;
-      const isInput =
-        target &&
-        (target.tagName === "INPUT" ||
-          target.tagName === "TEXTAREA" ||
-          target.tagName === "SELECT" ||
-          target.isContentEditable);
+      try {
+        const target = e.target;
+        const isInput =
+          target &&
+          (target.tagName === "INPUT" ||
+            target.tagName === "TEXTAREA" ||
+            target.tagName === "SELECT" ||
+            target.isContentEditable);
 
-      if ((e.code === "Space" || e.key === " ") && !isInput) {
-        e.preventDefault();
-        togglePlay();
+        if ((e.code === "Space" || e.key === " ") && !isInput) {
+          e.preventDefault();
+          togglePlay();
+        }
+      } catch (err) {
+        console.warn("AudioPlayer: Key handler error:", err);
       }
     };
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [togglePlay]);
 
   return (
     <>
@@ -88,6 +121,10 @@ export default function AudioPlayer() {
         src="/Assets/Spider_Man.mp3"
         loop
         preload="auto"
+        onError={(e) => {
+          console.warn("AudioPlayer: Audio resource failed to load:", e);
+          setIsPlaying(false);
+        }}
       />
 
       {/* Floating Audio Control Button - Responsive & High Z-Index */}
