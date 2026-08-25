@@ -31,7 +31,7 @@ const WindowWrapper = (WrappedComponent, windowKey) => {
         const [draggable] = Draggable.create(containerRef.current, {
           trigger: header || containerRef.current,
           bounds: '#desktop-bounds',
-          edgeResistance: 0.85,
+          edgeResistance: 1,
           type: 'x,y',
           force3D: true,
           cursor: 'default',

@@ -4,11 +4,22 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+*,
+*::before,
+*::after {
+  overscroll-behavior: none !important;
+  overscroll-behavior-y: none !important;
+  overscroll-behavior-x: none !important;
+}
+
 html,
 body {
   width: 100dvw;
   overflow: hidden;
   height: 100dvh;
+  overscroll-behavior: none !important;
+  overscroll-behavior-y: none !important;
+  overscroll-behavior-x: none !important;
   background-image: url("/images/wallpaper.png");
   background-size: cover;
   background-repeat: no-repeat;
