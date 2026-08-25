@@ -10,8 +10,8 @@ const nextConfig = {
   async headers() {
     return [
       {
-        // Immutable long-term caching for static images, icons, and files
-        source: '/(images|icons|files)/:path*',
+        // Immutable long-term caching for static images, icons, favicons, and files
+        source: '/(images|icons|files|favicon)/:path*',
         headers: [
           {
             key: 'Cache-Control',
