@@ -27,17 +27,10 @@ export const metadata = {
     'TypeScript',
   ],
   icons: {
-    icon: [
-      { url: '/favicon/favicon-96x96.png?v=laptop_v3', sizes: '96x96', type: 'image/png' },
-      { url: '/favicon/favicon.svg?v=laptop_v3', type: 'image/svg+xml' },
-      { url: '/favicon.ico?v=laptop_v3' },
-    ],
-    shortcut: '/favicon.ico?v=laptop_v3',
-    apple: [
-      { url: '/apple-touch-icon.png?v=laptop_v3', sizes: '180x180' },
-    ],
+    icon: '/macbook.png?v=macbook_live',
+    shortcut: '/macbook.png?v=macbook_live',
+    apple: '/macbook.png?v=macbook_live',
   },
-  manifest: '/favicon/site.webmanifest?v=laptop_v3',
   appleWebApp: {
     title: "Nisarg's Portfolio",
   },
@@ -54,13 +47,11 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
-        {/* Favicon links with MacBook Laptop icon */}
-        <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png?v=laptop_v3" sizes="96x96" />
-        <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg?v=laptop_v3" />
-        <link rel="shortcut icon" href="/favicon.ico?v=laptop_v3" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=laptop_v3" />
+        {/* Direct MacBook Laptop Favicons */}
+        <link rel="icon" type="image/png" href="/macbook.png?v=macbook_live" />
+        <link rel="shortcut icon" type="image/png" href="/macbook.png?v=macbook_live" />
+        <link rel="apple-touch-icon" href="/macbook.png?v=macbook_live" />
         <meta name="apple-mobile-web-app-title" content="Nisarg's Portfolio" />
-        <link rel="manifest" href="/favicon/site.webmanifest?v=laptop_v3" />
 
         {/* Preconnect for Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
