@@ -117,6 +117,13 @@ npm run start
 
 ---
 
+## 🙏 Acknowledgments
+
+- Special thanks and credit to **[Adrian Hajdin](https://github.com/adrianhajdin)** / **[JavaScript Mastery](https://www.jsmastery.pro/)** for the design inspiration, educational resources, and community guidance.
+
+---
+
 ## 📄 License
 
 This project is open source and available under the [MIT License](LICENSE).
+
