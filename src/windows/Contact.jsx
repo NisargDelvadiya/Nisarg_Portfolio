@@ -12,12 +12,31 @@ const Contact = ({ controls, isMaximized }) => {
   const [copied, setCopied] = useState(false)
   const email = 'nisarg.delvadiya1@zohomail.in'
 
-  const handleCopyEmail = () => {
-    navigator.clipboard.writeText(email)
-    setCopied(true)
-    setTimeout(() => {
-      setCopied(false)
-    }, 2500)
+  const handleCopyEmail = async () => {
+    try {
+      if (navigator?.clipboard?.writeText) {
+        await navigator.clipboard.writeText(email)
+      } else {
+        const textarea = document.createElement('textarea')
+        textarea.value = email
+        textarea.style.position = 'fixed'
+        textarea.style.opacity = '0'
+        document.body.appendChild(textarea)
+        textarea.focus()
+        textarea.select()
+        document.execCommand('copy')
+        document.body.removeChild(textarea)
+      }
+      setCopied(true)
+      setTimeout(() => {
+        setCopied(false)
+      }, 2500)
+    } catch (err) {
+      console.warn('[Contact] Clipboard copy failed:', err)
+      // Still show fallback feedback if desired
+      setCopied(true)
+      setTimeout(() => setCopied(false), 2000)
+    }
   }
 
   return (
