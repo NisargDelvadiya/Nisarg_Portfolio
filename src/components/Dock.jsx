@@ -126,15 +126,9 @@ const Dock = () => {
         {dockApps.map((app) => {
           const isOpen = windows[app.id]?.isOpen
           return (
-            <React.Fragment key={app.id}>
-              {app.id === 'trash' && (
-                <div
-                  aria-hidden="true"
-                  className="w-[1px] h-7 sm:h-9 mx-1 sm:mx-1.5 self-center bg-black/20 dark:bg-white/20 rounded-full flex-shrink-0"
-                />
-              )}
-              <div
-                data-app-id={app.id}
+            <div
+              key={app.id}
+              data-app-id={app.id}
                 role="button"
                 tabIndex={0}
                 aria-label={`Open ${app.name}`}
@@ -176,7 +170,6 @@ const Dock = () => {
                   />
                 )}
               </div>
-            </React.Fragment>
           )
         })}
       </div>
