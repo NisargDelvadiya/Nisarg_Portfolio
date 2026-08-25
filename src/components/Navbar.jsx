@@ -1,29 +1,20 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
-import dayjs from 'dayjs'
+import React, { useEffect } from 'react'
 import { navLinks } from '#constants'
 import useWindowStore from '#store/windows'
 
 /**
  * macOS Top Menu Bar Component
- * Displays branding, quick navigation links, and dynamic clock with responsive multi-row adaptation on smaller viewports.
+ * Displays branding on the left and quick navigation links (Projects, Contact, Resume) aligned on the right.
  */
 const Navbar = () => {
-  const [mounted, setMounted] = useState(false)
-  const [time, setTime] = useState(dayjs())
   const { openWindow } = useWindowStore()
 
   useEffect(() => {
-    setMounted(true)
     const root = document.documentElement
     root.classList.add('dark')
     document.body.classList.add('dark')
-
-    const timer = setInterval(() => {
-      setTime(dayjs())
-    }, 1000)
-    return () => clearInterval(timer)
   }, [])
 
   const handleKeyDown = (e, type) => {
@@ -36,19 +27,15 @@ const Navbar = () => {
   return (
     <header
       role="banner"
-      className="fixed top-0 left-0 right-0 w-full bg-gradient-to-b from-[#181238]/70 to-[#0c0822]/55 backdrop-blur-3xl saturate-180 border-b border-white/[0.14] shadow-[inset_0_-1px_0_rgba(255,255,255,0.06),0_4px_24px_rgba(0,0,0,0.3)] z-[9999] flex flex-col md:flex-row items-center justify-between px-3 sm:px-6 md:px-8 py-1.5 md:py-0 md:h-11 gap-1 md:gap-0 text-sm text-white select-none transition-all duration-300"
+      className="fixed top-0 left-0 right-0 w-full h-11 bg-gradient-to-b from-[#181238]/75 to-[#0c0822]/60 backdrop-blur-3xl saturate-180 border-b border-white/[0.14] shadow-[inset_0_-1px_0_rgba(255,255,255,0.06),0_4px_24px_rgba(0,0,0,0.3)] z-[9999] flex items-center justify-between px-4 sm:px-6 md:px-8 text-sm text-white select-none transition-all duration-300"
     >
-      {/* Row 1 on mobile / Left Section on desktop */}
-      <nav
-        aria-label="Desktop menu"
-        className="w-full md:w-auto flex items-center justify-between md:justify-start gap-2.5 sm:gap-6 md:gap-10 overflow-x-auto no-scrollbar bg-transparent"
-      >
-        {/* Apple Icon & Brand */}
+      {/* Left Section: Apple Icon & Brand */}
+      <div className="flex items-center">
         <a
           href="https://nisargjayeshdelvadiya.com/"
           target="_blank"
           rel="noreferrer"
-          className="flex items-center gap-1.5 sm:gap-2.5 cursor-pointer hover:opacity-90 transition-opacity focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none rounded-md px-1 flex-shrink-0"
+          className="flex items-center gap-2 sm:gap-2.5 cursor-pointer hover:opacity-90 transition-opacity focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none rounded-md px-1"
           title="Visit Nisarg's Portfolio Website"
           aria-label="Visit Nisarg's official website"
         >
@@ -68,9 +55,11 @@ const Navbar = () => {
             Nisarg's Portfolio
           </span>
         </a>
+      </div>
 
-        {/* Navigation Links */}
-        <ul className="flex items-center gap-2 sm:gap-4 md:gap-8 flex-shrink-0">
+      {/* Right Section: Navigation Links */}
+      <nav aria-label="Desktop menu" className="flex items-center">
+        <ul className="flex items-center gap-3 sm:gap-6 md:gap-8">
           {navLinks.map(({ id, name, type }) => (
             <li
               key={id}
@@ -78,7 +67,7 @@ const Navbar = () => {
               tabIndex={0}
               onClick={() => openWindow(type)}
               onKeyDown={(e) => handleKeyDown(e, type)}
-              className="cursor-pointer text-white/90 hover:text-white transition-colors duration-150 font-medium px-1 text-[11px] sm:text-xs md:text-sm whitespace-nowrap focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none rounded-md"
+              className="cursor-pointer text-white/90 hover:text-white transition-colors duration-150 font-medium px-1 text-xs sm:text-sm whitespace-nowrap focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none rounded-md"
               title={`Open ${name}`}
               aria-label={`Open ${name} window`}
             >
@@ -87,17 +76,6 @@ const Navbar = () => {
           ))}
         </ul>
       </nav>
-
-      {/* Row 2 on mobile / Right Section on desktop */}
-      <div className="flex items-center justify-center md:justify-end flex-shrink-0 w-full md:w-auto">
-        <time
-          suppressHydrationWarning
-          className="font-medium text-white/80 md:text-white/95 text-[11px] sm:text-xs md:text-sm tracking-wide whitespace-nowrap"
-          aria-label="Current system time"
-        >
-          {mounted ? time.format('ddd MMM D h:mm A') : ''}
-        </time>
-      </div>
     </header>
   )
 }
