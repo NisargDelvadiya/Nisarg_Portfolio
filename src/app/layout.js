@@ -1,14 +1,20 @@
 import './globals.css'
 
 export const metadata = {
-  title: "Nisarg's Macfolio",
+  metadataBase: new URL('https://nisargjayeshdelvadiya.com'),
+  title: {
+    default: "Nisarg's Macfolio | Next.js Developer Portfolio",
+    template: "%s | Nisarg's Macfolio",
+  },
   description:
     "Hi, I'm Nisarg — a Next.js Developer crafting fast, responsive, and SEO-optimized web applications. From concept to deployment, I build secure, seamless, scalable and high-impact digital experiences from server architecture to premium UI/UX.",
-  authors: [{ name: 'Nisarg', url: 'https://nisargjayeshdelvadiya.com/' }],
-  creator: 'Nisarg',
+  authors: [{ name: 'Nisarg Delvadiya', url: 'https://nisargjayeshdelvadiya.com/' }],
+  creator: 'Nisarg Delvadiya',
+  publisher: 'Nisarg Delvadiya',
   keywords: [
     'Nisarg',
     'Nisarg Delvadiya',
+    'Nisarg Jayesh Delvadiya',
     'Next.js Developer',
     'React Developer',
     'Frontend Developer',
@@ -26,6 +32,44 @@ export const metadata = {
     'JavaScript',
     'TypeScript',
   ],
+  alternates: {
+    canonical: 'https://nisargjayeshdelvadiya.com',
+  },
+  openGraph: {
+    title: "Nisarg's Macfolio | Next.js Developer Portfolio",
+    description:
+      "Explore Nisarg's interactive macOS portfolio featuring modern web apps, full-stack projects, interactive terminals, and design showcases.",
+    url: 'https://nisargjayeshdelvadiya.com',
+    siteName: "Nisarg's Macfolio",
+    locale: 'en_US',
+    type: 'website',
+    images: [
+      {
+        url: '/images/wallpaper.png',
+        width: 1920,
+        height: 1080,
+        alt: "Nisarg's Macfolio Desktop Experience",
+      },
+    ],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Nisarg's Macfolio | Next.js Developer Portfolio",
+    description:
+      "Explore Nisarg's interactive macOS portfolio featuring modern web apps, full-stack projects, and design showcases.",
+    images: ['/images/wallpaper.png'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
   icons: {
     icon: '/macbook.png?v=macbook_live',
     shortcut: '/macbook.png?v=macbook_live',
@@ -43,10 +87,41 @@ export const viewport = {
   themeColor: '#0c0822',
 }
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Nisarg Delvadiya',
+  url: 'https://nisargjayeshdelvadiya.com',
+  jobTitle: 'Next.js & Full-Stack Developer',
+  email: 'nisarg.delvadiya1@zohomail.in',
+  sameAs: [
+    'https://github.com/NisargDelvadiya',
+    'https://www.linkedin.com/in/nisargjayeshdelvadiya/',
+  ],
+  knowsAbout: [
+    'Next.js',
+    'React',
+    'JavaScript',
+    'TypeScript',
+    'Tailwind CSS',
+    'GSAP',
+    'Node.js',
+    'MongoDB',
+    'Full Stack Web Development',
+    'UI/UX Design',
+  ],
+}
+
 export default function RootLayout({ children }) {
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <head>
+        {/* Schema.org Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+
         {/* Direct MacBook Laptop Favicons */}
         <link rel="icon" type="image/png" href="/macbook.png?v=macbook_live" />
         <link rel="shortcut icon" type="image/png" href="/macbook.png?v=macbook_live" />
