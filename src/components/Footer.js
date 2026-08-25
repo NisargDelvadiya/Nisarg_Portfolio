@@ -461,7 +461,7 @@ export default function Footer() {
 
             {/* Copyright, UI Design Credit & Developer Watermark Line */}
             <p className="text-center text-[11px] sm:text-xs md:text-sm text-gray-400 font-medium leading-relaxed max-w-3xl mx-auto">
-              &copy; 2026 • Made with ❤️ in Bharat 🇮🇳 | Mahin Gunjal • All Rights Reserved <span className="hidden sm:inline">|</span> <br className="sm:hidden" /> UI Design Inspiration:{" "}
+              &copy; 2026 • Made with ❤️ in Bharat 🇮🇳 | Mahin Gunjal&trade; • All Rights Reserved <span className="hidden sm:inline">|</span> <br className="sm:hidden" /> UI Design Inspiration:{" "}
               <a
                 href="https://www.instagram.com/srii_tech_?igsh=aHJra2h0Y3A1c3pj"
                 target="_blank"
