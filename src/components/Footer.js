@@ -461,36 +461,7 @@ export default function Footer() {
 
             {/* Copyright, UI Design Credit & Developer Watermark Line */}
             <p className="text-center text-[11px] sm:text-xs md:text-sm text-gray-400 font-medium leading-relaxed max-w-3xl mx-auto">
-              &copy; 2026 • Made with ❤️ in Bharat 🇮🇳 | Mahin Gunjal&trade; • All Rights Reserved <span className="hidden sm:inline">|</span> <br className="sm:hidden" /> UI Design Inspiration:{" "}
-              <a
-                href="https://www.instagram.com/srii_tech_?igsh=aHJra2h0Y3A1c3pj"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="UI Design Credit: @srii_tech_ on Instagram (Opens in new tab)"
-                aria-label="UI Design Credit: @srii_tech_ on Instagram (Opens in new tab)"
-                className={`text-white font-extrabold underline decoration-2 active:scale-95 transition-all duration-150 cursor-pointer inline-block ${
-                  isVenomMode
-                    ? "hover:text-purple-400 decoration-purple-500"
-                    : "hover:text-[#a31515] decoration-[#a31515]"
-                }`}
-              >
-                @srii_tech_
-              </a>{" "}
-              | Developed by{" "}
-              <a
-                href="https://nisargjayeshdelvadiya.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                title="Developed by Nisarg (Opens in new tab)"
-                aria-label="Developed by Nisarg (Opens in new tab)"
-                className={`text-white font-extrabold underline decoration-2 active:scale-95 transition-all duration-150 cursor-pointer inline-block ${
-                  isVenomMode
-                    ? "hover:text-purple-400 decoration-purple-500"
-                    : "hover:text-[#a31515] decoration-[#a31515]"
-                }`}
-              >
-                Nisarg
-              </a>
+              &copy; 2026 • Made with ❤️ in Bharat 🇮🇳 | Mahin Gunjal&trade; • All Rights Reserved
             </p>
           </div>
         </div>
