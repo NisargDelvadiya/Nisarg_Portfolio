@@ -276,5 +276,6 @@ Google Translate injects iframe toolbars and modifies `document.body.style.top =
 ## 👨‍💻 Credits & Author
 
 - **Portfolio Owner**: [Mahin Gunjal](https://mahingunjal.com) — Web Designer & VFX Artist
-- **Lead Developer**: [Nisarg Delvadiya](https://nisargjayeshdelvadiya.com)
+- **Lead Developer**: [Nisarg](https://nisargjayeshdelvadiya.com)
+- - **Lead Designer**: [Mahin](https://mahin-portfolio-spidey.vercel.app)
 - **UI Design Inspiration**: [@srii_tech_](https://www.instagram.com/srii_tech_)
