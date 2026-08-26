@@ -45,7 +45,11 @@ const Finder = ({ controls, isMaximized }) => {
     } else if (item.fileType === 'img') {
       openWindow('imgfile', { name: item.name, imageUrl: item.imageUrl || item.image })
     } else if (item.fileType === 'pdf') {
-      openWindow('resume')
+      if (item.fileUrl || item.href || item.pdfUrl) {
+        openWindow('pdf', { name: item.name, fileUrl: item.fileUrl || item.href || item.pdfUrl })
+      } else {
+        openWindow('resume')
+      }
     } else if (item.fileType === 'url' && item.href) {
       window.open(item.href, '_blank')
     }

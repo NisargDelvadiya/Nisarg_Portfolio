@@ -14,6 +14,7 @@ const Terminal = dynamic(() => import('#windows').then((mod) => mod.Terminal), {
 const Resume = dynamic(() => import('#windows').then((mod) => mod.Resume), { ssr: false })
 const TxtFile = dynamic(() => import('#windows').then((mod) => mod.TxtFile), { ssr: false })
 const ImgFile = dynamic(() => import('#windows').then((mod) => mod.ImgFile), { ssr: false })
+const PdfViewer = dynamic(() => import('#windows').then((mod) => mod.PdfViewer), { ssr: false })
 
 export default function Home() {
   const [mounted, setMounted] = useState(false)
@@ -45,6 +46,7 @@ export default function Home() {
       <Resume />
       <TxtFile />
       <ImgFile />
+      <PdfViewer />
     </main>
   )
 }

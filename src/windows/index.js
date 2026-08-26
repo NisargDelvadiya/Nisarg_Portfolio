@@ -6,5 +6,6 @@ import Terminal from './Terminal'
 import Resume from './Resume'
 import TxtFile from './TxtFile'
 import ImgFile from './ImgFile'
+import PdfViewer from './PdfViewer'
 
-export { Finder, Safari, Photos, Contact, Terminal, Resume, TxtFile, ImgFile }
+export { Finder, Safari, Photos, Contact, Terminal, Resume, TxtFile, ImgFile, PdfViewer }

@@ -259,6 +259,15 @@ const ABOUT_LOCATION = {
         "• University: Manipal University Jaipur",
       ],
     },
+    {
+      id: 3,
+      name: "Terms and Conditions.pdf",
+      icon: "/images/pdf.png",
+      kind: "file",
+      fileType: "pdf",
+      fileUrl: "/files/terms-and-conditions.pdf",
+      position: "top-10 left-86",
+    },
   ],
 };
 
@@ -299,6 +308,7 @@ const WINDOW_CONFIG = {
   terminal: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
+  pdf: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
 };
 
 export { INITIAL_Z_INDEX, WINDOW_CONFIG };

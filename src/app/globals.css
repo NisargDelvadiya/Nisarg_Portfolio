@@ -239,6 +239,13 @@ body {
   width: min(600px, 90vw);
 }
 
+#pdf {
+  position: absolute;
+  top: 4.5rem;
+  left: 20%;
+  width: min(780px, 92vw);
+}
+
 /* Mobile & Tablet Responsive Overrides */
 @media (max-width: 768px) {
   #safari,
@@ -248,7 +255,8 @@ body {
   #resume,
   #finder,
   #txtfile,
-  #imgfile {
+  #imgfile,
+  #pdf {
     left: 3% !important;
     right: 3% !important;
     width: 94vw !important;
