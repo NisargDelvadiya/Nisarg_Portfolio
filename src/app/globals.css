@@ -249,8 +249,8 @@ body {
 #notes {
   position: absolute;
   top: 4.5rem;
-  left: 18%;
-  width: min(840px, 94vw);
+  left: 25%;
+  width: min(650px, 92vw);
 }
 
 #translate {

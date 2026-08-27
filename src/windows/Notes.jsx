@@ -60,7 +60,7 @@ const Notes = ({ controls, isMaximized }) => {
   return (
     <div
       className={`flex flex-col bg-white dark:bg-[#1e1e22] text-gray-800 dark:text-white rounded-xl shadow-2xl overflow-hidden border border-black/10 dark:border-white/10 select-none transition-colors duration-200 w-full ${
-        isMaximized ? 'h-[calc(100vh-140px)]' : 'h-[620px]'
+        isMaximized ? 'h-[calc(100vh-140px)]' : 'h-[460px]'
       }`}
     >
       {/* Window Header */}
@@ -91,19 +91,19 @@ const Notes = ({ controls, isMaximized }) => {
       {/* Split-Pane Body */}
       <div className="flex flex-1 overflow-hidden">
         {/* Left Sidebar - Notes Index */}
-        <aside className="w-60 sm:w-72 border-r border-gray-200 dark:border-white/10 bg-gray-50/80 dark:bg-[#18181c] flex flex-col flex-shrink-0">
+        <aside className="w-48 sm:w-56 border-r border-gray-200 dark:border-white/10 bg-gray-50/80 dark:bg-[#18181c] flex flex-col flex-shrink-0">
           {/* Notes Folder Header */}
-          <div className="p-3 border-b border-gray-200 dark:border-white/5 flex items-center justify-between">
-            <span className="text-[11px] font-semibold text-gray-400 dark:text-gray-400 uppercase tracking-wider">
+          <div className="p-2.5 sm:p-3 border-b border-gray-200 dark:border-white/5 flex items-center justify-between">
+            <span className="text-[10px] sm:text-[11px] font-semibold text-gray-400 dark:text-gray-400 uppercase tracking-wider">
               Legal & Compliance
             </span>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-mono font-medium">
+            <span className="text-[11px] px-1.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-mono font-medium">
               2 Notes
             </span>
           </div>
 
           {/* Notes List */}
-          <div className="flex-1 overflow-y-auto p-2 space-y-1.5 overscroll-contain">
+          <div className="flex-1 overflow-y-auto p-1.5 sm:p-2 space-y-1.5 overscroll-contain">
             {notesList.map((note) => {
               const isSelected = activeNoteId === note.id
               return (
@@ -112,16 +112,16 @@ const Notes = ({ controls, isMaximized }) => {
                   type="button"
                   data-clickable="true"
                   onClick={() => setActiveNoteId(note.id)}
-                  className={`w-full text-left p-3 rounded-xl transition-all cursor-pointer group flex flex-col gap-1 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none ${
+                  className={`w-full text-left p-2.5 rounded-xl transition-all cursor-pointer group flex flex-col gap-1 focus-visible:ring-2 focus-visible:ring-amber-400 focus-visible:outline-none ${
                     isSelected
                       ? 'bg-amber-500 text-white shadow-sm'
                       : 'hover:bg-gray-100 dark:hover:bg-[#23232a] text-gray-800 dark:text-gray-200'
                   }`}
                 >
                   <div className="flex items-center justify-between gap-1 w-full">
-                    <h3 className="font-semibold text-xs sm:text-sm truncate">{note.title}</h3>
+                    <h3 className="font-semibold text-xs sm:text-[13px] truncate">{note.title}</h3>
                     <span
-                      className={`text-[10px] font-mono flex-shrink-0 ${
+                      className={`text-[9px] sm:text-[10px] font-mono flex-shrink-0 ${
                         isSelected ? 'text-white/80' : 'text-gray-400 dark:text-gray-500'
                       }`}
                     >
@@ -130,7 +130,7 @@ const Notes = ({ controls, isMaximized }) => {
                   </div>
 
                   <span
-                    className={`inline-block text-[10px] font-medium px-2 py-0.5 rounded-md self-start ${
+                    className={`inline-block text-[9px] sm:text-[10px] font-medium px-1.5 py-0.5 rounded-md self-start ${
                       isSelected
                         ? 'bg-white/20 text-white'
                         : 'bg-amber-500/10 text-amber-700 dark:text-amber-300'
@@ -140,7 +140,7 @@ const Notes = ({ controls, isMaximized }) => {
                   </span>
 
                   <p
-                    className={`text-[11px] line-clamp-2 leading-relaxed mt-0.5 ${
+                    className={`text-[10px] sm:text-[11px] line-clamp-2 leading-relaxed mt-0.5 ${
                       isSelected ? 'text-white/90' : 'text-gray-500 dark:text-gray-400'
                     }`}
                   >
@@ -152,8 +152,8 @@ const Notes = ({ controls, isMaximized }) => {
           </div>
 
           {/* Sidebar Footer */}
-          <div className="p-3 border-t border-gray-200 dark:border-white/10 bg-gray-100/50 dark:bg-[#141418] text-[11px] text-gray-400 flex items-center gap-1.5">
-            <span className="size-2 rounded-full bg-emerald-500" />
+          <div className="p-2 sm:p-2.5 border-t border-gray-200 dark:border-white/10 bg-gray-100/50 dark:bg-[#141418] text-[10px] text-gray-400 flex items-center gap-1.5">
+            <span className="size-1.5 rounded-full bg-emerald-500" />
             <span>Updated & Enforceable</span>
           </div>
         </aside>
@@ -161,7 +161,7 @@ const Notes = ({ controls, isMaximized }) => {
         {/* Right Main Content Reading Pane */}
         <main
           id="notes-content-pane"
-          className="flex-1 overflow-y-auto overscroll-contain p-4 sm:p-7 bg-white dark:bg-[#1a1a1f] space-y-6 text-gray-700 dark:text-gray-200 text-xs sm:text-sm leading-relaxed"
+          className="flex-1 overflow-y-auto overscroll-contain p-3.5 sm:p-5 bg-white dark:bg-[#1a1a1f] space-y-5 text-gray-700 dark:text-gray-200 text-xs sm:text-sm leading-relaxed"
         >
           {activeNoteId === 'terms' ? (
             /* ================= TERMS AND CONDITIONS CONTENT ================= */
