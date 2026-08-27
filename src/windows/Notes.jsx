@@ -53,10 +53,32 @@ const Notes = ({ controls, isMaximized }) => {
         <div className="w-14" />
       </div>
 
+      {/* Mobile Top Segmented Tab Switcher */}
+      <div className="flex sm:hidden p-2 border-b border-gray-200 dark:border-white/10 bg-gray-50 dark:bg-[#18181c] gap-1.5 flex-shrink-0">
+        {notesList.map((note) => {
+          const isSelected = activeNoteId === note.id
+          return (
+            <button
+              key={note.id}
+              type="button"
+              data-clickable="true"
+              onClick={() => setActiveNoteId(note.id)}
+              className={`flex-1 py-1.5 px-2 rounded-lg text-xs font-semibold text-center transition-all cursor-pointer truncate ${
+                isSelected
+                  ? 'bg-amber-500 text-white shadow-sm'
+                  : 'bg-white dark:bg-[#24242c] text-gray-700 dark:text-gray-300 border border-gray-200 dark:border-white/5'
+              }`}
+            >
+              {note.title}
+            </button>
+          )
+        })}
+      </div>
+
       {/* Split-Pane Body */}
       <div className="flex flex-1 overflow-hidden">
-        {/* Left Sidebar - Notes Index */}
-        <aside className="w-48 sm:w-56 border-r border-gray-200 dark:border-white/10 bg-gray-50/80 dark:bg-[#18181c] flex flex-col flex-shrink-0">
+        {/* Left Sidebar - Notes Index (Visible on sm+ screens) */}
+        <aside className="hidden sm:flex w-48 sm:w-56 border-r border-gray-200 dark:border-white/10 bg-gray-50/80 dark:bg-[#18181c] flex-col flex-shrink-0">
           {/* Notes Folder Header */}
           <div className="p-2.5 sm:p-3 border-b border-gray-200 dark:border-white/5 flex items-center justify-between">
             <span className="text-[10px] sm:text-[11px] font-semibold text-gray-400 dark:text-gray-400 uppercase tracking-wider">
@@ -126,7 +148,7 @@ const Notes = ({ controls, isMaximized }) => {
         {/* Right Main Content Reading Pane */}
         <main
           id="notes-content-pane"
-          className="flex-1 overflow-y-auto overscroll-contain p-3.5 sm:p-5 bg-white dark:bg-[#1a1a1f] space-y-5 text-gray-700 dark:text-gray-200 text-xs sm:text-sm leading-relaxed"
+          className="flex-1 overflow-y-auto overscroll-contain p-3.5 sm:p-5 bg-white dark:bg-[#1a1a1f] space-y-5 text-gray-700 dark:text-gray-200 text-xs sm:text-sm leading-relaxed w-full box-border"
         >
           {activeNoteId === 'terms' ? (
             /* ================= TERMS AND CONDITIONS CONTENT ================= */

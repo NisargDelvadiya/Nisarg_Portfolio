@@ -126,7 +126,7 @@ const CookieNotification = () => {
       aria-label="Cookie and Privacy Consent Notification"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      className="fixed top-9 sm:top-10 right-3 sm:right-5 z-[9999] w-[340px] sm:w-[370px] rounded-2xl p-3.5 backdrop-blur-2xl bg-white/80 dark:bg-[#1e1e24]/90 border border-white/40 dark:border-white/10 shadow-[0_18px_40px_-10px_rgba(0,0,0,0.45)] select-none text-gray-800 dark:text-gray-100 transition-colors"
+      className="fixed top-9 sm:top-10 right-3 sm:right-5 z-[9999] w-[calc(100vw-1.5rem)] sm:w-[370px] max-w-[370px] rounded-2xl p-3.5 backdrop-blur-2xl bg-white/80 dark:bg-[#1e1e24]/90 border border-white/40 dark:border-white/10 shadow-[0_18px_40px_-10px_rgba(0,0,0,0.45)] select-none text-gray-800 dark:text-gray-100 transition-colors box-border"
     >
       {/* macOS Notification Hover Dismiss Button (re-pops in 30s) */}
       {isHovered && (

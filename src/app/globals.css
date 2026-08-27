@@ -130,6 +130,36 @@ body {
   will-change: transform;
 }
 
+/* Mobile & Small Screen Responsive Dock */
+@media (max-width: 640px) {
+  #dock {
+    bottom: 0.75rem;
+  }
+  .dock-container {
+    gap: 0.35rem;
+    padding: 0.35rem 0.55rem;
+    border-radius: 1.25rem;
+  }
+  .dock-icon {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+}
+
+@media (max-width: 380px) {
+  #dock {
+    bottom: 0.5rem;
+  }
+  .dock-container {
+    gap: 0.25rem;
+    padding: 0.25rem 0.4rem;
+  }
+  .dock-icon {
+    width: 2.35rem;
+    height: 2.35rem;
+  }
+}
+
 .tooltip {
   padding: 0.25rem 0.65rem;
   font-size: 0.75rem;
