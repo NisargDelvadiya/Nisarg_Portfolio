@@ -167,15 +167,31 @@ export default function RootLayout({ children }) {
                 }
               }
 
-              // Continuous suppressor to prevent Google from shifting the desktop layout or showing banner
+              // Continuous suppressor to prevent Google from shifting the desktop layout, translating the title, or showing banner
               if (typeof window !== 'undefined') {
-                const suppressGoogleBanner = () => {
+                const originalTitle = "Nisarg's Macfolio | Next.js Developer Portfolio";
+
+                const suppressGoogleArtifacts = () => {
+                  // Prevent document title translation
+                  if (document.title && document.title !== originalTitle) {
+                    document.title = originalTitle;
+                  }
+
+                  const titleEl = document.querySelector('title');
+                  if (titleEl && !titleEl.classList.contains('notranslate')) {
+                    titleEl.setAttribute('translate', 'no');
+                    titleEl.classList.add('notranslate');
+                  }
+
+                  // Prevent body top shifting
                   if (document.body && document.body.style.top && document.body.style.top !== '0px') {
                     document.body.style.top = '0px';
                   }
                   if (document.documentElement && document.documentElement.style.top && document.documentElement.style.top !== '0px') {
                     document.documentElement.style.top = '0px';
                   }
+
+                  // Hide banner frames
                   const banner = document.querySelector('.goog-te-banner-frame, iframe.skiptranslate, iframe.goog-te-banner-frame');
                   if (banner) {
                     banner.style.setProperty('display', 'none', 'important');
@@ -184,8 +200,8 @@ export default function RootLayout({ children }) {
                   }
                 };
 
-                setInterval(suppressGoogleBanner, 100);
-                window.addEventListener('load', suppressGoogleBanner);
+                setInterval(suppressGoogleArtifacts, 100);
+                window.addEventListener('load', suppressGoogleArtifacts);
               }
             `,
           }}
