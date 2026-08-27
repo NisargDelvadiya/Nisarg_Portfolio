@@ -19,14 +19,14 @@ const ThemeContext = createContext({
   toggleTheme: () => {},
 });
 
-// Defensive snapshot getter for browser client
+// Defensive snapshot getter for browser client (Defaults to Spider-Man Light Mode)
 const getClientSnapshot = () => {
   try {
     if (typeof window !== "undefined") {
-      const savedTheme = window.localStorage.getItem("theme_mode");
+      const savedTheme = window.sessionStorage.getItem("theme_mode");
       if (savedTheme === "venom") return true;
       if (savedTheme === "spidey") return false;
-      return window.matchMedia("(prefers-color-scheme: dark)").matches;
+      return false; // Always Spider-Man mode by default when opened anew
     }
   } catch {
     // Safe fallback
@@ -37,7 +37,7 @@ const getClientSnapshot = () => {
 // Safe snapshot for SSR server rendering
 const getServerSnapshot = () => false;
 
-// Event subscription for theme updates across tabs and within the window
+// Event subscription for theme updates within the active window session
 const subscribe = (callback) => {
   try {
     if (typeof window !== "undefined") {
@@ -56,12 +56,7 @@ const subscribe = (callback) => {
 
 /**
  * ThemeProvider component that wraps the entire portfolio application.
- * Manages theme state (Spider-Man Light vs. Venom Dark) using useSyncExternalStore
- * for React 19 concurrency and zero cascading renders.
- * 
- * @param {Object} props
- * @param {React.ReactNode} props.children - Child elements wrapped by the theme provider.
- * @returns {JSX.Element}
+ * Defaults strictly to Spider-Man Mode when website is opened freshly.
  */
 export function ThemeProvider({ children }) {
   const isVenomMode = useSyncExternalStore(
@@ -69,6 +64,15 @@ export function ThemeProvider({ children }) {
     getClientSnapshot,
     getServerSnapshot
   );
+
+  // Clear any persistent legacy storage on mount so restart is always Spider-Man
+  useEffect(() => {
+    try {
+      if (typeof window !== "undefined") {
+        window.localStorage.removeItem("theme_mode");
+      }
+    } catch {}
+  }, []);
 
   // Synchronize HTML document classes defensively
   useEffect(() => {
@@ -86,17 +90,17 @@ export function ThemeProvider({ children }) {
   }, [isVenomMode]);
 
   /**
-   * Toggles active theme state and dispatches event to sync all consumers.
+   * Toggles active theme state within the current session.
    */
   const toggleTheme = useCallback(() => {
     try {
       if (typeof window !== "undefined") {
         const nextMode = !getClientSnapshot();
         if (nextMode) {
-          window.localStorage.setItem("theme_mode", "venom");
+          window.sessionStorage.setItem("theme_mode", "venom");
           document.documentElement.classList.add("dark");
         } else {
-          window.localStorage.setItem("theme_mode", "spidey");
+          window.sessionStorage.setItem("theme_mode", "spidey");
           document.documentElement.classList.remove("dark");
         }
         window.dispatchEvent(new Event("theme-change"));
