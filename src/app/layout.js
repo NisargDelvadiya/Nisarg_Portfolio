@@ -166,6 +166,27 @@ export default function RootLayout({ children }) {
                   console.warn('[Google Translate] Init error:', e);
                 }
               }
+
+              // Continuous suppressor to prevent Google from shifting the desktop layout or showing banner
+              if (typeof window !== 'undefined') {
+                const suppressGoogleBanner = () => {
+                  if (document.body && document.body.style.top && document.body.style.top !== '0px') {
+                    document.body.style.top = '0px';
+                  }
+                  if (document.documentElement && document.documentElement.style.top && document.documentElement.style.top !== '0px') {
+                    document.documentElement.style.top = '0px';
+                  }
+                  const banner = document.querySelector('.goog-te-banner-frame, iframe.skiptranslate, iframe.goog-te-banner-frame');
+                  if (banner) {
+                    banner.style.setProperty('display', 'none', 'important');
+                    banner.style.setProperty('visibility', 'hidden', 'important');
+                    banner.style.setProperty('height', '0px', 'important');
+                  }
+                };
+
+                setInterval(suppressGoogleBanner, 100);
+                window.addEventListener('load', suppressGoogleBanner);
+              }
             `,
           }}
         />

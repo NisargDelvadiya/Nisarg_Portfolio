@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import WindowWrapper from '#hoc/WindowWrapper'
 import { ALL_LANGUAGES } from '#constants'
 
@@ -9,7 +9,6 @@ import { ALL_LANGUAGES } from '#constants'
  * Powered by Google Translate for real-time translation across 20 languages.
  */
 const Translate = ({ controls, isMaximized }) => {
-  const [searchQuery, setSearchQuery] = useState('')
   const [currentLang, setCurrentLang] = useState('en')
   const [statusMessage, setStatusMessage] = useState('')
 
@@ -41,18 +40,6 @@ const Translate = ({ controls, isMaximized }) => {
       console.warn('[Translate] Language detection error:', e)
     }
   }, [])
-
-  // Filter languages based on search query
-  const filteredLanguages = useMemo(() => {
-    if (!searchQuery.trim()) return ALL_LANGUAGES
-    const q = searchQuery.toLowerCase().trim()
-    return ALL_LANGUAGES.filter(
-      (lang) =>
-        lang.name.toLowerCase().includes(q) ||
-        lang.code.toLowerCase().includes(q) ||
-        (lang.nativeName && lang.nativeName.toLowerCase().includes(q))
-    )
-  }, [searchQuery])
 
   // Trigger Google Translate engine
   const handleSelectLanguage = (code, name) => {
@@ -101,7 +88,7 @@ const Translate = ({ controls, isMaximized }) => {
   return (
     <div
       className={`flex flex-col bg-white dark:bg-[#1e1e22] text-gray-800 dark:text-white rounded-xl shadow-2xl overflow-hidden border border-black/10 dark:border-white/10 select-none transition-colors duration-200 w-full ${
-        isMaximized ? 'h-[calc(100vh-140px)]' : 'h-[540px]'
+        isMaximized ? 'h-[calc(100vh-140px)]' : 'h-[500px]'
       }`}
     >
       {/* Window Header */}
@@ -133,7 +120,7 @@ const Translate = ({ controls, isMaximized }) => {
       {/* Main Content Area */}
       <div className="flex flex-col flex-1 overflow-hidden bg-gray-50/50 dark:bg-[#18181c]">
         {/* Top Control Bar */}
-        <div className="p-3 sm:p-4 border-b border-gray-200 dark:border-white/10 bg-white/80 dark:bg-[#202026]/80 backdrop-blur-md space-y-3">
+        <div className="p-3 sm:p-3.5 border-b border-gray-200 dark:border-white/10 bg-white/80 dark:bg-[#202026]/80 backdrop-blur-md">
           {/* Active Language & Status Banner */}
           <div className="flex items-center justify-between gap-2 flex-wrap">
             <div className="flex items-center gap-2">
@@ -150,111 +137,72 @@ const Translate = ({ controls, isMaximized }) => {
               </span>
             )}
           </div>
-
-          {/* Search Input */}
-          <div className="relative">
-            <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
-              <svg className="size-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-                />
-              </svg>
-            </div>
-            <input
-              type="text"
-              data-clickable="true"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search Indian & global languages..."
-              className="w-full pl-9 pr-8 py-2 text-xs sm:text-sm bg-gray-100 dark:bg-[#2a2a32] border border-gray-200 dark:border-white/10 rounded-lg text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
-            />
-            {searchQuery && (
-              <button
-                type="button"
-                data-clickable="true"
-                onClick={() => setSearchQuery('')}
-                className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 cursor-pointer"
-              >
-                ✕
-              </button>
-            )}
-          </div>
         </div>
 
         {/* Language Grid */}
         <div className="flex-1 overflow-y-auto overscroll-contain p-3 sm:p-4">
-          {filteredLanguages.length === 0 ? (
-            <div className="flex flex-col items-center justify-center h-48 text-center text-gray-400">
-              <p className="text-sm">No matching languages found</p>
-              <p className="text-xs mt-1 text-gray-500">Try searching for "Hindi", "Gujarati", or "Bengali"</p>
-            </div>
-          ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-              {filteredLanguages.map((lang) => {
-                const isSelected = currentLang === lang.code
-                return (
-                  <button
-                    key={lang.code}
-                    type="button"
-                    data-clickable="true"
-                    onClick={() => handleSelectLanguage(lang.code, lang.name)}
-                    className={`flex items-center justify-between p-3 rounded-xl border text-left transition-all cursor-pointer group focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none ${
-                      isSelected
-                        ? 'bg-blue-50 dark:bg-blue-950/40 border-blue-400 dark:border-blue-500/60 shadow-sm'
-                        : 'bg-white dark:bg-[#222228] border-gray-200 dark:border-white/5 hover:border-gray-300 dark:hover:border-white/20 hover:bg-gray-50 dark:hover:bg-[#282830]'
-                    }`}
-                  >
-                    <div className="flex items-center gap-3 min-w-0">
-                      {/* Code Avatar */}
-                      <div
-                        className={`size-9 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0 transition-colors uppercase ${
-                          isSelected
-                            ? 'bg-blue-600 text-white'
-                            : 'bg-gray-100 dark:bg-[#2e2e36] text-gray-700 dark:text-gray-300 group-hover:bg-blue-600/10 group-hover:text-blue-600 dark:group-hover:text-blue-400'
-                        }`}
-                      >
-                        {lang.code.slice(0, 3)}
-                      </div>
-
-                      {/* Language Title & Script */}
-                      <div className="min-w-0">
-                        <p
-                          className={`text-xs sm:text-sm font-semibold truncate ${
-                            isSelected
-                              ? 'text-blue-700 dark:text-blue-300'
-                              : 'text-gray-800 dark:text-gray-100'
-                          }`}
-                        >
-                          {lang.name}
-                        </p>
-                        {lang.nativeName && (
-                          <p className="text-[11px] text-gray-400 dark:text-gray-400 truncate">
-                            {lang.nativeName}
-                          </p>
-                        )}
-                      </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            {ALL_LANGUAGES.map((lang) => {
+              const isSelected = currentLang === lang.code
+              return (
+                <button
+                  key={lang.code}
+                  type="button"
+                  data-clickable="true"
+                  onClick={() => handleSelectLanguage(lang.code, lang.name)}
+                  className={`flex items-center justify-between p-3 rounded-xl border text-left transition-all cursor-pointer group focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none ${
+                    isSelected
+                      ? 'bg-blue-50 dark:bg-blue-950/40 border-blue-400 dark:border-blue-500/60 shadow-sm'
+                      : 'bg-white dark:bg-[#222228] border-gray-200 dark:border-white/5 hover:border-gray-300 dark:hover:border-white/20 hover:bg-gray-50 dark:hover:bg-[#282830]'
+                  }`}
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    {/* Code Avatar */}
+                    <div
+                      className={`size-9 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0 transition-colors uppercase ${
+                        isSelected
+                          ? 'bg-blue-600 text-white'
+                          : 'bg-gray-100 dark:bg-[#2e2e36] text-gray-700 dark:text-gray-300 group-hover:bg-blue-600/10 group-hover:text-blue-600 dark:group-hover:text-blue-400'
+                      }`}
+                    >
+                      {lang.code.slice(0, 3)}
                     </div>
 
-                    {/* Active State Checkmark */}
-                    {isSelected ? (
-                      <div className="size-6 rounded-full bg-blue-600 text-white flex items-center justify-center flex-shrink-0 ml-2 shadow-sm">
-                        <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-                        </svg>
-                      </div>
-                    ) : (
-                      <span className="text-[11px] font-medium text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2">
-                        Select →
-                      </span>
-                    )}
-                  </button>
-                )
-              })}
-            </div>
-          )}
+                    {/* Language Title & Script */}
+                    <div className="min-w-0">
+                      <p
+                        className={`text-xs sm:text-sm font-semibold truncate ${
+                          isSelected
+                            ? 'text-blue-700 dark:text-blue-300'
+                            : 'text-gray-800 dark:text-gray-100'
+                        }`}
+                      >
+                        {lang.name}
+                      </p>
+                      {lang.nativeName && (
+                        <p className="text-[11px] text-gray-400 dark:text-gray-400 truncate">
+                          {lang.nativeName}
+                        </p>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Active State Checkmark */}
+                  {isSelected ? (
+                    <div className="size-6 rounded-full bg-blue-600 text-white flex items-center justify-center flex-shrink-0 ml-2 shadow-sm">
+                      <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                      </svg>
+                    </div>
+                  ) : (
+                    <span className="text-[11px] font-medium text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2">
+                      Select →
+                    </span>
+                  )}
+                </button>
+              )
+            })}
+          </div>
         </div>
 
         {/* Footer Note */}
