@@ -75,8 +75,12 @@ export const metadata = {
     shortcut: '/macbook.png?v=macbook_live',
     apple: '/macbook.png?v=macbook_live',
   },
+  manifest: '/manifest.webmanifest',
+  applicationName: "Nisarg's Macfolio",
   appleWebApp: {
-    title: "Nisarg's Portfolio",
+    capable: true,
+    statusBarStyle: 'black-translucent',
+    title: "Nisarg's Macfolio",
   },
 }
 
@@ -122,11 +126,17 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
 
-        {/* Direct MacBook Laptop Favicons */}
+        {/* PWA & Mobile Web App Meta */}
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+        <meta name="apple-mobile-web-app-title" content="Nisarg's Macfolio" />
+        <meta name="format-detection" content="telephone=no" />
+
+        {/* Direct MacBook Laptop Favicons & Icons */}
         <link rel="icon" type="image/png" href="/macbook.png?v=macbook_live" />
         <link rel="shortcut icon" type="image/png" href="/macbook.png?v=macbook_live" />
         <link rel="apple-touch-icon" href="/macbook.png?v=macbook_live" />
-        <meta name="apple-mobile-web-app-title" content="Nisarg's Portfolio" />
 
         {/* Preconnect for Google Fonts */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -135,15 +145,15 @@ export default function RootLayout({ children }) {
         {/* Preload critical desktop background for instant paint */}
         <link rel="preload" as="image" href="/images/wallpaper.png" fetchPriority="high" />
 
-        {/* Clean ServiceWorker cache cleanup */}
+        {/* PWA Service Worker Registration */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
               if (typeof window !== 'undefined' && 'serviceWorker' in navigator) {
-                navigator.serviceWorker.getRegistrations().then(function(registrations) {
-                  for (var registration of registrations) {
-                    registration.unregister();
-                  }
+                window.addEventListener('load', function() {
+                  navigator.serviceWorker.register('/sw.js', { scope: '/' }).catch(function(err) {
+                    console.warn('[PWA] ServiceWorker registration notice:', err);
+                  });
                 });
               }
             `,

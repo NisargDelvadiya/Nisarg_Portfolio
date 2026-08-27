@@ -355,5 +355,22 @@ body {
   box-shadow: none !important;
 }
 
+/* Hardware GPU Acceleration & 60/120fps Smooth Animations */
+.dock-icon,
+.dock-container,
+#desktop-bounds,
+section[id],
+.will-change-transform {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* Native Smooth Scrolling */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 
 
