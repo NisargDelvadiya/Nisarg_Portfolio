@@ -10,8 +10,6 @@ import WindowWrapper from '#hoc/WindowWrapper'
  */
 const Notes = ({ controls, isMaximized }) => {
   const [activeNoteId, setActiveNoteId] = useState('terms')
-  const [searchQuery, setSearchQuery] = useState('')
-  const [copied, setCopied] = useState(false)
 
   const notesList = [
     {
@@ -34,29 +32,6 @@ const Notes = ({ controls, isMaximized }) => {
 
   const activeNote = notesList.find((n) => n.id === activeNoteId) || notesList[0]
 
-  const handleCopyText = async () => {
-    try {
-      const contentEl = document.getElementById('notes-content-pane')
-      if (contentEl) {
-        const text = contentEl.innerText
-        if (navigator?.clipboard?.writeText) {
-          await navigator.clipboard.writeText(text)
-        } else {
-          const textarea = document.createElement('textarea')
-          textarea.value = text
-          document.body.appendChild(textarea)
-          textarea.select()
-          document.execCommand('copy')
-          document.body.removeChild(textarea)
-        }
-        setCopied(true)
-        setTimeout(() => setCopied(false), 2000)
-      }
-    } catch (err) {
-      console.warn('Failed to copy note content:', err)
-    }
-  }
-
   return (
     <div
       className={`flex flex-col bg-white dark:bg-[#1e1e22] text-gray-800 dark:text-white rounded-xl shadow-2xl overflow-hidden border border-black/10 dark:border-white/10 select-none transition-colors duration-200 w-full ${
@@ -75,17 +50,7 @@ const Notes = ({ controls, isMaximized }) => {
             Legal Notes — {activeNote.title}
           </h2>
         </div>
-        <div className="w-14 text-right">
-          <button
-            type="button"
-            data-clickable="true"
-            onClick={handleCopyText}
-            className="text-[11px] text-amber-600 dark:text-amber-400 hover:underline font-medium cursor-pointer"
-            title="Copy current note text"
-          >
-            {copied ? 'Copied! ✓' : 'Copy'}
-          </button>
-        </div>
+        <div className="w-14" />
       </div>
 
       {/* Split-Pane Body */}
