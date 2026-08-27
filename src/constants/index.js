@@ -47,6 +47,12 @@ const dockApps = [
     icon: "terminal.png",
     canOpen: true,
   },
+  {
+    id: "translate",
+    name: "Translate",
+    icon: "translate.svg",
+    canOpen: true,
+  },
 ];
 
 const blogPosts = [
@@ -145,6 +151,29 @@ const gallery = [
   },
 ];
 
+const ALL_LANGUAGES = [
+  { code: "en", name: "English", nativeName: "English" },
+  { code: "as", name: "Assamese", nativeName: "অসমীয়া" },
+  { code: "bn", name: "Bengali", nativeName: "বাংলা" },
+  { code: "doi", name: "Dogri", nativeName: "डोगरी" },
+  { code: "gu", name: "Gujarati", nativeName: "ગુજરાતી" },
+  { code: "hi", name: "Hindi", nativeName: "हिन्दी" },
+  { code: "kn", name: "Kannada", nativeName: "ಕನ್ನಡ" },
+  { code: "ks", name: "Kashmiri", nativeName: "کٲشُر" },
+  { code: "gom", name: "Konkani", nativeName: "कोंकणी" },
+  { code: "mai", name: "Maithili", nativeName: "मैथिली" },
+  { code: "ml", name: "Malayalam", nativeName: "മലയാളം" },
+  { code: "mni-Mtei", name: "Manipuri (Meiteilon)", nativeName: "ꯃꯩꯇꯩꯂꯣꯟ" },
+  { code: "mr", name: "Marathi", nativeName: "मराठी" },
+  { code: "ne", name: "Nepali", nativeName: "नेपाली" },
+  { code: "or", name: "Odia", nativeName: "ଓଡ଼ିଆ" },
+  { code: "pa", name: "Punjabi", nativeName: "ਪੰਜਾਬੀ" },
+  { code: "sa", name: "Sanskrit", nativeName: "संस्कृतम्" },
+  { code: "sat", name: "Santali", nativeName: "ᱥᱟᱱᱛᱟᱲᱤ" },
+  { code: "ta", name: "Tamil", nativeName: "தமிழ்" },
+  { code: "te", name: "Telugu", nativeName: "తెలుగు" },
+];
+
 export {
   navLinks,
   dockApps,
@@ -153,6 +182,7 @@ export {
   socials,
   photosLinks,
   gallery,
+  ALL_LANGUAGES,
 };
 
 const WORK_LOCATION = {
@@ -313,6 +343,7 @@ const WINDOW_CONFIG = {
   txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   pdf: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
+  translate: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
 };
 
 export { INITIAL_Z_INDEX, WINDOW_CONFIG };

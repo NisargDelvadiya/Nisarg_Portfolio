@@ -149,8 +149,36 @@ export default function RootLayout({ children }) {
             `,
           }}
         />
+
+        {/* Google Translate Init Script */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              function googleTranslateElementInit() {
+                try {
+                  new google.translate.TranslateElement({
+                    pageLanguage: 'en',
+                    includedLanguages: 'en,as,bn,doi,gu,hi,kn,ks,gom,mai,ml,mni-Mtei,mr,ne,or,pa,sa,sat,ta,te',
+                    autoDisplay: false,
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                  }, 'google_translate_element');
+                } catch(e) {
+                  console.warn('[Google Translate] Init error:', e);
+                }
+              }
+            `,
+          }}
+        />
+        <script
+          type="text/javascript"
+          src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"
+          async
+        />
       </head>
-      <body className="dark antialiased select-none">{children}</body>
+      <body className="dark antialiased select-none">
+        <div id="google_translate_element" aria-hidden="true" />
+        {children}
+      </body>
     </html>
   )
 }

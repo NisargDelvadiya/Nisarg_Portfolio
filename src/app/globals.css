@@ -246,6 +246,13 @@ body {
   width: min(780px, 92vw);
 }
 
+#translate {
+  position: absolute;
+  top: 5rem;
+  left: 28%;
+  width: min(580px, 92vw);
+}
+
 /* Mobile & Tablet Responsive Overrides */
 @media (max-width: 768px) {
   #safari,
@@ -256,13 +263,56 @@ body {
   #finder,
   #txtfile,
   #imgfile,
-  #pdf {
+  #pdf,
+  #translate {
     left: 3% !important;
     right: 3% !important;
     width: 94vw !important;
     max-width: 94vw !important;
     top: 3.5rem !important;
   }
+}
+
+/* Google Translate Hidden Element & Clean UI Overrides */
+#google_translate_element {
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  overflow: hidden !important;
+}
+
+.goog-te-banner-frame.skiptranslate,
+.goog-te-banner-frame,
+iframe.goog-te-banner-frame {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+}
+
+body {
+  top: 0px !important;
+  position: static !important;
+}
+
+.goog-tooltip,
+.goog-tooltip:hover {
+  display: none !important;
+}
+
+.goog-text-highlight {
+  background-color: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.VIpgJd-ZVi9gl-aZ2wEe-wOHMyf,
+.VIpgJd-ZVi9gl-aZ2wEe-OVi9nd,
+.VIpgJd-y60Sfe-OUuff-rOUt5d {
+  display: none !important;
 }
 
 
