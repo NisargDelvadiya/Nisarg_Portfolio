@@ -230,24 +230,6 @@ export default function ProjectsPage() {
             </div>
           ))}
         </div>
-
-        {/* Footer Return Action */}
-        <footer className="mt-8 pt-8 border-t border-gray-200 dark:border-purple-900/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
-          <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">
-            &copy; 2026 • Mahin Gunjal Portfolio • All 3D & VFX rights reserved.
-          </p>
-
-          <button
-            onClick={handleBackToHome}
-            className={`inline-flex items-center gap-2 font-bold text-xs uppercase tracking-wider underline decoration-2 cursor-pointer transition-colors ${
-              isVenomMode
-                ? "text-purple-400 hover:text-purple-300"
-                : "text-[#a31515] hover:text-[#821010]"
-            }`}
-          >
-            ← Close tab and return to main website
-          </button>
-        </footer>
       </div>
     </div>
   );
