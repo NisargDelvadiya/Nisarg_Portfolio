@@ -113,6 +113,9 @@ graph TD
 Mahin_Portfolio/
 ├── public/
 │   ├── Assets/
+│   │   ├── favicon/                # Multi-size favicons & web app manifest
+│   │   ├── files/                  # Downloadable documents (Mahin_Resume.pdf)
+│   │   ├── Projects/               # Video reels & showcase media (.mp4)
 │   │   ├── Mahin.jpeg              # Profile portrait for About section pendulum
 │   │   ├── Mahin_Man.jpeg          # Unmasked portrait base layer in Hero
 │   │   ├── Spider_Man.png          # Masked suit overlay layer in Hero
@@ -120,8 +123,6 @@ Mahin_Portfolio/
 │   │   ├── Web.png                 # Spider web decorative accent
 │   │   ├── spidey_gif_1.png        # Upside-down hanging Spider-Man graphic
 │   │   └── spidey_gif_2.png        # Peeking corner Spider-Man graphic
-│   ├── favicon/                    # Multi-size favicons (96x96, 192x192, 512x512, SVG)
-│   ├── Mahin_Resume.pdf            # Downloadable professional curriculum vitae
 │   ├── manifest.json               # PWA web app manifest
 │   └── sw.js                       # Service Worker for offline PWA caching
 ├── src/
@@ -178,9 +179,9 @@ Mahin_Portfolio/
 - Features origin-left background expand hover effects on each skill card.
 
 ### 4. `ProjectsSection.js`
-- Displays 2x2 responsive grid of featured software engineering and web application projects.
+- Displays responsive 2-column / 3-column grid of featured 3D animation, commercial VFX, and CGI video reels (`.mp4`).
 - Includes corner peeking Spider-Man animation oscillating vertically.
-- Contains external links to GitHub repositories.
+- Clean presentation focusing on video playback previews, titles, and descriptions.
 
 ### 5. `ExperiencesSection.js`
 - Alternating vertical timeline showcasing professional experience, internships, leadership roles, and administrative work.

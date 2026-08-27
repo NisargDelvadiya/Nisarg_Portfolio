@@ -239,7 +239,7 @@ export default function Hero() {
             EXPLORE PROJECTS
           </a>
           <a
-            href="/Mahin_Resume.pdf"
+            href="/Assets/files/Mahin_Resume.pdf"
             download="Mahin_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"

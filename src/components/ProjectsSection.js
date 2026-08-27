@@ -5,36 +5,44 @@ import gsap from "gsap";
 import { useTheme } from "@/context/ThemeContext";
 
 /**
- * Projects showcase dataset
+ * Projects showcase dataset featuring 3D & VFX Video Reels
  */
 const projectsData = [
   {
-    title: "MULTI-TENANT SAAS PLATFORM",
+    title: "TATA SAFARI 3D COMMERCIAL",
     description:
-      "Engineered a containerized multi-tenant SaaS application featuring strict data isolation, dynamic tenancy resolution, and role-based access control.",
-    tags: ["REACT", "NODE.JS", "POSTGRESQL", "DOCKER"],
-    link: "https://github.com/mahingunjal",
+      "High-octane commercial 3D animation, vehicle rendering, and cinematic visual effects highlighting rugged aesthetics and performance.",
+    video: "/Assets/Projects/tata safari.mp4",
   },
   {
-    title: "FULL-STACK PAYMENT GATEWAY",
+    title: "NIKE DYNAMIC PRODUCT REEL",
     description:
-      "Built a robust payment gateway system simulating real-time transaction state management, secure webhooks, and multi-method processing workflows.",
-    tags: ["NODE.JS", "EXPRESS", "MONGODB", "REST APIS"],
-    link: "https://github.com/mahingunjal",
+      "Dynamic 3D footwear motion graphics and product visualization showcasing kinetic energy, material textures, and fluid physics.",
+    video: "/Assets/Projects/nike.mp4",
   },
   {
-    title: "NOTICE HUB UNIVERSITY PORTAL",
+    title: "LAY'S 3D BRAND ADVERTISING",
     description:
-      "Developed a centralized real-time notification platform to streamline university announcements, student communication, and campus updates.",
-    tags: ["REACT", "TAILWIND CSS", "NODE.JS"],
-    link: "https://github.com/mahingunjal",
+      "Vibrant photorealistic product animation with dynamic particle effects, crisp lighting, and commercial broadcast composition.",
+    video: "/Assets/Projects/lays.mp4",
   },
   {
-    title: "PRODUCTIVITY SUITE EXTENSION",
+    title: "HEADS CHARACTER VFX & MOTION",
     description:
-      "Created a feature-rich Chrome extension utilizing JavaScript and Chrome APIs to optimize personal daily task management and workflow tracking.",
-    tags: ["JAVASCRIPT", "CHROME APIS", "TAILWIND"],
-    link: "https://github.com/mahingunjal",
+      "Stylized character motion design and lighting composition exploring surreal 3D sculpting, animation, and visual storytelling.",
+    video: "/Assets/Projects/heads.mp4",
+  },
+  {
+    title: "FASHION APPAREL 3D VISUALS",
+    description:
+      "Sleek high-fashion 3D cloth simulation, aesthetic lighting, and motion design tailored for luxury apparel campaigns.",
+    video: "/Assets/Projects/fashion .mp4",
+  },
+  {
+    title: "DREAM CINEMATIC CONCEPT",
+    description:
+      "Atmospheric VFX concept environment featuring cinematic camera sequencing, volumetric lighting, and surreal ambient mood.",
+    video: "/Assets/Projects/dream.mp4",
   },
 ];
 
@@ -42,10 +50,11 @@ const projectsData = [
  * ProjectsSection Component
  * 
  * Features:
- * - 2x2 grid of featured software engineering & web development projects
+ * - Responsive 2-column / 3-column grid of featured 3D animation & VFX video project reels
+ * - Integrated auto-playing, looping, muted video showcases with hardware-accelerated playback
  * - Animated corner Spider-Man / Venom peek character with subtle floating oscillation
  * - Continuous rotating web background graphic
- * - High-contrast tag badges and interactive external GitHub redirection links
+ * - Minimalist, focused design emphasizing title, video preview, and descriptions
  */
 export default function ProjectsSection() {
   const sectionRef = useRef(null);
@@ -157,47 +166,54 @@ export default function ProjectsSection() {
         </h2>
       </div>
 
-      {/* Projects Grid Container (2x2 on desktop) */}
-      <div className="relative z-20 max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+      {/* Projects Grid Container (2 cols on md, 3 cols on xl) */}
+      <div className="relative z-20 max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {projectsData.map((project, index) => (
           <div
             key={index}
-            className={`group relative flex flex-col justify-between p-6 sm:p-8 rounded-3xl border-3 shadow-xl transition-all duration-300 hover:-translate-y-1.5 active:scale-[0.98] ${
+            className={`group relative flex flex-col overflow-hidden rounded-3xl border-3 shadow-xl transition-all duration-300 hover:-translate-y-2 ${
               isVenomMode
-                ? "bg-[#0f0f18] border-purple-900/60 shadow-purple-950/20 hover:border-purple-500 hover:shadow-purple-900/40"
-                : "bg-white border-red-900/20 shadow-red-950/10 hover:border-[#a31515] hover:shadow-red-900/20"
+                ? "bg-[#0f0f18] border-purple-900/60 shadow-purple-950/20 hover:border-purple-500 hover:shadow-[0_10px_30px_rgba(147,51,234,0.25)]"
+                : "bg-white border-red-900/20 shadow-red-950/10 hover:border-[#a31515] hover:shadow-[0_10px_30px_rgba(163,21,21,0.2)]"
             }`}
           >
-            {/* Top Card Info */}
-            <div className="flex flex-col gap-4">
-              <div className="flex items-center justify-between">
-                <span
-                  className={`text-xs font-black tracking-widest uppercase transition-colors duration-300 ${
-                    isVenomMode ? "text-purple-400" : "text-[#a31515]"
-                  }`}
-                >
-                  PROJECT 0{index + 1}
-                </span>
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  title={`View ${project.title} on GitHub (Opens in new tab)`}
-                  aria-label={`View ${project.title} on GitHub (Opens in new tab)`}
-                  className={`w-9 h-9 rounded-full flex items-center justify-center border transition-all duration-200 active:scale-90 ${
-                    isVenomMode
-                      ? "border-purple-800 bg-purple-950/60 text-purple-300 hover:bg-purple-600 hover:text-white"
-                      : "border-red-200 bg-red-50 text-[#a31515] hover:bg-[#a31515] hover:text-white"
-                  }`}
-                >
-                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-                    <path d="M14 3h7v7h-2V6.414l-9.293 9.293-1.414-1.414L17.586 5H14V3zm-9 4h6v2H5v10h10v-6h2v8H3V7h2z" />
-                  </svg>
-                </a>
-              </div>
+            {/* Top Project Tag & Badge */}
+            <div className="px-6 pt-5 pb-3 flex items-center justify-between">
+              <span
+                className={`text-xs font-black tracking-widest uppercase transition-colors duration-300 ${
+                  isVenomMode ? "text-purple-400" : "text-[#a31515]"
+                }`}
+              >
+                PROJECT 0{index + 1}
+              </span>
+              <span
+                className={`text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full border transition-colors duration-300 ${
+                  isVenomMode
+                    ? "border-purple-800/60 bg-purple-950/50 text-purple-300"
+                    : "border-red-200 bg-red-50 text-[#a31515]"
+                }`}
+              >
+                3D / VFX
+              </span>
+            </div>
 
+            {/* Video Player Showcase */}
+            <div className="relative mx-5 my-2 aspect-video overflow-hidden rounded-2xl bg-black border border-black/10 dark:border-white/10 shadow-inner">
+              <video
+                src={project.video}
+                autoPlay
+                loop
+                muted
+                playsInline
+                preload="metadata"
+                className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+
+            {/* Project Details (Title & Description) */}
+            <div className="flex flex-col gap-2.5 p-6 pt-4 flex-1">
               <h3
-                className={`text-xl sm:text-2xl font-black italic tracking-tight uppercase leading-snug transition-colors duration-300 ${
+                className={`text-lg sm:text-xl font-black italic tracking-tight uppercase leading-snug transition-colors duration-300 ${
                   isVenomMode ? "text-white" : "text-gray-900"
                 }`}
               >
@@ -211,22 +227,6 @@ export default function ProjectsSection() {
               >
                 {project.description}
               </p>
-            </div>
-
-            {/* Bottom Tech Tags */}
-            <div className="flex flex-wrap gap-2 pt-6 mt-4 border-t border-gray-100 dark:border-purple-950/60">
-              {project.tags.map((tag, tIdx) => (
-                <span
-                  key={tIdx}
-                  className={`px-3 py-1 rounded-xl text-[10px] sm:text-xs font-bold tracking-wider uppercase transition-colors duration-300 ${
-                    isVenomMode
-                      ? "bg-purple-950/80 text-purple-300 border border-purple-800/60"
-                      : "bg-red-50 text-[#a31515] border border-red-100"
-                  }`}
-                >
-                  {tag}
-                </span>
-              ))}
             </div>
           </div>
         ))}

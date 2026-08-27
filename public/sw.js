@@ -2,10 +2,10 @@ const CACHE_NAME = "mahin-gunjal-portfolio-v1";
 const ASSETS_TO_CACHE = [
   "/",
   "/manifest.json",
-  "/favicon/favicon.ico",
-  "/favicon/apple-touch-icon.png",
-  "/favicon/web-app-manifest-192x192.png",
-  "/favicon/web-app-manifest-512x512.png"
+  "/Assets/favicon/favicon.ico",
+  "/Assets/favicon/apple-touch-icon.png",
+  "/Assets/favicon/web-app-manifest-192x192.png",
+  "/Assets/favicon/web-app-manifest-512x512.png"
 ];
 
 // Install Event - Pre-cache core shell assets

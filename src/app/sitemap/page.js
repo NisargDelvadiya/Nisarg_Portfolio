@@ -37,7 +37,7 @@ export default function SitemapPage() {
       category: "Downloads & External Resources",
       description: "Resume and professional developer profiles",
       links: [
-        { name: "Curriculum Vitae (Resume PDF)", url: "/Mahin_Resume.pdf", desc: "Official professional resume download" },
+        { name: "Curriculum Vitae (Resume PDF)", url: "/Assets/files/Mahin_Resume.pdf", desc: "Official professional resume download" },
         { name: "GitHub Profile", url: "https://github.com/mahingunjal", desc: "Open-source code repositories & contributions", external: true },
         { name: "LinkedIn Profile", url: "https://www.linkedin.com/in/mahin-gunjal-669006275/", desc: "Professional network & career updates", external: true },
         { name: "Instagram (@mahingunjal)", url: "https://www.instagram.com/mahingunjal", desc: "Visual designs & creative highlights", external: true },
