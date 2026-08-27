@@ -7,18 +7,19 @@ import useWindowStore from '#store/windows'
 /**
  * macOS Top-Right Cookie Consent Notification
  * Styled authentically like a macOS push notification banner.
- * Remembers consent in localStorage and allows opening the Legal Notes Privacy Policy.
+ * If dismissed via the cross '✕' without accepting, it pops up again every 30 seconds until accepted.
  */
 const CookieNotification = () => {
   const [visible, setVisible] = useState(false)
   const [isHovered, setIsHovered] = useState(false)
   const notificationRef = useRef(null)
+  const repopTimerRef = useRef(null)
   const { openWindow } = useWindowStore()
 
   useEffect(() => {
     try {
-      const consent = localStorage.getItem('cookie_consent_status')
-      if (!consent) {
+      const accepted = localStorage.getItem('cookie_consent_accepted') === 'true'
+      if (!accepted) {
         // Show after a slight natural delay for macOS desktop boot-in feel
         const timer = setTimeout(() => {
           setVisible(true)
@@ -27,6 +28,12 @@ const CookieNotification = () => {
       }
     } catch (e) {
       console.warn('[CookieNotification] localStorage access error:', e)
+    }
+
+    return () => {
+      if (repopTimerRef.current) {
+        clearTimeout(repopTimerRef.current)
+      }
     }
   }, [])
 
@@ -41,11 +48,17 @@ const CookieNotification = () => {
     }
   }, [visible])
 
-  const handleDismiss = (status = 'accepted') => {
+  // Permanent Accept Action
+  const handleAccept = () => {
     try {
-      localStorage.setItem('cookie_consent_status', status)
+      localStorage.setItem('cookie_consent_accepted', 'true')
     } catch (e) {
       console.warn(e)
+    }
+
+    if (repopTimerRef.current) {
+      clearTimeout(repopTimerRef.current)
+      repopTimerRef.current = null
     }
 
     if (notificationRef.current) {
@@ -64,9 +77,44 @@ const CookieNotification = () => {
     }
   }
 
+  // Dismiss via Cross (will pop up again in 30 seconds)
+  const handleCrossDismiss = () => {
+    if (notificationRef.current) {
+      gsap.to(notificationRef.current, {
+        x: 120,
+        opacity: 0,
+        scale: 0.92,
+        duration: 0.28,
+        ease: 'power2.in',
+        onComplete: () => {
+          setVisible(false)
+          // Schedule repop in 30 seconds if not accepted
+          if (repopTimerRef.current) clearTimeout(repopTimerRef.current)
+          repopTimerRef.current = setTimeout(() => {
+            try {
+              const accepted = localStorage.getItem('cookie_consent_accepted') === 'true'
+              if (!accepted) {
+                setVisible(true)
+              }
+            } catch (err) {
+              console.warn(err)
+            }
+          }, 30000) // 30 seconds
+        },
+      })
+    } else {
+      setVisible(false)
+      if (repopTimerRef.current) clearTimeout(repopTimerRef.current)
+      repopTimerRef.current = setTimeout(() => {
+        const accepted = localStorage.getItem('cookie_consent_accepted') === 'true'
+        if (!accepted) setVisible(true)
+      }, 30000)
+    }
+  }
+
   const handleOpenPrivacyPolicy = () => {
     openWindow('notes')
-    handleDismiss('viewed_policy')
+    handleCrossDismiss()
   }
 
   if (!visible) return null
@@ -80,13 +128,14 @@ const CookieNotification = () => {
       onMouseLeave={() => setIsHovered(false)}
       className="fixed top-9 sm:top-10 right-3 sm:right-5 z-[9999] w-[340px] sm:w-[370px] rounded-2xl p-3.5 backdrop-blur-2xl bg-white/80 dark:bg-[#1e1e24]/90 border border-white/40 dark:border-white/10 shadow-[0_18px_40px_-10px_rgba(0,0,0,0.45)] select-none text-gray-800 dark:text-gray-100 transition-colors"
     >
-      {/* macOS Notification Hover Dismiss Button */}
+      {/* macOS Notification Hover Dismiss Button (re-pops in 30s) */}
       {isHovered && (
         <button
           type="button"
           data-clickable="true"
-          onClick={() => handleDismiss('dismissed')}
-          aria-label="Close notification"
+          onClick={handleCrossDismiss}
+          aria-label="Temporarily dismiss notification"
+          title="Dismiss (will reappear in 30s until accepted)"
           className="absolute -top-2 -left-2 size-5 rounded-full bg-gray-600/80 hover:bg-gray-700 text-white flex items-center justify-center text-[10px] font-bold shadow-md cursor-pointer transition-transform hover:scale-110"
         >
           ✕
@@ -134,7 +183,7 @@ const CookieNotification = () => {
         <button
           type="button"
           data-clickable="true"
-          onClick={() => handleDismiss('accepted')}
+          onClick={handleAccept}
           className="px-3.5 py-1 text-[11px] font-semibold text-white bg-blue-600 hover:bg-blue-500 active:scale-95 rounded-lg shadow-sm transition-all cursor-pointer focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none"
         >
           Accept
