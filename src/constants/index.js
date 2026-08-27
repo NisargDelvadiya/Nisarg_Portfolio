@@ -139,6 +139,10 @@ const gallery = [
     id: 4,
     img: "/images/gal4.png",
   },
+  {
+    id: 5,
+    img: "/images/gal5.png",
+  },
 ];
 
 export {
