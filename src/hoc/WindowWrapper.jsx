@@ -117,7 +117,8 @@ const WindowWrapper = (WrappedComponent, windowKey) => {
       <section
         id={windowKey}
         ref={containerRef}
-        className="will-change-transform select-none"
+        translate={windowKey === 'translate' ? 'no' : undefined}
+        className={`will-change-transform select-none ${windowKey === 'translate' ? 'notranslate' : ''}`}
         style={{ zIndex: windowState?.zIndex || 1000 }}
         onMouseDown={() => {
           try {

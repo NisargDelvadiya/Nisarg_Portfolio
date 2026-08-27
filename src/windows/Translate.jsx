@@ -87,7 +87,8 @@ const Translate = ({ controls, isMaximized }) => {
 
   return (
     <div
-      className={`flex flex-col bg-white dark:bg-[#1e1e22] text-gray-800 dark:text-white rounded-xl shadow-2xl overflow-hidden border border-black/10 dark:border-white/10 select-none transition-colors duration-200 w-full ${
+      translate="no"
+      className={`notranslate flex flex-col bg-white dark:bg-[#1e1e22] text-gray-800 dark:text-white rounded-xl shadow-2xl overflow-hidden border border-black/10 dark:border-white/10 select-none transition-colors duration-200 w-full ${
         isMaximized ? 'h-[calc(100vh-140px)]' : 'h-[500px]'
       }`}
     >
