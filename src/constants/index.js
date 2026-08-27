@@ -48,6 +48,12 @@ const dockApps = [
     canOpen: true,
   },
   {
+    id: "notes",
+    name: "Legal Notes",
+    icon: "apple-notes.svg",
+    canOpen: true,
+  },
+  {
     id: "translate",
     name: "Translate",
     icon: "translate.svg",
@@ -343,6 +349,7 @@ const WINDOW_CONFIG = {
   txtfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   imgfile: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   pdf: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
+  notes: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
   translate: { isOpen: false, zIndex: INITIAL_Z_INDEX, data: null },
 };
 

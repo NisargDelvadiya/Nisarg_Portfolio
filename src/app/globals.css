@@ -246,6 +246,13 @@ body {
   width: min(780px, 92vw);
 }
 
+#notes {
+  position: absolute;
+  top: 4.5rem;
+  left: 18%;
+  width: min(840px, 94vw);
+}
+
 #translate {
   position: absolute;
   top: 5rem;
@@ -264,6 +271,7 @@ body {
   #txtfile,
   #imgfile,
   #pdf,
+  #notes,
   #translate {
     left: 3% !important;
     right: 3% !important;

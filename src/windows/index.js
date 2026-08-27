@@ -8,5 +8,6 @@ import TxtFile from './TxtFile'
 import ImgFile from './ImgFile'
 import PdfViewer from './PdfViewer'
 import Translate from './Translate'
+import Notes from './Notes'
 
-export { Finder, Safari, Photos, Contact, Terminal, Resume, TxtFile, ImgFile, PdfViewer, Translate }
+export { Finder, Safari, Photos, Contact, Terminal, Resume, TxtFile, ImgFile, PdfViewer, Translate, Notes }
