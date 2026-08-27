@@ -16,7 +16,7 @@ import { projectsData } from "@/data/projectsData";
 export default function ProjectsPage() {
   const containerRef = useRef(null);
   const webBgRef = useRef(null);
-  const { isVenomMode, toggleTheme } = useTheme();
+  const { isVenomMode } = useTheme();
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -107,27 +107,13 @@ export default function ProjectsPage() {
             </div>
           </div>
 
-          {/* Action Buttons: Theme Toggle & Back To Home Button */}
-          <div className="flex flex-wrap sm:flex-nowrap items-center gap-2.5 sm:gap-3 w-full sm:w-auto justify-between sm:justify-end">
-            <button
-              onClick={toggleTheme}
-              title={`Switch to ${isVenomMode ? "Spider-Man Light" : "Venom Dark"} Mode`}
-              aria-label="Toggle Spider-Man / Venom Theme"
-              className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-xl font-bold text-[11px] sm:text-xs uppercase tracking-wider transition-all border cursor-pointer active:scale-95 flex-1 sm:flex-initial text-center ${
-                isVenomMode
-                  ? "bg-purple-950/80 hover:bg-purple-900 border-purple-800 text-purple-300"
-                  : "bg-white hover:bg-gray-100 border-gray-300 text-gray-800 shadow-sm"
-              }`}
-            >
-              {isVenomMode ? "🕷️ LIGHT MODE" : "🖤 VENOM MODE"}
-            </button>
-
-            {/* Back to Home Button (closes tab & returns to previous) */}
+          {/* Action Button: Back To Home Button (closes tab & returns to previous) */}
+          <div className="w-full sm:w-auto flex justify-start sm:justify-end">
             <button
               onClick={handleBackToHome}
               title="Close this tab and return to the main homepage"
               aria-label="Close this tab and return to the main homepage"
-              className={`group inline-flex items-center justify-center gap-2 px-4 sm:px-6 py-2 sm:py-2.5 rounded-xl font-black text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 border-2 active:scale-95 cursor-pointer flex-1 sm:flex-initial text-center ${
+              className={`group inline-flex items-center justify-center gap-2 w-full sm:w-auto px-5 sm:px-6 py-2.5 rounded-xl font-black text-xs sm:text-sm uppercase tracking-wider transition-all duration-200 border-2 active:scale-95 cursor-pointer text-center ${
                 isVenomMode
                   ? "bg-purple-600 hover:bg-purple-500 text-white border-purple-400 shadow-[0_4px_15px_rgba(147,51,234,0.4)]"
                   : "bg-[#a31515] hover:bg-[#821010] text-white border-black shadow-[3px_3px_0px_#000000] active:shadow-[1px_1px_0px_#000000]"
