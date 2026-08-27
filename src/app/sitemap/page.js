@@ -27,6 +27,7 @@ export default function SitemapPage() {
       category: "Pages & Legal Documents",
       description: "Official legal guidelines, cookie disclosures, and terms",
       links: [
+        { name: "All Projects Archive", url: "/projects", desc: "Complete 3D animation, CGI & VFX portfolio showcase" },
         { name: "Privacy Policy", url: "/PrivacyPolicy", desc: "DPDP Act 2023 compliance & data handling" },
         { name: "Terms & Conditions", url: "/T&C", desc: "Terms of service, usage licenses & IP rules" },
         { name: "Visual HTML Sitemap", url: "/sitemap", desc: "Directory index of all website routes" },

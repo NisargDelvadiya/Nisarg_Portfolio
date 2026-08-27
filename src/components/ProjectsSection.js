@@ -2,65 +2,28 @@
 
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import Link from "next/link";
 import { useTheme } from "@/context/ThemeContext";
+import { projectsData } from "@/data/projectsData";
 
 /**
- * Projects showcase dataset featuring 3D & VFX Video Reels
- */
-const projectsData = [
-  {
-    title: "TATA SAFARI 3D COMMERCIAL",
-    description:
-      "High-octane commercial 3D animation, vehicle rendering, and cinematic visual effects highlighting rugged aesthetics and performance.",
-    video: "/Assets/Projects/tata safari.mp4",
-  },
-  {
-    title: "NIKE DYNAMIC PRODUCT REEL",
-    description:
-      "Dynamic 3D footwear motion graphics and product visualization showcasing kinetic energy, material textures, and fluid physics.",
-    video: "/Assets/Projects/nike.mp4",
-  },
-  {
-    title: "LAY'S 3D BRAND ADVERTISING",
-    description:
-      "Vibrant photorealistic product animation with dynamic particle effects, crisp lighting, and commercial broadcast composition.",
-    video: "/Assets/Projects/lays.mp4",
-  },
-  {
-    title: "HEADS CHARACTER VFX & MOTION",
-    description:
-      "Stylized character motion design and lighting composition exploring surreal 3D sculpting, animation, and visual storytelling.",
-    video: "/Assets/Projects/heads.mp4",
-  },
-  {
-    title: "FASHION APPAREL 3D VISUALS",
-    description:
-      "Sleek high-fashion 3D cloth simulation, aesthetic lighting, and motion design tailored for luxury apparel campaigns.",
-    video: "/Assets/Projects/fashion .mp4",
-  },
-  {
-    title: "DREAM CINEMATIC CONCEPT",
-    description:
-      "Atmospheric VFX concept environment featuring cinematic camera sequencing, volumetric lighting, and surreal ambient mood.",
-    video: "/Assets/Projects/dream.mp4",
-  },
-];
-
-/**
- * ProjectsSection Component
+ * ProjectsSection Component (Homepage Showcase)
  * 
  * Features:
- * - Responsive 2-column / 3-column grid of featured 3D animation & VFX video project reels
- * - Integrated auto-playing, looping, muted video showcases with hardware-accelerated playback
+ * - 2x2 grid of 4 featured 3D animation & VFX video project reels
+ * - "View More Projects" CTA button opening the dedicated /projects archive in a new tab
+ * - Integrated auto-playing, looping, muted video showcases
  * - Animated corner Spider-Man / Venom peek character with subtle floating oscillation
  * - Continuous rotating web background graphic
- * - Minimalist, focused design emphasizing title, video preview, and descriptions
  */
 export default function ProjectsSection() {
   const sectionRef = useRef(null);
   const webBgRef = useRef(null);
   const spideyCornerRef = useRef(null);
   const { isVenomMode } = useTheme();
+
+  // Display only the first 4 projects on the main homepage
+  const featuredProjects = projectsData.slice(0, 4);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -166,11 +129,11 @@ export default function ProjectsSection() {
         </h2>
       </div>
 
-      {/* Projects Grid Container (2 cols on md, 3 cols on xl) */}
-      <div className="relative z-20 max-w-7xl w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {projectsData.map((project, index) => (
+      {/* Projects Grid Container (2x2 on desktop) */}
+      <div className="relative z-20 max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-10">
+        {featuredProjects.map((project, index) => (
           <div
-            key={index}
+            key={project.id || index}
             className={`group relative flex flex-col overflow-hidden rounded-3xl border-3 shadow-xl transition-all duration-300 hover:-translate-y-2 ${
               isVenomMode
                 ? "bg-[#0f0f18] border-purple-900/60 shadow-purple-950/20 hover:border-purple-500 hover:shadow-[0_10px_30px_rgba(147,51,234,0.25)]"
@@ -184,7 +147,7 @@ export default function ProjectsSection() {
                   isVenomMode ? "text-purple-400" : "text-[#a31515]"
                 }`}
               >
-                PROJECT 0{index + 1}
+                PROJECT {project.id || `0${index + 1}`}
               </span>
               <span
                 className={`text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full border transition-colors duration-300 ${
@@ -193,7 +156,7 @@ export default function ProjectsSection() {
                     : "border-red-200 bg-red-50 text-[#a31515]"
                 }`}
               >
-                3D / VFX
+                {project.category || "3D / VFX"}
               </span>
             </div>
 
@@ -230,6 +193,30 @@ export default function ProjectsSection() {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* View More Projects CTA Button */}
+      <div className="relative z-20 mt-14 flex items-center justify-center">
+        <a
+          href="/projects"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="View All Projects (Opens in a new tab)"
+          aria-label="View All Projects (Opens in a new tab)"
+          className={`group relative inline-flex items-center gap-3 px-8 py-4 rounded-2xl font-black text-sm md:text-base uppercase tracking-widest transition-all duration-300 shadow-xl border-2 active:scale-95 active:translate-y-0.5 cursor-pointer ${
+            isVenomMode
+              ? "bg-purple-950/80 hover:bg-purple-600 text-purple-200 hover:text-white border-purple-600/80 shadow-[0_4px_20px_rgba(147,51,234,0.35)] hover:shadow-[0_8px_30px_rgba(147,51,234,0.6)]"
+              : "bg-[#a31515] hover:bg-[#821010] text-white border-black shadow-[4px_4px_0px_#000000] hover:shadow-[6px_6px_0px_#000000]"
+          }`}
+        >
+          <span>VIEW MORE PROJECTS</span>
+          <svg
+            className="w-5 h-5 fill-none stroke-current stroke-2 transition-transform duration-300 group-hover:translate-x-1"
+            viewBox="0 0 24 24"
+          >
+            <path strokeLinecap="round" strokeLinejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
       </div>
     </section>
   );

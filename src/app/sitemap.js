@@ -19,6 +19,12 @@ export default function sitemap() {
         images: [`${baseUrl}/Assets/Mahin.jpeg`],
       },
       {
+        url: `${baseUrl}/projects`,
+        lastModified: now,
+        changeFrequency: "weekly",
+        priority: 0.9,
+      },
+      {
         url: `${baseUrl}/sitemap`,
         lastModified: now,
         changeFrequency: "monthly",
