@@ -4,7 +4,7 @@
  * and offline application resilience.
  */
 
-const CACHE_NAME = 'macfolio-cache-v1.1'
+const CACHE_NAME = 'macfolio-cache-v1.2'
 
 // Critical App Shell resources to precache immediately on install
 const PRECACHE_RESOURCES = [
