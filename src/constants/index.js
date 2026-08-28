@@ -280,7 +280,7 @@ const ABOUT_LOCATION = {
       fileType: "txt",
       position: "top-10 left-10",
       description: [
-        "Hey! I'm Nisarg Delvadiya 👋, a full-stack web developer who enjoys building sleek, interactive web applications that actually work well.",
+        "Namaste! I'm Nisarg Delvadiya 🙏, a full-stack web developer who enjoys building sleek, interactive web applications that actually work well.",
         "I specialize in JavaScript, React, Next.js, and Node.js—and I love making things feel smooth, fast, and delightful to interact with.",
         "I'm passionate about clean UI, modern UX, responsive design, and writing high-performance code.",
         "Outside of development work, you'll find me exploring new technologies, refining design details, and building creative digital experiences.",
