@@ -9,12 +9,12 @@ import WindowWrapper from '#hoc/WindowWrapper'
  */
 const PdfViewer = ({ controls, windowData, isMaximized }) => {
   const data = windowData || {
-    name: 'Terms and Conditions.pdf',
-    fileUrl: '/files/terms-and-conditions.pdf',
+    name: 'Resume.pdf',
+    fileUrl: '/files/resume.pdf',
   }
 
-  const fileUrl = data.fileUrl || '/files/terms-and-conditions.pdf'
-  const fileName = data.name || 'Document.pdf'
+  const fileUrl = data.fileUrl || '/files/resume.pdf'
+  const fileName = data.name || 'Resume.pdf'
 
   return (
     <div

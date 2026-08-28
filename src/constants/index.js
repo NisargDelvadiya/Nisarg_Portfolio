@@ -299,15 +299,6 @@ const ABOUT_LOCATION = {
         "• University: Manipal University Jaipur",
       ],
     },
-    {
-      id: 3,
-      name: "Terms and Conditions.pdf",
-      icon: "/images/pdf.png",
-      kind: "file",
-      fileType: "pdf",
-      fileUrl: "/files/terms-and-conditions.pdf",
-      position: "top-10 left-86",
-    },
   ],
 };
 
