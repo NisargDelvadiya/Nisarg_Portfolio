@@ -24,6 +24,10 @@ Thumbs.db
 *.swp
 *.swo
 
+# AI & Agent Guidelines
+AGENTS.md
+CLAUDE.md
+
 # Environment Variables & Local Secrets
 .env
 .env*.local

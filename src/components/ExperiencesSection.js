@@ -19,7 +19,7 @@ const experiencesData = [
   {
     role: "WordPress Developer Intern",
     company: "MySphere Infotech",
-    duration: "1 Month | Internship",
+    duration: "3 Months | Internship",
     description:
       "Worked as a WordPress Developer Intern, gaining hands-on experience in website development and customization. Worked with WordPress, PHP, HTML, and CSS to modify website components, customize layouts, fix design issues, and implement client requirements.",
     tags: ["WordPress", "PHP", "HTML", "CSS", "Customization"],
@@ -27,7 +27,7 @@ const experiencesData = [
   {
     role: "Chef",
     company: "Santushti",
-    duration: "1 Month",
+    duration: "3 Months",
     description:
       "Gained practical experience in food preparation, kitchen operations, time management, teamwork, and maintaining quality standards. Developed discipline, responsibility, coordination, and high-efficiency performance in a fast-paced environment.",
     tags: ["Time Management", "Teamwork", "Operations", "Discipline"],
@@ -43,7 +43,7 @@ const experiencesData = [
   {
     role: "Office Administrative",
     company: "Baroda Public School",
-    duration: "Part-Time | May 2023",
+    duration: "2 Months",
     description:
       "Managed reception and front-desk operations while supporting day-to-day administrative activities. Managed data entry, documentation, tele-calling, filing, office supply management, and test invigilation.",
     tags: ["Administration", "Data Entry", "Documentation", "Multitasking"],

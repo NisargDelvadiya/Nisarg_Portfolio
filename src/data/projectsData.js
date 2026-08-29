@@ -50,4 +50,12 @@ export const projectsData = [
     video: "/Assets/Projects/dream.mp4",
     category: "3D / VFX",
   },
+  {
+    id: "07",
+    title: "DESTINATION CINEMATIC 3D REEL",
+    description:
+      "Immersive 3D environment visualization and cinematic camera direction capturing atmospheric depth, architectural details, and scenic lighting.",
+    video: "/Assets/Projects/destination.mp4",
+    category: "3D / VFX",
+  },
 ];
