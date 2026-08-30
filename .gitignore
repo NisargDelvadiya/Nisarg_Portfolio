@@ -28,6 +28,8 @@ lerna-debug.log*
 
 # Editor & OS Metadata
 .DS_Store
+.DS_Store?
+._*
 *.pem
 .idea/
 .vscode/*
@@ -37,6 +39,12 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# AI & Agent Guidelines
+AGENTS.md
+CLAUDE.md
+.gemini/
+.agents/
 
 # TypeScript & Cache
 *.tsbuildinfo
