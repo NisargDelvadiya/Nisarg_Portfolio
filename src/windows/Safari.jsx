@@ -74,7 +74,7 @@ const Safari = ({ controls, isMaximized }) => {
     {
       id: 'donations',
       title: 'Causes & Donations',
-      url: 'https://donations.nisargjayeshdelvadiya.com/noble-causes',
+      url: 'https://donations.nisarg.com/dharma',
     },
     {
       id: 'blogs',
