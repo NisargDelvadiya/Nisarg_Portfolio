@@ -143,18 +143,6 @@ const gallery = [
     id: 2,
     img: "/images/gal2.png",
   },
-  {
-    id: 3,
-    img: "/images/gal3.png",
-  },
-  {
-    id: 4,
-    img: "/images/gal4.png",
-  },
-  {
-    id: 5,
-    img: "/images/gal5.png",
-  },
 ];
 
 const ALL_LANGUAGES = [
