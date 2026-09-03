@@ -130,6 +130,37 @@ body {
   will-change: transform;
 }
 
+/* Desktop Larger Dock */
+@media (min-width: 1024px) {
+  #dock {
+    bottom: 1.5rem;
+  }
+  .dock-container {
+    gap: 0.85rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 1.75rem;
+  }
+  .dock-icon {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  #dock {
+    bottom: 1.75rem;
+  }
+  .dock-container {
+    gap: 0.95rem;
+    padding: 0.7rem 1.25rem;
+    border-radius: 2rem;
+  }
+  .dock-icon {
+    width: 4.85rem;
+    height: 4.85rem;
+  }
+}
+
 /* Mobile & Small Screen Responsive Dock */
 @media (max-width: 640px) {
   #dock {
