@@ -6,7 +6,7 @@ import { blogPosts } from '#constants'
 
 /**
  * macOS Safari Browser Window
- * Minimalist, elegant design with real website favicons for all donation platforms.
+ * Minimalist, elegant layout with proper alignment, full-width responsive rows, and favicons.
  */
 const Safari = ({ controls, isMaximized }) => {
   const [activeTab, setActiveTab] = useState('donations')
@@ -19,7 +19,6 @@ const Safari = ({ controls, isMaximized }) => {
       description: 'Providing wholesome mid-day meals to millions of government school children across India.',
       favicon: '/icons/causes/akshayapatra.png',
       link: 'https://www.akshayapatra.org/donate-to-midday-meal-programme?utm_source=google&utm_medium=cpc&utm_campaign=gads&utm_content=lapsed-px-mdm-26&gad_source=1&gad_campaignid=23942140523&gbraid=0AAAAADtGwlyegnOx-VzkL8UHqs8vuzz7g&gclid=Cj0KCQjwteTUBhD4ARIsAEYjs3rUSyHEw9nWu5CbfvFXoTIkZdv4Ke30P2gYdi4b5n-ryB1I4cZs5BAaAukFEALw_wcB/',
-      domain: 'akshayapatra.org',
     },
     {
       id: 2,
@@ -28,7 +27,6 @@ const Safari = ({ controls, isMaximized }) => {
       description: 'Eliminating hunger, malnutrition, and food wastage across vulnerable communities.',
       favicon: '/icons/causes/feedingindia.png',
       link: 'https://www.feedingindia.org/',
-      domain: 'feedingindia.org',
     },
     {
       id: 3,
@@ -37,7 +35,6 @@ const Safari = ({ controls, isMaximized }) => {
       description: 'Crowdfunding platform dedicated to supporting civilizational causes and temple restoration.',
       favicon: '/icons/causes/hindu_fund.png',
       link: 'https://hindu.fund/',
-      domain: 'hindu.fund',
     },
     {
       id: 4,
@@ -46,7 +43,6 @@ const Safari = ({ controls, isMaximized }) => {
       description: 'Educational initiatives preserving and spreading timeless Vedic knowledge and philosophy.',
       favicon: '/icons/causes/veducation.png',
       link: 'https://www.veducation.world/',
-      domain: 'veducation.world',
     },
     {
       id: 5,
@@ -55,7 +51,6 @@ const Safari = ({ controls, isMaximized }) => {
       description: 'Making Sanskrit linguistics, chants, and ancient philosophical texts accessible globally.',
       favicon: '/icons/causes/thesanskritchannel.png',
       link: 'https://www.thesanskritchannel.org/',
-      domain: 'thesanskritchannel.org',
     },
     {
       id: 6,
@@ -64,7 +59,6 @@ const Safari = ({ controls, isMaximized }) => {
       description: 'Preserving sacred heritage pilgrimage sites, devotee assistance, and charitable seva projects.',
       favicon: '/icons/causes/shivdhaam.png',
       link: 'https://www.shivdhaam.org.in/?gad_source=1&gad_campaignid=23949023171&gbraid=0AAAAA-wKSMMO4ZiZthKTvahdFl4GIwcLA&gclid=CjwKCAjwqJXUBhBNEiwA8BgG7ieXXDG3WGkjFA0uEGe8yEg6NRAmmD_r6jHUKL3IaqTBgIR3aL-AjBoCq5wQAvD_BwE',
-      domain: 'shivdhaam.org.in',
     },
     {
       id: 7,
@@ -73,7 +67,6 @@ const Safari = ({ controls, isMaximized }) => {
       description: 'Delivering grassroots emergency medical relief, education support, and assistance to families in need.',
       favicon: '/icons/causes/forthepeople.png',
       link: 'https://forthepeople.in/en',
-      domain: 'forthepeople.in',
     },
   ]
 
@@ -97,10 +90,10 @@ const Safari = ({ controls, isMaximized }) => {
       className={`flex flex-col bg-white dark:bg-[#18181c] text-gray-800 dark:text-white rounded-xl shadow-2xl overflow-hidden border border-black/10 dark:border-white/10 select-none transition-colors duration-200 ${
         isMaximized
           ? 'w-full h-[calc(100dvh-140px)]'
-          : 'w-full max-w-[94vw] sm:max-w-[680px] md:max-w-[740px] lg:max-w-[800px] h-[calc(100dvh-140px)] sm:h-[520px] md:h-[560px]'
+          : 'w-[720px] max-w-[94vw] h-[calc(100dvh-140px)] sm:h-[540px]'
       }`}
     >
-      {/* Minimalist Safari Header & Address Bar */}
+      {/* Safari Header & Toolbar */}
       <div
         id="window-header"
         className="bg-[#f5f5f7] dark:bg-[#202024] border-b border-gray-200/70 dark:border-white/10 px-3 sm:px-4 py-2 flex items-center justify-between flex-shrink-0 gap-2 cursor-grab active:cursor-grabbing"
@@ -131,7 +124,7 @@ const Safari = ({ controls, isMaximized }) => {
           </div>
         </div>
 
-        {/* Minimal Smart Search / Address Bar */}
+        {/* Smart Search / Address Bar */}
         <div
           className="search flex-1 min-w-0 max-w-full sm:max-w-md mx-auto flex items-center gap-1.5 px-3 py-1 rounded-md bg-white dark:bg-[#151518] border border-black/10 dark:border-white/10 shadow-2xs"
           onMouseDown={(e) => e.stopPropagation()}
@@ -151,7 +144,7 @@ const Safari = ({ controls, isMaximized }) => {
         <div className="w-10 sm:w-14" />
       </div>
 
-      {/* Minimal Safari Tab Bar */}
+      {/* Safari Tab Bar */}
       <div className="bg-[#ebebef] dark:bg-[#1a1a1d] px-2 pt-1 flex items-center gap-1 border-b border-gray-200/70 dark:border-white/10 select-none overflow-x-auto">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id
@@ -172,11 +165,11 @@ const Safari = ({ controls, isMaximized }) => {
         })}
       </div>
 
-      {/* Minimal Browser Main View */}
-      <main className="flex-1 overflow-y-auto overscroll-contain bg-white dark:bg-[#18181c]">
+      {/* Browser Main View with Clean Full-Width Content */}
+      <main className="flex-1 overflow-y-auto overscroll-contain bg-white dark:bg-[#18181c] p-4 sm:p-6">
         {activeTab === 'donations' && (
-          <div className="p-4 sm:p-6 md:p-8 max-w-2xl mx-auto">
-            <div className="mb-4 sm:mb-6 pb-2 border-b border-gray-100 dark:border-white/5">
+          <div className="w-full">
+            <div className="mb-4 pb-2.5 border-b border-gray-100 dark:border-white/5">
               <h2 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">
                 Causes & Foundations
               </h2>
@@ -185,14 +178,14 @@ const Safari = ({ controls, isMaximized }) => {
               </p>
             </div>
 
-            {/* Minimal Clean Cause Rows with Favicons */}
+            {/* Clean Cause Rows */}
             <div className="divide-y divide-gray-100 dark:divide-white/5">
               {nobleCauses.map((cause) => (
                 <div
                   key={cause.id}
-                  className="py-3 sm:py-3.5 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4 hover:bg-gray-50/60 dark:hover:bg-white/[0.02] px-2 -mx-2 rounded-lg transition-colors"
+                  className="py-3 flex items-center justify-between gap-3 sm:gap-4 hover:bg-gray-50/70 dark:hover:bg-white/[0.02] px-2.5 -mx-2.5 rounded-lg transition-colors"
                 >
-                  <div className="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+                  <div className="flex items-center gap-3 min-w-0 flex-1">
                     {/* Website Favicon */}
                     <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gray-100 dark:bg-white/5 border border-black/5 dark:border-white/10 p-1 flex items-center justify-center flex-shrink-0 shadow-2xs">
                       <img
@@ -208,15 +201,15 @@ const Safari = ({ controls, isMaximized }) => {
                     </div>
 
                     <div className="space-y-0.5 min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
-                        <span className="text-xs font-medium text-gray-900 dark:text-white truncate">
+                      <div className="flex items-center gap-2 min-w-0">
+                        <span className="text-xs sm:text-sm font-medium text-gray-900 dark:text-white truncate">
                           {cause.name}
                         </span>
-                        <span className="text-[10px] text-gray-400 dark:text-gray-500">
+                        <span className="text-[10px] text-gray-400 dark:text-gray-500 truncate hidden sm:inline">
                           • {cause.category}
                         </span>
                       </div>
-                      <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
+                      <p className="text-[11px] sm:text-xs text-gray-500 dark:text-gray-400 line-clamp-1 sm:line-clamp-2">
                         {cause.description}
                       </p>
                     </div>
@@ -226,7 +219,7 @@ const Safari = ({ controls, isMaximized }) => {
                     href={cause.link}
                     target="_blank"
                     rel="noreferrer"
-                    className="self-start sm:self-center text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 inline-flex items-center gap-1 cursor-pointer flex-shrink-0 ml-10 sm:ml-0"
+                    className="text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 inline-flex items-center gap-1 cursor-pointer flex-shrink-0 px-2.5 py-1 rounded hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors"
                     title={`Donate to ${cause.name}`}
                   >
                     <span>Donate</span>
@@ -239,8 +232,8 @@ const Safari = ({ controls, isMaximized }) => {
         )}
 
         {activeTab === 'blogs' && (
-          <div className="p-4 sm:p-6 md:p-8 max-w-2xl mx-auto">
-            <div className="flex items-center justify-between mb-4 sm:mb-6 pb-2 border-b border-gray-100 dark:border-white/5">
+          <div className="w-full">
+            <div className="flex items-center justify-between mb-4 pb-2.5 border-b border-gray-100 dark:border-white/5">
               <div>
                 <h2 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white">
                   Articles & Publications
@@ -260,18 +253,18 @@ const Safari = ({ controls, isMaximized }) => {
               </a>
             </div>
 
-            {/* Minimal Clean Blog Rows */}
+            {/* Clean Blog Rows */}
             <div className="divide-y divide-gray-100 dark:divide-white/5">
               {blogPosts.map((post) => (
                 <div
                   key={post.id}
-                  className="py-3.5 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4 hover:bg-gray-50/60 dark:hover:bg-white/[0.02] px-2 -mx-2 rounded-lg transition-colors"
+                  className="py-3 flex items-center justify-between gap-3 sm:gap-4 hover:bg-gray-50/70 dark:hover:bg-white/[0.02] px-2.5 -mx-2.5 rounded-lg transition-colors"
                 >
                   <div className="space-y-0.5 min-w-0 flex-1">
                     <span className="text-[10px] text-gray-400 dark:text-gray-500 uppercase tracking-wider">
                       {post.date}
                     </span>
-                    <h3 className="text-xs sm:text-sm font-medium text-gray-900 dark:text-white line-clamp-2">
+                    <h3 className="text-xs sm:text-sm font-medium text-gray-900 dark:text-white line-clamp-1 sm:line-clamp-2">
                       {post.title}
                     </h3>
                   </div>
@@ -279,7 +272,7 @@ const Safari = ({ controls, isMaximized }) => {
                     href={post.link}
                     target="_blank"
                     rel="noreferrer"
-                    className="self-start sm:self-center text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 inline-flex items-center gap-1 cursor-pointer flex-shrink-0"
+                    className="text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 inline-flex items-center gap-1 cursor-pointer flex-shrink-0 px-2.5 py-1 rounded hover:bg-blue-50 dark:hover:bg-blue-950/30 transition-colors"
                     title={`Read: ${post.title}`}
                   >
                     <span>Read</span>
