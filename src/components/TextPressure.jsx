@@ -36,6 +36,7 @@ const TextPressure = ({
   flex = true,
   stroke = false,
   scale = false,
+  uppercase = false,
 
   textColor = '#FFFFFF',
   strokeColor = '#FF0000',
@@ -47,6 +48,7 @@ const TextPressure = ({
   defaultWidth = 100,
   defaultItalic = 0,
   defaultAlpha = 1,
+  as: Component = 'h1',
 }) => {
   const containerRef = useRef(null)
   const titleRef = useRef(null)
@@ -87,7 +89,6 @@ const TextPressure = ({
 
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect()
-        // Strictly check if mouse is inside the text container bounds
         const isInside =
           e.clientX >= rect.left &&
           e.clientX <= rect.right &&
@@ -147,12 +148,12 @@ const TextPressure = ({
 
     const { width: containerW, height: containerH } = containerRef.current.getBoundingClientRect()
 
-    let newFontSize = containerW / (chars.length / 2)
+    let newFontSize = containerW / (chars.length / (flex ? 2 : 1.8))
     newFontSize = Math.max(newFontSize, minFontSize)
 
     setFontSize(newFontSize)
     setScaleY(1)
-    setLineHeight(1)
+    setLineHeight(1.1)
 
     requestAnimationFrame(() => {
       if (!titleRef.current) return
@@ -164,7 +165,7 @@ const TextPressure = ({
         setLineHeight(yRatio)
       }
     })
-  }, [chars.length, minFontSize, scale])
+  }, [chars.length, minFontSize, scale, flex])
 
   useEffect(() => {
     const debouncedSetSize = debounce(setSize, 100)
@@ -218,7 +219,6 @@ const TextPressure = ({
           }
 
           const cur = currentPropsRef.current[i]
-          // Lerp speed: 0.2 provides responsive return to original state
           cur.wght += (targetWght - cur.wght) * 0.2
           cur.wdth += (targetWdth - cur.wdth) * 0.2
           cur.ital += (targetItal - cur.ital) * 0.2
@@ -277,22 +277,22 @@ const TextPressure = ({
       onMouseLeave={() => {
         isHoveredRef.current = false
       }}
-      className="relative w-full h-full overflow-hidden bg-transparent cursor-default"
+      className="relative w-full h-full overflow-hidden bg-transparent cursor-default flex items-center justify-center"
     >
       {styleElement}
-      <h1
+      <Component
         ref={titleRef}
         className={`text-pressure-title ${className} ${
-          flex ? 'flex justify-between' : ''
-        } ${stroke ? 'stroke' : ''} uppercase text-center`}
+          flex ? 'flex justify-between w-full' : 'inline-flex justify-center'
+        } ${stroke ? 'stroke' : ''} ${uppercase ? 'uppercase' : ''} text-center`}
         style={{
           fontFamily,
-          fontSize: fontSize,
+          fontSize: `${fontSize}px`,
           lineHeight,
           transform: `scale(1, ${scaleY})`,
           transformOrigin: 'center top',
           margin: 0,
-          fontWeight: 400,
+          fontWeight: defaultWeight,
           color: stroke ? undefined : textColor,
         }}
       >
@@ -311,7 +311,7 @@ const TextPressure = ({
             {char === ' ' ? ' ' : char}
           </span>
         ))}
-      </h1>
+      </Component>
     </div>
   )
 }
