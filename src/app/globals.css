@@ -406,3 +406,38 @@ section[id],
 
 
 
+
+/* Smooth macOS Window Scrollbar & Momentum */
+.window-scroll-body {
+  overflow-y: auto !important;
+  overflow-x: hidden !important;
+  overscroll-behavior-y: contain !important;
+  -webkit-overflow-scrolling: touch !important;
+  scroll-behavior: smooth;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.18) transparent;
+}
+
+.dark .window-scroll-body {
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
+}
+
+.window-scroll-body::-webkit-scrollbar {
+  width: 6px;
+}
+.window-scroll-body::-webkit-scrollbar-track {
+  background: transparent;
+}
+.window-scroll-body::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 9999px;
+}
+.dark .window-scroll-body::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+}
+.window-scroll-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.35);
+}
+.dark .window-scroll-body::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.35);
+}

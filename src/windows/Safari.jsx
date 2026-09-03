@@ -166,7 +166,10 @@ const Safari = ({ controls, isMaximized }) => {
       </div>
 
       {/* Browser Main View with Clean Full-Width Content */}
-      <main className="flex-1 overflow-y-auto overscroll-contain bg-white dark:bg-[#18181c] p-4 sm:p-6">
+      <main
+        className="window-scroll-body flex-1 bg-white dark:bg-[#18181c] p-4 sm:p-6"
+        onWheel={(e) => e.stopPropagation()}
+      >
         {activeTab === 'donations' && (
           <div className="w-full">
             <div className="mb-4 pb-2.5 border-b border-gray-100 dark:border-white/5">
