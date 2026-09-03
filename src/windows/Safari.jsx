@@ -6,7 +6,7 @@ import { blogPosts } from '#constants'
 
 /**
  * macOS Safari Browser Window
- * Minimalist, elegant design inspired by native macOS Safari.
+ * Minimalist, elegant design with real website favicons for all donation platforms.
  */
 const Safari = ({ controls, isMaximized }) => {
   const [activeTab, setActiveTab] = useState('donations')
@@ -17,6 +17,7 @@ const Safari = ({ controls, isMaximized }) => {
       name: 'The Akshaya Patra Foundation',
       category: 'Mid-Day Meals & Child Nutrition',
       description: 'Providing wholesome mid-day meals to millions of government school children across India.',
+      favicon: '/icons/causes/akshayapatra.png',
       link: 'https://www.akshayapatra.org/donate-to-midday-meal-programme?utm_source=google&utm_medium=cpc&utm_campaign=gads&utm_content=lapsed-px-mdm-26&gad_source=1&gad_campaignid=23942140523&gbraid=0AAAAADtGwlyegnOx-VzkL8UHqs8vuzz7g&gclid=Cj0KCQjwteTUBhD4ARIsAEYjs3rUSyHEw9nWu5CbfvFXoTIkZdv4Ke30P2gYdi4b5n-ryB1I4cZs5BAaAukFEALw_wcB/',
       domain: 'akshayapatra.org',
     },
@@ -25,6 +26,7 @@ const Safari = ({ controls, isMaximized }) => {
       name: 'Feeding India',
       category: 'Hunger Relief',
       description: 'Eliminating hunger, malnutrition, and food wastage across vulnerable communities.',
+      favicon: '/icons/causes/feedingindia.png',
       link: 'https://www.feedingindia.org/',
       domain: 'feedingindia.org',
     },
@@ -33,6 +35,7 @@ const Safari = ({ controls, isMaximized }) => {
       name: 'Hindu Fund',
       category: 'Heritage & Community',
       description: 'Crowdfunding platform dedicated to supporting civilizational causes and temple restoration.',
+      favicon: '/icons/causes/hindu_fund.png',
       link: 'https://hindu.fund/',
       domain: 'hindu.fund',
     },
@@ -41,6 +44,7 @@ const Safari = ({ controls, isMaximized }) => {
       name: 'Veducation',
       category: 'Vedic Wisdom',
       description: 'Educational initiatives preserving and spreading timeless Vedic knowledge and philosophy.',
+      favicon: '/icons/causes/veducation.png',
       link: 'https://www.veducation.world/',
       domain: 'veducation.world',
     },
@@ -49,6 +53,7 @@ const Safari = ({ controls, isMaximized }) => {
       name: 'The Sanskrit Channel',
       category: 'Sanskrit Revival',
       description: 'Making Sanskrit linguistics, chants, and ancient philosophical texts accessible globally.',
+      favicon: '/icons/causes/thesanskritchannel.png',
       link: 'https://www.thesanskritchannel.org/',
       domain: 'thesanskritchannel.org',
     },
@@ -57,6 +62,7 @@ const Safari = ({ controls, isMaximized }) => {
       name: 'Shivdhaam',
       category: 'Spiritual & Social Welfare',
       description: 'Preserving sacred heritage pilgrimage sites, devotee assistance, and charitable seva projects.',
+      favicon: '/icons/causes/shivdhaam.png',
       link: 'https://www.shivdhaam.org.in/?gad_source=1&gad_campaignid=23949023171&gbraid=0AAAAA-wKSMMO4ZiZthKTvahdFl4GIwcLA&gclid=CjwKCAjwqJXUBhBNEiwA8BgG7ieXXDG3WGkjFA0uEGe8yEg6NRAmmD_r6jHUKL3IaqTBgIR3aL-AjBoCq5wQAvD_BwE',
       domain: 'shivdhaam.org.in',
     },
@@ -65,6 +71,7 @@ const Safari = ({ controls, isMaximized }) => {
       name: 'For The People Foundation',
       category: 'Humanitarian Aid',
       description: 'Delivering grassroots emergency medical relief, education support, and assistance to families in need.',
+      favicon: '/icons/causes/forthepeople.png',
       link: 'https://forthepeople.in/en',
       domain: 'forthepeople.in',
     },
@@ -178,32 +185,48 @@ const Safari = ({ controls, isMaximized }) => {
               </p>
             </div>
 
-            {/* Minimal Clean Cause Rows */}
+            {/* Minimal Clean Cause Rows with Favicons */}
             <div className="divide-y divide-gray-100 dark:divide-white/5">
               {nobleCauses.map((cause) => (
                 <div
                   key={cause.id}
                   className="py-3 sm:py-3.5 first:pt-0 last:pb-0 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-4 hover:bg-gray-50/60 dark:hover:bg-white/[0.02] px-2 -mx-2 rounded-lg transition-colors"
                 >
-                  <div className="space-y-0.5 min-w-0 flex-1">
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs font-medium text-gray-900 dark:text-white">
-                        {cause.name}
-                      </span>
-                      <span className="text-[10px] text-gray-400 dark:text-gray-500">
-                        • {cause.category}
-                      </span>
+                  <div className="flex items-start sm:items-center gap-3 min-w-0 flex-1">
+                    {/* Website Favicon */}
+                    <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gray-100 dark:bg-white/5 border border-black/5 dark:border-white/10 p-1 flex items-center justify-center flex-shrink-0 shadow-2xs">
+                      <img
+                        src={cause.favicon}
+                        alt=""
+                        aria-hidden="true"
+                        className="size-full object-contain rounded"
+                        loading="lazy"
+                        onError={(e) => {
+                          e.currentTarget.style.display = 'none'
+                        }}
+                      />
                     </div>
-                    <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
-                      {cause.description}
-                    </p>
+
+                    <div className="space-y-0.5 min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
+                        <span className="text-xs font-medium text-gray-900 dark:text-white truncate">
+                          {cause.name}
+                        </span>
+                        <span className="text-[10px] text-gray-400 dark:text-gray-500">
+                          • {cause.category}
+                        </span>
+                      </div>
+                      <p className="text-xs text-gray-500 dark:text-gray-400 line-clamp-2">
+                        {cause.description}
+                      </p>
+                    </div>
                   </div>
 
                   <a
                     href={cause.link}
                     target="_blank"
                     rel="noreferrer"
-                    className="self-start sm:self-center text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 inline-flex items-center gap-1 cursor-pointer flex-shrink-0"
+                    className="self-start sm:self-center text-xs font-medium text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 inline-flex items-center gap-1 cursor-pointer flex-shrink-0 ml-10 sm:ml-0"
                     title={`Donate to ${cause.name}`}
                   >
                     <span>Donate</span>
