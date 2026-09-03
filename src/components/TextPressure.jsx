@@ -43,6 +43,10 @@ const TextPressure = ({
   className = '',
 
   minFontSize = 24,
+  defaultWeight = 400,
+  defaultWidth = 100,
+  defaultItalic = 0,
+  defaultAlpha = 1,
 }) => {
   const containerRef = useRef(null)
   const titleRef = useRef(null)
@@ -50,12 +54,31 @@ const TextPressure = ({
 
   const mouseRef = useRef({ x: 0, y: 0 })
   const cursorRef = useRef({ x: 0, y: 0 })
+  const isHoveredRef = useRef(false)
 
   const [fontSize, setFontSize] = useState(minFontSize)
   const [scaleY, setScaleY] = useState(1)
   const [lineHeight, setLineHeight] = useState(1)
 
-  const chars = text.split('')
+  const chars = useMemo(() => text.split(''), [text])
+
+  const currentPropsRef = useRef(
+    chars.map(() => ({
+      wght: defaultWeight,
+      wdth: defaultWidth,
+      ital: defaultItalic,
+      alpha: defaultAlpha,
+    }))
+  )
+
+  useEffect(() => {
+    currentPropsRef.current = chars.map(() => ({
+      wght: defaultWeight,
+      wdth: defaultWidth,
+      ital: defaultItalic,
+      alpha: defaultAlpha,
+    }))
+  }, [chars, defaultWeight, defaultWidth, defaultItalic, defaultAlpha])
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -70,14 +93,6 @@ const TextPressure = ({
 
     window.addEventListener('mousemove', handleMouseMove)
     window.addEventListener('touchmove', handleTouchMove, { passive: true })
-
-    if (containerRef.current) {
-      const { left, top, width: w, height: h } = containerRef.current.getBoundingClientRect()
-      mouseRef.current.x = left + w / 2
-      mouseRef.current.y = top + h / 2
-      cursorRef.current.x = mouseRef.current.x
-      cursorRef.current.y = mouseRef.current.y
-    }
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
@@ -119,36 +134,60 @@ const TextPressure = ({
   useEffect(() => {
     let rafId
     const animate = () => {
-      mouseRef.current.x += (cursorRef.current.x - mouseRef.current.x) / 15
-      mouseRef.current.y += (cursorRef.current.y - mouseRef.current.y) / 15
+      if (isHoveredRef.current) {
+        mouseRef.current.x += (cursorRef.current.x - mouseRef.current.x) / 10
+        mouseRef.current.y += (cursorRef.current.y - mouseRef.current.y) / 10
+      }
 
       if (titleRef.current) {
         const titleRect = titleRef.current.getBoundingClientRect()
-        const maxDist = titleRect.width / 2
+        const maxDist = Math.max(titleRect.width / 2, 200)
 
-        spansRef.current.forEach((span) => {
+        spansRef.current.forEach((span, i) => {
           if (!span) return
 
-          const rect = span.getBoundingClientRect()
-          const charCenter = {
-            x: rect.x + rect.width / 2,
-            y: rect.y + rect.height / 2,
+          let targetWdth = defaultWidth
+          let targetWght = defaultWeight
+          let targetItal = defaultItalic
+          let targetAlpha = defaultAlpha
+
+          if (isHoveredRef.current) {
+            const rect = span.getBoundingClientRect()
+            const charCenter = {
+              x: rect.x + rect.width / 2,
+              y: rect.y + rect.height / 2,
+            }
+
+            const d = dist(mouseRef.current, charCenter)
+
+            targetWdth = width ? Math.floor(getAttr(d, maxDist, 25, 151)) : defaultWidth
+            targetWght = weight ? Math.floor(getAttr(d, maxDist, 100, 900)) : defaultWeight
+            targetItal = italic ? Number(getAttr(d, maxDist, 0, 1).toFixed(2)) : defaultItalic
+            targetAlpha = alpha ? Number(getAttr(d, maxDist, 0.3, 1).toFixed(2)) : defaultAlpha
           }
 
-          const d = dist(mouseRef.current, charCenter)
+          if (!currentPropsRef.current[i]) {
+            currentPropsRef.current[i] = {
+              wght: defaultWeight,
+              wdth: defaultWidth,
+              ital: defaultItalic,
+              alpha: defaultAlpha,
+            }
+          }
 
-          const wdth = width ? Math.floor(getAttr(d, maxDist, 25, 151)) : 100
-          const wght = weight ? Math.floor(getAttr(d, maxDist, 100, 900)) : 400
-          const italVal = italic ? getAttr(d, maxDist, 0, 1).toFixed(2) : 0
-          const alphaVal = alpha ? getAttr(d, maxDist, 0, 1).toFixed(2) : 1
+          const cur = currentPropsRef.current[i]
+          cur.wght += (targetWght - cur.wght) * 0.15
+          cur.wdth += (targetWdth - cur.wdth) * 0.15
+          cur.ital += (targetItal - cur.ital) * 0.15
+          cur.alpha += (targetAlpha - cur.alpha) * 0.15
 
-          const newFontVariationSettings = `'wght' ${wght}, 'wdth' ${wdth}, 'ital' ${italVal}`
+          const newFontVariationSettings = `'wght' ${Math.round(cur.wght)}, 'wdth' ${Math.round(cur.wdth)}, 'ital' ${cur.ital.toFixed(2)}`
 
           if (span.style.fontVariationSettings !== newFontVariationSettings) {
             span.style.fontVariationSettings = newFontVariationSettings
           }
-          if (alpha && span.style.opacity !== String(alphaVal)) {
-            span.style.opacity = alphaVal
+          if (alpha && span.style.opacity !== String(cur.alpha.toFixed(2))) {
+            span.style.opacity = cur.alpha.toFixed(2)
           }
         })
       }
@@ -158,7 +197,7 @@ const TextPressure = ({
 
     animate()
     return () => cancelAnimationFrame(rafId)
-  }, [width, weight, italic, alpha])
+  }, [width, weight, italic, alpha, defaultWidth, defaultWeight, defaultItalic, defaultAlpha])
 
   const styleElement = useMemo(() => {
     return (
@@ -183,7 +222,20 @@ const TextPressure = ({
   }, [fontFamily, fontUrl, textColor, strokeColor, strokeWidth])
 
   return (
-    <div ref={containerRef} className="relative w-full h-full overflow-hidden bg-transparent">
+    <div
+      ref={containerRef}
+      onMouseEnter={(e) => {
+        isHoveredRef.current = true
+        mouseRef.current.x = e.clientX
+        mouseRef.current.y = e.clientY
+        cursorRef.current.x = e.clientX
+        cursorRef.current.y = e.clientY
+      }}
+      onMouseLeave={() => {
+        isHoveredRef.current = false
+      }}
+      className="relative w-full h-full overflow-hidden bg-transparent cursor-default"
+    >
       {styleElement}
       <h1
         ref={titleRef}
@@ -197,7 +249,7 @@ const TextPressure = ({
           transform: `scale(1, ${scaleY})`,
           transformOrigin: 'center top',
           margin: 0,
-          fontWeight: 100,
+          fontWeight: 400,
           color: stroke ? undefined : textColor,
         }}
       >
@@ -209,6 +261,9 @@ const TextPressure = ({
             }}
             data-char={char}
             className="inline-block"
+            style={{
+              fontVariationSettings: `'wght' ${defaultWeight}, 'wdth' ${defaultWidth}, 'ital' ${defaultItalic}`,
+            }}
           >
             {char === ' ' ? ' ' : char}
           </span>
