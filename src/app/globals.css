@@ -243,8 +243,9 @@ body {
 /* Window Positions & Base Sizing */
 #safari {
   position: absolute;
-  top: 5rem;
-  left: 14%;
+  top: 4.5rem;
+  left: 50%;
+  transform: translateX(-50%);
   width: fit-content;
   max-width: 94vw;
 }
