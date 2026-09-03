@@ -186,7 +186,9 @@ const Safari = ({ controls, isMaximized }) => {
           className="search flex-1 min-w-0 max-w-full sm:max-w-md mx-auto flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white/95 dark:bg-[#111114]/90 border border-black/10 dark:border-white/10 shadow-xs ring-1 ring-black/5 dark:ring-white/5"
           onMouseDown={(e) => e.stopPropagation()}
         >
-          <div className="w-2 h-2 rounded-full bg-emerald-500 shadow-[0_0_8px_rgba(16,185,129,0.7)] flex-shrink-0" />
+          <svg className="w-3 h-3 text-gray-400 dark:text-gray-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clipRule="evenodd" />
+          </svg>
           <input
             type="text"
             readOnly
@@ -206,11 +208,7 @@ const Safari = ({ controls, isMaximized }) => {
           </button>
         </div>
 
-        <div className="w-10 sm:w-14 flex items-center justify-end">
-          <div className="text-[10px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 border border-blue-500/20 hidden sm:block">
-            Safari
-          </div>
-        </div>
+        <div className="w-10 sm:w-14" />
       </div>
 
       {/* Safari Glass Tab Bar */}

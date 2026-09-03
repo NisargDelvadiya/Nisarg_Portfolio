@@ -83,47 +83,60 @@ const TextPressure = ({
   }, [chars, defaultWeight, defaultWidth, defaultItalic, defaultAlpha])
 
   useEffect(() => {
+    // Only enable interactive hover on desktop screens with a mouse/precision pointer
+    const isDesktopPointer = () => {
+      if (typeof window === 'undefined') return false
+      const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches
+      const isWideScreen = window.innerWidth >= 1024
+      return hasFinePointer && isWideScreen
+    }
+
     const handleMouseMove = (e) => {
-      cursorRef.current.x = e.clientX
-      cursorRef.current.y = e.clientY
+      if (!isDesktopPointer()) {
+        isHoveredRef.current = false
+        return
+      }
+
+      // Check what element is directly under the user's cursor
+      const elementUnderCursor = document.elementFromPoint(e.clientX, e.clientY)
+
+      // If the cursor is over ANY open window, dock, navbar, or overlay, completely disable desktop bg hover
+      const isOverWindowOrUi = Boolean(
+        elementUnderCursor?.closest?.(
+          '#safari, #finder, #photos, #contact, #terminal, #resume, #txtfile, #imgfile, #pdf, #notes, #translate, #dock, #navbar, section[id]:not(#welcome), .dock-container, [role="dialog"], [role="toolbar"], button, input'
+        )
+      )
+
+      if (isOverWindowOrUi) {
+        isHoveredRef.current = false
+        return
+      }
 
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect()
-        const isInside =
+        const isInsideBounds =
           e.clientX >= rect.left &&
           e.clientX <= rect.right &&
           e.clientY >= rect.top &&
           e.clientY <= rect.bottom
 
-        isHoveredRef.current = isInside
+        // Ensure the cursor directly targets the welcome hero area and is not obstructed
+        const isDirectHit = Boolean(elementUnderCursor?.closest?.('#welcome, .text-pressure-title'))
+
+        isHoveredRef.current = isInsideBounds && isDirectHit
+      } else {
+        isHoveredRef.current = false
       }
-    }
 
-    const handleTouchMove = (e) => {
-      const t = e.touches[0]
-      if (t) {
-        cursorRef.current.x = t.clientX
-        cursorRef.current.y = t.clientY
-
-        if (containerRef.current) {
-          const rect = containerRef.current.getBoundingClientRect()
-          const isInside =
-            t.clientX >= rect.left &&
-            t.clientX <= rect.right &&
-            t.clientY >= rect.top &&
-            t.clientY <= rect.bottom
-
-          isHoveredRef.current = isInside
-        }
-      }
+      cursorRef.current.x = e.clientX
+      cursorRef.current.y = e.clientY
     }
 
     const resetHover = () => {
       isHoveredRef.current = false
     }
 
-    window.addEventListener('mousemove', handleMouseMove)
-    window.addEventListener('touchmove', handleTouchMove, { passive: true })
+    window.addEventListener('mousemove', handleMouseMove, { passive: true })
     window.addEventListener('mouseleave', resetHover)
     window.addEventListener('mouseout', (e) => {
       if (!e.relatedTarget && !e.toElement) {
@@ -137,7 +150,6 @@ const TextPressure = ({
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
-      window.removeEventListener('touchmove', handleTouchMove)
       window.removeEventListener('mouseleave', resetHover)
       window.removeEventListener('blur', resetHover)
     }
@@ -267,16 +279,6 @@ const TextPressure = ({
   return (
     <div
       ref={containerRef}
-      onMouseEnter={(e) => {
-        isHoveredRef.current = true
-        mouseRef.current.x = e.clientX
-        mouseRef.current.y = e.clientY
-        cursorRef.current.x = e.clientX
-        cursorRef.current.y = e.clientY
-      }}
-      onMouseLeave={() => {
-        isHoveredRef.current = false
-      }}
       className="relative w-full h-full overflow-hidden bg-transparent cursor-default flex items-center justify-center"
     >
       {styleElement}
