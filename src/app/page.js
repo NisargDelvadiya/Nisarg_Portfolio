@@ -7,7 +7,6 @@ const Navbar = dynamic(() => import('#components').then((mod) => mod.Navbar), { 
 const Welcome = dynamic(() => import('#components').then((mod) => mod.Welcome), { ssr: false })
 const Dock = dynamic(() => import('#components').then((mod) => mod.Dock), { ssr: false })
 const CookieNotification = dynamic(() => import('#components').then((mod) => mod.CookieNotification), { ssr: false })
-const GlowCursor = dynamic(() => import('#components').then((mod) => mod.GlowCursor), { ssr: false })
 const Finder = dynamic(() => import('#windows').then((mod) => mod.Finder), { ssr: false })
 const Safari = dynamic(() => import('#windows').then((mod) => mod.Safari), { ssr: false })
 const Photos = dynamic(() => import('#windows').then((mod) => mod.Photos), { ssr: false })
@@ -33,25 +32,7 @@ export default function Home() {
 
   return (
     <main className="w-dvw h-dvh overflow-hidden select-none relative">
-      {/* WebGL Fluid GlowCursor Trail */}
-      <GlowCursor
-        className="pointer-events-none fixed inset-0 z-30"
-        color="#67E8F9"
-        secondaryColor="#A78BFA"
-        trailLength={38}
-        trailWidth={7.5}
-        trailTaper={0.82}
-        followSpeed={0.18}
-        glowIntensity={1.85}
-        glowSpread={1.2}
-        hotspot={0.65}
-        brightness={1.2}
-        opacity={0.88}
-        idleFade={true}
-        idleTimeout={650}
-        fadeDuration={800}
-      />
-
+      
       <Navbar />
 
       {/* Boundary container to prevent windows from going above navbar */}
