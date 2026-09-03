@@ -169,9 +169,7 @@ const Safari = ({ controls, isMaximized }) => {
                 <span className="sm:hidden">{tab.title}</span>
                 <span className="hidden sm:inline">{tab.fullTitle}</span>
               </span>
-              {isActive && (
-                <span className="ml-auto w-1.5 h-1.5 rounded-full bg-blue-500 flex-shrink-0" />
-              )}
+              
             </button>
           )
         })}
