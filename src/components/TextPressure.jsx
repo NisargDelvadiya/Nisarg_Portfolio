@@ -84,19 +84,61 @@ const TextPressure = ({
     const handleMouseMove = (e) => {
       cursorRef.current.x = e.clientX
       cursorRef.current.y = e.clientY
+
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect()
+        // Strictly check if mouse is inside the text container bounds
+        const isInside =
+          e.clientX >= rect.left &&
+          e.clientX <= rect.right &&
+          e.clientY >= rect.top &&
+          e.clientY <= rect.bottom
+
+        isHoveredRef.current = isInside
+      }
     }
+
     const handleTouchMove = (e) => {
       const t = e.touches[0]
-      cursorRef.current.x = t.clientX
-      cursorRef.current.y = t.clientY
+      if (t) {
+        cursorRef.current.x = t.clientX
+        cursorRef.current.y = t.clientY
+
+        if (containerRef.current) {
+          const rect = containerRef.current.getBoundingClientRect()
+          const isInside =
+            t.clientX >= rect.left &&
+            t.clientX <= rect.right &&
+            t.clientY >= rect.top &&
+            t.clientY <= rect.bottom
+
+          isHoveredRef.current = isInside
+        }
+      }
+    }
+
+    const resetHover = () => {
+      isHoveredRef.current = false
     }
 
     window.addEventListener('mousemove', handleMouseMove)
     window.addEventListener('touchmove', handleTouchMove, { passive: true })
+    window.addEventListener('mouseleave', resetHover)
+    window.addEventListener('mouseout', (e) => {
+      if (!e.relatedTarget && !e.toElement) {
+        resetHover()
+      }
+    })
+    window.addEventListener('blur', resetHover)
+    document.addEventListener('visibilitychange', () => {
+      if (document.hidden) resetHover()
+    })
 
     return () => {
       window.removeEventListener('mousemove', handleMouseMove)
       window.removeEventListener('touchmove', handleTouchMove)
+      window.removeEventListener('mouseleave', resetHover)
+      window.removeEventListener('blur', resetHover)
     }
   }, [])
 
@@ -176,10 +218,11 @@ const TextPressure = ({
           }
 
           const cur = currentPropsRef.current[i]
-          cur.wght += (targetWght - cur.wght) * 0.15
-          cur.wdth += (targetWdth - cur.wdth) * 0.15
-          cur.ital += (targetItal - cur.ital) * 0.15
-          cur.alpha += (targetAlpha - cur.alpha) * 0.15
+          // Lerp speed: 0.2 provides responsive return to original state
+          cur.wght += (targetWght - cur.wght) * 0.2
+          cur.wdth += (targetWdth - cur.wdth) * 0.2
+          cur.ital += (targetItal - cur.ital) * 0.2
+          cur.alpha += (targetAlpha - cur.alpha) * 0.2
 
           const newFontVariationSettings = `'wght' ${Math.round(cur.wght)}, 'wdth' ${Math.round(cur.wdth)}, 'ital' ${cur.ital.toFixed(2)}`
 
