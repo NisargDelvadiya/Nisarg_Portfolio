@@ -10,22 +10,11 @@ import { blogPosts } from '#constants'
  * fully responsive layouts for all device viewports, dynamic address bar, and rich visual cards.
  */
 const Safari = ({ controls, isMaximized }) => {
-  const [activeTab, setActiveTab] = useState('blogs')
+  const [activeTab, setActiveTab] = useState('donations')
   const [copiedUpi, setCopiedUpi] = useState(false)
   const [selectedTier, setSelectedTier] = useState(1)
 
   const tabs = [
-    {
-      id: 'blogs',
-      title: 'Blogs',
-      fullTitle: 'Blogs & Articles',
-      url: 'https://draft.blogger.com/profile/06497378480775646608',
-      icon: (
-        <svg className="w-3.5 h-3.5 flex-shrink-0 text-orange-500" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-          <path d="M19.5 3h-15C3.12 3 2 4.12 2 5.5v13C2 19.88 3.12 21 4.5 21h15c1.38 0 2.5-1.12 2.5-2.5v-13C22 4.12 20.88 3 19.5 3zM18 17H6v-2h12v2zm0-4H6v-2h12v2zm0-4H6V7h12v2z" />
-        </svg>
-      ),
-    },
     {
       id: 'donations',
       title: 'Support',
@@ -34,6 +23,17 @@ const Safari = ({ controls, isMaximized }) => {
       icon: (
         <svg className="w-3.5 h-3.5 flex-shrink-0 text-amber-500" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z" />
+        </svg>
+      ),
+    },
+    {
+      id: 'blogs',
+      title: 'Blogs',
+      fullTitle: 'Blogs & Articles',
+      url: 'https://draft.blogger.com/profile/06497378480775646608',
+      icon: (
+        <svg className="w-3.5 h-3.5 flex-shrink-0 text-orange-500" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M19.5 3h-15C3.12 3 2 4.12 2 5.5v13C2 19.88 3.12 21 4.5 21h15c1.38 0 2.5-1.12 2.5-2.5v-13C22 4.12 20.88 3 19.5 3zM18 17H6v-2h12v2zm0-4H6v-2h12v2zm0-4H6V7h12v2z" />
         </svg>
       ),
     },
