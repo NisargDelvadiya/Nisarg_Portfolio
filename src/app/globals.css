@@ -244,9 +244,8 @@ body {
 #safari {
   position: absolute;
   top: 4.5rem;
-  left: calc(50% - 290px);
-  width: fit-content;
-  max-width: 92vw;
+  left: calc(50% - 275px);
+  width: min(550px, 92vw);
 }
 
 #terminal {

@@ -5,7 +5,7 @@ import WindowWrapper from '#hoc/WindowWrapper'
 
 /**
  * macOS Safari Browser Window
- * High-definition visual imagery for each charitable foundation.
+ * Compact, rock-solid width constraints, no container overflow.
  */
 const Safari = ({ controls, isMaximized }) => {
   const [activeTab, setActiveTab] = useState('donations')
@@ -135,16 +135,16 @@ const Safari = ({ controls, isMaximized }) => {
 
   return (
     <div
-      className={`flex flex-col bg-[#fdfdfd] dark:bg-[#151518] text-gray-800 dark:text-white rounded-2xl shadow-2xl overflow-hidden border border-black/10 dark:border-white/10 select-none transition-colors duration-200 ${
+      className={`flex flex-col bg-[#fdfdfd] dark:bg-[#151518] text-gray-800 dark:text-white rounded-2xl shadow-2xl overflow-hidden border border-black/10 dark:border-white/10 select-none transition-colors duration-200 w-full ${
         isMaximized
-          ? 'w-full h-[calc(100dvh-140px)]'
-          : 'w-[580px] max-w-[92vw] h-[calc(100dvh-140px)] sm:h-[480px]'
+          ? 'h-[calc(100dvh-140px)]'
+          : 'h-[calc(100dvh-140px)] sm:h-[480px]'
       }`}
     >
       {/* Safari Header & Address Bar */}
       <div
         id="window-header"
-        className="bg-[#ebebef]/90 dark:bg-[#1f1f24]/90 backdrop-blur-md border-b border-gray-200/80 dark:border-white/10 px-3 py-2 flex items-center justify-between flex-shrink-0 gap-2 cursor-grab active:cursor-grabbing"
+        className="bg-[#ebebef]/90 dark:bg-[#1f1f24]/90 backdrop-blur-md border-b border-gray-200/80 dark:border-white/10 px-3 py-2 flex items-center justify-between flex-shrink-0 gap-2 cursor-grab active:cursor-grabbing w-full"
       >
         <div className="flex items-center gap-2.5 flex-shrink-0">
           {controls}
@@ -193,7 +193,7 @@ const Safari = ({ controls, isMaximized }) => {
       </div>
 
       {/* Safari Tab Bar */}
-      <div className="bg-[#e0e0e5]/80 dark:bg-[#18181c]/80 backdrop-blur-md px-2 pt-1 flex items-center gap-1 border-b border-gray-200/80 dark:border-white/10 select-none overflow-x-auto">
+      <div className="bg-[#e0e0e5]/80 dark:bg-[#18181c]/80 backdrop-blur-md px-2 pt-1 flex items-center gap-1 border-b border-gray-200/80 dark:border-white/10 select-none overflow-x-auto w-full">
         {tabs.map((tab) => {
           const isActive = activeTab === tab.id
           return (
@@ -216,23 +216,23 @@ const Safari = ({ controls, isMaximized }) => {
 
       {/* Safari Main View */}
       <main
-        className="window-scroll-body flex-1 bg-gradient-to-b from-[#fdfdfd] to-[#f7f7f9] dark:from-[#151518] dark:to-[#0f0f12] p-3 sm:p-4 overflow-x-hidden"
+        className="window-scroll-body flex-1 bg-gradient-to-b from-[#fdfdfd] to-[#f7f7f9] dark:from-[#151518] dark:to-[#0f0f12] p-2.5 sm:p-3 overflow-x-hidden w-full"
         onWheel={(e) => e.stopPropagation()}
       >
         {activeTab === 'donations' && (
-          <div className="w-full space-y-2">
+          <div className="w-full max-w-full space-y-2 flex flex-col">
             {nobleCauses.map((cause) => (
               <a
                 key={cause.id}
                 href={cause.link}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex items-center justify-between gap-2.5 p-2 rounded-xl bg-white/90 dark:bg-[#1c1c22]/90 hover:bg-white dark:hover:bg-[#23232b] border border-black/5 dark:border-white/10 shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer w-full"
+                className="group flex items-center justify-between gap-2 p-2 rounded-xl bg-white/90 dark:bg-[#1c1c22]/90 hover:bg-white dark:hover:bg-[#23232b] border border-black/5 dark:border-white/10 shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer w-full max-w-full box-border overflow-hidden"
                 title={`Donate to ${cause.name}`}
               >
-                {/* Left: Illustrative Image & Details */}
-                <div className="flex items-center gap-3 min-w-0 flex-1">
-                  <div className="w-11 h-11 rounded-lg overflow-hidden border border-black/10 dark:border-white/10 flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform bg-gray-100 dark:bg-white/5">
+                {/* Left: Image & Details */}
+                <div className="flex items-center gap-2.5 min-w-0 flex-1 overflow-hidden">
+                  <div className="w-9 h-9 rounded-lg overflow-hidden border border-black/10 dark:border-white/10 flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform bg-gray-100 dark:bg-white/5">
                     <img
                       src={cause.image}
                       alt={cause.name}
@@ -241,25 +241,25 @@ const Safari = ({ controls, isMaximized }) => {
                     />
                   </div>
 
-                  <div className="min-w-0 flex-1 space-y-0.5">
+                  <div className="min-w-0 flex-1 space-y-0.5 overflow-hidden">
                     <div className="flex items-center gap-1.5 min-w-0">
                       <h3 className="text-xs font-bold text-gray-900 dark:text-white truncate group-hover:text-blue-500 transition-colors">
                         {cause.name}
                       </h3>
-                      <span className={`text-[9px] font-semibold px-1.5 py-0.5 rounded border flex-shrink-0 ${cause.tagColor}`}>
+                      <span className={`text-[9px] font-semibold px-1.5 py-0.2 rounded border flex-shrink-0 hidden md:inline ${cause.tagColor}`}>
                         {cause.category}
                       </span>
                     </div>
-                    <p className="text-[11px] text-gray-500 dark:text-gray-400 truncate leading-relaxed">
+                    <p className="text-[11px] text-gray-500 dark:text-gray-400 truncate leading-tight">
                       {cause.description}
                     </p>
                   </div>
                 </div>
 
                 {/* Right: Direct Donate Button */}
-                <div className="flex-shrink-0 ml-1">
+                <div className="flex-shrink-0 ml-1.5">
                   <span
-                    className={`inline-flex items-center gap-1 px-3 py-1 rounded-lg bg-gradient-to-r ${cause.btnGradient} text-white font-semibold text-[11px] shadow-2xs group-hover:shadow-sm group-hover:scale-105 transition-all`}
+                    className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-gradient-to-r ${cause.btnGradient} text-white font-semibold text-[11px] shadow-2xs group-hover:shadow-sm group-hover:scale-105 transition-all`}
                   >
                     <span>Donate</span>
                     <span aria-hidden="true">&rarr;</span>
@@ -271,7 +271,7 @@ const Safari = ({ controls, isMaximized }) => {
         )}
 
         {activeTab === 'blogs' && (
-          <div className="w-full space-y-2">
+          <div className="w-full max-w-full space-y-2 flex flex-col">
             <div className="flex items-center justify-between pb-1.5 border-b border-gray-100 dark:border-white/5">
               <span className="text-[11px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
                 Publications & Writeups
@@ -293,22 +293,22 @@ const Safari = ({ controls, isMaximized }) => {
                 href={post.link}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex items-center justify-between gap-2.5 p-2 rounded-xl bg-white/90 dark:bg-[#1c1c22]/90 hover:bg-white dark:hover:bg-[#23232b] border border-black/5 dark:border-white/10 shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer w-full"
+                className="group flex items-center justify-between gap-2 p-2 rounded-xl bg-white/90 dark:bg-[#1c1c22]/90 hover:bg-white dark:hover:bg-[#23232b] border border-black/5 dark:border-white/10 shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer w-full max-w-full box-border overflow-hidden"
                 title={`Read: ${post.title}`}
               >
-                <div className="flex items-center gap-3 min-w-0 flex-1">
+                <div className="flex items-center gap-2.5 min-w-0 flex-1 overflow-hidden">
                   <div
-                    className={`w-11 h-11 rounded-lg bg-gradient-to-br ${post.gradient} text-white flex items-center justify-center text-xs font-extrabold flex-shrink-0 shadow-2xs`}
+                    className={`w-9 h-9 rounded-lg bg-gradient-to-br ${post.gradient} text-white flex items-center justify-center text-[11px] font-extrabold flex-shrink-0 shadow-2xs`}
                   >
                     {post.badge}
                   </div>
 
-                  <div className="min-w-0 flex-1 space-y-0.5">
+                  <div className="min-w-0 flex-1 space-y-0.5 overflow-hidden">
                     <div className="flex items-center gap-1.5 min-w-0">
                       <span className="text-[9px] font-mono text-gray-400 dark:text-gray-500 uppercase tracking-wider flex-shrink-0">
                         {post.date}
                       </span>
-                      <span className={`text-[9px] font-semibold px-1.5 py-0.5 rounded border flex-shrink-0 ${post.tagColor}`}>
+                      <span className={`text-[9px] font-semibold px-1.5 py-0.2 rounded border flex-shrink-0 hidden md:inline ${post.tagColor}`}>
                         {post.tag}
                       </span>
                     </div>
@@ -318,7 +318,7 @@ const Safari = ({ controls, isMaximized }) => {
                   </div>
                 </div>
 
-                <div className="flex-shrink-0 ml-1">
+                <div className="flex-shrink-0 ml-1.5">
                   <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-white/10 group-hover:bg-blue-600 group-hover:text-white text-gray-800 dark:text-white text-[11px] font-semibold transition-all">
                     <span>Read</span>
                     <span aria-hidden="true">&rarr;</span>
