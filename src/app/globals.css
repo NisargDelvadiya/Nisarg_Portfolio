@@ -244,10 +244,9 @@ body {
 #safari {
   position: absolute;
   top: 4.5rem;
-  left: 50%;
-  transform: translateX(-50%);
+  left: calc(50% - 290px);
   width: fit-content;
-  max-width: 94vw;
+  max-width: 92vw;
 }
 
 #terminal {
