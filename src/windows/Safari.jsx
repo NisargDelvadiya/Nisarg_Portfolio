@@ -200,10 +200,15 @@ const Safari = ({ controls, isMaximized }) => {
             <button
               key={tab.id}
               type="button"
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => {
+                if (tab.id === 'blogs') return;
+                setActiveTab(tab.id);
+              }}
               className={`flex items-center gap-1.5 px-3 py-1 rounded-t-lg text-xs font-medium transition-all duration-200 cursor-pointer truncate ${
                 isActive
                   ? 'bg-[#fdfdfd] dark:bg-[#151518] text-gray-900 dark:text-white shadow-2xs border-t border-x border-black/5 dark:border-white/10 relative z-10 font-semibold'
+                  : tab.id === 'blogs'
+                  ? 'text-gray-400 dark:text-gray-600 opacity-50 cursor-default'
                   : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 opacity-80 hover:opacity-100'
               }`}
             >
