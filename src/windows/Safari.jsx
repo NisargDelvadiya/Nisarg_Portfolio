@@ -5,7 +5,7 @@ import WindowWrapper from '#hoc/WindowWrapper'
 
 /**
  * macOS Safari Browser Window
- * Compact, rock-solid width constraints, no container overflow.
+ * Fully responsive across Mobile, Tablet, iPad, and Desktop screens.
  */
 const Safari = ({ controls, isMaximized }) => {
   const [activeTab, setActiveTab] = useState('donations')
@@ -83,39 +83,6 @@ const Safari = ({ controls, isMaximized }) => {
     },
   ]
 
-  const blogPostsExtended = [
-    {
-      id: 1,
-      date: 'Sep 2, 2025',
-      title: 'TypeScript Explained: What It Is, Why It Matters, and How to Master It',
-      tag: 'TypeScript',
-      badge: 'TS',
-      tagColor: 'text-blue-500 bg-blue-500/10 border-blue-500/20',
-      gradient: 'from-blue-600 to-indigo-700',
-      link: 'https://jsmastery.com/blog/typescript-explained-what-it-is-why-it-matters-and-how-to-master-it',
-    },
-    {
-      id: 2,
-      date: 'Aug 28, 2025',
-      title: 'The Ultimate Guide to Mastering Three.js for 3D Development',
-      tag: 'Three.js',
-      badge: '3D',
-      tagColor: 'text-purple-500 bg-purple-500/10 border-purple-500/20',
-      gradient: 'from-purple-600 to-pink-600',
-      link: 'https://jsmastery.com/blog/the-ultimate-guide-to-mastering-three-js-for-3d-development',
-    },
-    {
-      id: 3,
-      date: 'Aug 15, 2025',
-      title: 'The Ultimate Guide to Mastering GSAP Animations',
-      tag: 'GSAP Motion',
-      badge: 'GSAP',
-      tagColor: 'text-emerald-500 bg-emerald-500/10 border-emerald-500/20',
-      gradient: 'from-emerald-600 to-teal-700',
-      link: 'https://jsmastery.com/blog/the-ultimate-guide-to-mastering-gsap-animations',
-    },
-  ]
-
   const tabs = [
     {
       id: 'donations',
@@ -137,18 +104,18 @@ const Safari = ({ controls, isMaximized }) => {
     <div
       className={`flex flex-col bg-[#fdfdfd] dark:bg-[#151518] text-gray-800 dark:text-white rounded-2xl shadow-2xl overflow-hidden border border-black/10 dark:border-white/10 select-none transition-colors duration-200 w-full ${
         isMaximized
-          ? 'h-[calc(100dvh-140px)]'
-          : 'h-[calc(100dvh-140px)] sm:h-[480px]'
+          ? 'h-[calc(100dvh-130px)]'
+          : 'h-[calc(100dvh-130px)] sm:h-[480px] max-h-[560px]'
       }`}
     >
-      {/* Safari Header & Address Bar */}
+      {/* Responsive Safari Header & Address Bar */}
       <div
         id="window-header"
-        className="bg-[#ebebef]/90 dark:bg-[#1f1f24]/90 backdrop-blur-md border-b border-gray-200/80 dark:border-white/10 px-3 py-2 flex items-center justify-between flex-shrink-0 gap-2 cursor-grab active:cursor-grabbing w-full"
+        className="bg-[#ebebef]/90 dark:bg-[#1f1f24]/90 backdrop-blur-md border-b border-gray-200/80 dark:border-white/10 px-2.5 sm:px-3 py-2 flex items-center justify-between flex-shrink-0 gap-1.5 sm:gap-2 cursor-grab active:cursor-grabbing w-full"
       >
-        <div className="flex items-center gap-2.5 flex-shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-2.5 flex-shrink-0">
           {controls}
-          <div className="hidden sm:flex items-center gap-0.5 text-gray-400 dark:text-gray-500">
+          <div className="hidden xs:flex sm:flex items-center gap-0.5 text-gray-400 dark:text-gray-500">
             <button
               type="button"
               className="p-1 rounded-md hover:bg-black/5 dark:hover:bg-white/5 cursor-pointer transition-colors"
@@ -172,9 +139,9 @@ const Safari = ({ controls, isMaximized }) => {
           </div>
         </div>
 
-        {/* Smart Search Address Bar */}
+        {/* Responsive Smart Search Address Bar */}
         <div
-          className="search flex-1 min-w-0 max-w-full sm:max-w-xs mx-auto flex items-center gap-1.5 px-2.5 py-1 rounded-xl bg-white/95 dark:bg-[#111114]/90 border border-black/10 dark:border-white/10 shadow-2xs"
+          className="search flex-1 min-w-0 max-w-[220px] sm:max-w-xs mx-auto flex items-center gap-1.5 px-2 sm:px-2.5 py-1 rounded-xl bg-white/95 dark:bg-[#111114]/90 border border-black/10 dark:border-white/10 shadow-2xs"
           onMouseDown={(e) => e.stopPropagation()}
         >
           <svg className="w-3 h-3 text-gray-400 dark:text-gray-500 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
@@ -184,12 +151,12 @@ const Safari = ({ controls, isMaximized }) => {
             type="text"
             readOnly
             value={currentTabObj.url}
-            className="w-full text-[11px] font-mono text-gray-700 dark:text-gray-300 bg-transparent outline-none cursor-text truncate select-text"
+            className="w-full text-[10px] sm:text-[11px] font-mono text-gray-700 dark:text-gray-300 bg-transparent outline-none cursor-text truncate select-text"
             aria-label="Browser address URL"
           />
         </div>
 
-        <div className="w-8 sm:w-10" />
+        <div className="w-6 sm:w-10" />
       </div>
 
       {/* Safari Tab Bar */}
@@ -201,15 +168,15 @@ const Safari = ({ controls, isMaximized }) => {
               key={tab.id}
               type="button"
               onClick={() => {
-                if (tab.id === 'blogs') return;
-                setActiveTab(tab.id);
+                if (tab.id === 'blogs') return
+                setActiveTab(tab.id)
               }}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded-t-lg text-xs font-medium transition-all duration-200 cursor-pointer truncate ${
+              className={`flex items-center gap-1.5 px-3 py-1 rounded-t-lg text-xs font-medium transition-all duration-200 truncate ${
                 isActive
-                  ? 'bg-[#fdfdfd] dark:bg-[#151518] text-gray-900 dark:text-white shadow-2xs border-t border-x border-black/5 dark:border-white/10 relative z-10 font-semibold'
+                  ? 'bg-[#fdfdfd] dark:bg-[#151518] text-gray-900 dark:text-white shadow-2xs border-t border-x border-black/5 dark:border-white/10 relative z-10 font-semibold cursor-pointer'
                   : tab.id === 'blogs'
                   ? 'text-gray-400 dark:text-gray-600 opacity-50 cursor-default'
-                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 opacity-80 hover:opacity-100'
+                  : 'text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-black/5 dark:hover:bg-white/5 opacity-80 hover:opacity-100 cursor-pointer'
               }`}
             >
               <span className="text-xs">{tab.icon}</span>
@@ -219,7 +186,7 @@ const Safari = ({ controls, isMaximized }) => {
         })}
       </div>
 
-      {/* Safari Main View */}
+      {/* Responsive Scrollable Main View */}
       <main
         className="window-scroll-body flex-1 bg-gradient-to-b from-[#fdfdfd] to-[#f7f7f9] dark:from-[#151518] dark:to-[#0f0f12] p-2.5 sm:p-3 overflow-x-hidden w-full"
         onWheel={(e) => e.stopPropagation()}
@@ -232,12 +199,12 @@ const Safari = ({ controls, isMaximized }) => {
                 href={cause.link}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex items-center justify-between gap-2 p-2 rounded-xl bg-white/90 dark:bg-[#1c1c22]/90 hover:bg-white dark:hover:bg-[#23232b] border border-black/5 dark:border-white/10 shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer w-full max-w-full box-border overflow-hidden"
+                className="group flex items-center justify-between gap-2 p-2 sm:p-2.5 rounded-xl bg-white/90 dark:bg-[#1c1c22]/90 hover:bg-white dark:hover:bg-[#23232b] border border-black/5 dark:border-white/10 shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer w-full max-w-full box-border overflow-hidden"
                 title={`Donate to ${cause.name}`}
               >
-                {/* Left: Image & Details */}
-                <div className="flex items-center gap-2.5 min-w-0 flex-1 overflow-hidden">
-                  <div className="w-9 h-9 rounded-lg overflow-hidden border border-black/10 dark:border-white/10 flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform bg-gray-100 dark:bg-white/5">
+                {/* Left: Responsive Image & Cause Info */}
+                <div className="flex items-center gap-2 sm:gap-2.5 min-w-0 flex-1 overflow-hidden">
+                  <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-lg overflow-hidden border border-black/10 dark:border-white/10 flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform bg-gray-100 dark:bg-white/5">
                     <img
                       src={cause.image}
                       alt={cause.name}
@@ -248,84 +215,25 @@ const Safari = ({ controls, isMaximized }) => {
 
                   <div className="min-w-0 flex-1 space-y-0.5 overflow-hidden">
                     <div className="flex items-center gap-1.5 min-w-0">
-                      <h3 className="text-xs font-bold text-gray-900 dark:text-white truncate group-hover:text-blue-500 transition-colors">
+                      <h3 className="text-[11px] sm:text-xs font-bold text-gray-900 dark:text-white truncate group-hover:text-blue-500 transition-colors">
                         {cause.name}
                       </h3>
-                      <span className={`text-[9px] font-semibold px-1.5 py-0.2 rounded border flex-shrink-0 hidden md:inline ${cause.tagColor}`}>
+                      <span className={`text-[9px] font-semibold px-1.5 py-0.2 rounded border flex-shrink-0 hidden xs:inline sm:inline ${cause.tagColor}`}>
                         {cause.category}
                       </span>
                     </div>
-                    <p className="text-[11px] text-gray-500 dark:text-gray-400 truncate leading-tight">
+                    <p className="text-[10px] sm:text-[11px] text-gray-500 dark:text-gray-400 truncate leading-tight">
                       {cause.description}
                     </p>
                   </div>
                 </div>
 
-                {/* Right: Direct Donate Button */}
-                <div className="flex-shrink-0 ml-1.5">
+                {/* Right: Responsive Donate Button */}
+                <div className="flex-shrink-0 ml-1">
                   <span
-                    className={`inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-gradient-to-r ${cause.btnGradient} text-white font-semibold text-[11px] shadow-2xs group-hover:shadow-sm group-hover:scale-105 transition-all`}
+                    className={`inline-flex items-center gap-1 px-2.5 sm:px-3 py-1 rounded-lg bg-gradient-to-r ${cause.btnGradient} text-white font-semibold text-[10px] sm:text-[11px] shadow-2xs group-hover:shadow-sm group-hover:scale-105 transition-all`}
                   >
                     <span>Donate</span>
-                    <span aria-hidden="true">&rarr;</span>
-                  </span>
-                </div>
-              </a>
-            ))}
-          </div>
-        )}
-
-        {activeTab === 'blogs' && (
-          <div className="w-full max-w-full space-y-2 flex flex-col">
-            <div className="flex items-center justify-between pb-1.5 border-b border-gray-100 dark:border-white/5">
-              <span className="text-[11px] font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                Publications & Writeups
-              </span>
-              <a
-                href="https://draft.blogger.com/profile/06497378480775646608"
-                target="_blank"
-                rel="noreferrer"
-                className="text-[11px] font-semibold text-blue-600 dark:text-blue-400 hover:underline flex items-center gap-1"
-              >
-                <span>Blogger Profile</span>
-                <span aria-hidden="true">&rarr;</span>
-              </a>
-            </div>
-
-            {blogPostsExtended.map((post) => (
-              <a
-                key={post.id}
-                href={post.link}
-                target="_blank"
-                rel="noreferrer"
-                className="group flex items-center justify-between gap-2 p-2 rounded-xl bg-white/90 dark:bg-[#1c1c22]/90 hover:bg-white dark:hover:bg-[#23232b] border border-black/5 dark:border-white/10 shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer w-full max-w-full box-border overflow-hidden"
-                title={`Read: ${post.title}`}
-              >
-                <div className="flex items-center gap-2.5 min-w-0 flex-1 overflow-hidden">
-                  <div
-                    className={`w-9 h-9 rounded-lg bg-gradient-to-br ${post.gradient} text-white flex items-center justify-center text-[11px] font-extrabold flex-shrink-0 shadow-2xs`}
-                  >
-                    {post.badge}
-                  </div>
-
-                  <div className="min-w-0 flex-1 space-y-0.5 overflow-hidden">
-                    <div className="flex items-center gap-1.5 min-w-0">
-                      <span className="text-[9px] font-mono text-gray-400 dark:text-gray-500 uppercase tracking-wider flex-shrink-0">
-                        {post.date}
-                      </span>
-                      <span className={`text-[9px] font-semibold px-1.5 py-0.2 rounded border flex-shrink-0 hidden md:inline ${post.tagColor}`}>
-                        {post.tag}
-                      </span>
-                    </div>
-                    <h3 className="text-xs font-bold text-gray-900 dark:text-white truncate group-hover:text-blue-500 transition-colors">
-                      {post.title}
-                    </h3>
-                  </div>
-                </div>
-
-                <div className="flex-shrink-0 ml-1.5">
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-gray-100 dark:bg-white/10 group-hover:bg-blue-600 group-hover:text-white text-gray-800 dark:text-white text-[11px] font-semibold transition-all">
-                    <span>Read</span>
                     <span aria-hidden="true">&rarr;</span>
                   </span>
                 </div>
