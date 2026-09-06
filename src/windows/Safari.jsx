@@ -5,7 +5,7 @@ import WindowWrapper from '#hoc/WindowWrapper'
 
 /**
  * macOS Safari Browser Window
- * Compact, sleek layout where all cards and direct action buttons are 100% visible.
+ * High-definition visual imagery for each charitable foundation.
  */
 const Safari = ({ controls, isMaximized }) => {
   const [activeTab, setActiveTab] = useState('donations')
@@ -16,7 +16,7 @@ const Safari = ({ controls, isMaximized }) => {
       name: 'The Akshaya Patra Foundation',
       category: 'Mid-Day Meals',
       description: 'Wholesome mid-day meals to millions of school children across India every day.',
-      favicon: '/icons/causes/akshayapatra.png',
+      image: '/images/causes/akshaya_patra.jpg',
       tagColor: 'text-amber-500 dark:text-amber-400 bg-amber-500/10 border-amber-500/20',
       btnGradient: 'from-amber-500 to-orange-600 shadow-amber-500/25',
       link: 'https://www.akshayapatra.org/donate-to-midday-meal-programme?utm_source=google&utm_medium=cpc&utm_campaign=gads&utm_content=lapsed-px-mdm-26&gad_source=1&gad_campaignid=23942140523&gbraid=0AAAAADtGwlyegnOx-VzkL8UHqs8vuzz7g&gclid=Cj0KCQjwteTUBhD4ARIsAEYjs3rUSyHEw9nWu5CbfvFXoTIkZdv4Ke30P2gYdi4b5n-ryB1I4cZs5BAaAukFEALw_wcB/',
@@ -26,7 +26,7 @@ const Safari = ({ controls, isMaximized }) => {
       name: 'Feeding India',
       category: 'Hunger Relief',
       description: 'Eliminating hunger, malnutrition, and food wastage across vulnerable communities.',
-      favicon: '/icons/causes/feedingindia.png',
+      image: '/images/causes/feeding_india.jpg',
       tagColor: 'text-rose-500 dark:text-rose-400 bg-rose-500/10 border-rose-500/20',
       btnGradient: 'from-rose-500 to-red-600 shadow-rose-500/25',
       link: 'https://www.feedingindia.org/',
@@ -36,7 +36,7 @@ const Safari = ({ controls, isMaximized }) => {
       name: 'Hindu Fund',
       category: 'Heritage & Seva',
       description: 'Crowdfunding platform dedicated to supporting civilizational causes and temple restoration.',
-      favicon: '/icons/causes/hindu_fund.png',
+      image: '/images/causes/hindu_fund.jpg',
       tagColor: 'text-orange-500 dark:text-orange-400 bg-orange-500/10 border-orange-500/20',
       btnGradient: 'from-orange-500 to-amber-600 shadow-orange-500/25',
       link: 'https://hindu.fund/',
@@ -46,7 +46,7 @@ const Safari = ({ controls, isMaximized }) => {
       name: 'Veducation',
       category: 'Vedic Wisdom',
       description: 'Preserving and spreading timeless Vedic knowledge, philosophy, and cultural values.',
-      favicon: '/icons/causes/veducation.png',
+      image: '/images/causes/veducation.jpg',
       tagColor: 'text-blue-500 dark:text-blue-400 bg-blue-500/10 border-blue-500/20',
       btnGradient: 'from-blue-600 to-indigo-600 shadow-blue-500/25',
       link: 'https://www.veducation.world/',
@@ -56,7 +56,7 @@ const Safari = ({ controls, isMaximized }) => {
       name: 'The Sanskrit Channel',
       category: 'Sanskrit Revival',
       description: 'Making Sanskrit linguistics, meditative chants, and philosophical texts accessible globally.',
-      favicon: '/icons/causes/thesanskritchannel.png',
+      image: '/images/causes/sanskrit_channel.jpg',
       tagColor: 'text-emerald-500 dark:text-emerald-400 bg-emerald-500/10 border-emerald-500/20',
       btnGradient: 'from-emerald-500 to-teal-600 shadow-emerald-500/25',
       link: 'https://www.thesanskritchannel.org/',
@@ -66,7 +66,7 @@ const Safari = ({ controls, isMaximized }) => {
       name: 'Shivdhaam',
       category: 'Pilgrim Welfare',
       description: 'Preserving sacred pilgrimage heritage sites, devotee assistance, and charitable seva.',
-      favicon: '/icons/causes/shivdhaam.png',
+      image: '/images/causes/shivdhaam.jpg',
       tagColor: 'text-cyan-500 dark:text-cyan-400 bg-cyan-500/10 border-cyan-500/20',
       btnGradient: 'from-cyan-500 to-blue-600 shadow-cyan-500/25',
       link: 'https://www.shivdhaam.org.in/?gad_source=1&gad_campaignid=23949023171&gbraid=0AAAAA-wKSMMO4ZiZthKTvahdFl4GIwcLA&gclid=CjwKCAjwqJXUBhBNEiwA8BgG7ieXXDG3WGkjFA0uEGe8yEg6NRAmmD_r6jHUKL3IaqTBgIR3aL-AjBoCq5wQAvD_BwE',
@@ -76,7 +76,7 @@ const Safari = ({ controls, isMaximized }) => {
       name: 'For The People Foundation',
       category: 'Humanitarian Aid',
       description: 'Grassroots emergency medical relief, education support, and direct family assistance.',
-      favicon: '/icons/causes/forthepeople.png',
+      image: '/images/causes/for_people.jpg',
       tagColor: 'text-purple-500 dark:text-purple-400 bg-purple-500/10 border-purple-500/20',
       btnGradient: 'from-purple-600 to-pink-600 shadow-purple-500/25',
       link: 'https://forthepeople.in/en',
@@ -227,20 +227,17 @@ const Safari = ({ controls, isMaximized }) => {
                 href={cause.link}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex items-center justify-between gap-2.5 p-2.5 rounded-xl bg-white/90 dark:bg-[#1c1c22]/90 hover:bg-white dark:hover:bg-[#23232b] border border-black/5 dark:border-white/10 shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer w-full"
+                className="group flex items-center justify-between gap-2.5 p-2 rounded-xl bg-white/90 dark:bg-[#1c1c22]/90 hover:bg-white dark:hover:bg-[#23232b] border border-black/5 dark:border-white/10 shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer w-full"
                 title={`Donate to ${cause.name}`}
               >
-                {/* Left: Favicon & Details */}
-                <div className="flex items-center gap-2.5 min-w-0 flex-1">
-                  <div className="w-8 h-8 rounded-lg bg-gray-50 dark:bg-white/5 border border-black/5 dark:border-white/10 p-1 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform">
+                {/* Left: Illustrative Image & Details */}
+                <div className="flex items-center gap-3 min-w-0 flex-1">
+                  <div className="w-11 h-11 rounded-lg overflow-hidden border border-black/10 dark:border-white/10 flex-shrink-0 shadow-2xs group-hover:scale-105 transition-transform bg-gray-100 dark:bg-white/5">
                     <img
-                      src={cause.favicon}
+                      src={cause.image}
                       alt={cause.name}
-                      className="size-full object-contain rounded"
+                      className="size-full object-cover"
                       loading="lazy"
-                      onError={(e) => {
-                        e.currentTarget.style.display = 'none'
-                      }}
                     />
                   </div>
 
@@ -296,12 +293,12 @@ const Safari = ({ controls, isMaximized }) => {
                 href={post.link}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex items-center justify-between gap-2.5 p-2.5 rounded-xl bg-white/90 dark:bg-[#1c1c22]/90 hover:bg-white dark:hover:bg-[#23232b] border border-black/5 dark:border-white/10 shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer w-full"
+                className="group flex items-center justify-between gap-2.5 p-2 rounded-xl bg-white/90 dark:bg-[#1c1c22]/90 hover:bg-white dark:hover:bg-[#23232b] border border-black/5 dark:border-white/10 shadow-2xs hover:shadow-md transition-all duration-200 cursor-pointer w-full"
                 title={`Read: ${post.title}`}
               >
-                <div className="flex items-center gap-2.5 min-w-0 flex-1">
+                <div className="flex items-center gap-3 min-w-0 flex-1">
                   <div
-                    className={`w-8 h-8 rounded-lg bg-gradient-to-br ${post.gradient} text-white flex items-center justify-center text-[11px] font-extrabold flex-shrink-0 shadow-2xs`}
+                    className={`w-11 h-11 rounded-lg bg-gradient-to-br ${post.gradient} text-white flex items-center justify-center text-xs font-extrabold flex-shrink-0 shadow-2xs`}
                   >
                     {post.badge}
                   </div>
