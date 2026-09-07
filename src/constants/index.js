@@ -164,8 +164,10 @@ const ALL_LANGUAGES = [
   { code: "pa", name: "Punjabi", nativeName: "ਪੰਜਾਬੀ" },
   { code: "sa", name: "Sanskrit", nativeName: "संस्कृतम्" },
   { code: "sat", name: "Santali", nativeName: "ᱥᱟᱱᱛᱟᱲᱤ" },
+  { code: "sd", name: "Sindhi", nativeName: "سنڌي / सिन्धी" },
   { code: "ta", name: "Tamil", nativeName: "தமிழ்" },
   { code: "te", name: "Telugu", nativeName: "తెలుగు" },
+  { code: "ur", name: "Urdu", nativeName: "اردو" },
 ];
 
 export {

@@ -168,7 +168,7 @@ export default function RootLayout({ children }) {
                 try {
                   new google.translate.TranslateElement({
                     pageLanguage: 'en',
-                    includedLanguages: 'en,as,bn,doi,gu,hi,kn,ks,gom,mai,ml,mni-Mtei,mr,ne,or,pa,sa,sat,ta,te',
+                    includedLanguages: 'en,as,bn,doi,gu,hi,kn,ks,gom,mai,ml,mni-Mtei,mr,ne,or,pa,sa,sat,sd,ta,te,ur',
                     autoDisplay: false,
                     layout: google.translate.TranslateElement.InlineLayout.SIMPLE
                   }, 'google_translate_element');
