@@ -235,6 +235,18 @@ const WORK_LOCATION = {
         },
         {
           id: 2,
+          name: "Feedback.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-10 left-52",
+          description: [
+            "It was awesome working with you. Really love your energy and ofc the website. Looking forward to work with you again in the future...",
+            "— Mahin Gunjal",
+          ],
+        },
+        {
+          id: 3,
           name: "mahin-portfolio-spidey.vercel.app",
           icon: "/images/safari.png",
           kind: "file",
