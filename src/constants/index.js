@@ -269,6 +269,40 @@ const WORK_LOCATION = {
         },
       ],
     },
+    {
+      id: 53,
+      name: "Priyanka's Portfolio",
+      icon: "/images/folder.png",
+      kind: "folder",
+      position: "top-10 left-96",
+      children: [
+        {
+          id: 1,
+          name: "Priyanka Project.txt",
+          icon: "/images/txt.png",
+          kind: "file",
+          fileType: "txt",
+          position: "top-10 left-16",
+          description: [
+            "Priyanka Gunjal’s Digital Portfolio is a high-performance, accessible, and interactive web application engineered using Next.js 16 (App Router), React 19, and Tailwind CSS v4 to showcase her expertise as a Business Developer and Marketing Strategist.",
+            "The site utilizes a Bento Grid layout enhanced with GSAP-powered 3D tilt effects, custom interactive cursors, and a zero-latency Web Audio API synthesizer that plays unique sound cues on hover.",
+            "Built with full Progressive Web App (PWA) offline capabilities and strict WCAG 2.1 AA accessibility compliance, the portfolio ensures seamless navigation across all devices and networks.",
+            "It features dedicated case studies for projects like Brownthought Academy and Petalstorm 2025, an interactive in-app resume viewer, a curated photography gallery, and resilient error-handling boundaries.",
+            "The platform was designed by Mahin Gunjal and developed by Nisarg, offering an optimized, secure, and visually striking user experience.",
+            "Would you like to know more about the technical setup, deep dive into the file architecture, or explore the performance optimization tricks used in this project?",
+          ],
+        },
+        {
+          id: 2,
+          name: "priyanka-portfolio-luxury.vercel.app",
+          icon: "/images/safari.png",
+          kind: "file",
+          fileType: "url",
+          href: "https://priyanka-portfolio-luxury.vercel.app",
+          position: "top-10 right-28",
+        },
+      ],
+    },
   ],
 };
 
