@@ -5,7 +5,7 @@ import React from 'react'
 /**
  * Hero Welcome Component
  * Renders the iconic Apple "hello"-style cursive "macfolio" hero text
- * with clean static typography and no hover effects.
+ * with clear multi-line prominent subtitle typography.
  */
 const Welcome = () => {
   return (
@@ -14,13 +14,18 @@ const Welcome = () => {
       aria-label="Welcome Hero"
       className="z-0 pointer-events-none px-4 py-6 sm:p-8 flex flex-col items-center justify-center cursor-default select-none text-center w-full max-w-[1200px] mx-auto"
     >
-      {/* Subtitle */}
-      <p className="text-white/85 text-sm sm:text-base md:text-lg lg:text-xl font-light tracking-wider mb-2 sm:mb-3 font-['Georama',sans-serif]">
-        Namaste, I&apos;m Nisarg! welcome to my
-      </p>
+      {/* Subtitle with Namaste on first line and rest on next line */}
+      <div className="flex flex-col items-center justify-center mb-2 sm:mb-3 font-['Georama',sans-serif] tracking-wide">
+        <span className="text-white text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal drop-shadow-[0_2px_14px_rgba(0,0,0,0.45)] leading-tight">
+          Namaste,
+        </span>
+        <span className="text-white/90 text-sm sm:text-base md:text-xl lg:text-2xl font-light mt-1 tracking-wider drop-shadow-[0_2px_10px_rgba(0,0,0,0.35)] leading-tight">
+          I&apos;m Nisarg! welcome to my
+        </span>
+      </div>
 
       {/* Main Title: Apple "hello" script font writing "macfolio" */}
-      <h1 className="font-hello lowercase text-[64px] sm:text-[92px] md:text-[120px] lg:text-[150px] xl:text-[170px] leading-none text-white tracking-normal drop-shadow-[0_4px_30px_rgba(255,255,255,0.35)] select-none">
+      <h1 className="font-hello lowercase text-[76px] sm:text-[104px] md:text-[135px] lg:text-[165px] xl:text-[185px] leading-none text-white tracking-normal drop-shadow-[0_4px_35px_rgba(255,255,255,0.4)] select-none mt-1 sm:mt-2">
         macfolio
       </h1>
     </section>
