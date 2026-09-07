@@ -6,7 +6,8 @@ import { ALL_LANGUAGES } from '#constants'
 
 /**
  * macOS Translate & Language Selector Window
- * Powered by Google Translate for real-time translation across 20 languages.
+ * Powered by Google Translate for real-time translation across 22 languages.
+ * Highlights languages known by Nisarg with humorous witty remarks.
  */
 const Translate = ({ controls, isMaximized }) => {
   const [currentLang, setCurrentLang] = useState('en')
@@ -24,7 +25,6 @@ const Translate = ({ controls, isMaximized }) => {
 
       const googtrans = getCookie('googtrans')
       if (googtrans) {
-        // format usually /en/hi or /auto/hi
         const code = googtrans.split('/').filter(Boolean).pop()
         if (code) {
           setCurrentLang(code)
@@ -89,7 +89,7 @@ const Translate = ({ controls, isMaximized }) => {
     <div
       translate="no"
       className={`notranslate flex flex-col bg-white dark:bg-[#1e1e22] text-gray-800 dark:text-white rounded-xl shadow-2xl overflow-hidden border border-black/10 dark:border-white/10 select-none transition-colors duration-200 w-full ${
-        isMaximized ? 'h-[calc(100vh-140px)]' : 'h-[500px]'
+        isMaximized ? 'h-[calc(100vh-140px)]' : 'h-[540px]'
       }`}
     >
       {/* Window Header */}
@@ -121,15 +121,21 @@ const Translate = ({ controls, isMaximized }) => {
       {/* Main Content Area */}
       <div className="flex flex-col flex-1 overflow-hidden bg-gray-50/50 dark:bg-[#18181c]">
         {/* Top Control Bar */}
-        <div className="p-3 sm:p-3.5 border-b border-gray-200 dark:border-white/10 bg-white/80 dark:bg-[#202026]/80 backdrop-blur-md">
+        <div className="p-3 sm:p-3.5 border-b border-gray-200 dark:border-white/10 bg-white/80 dark:bg-[#202026]/80 backdrop-blur-md flex flex-col gap-2">
           {/* Active Language & Status Banner */}
           <div className="flex items-center justify-between gap-2 flex-wrap">
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2 flex-wrap">
               <span className="text-xs text-gray-500 dark:text-gray-400">Current Language:</span>
               <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold bg-blue-500/10 text-blue-600 dark:bg-blue-500/20 dark:text-blue-300 border border-blue-500/20">
                 <span className="size-1.5 rounded-full bg-blue-500 animate-pulse" />
                 {currentLangObj.name} {currentLangObj.nativeName ? `(${currentLangObj.nativeName})` : ''}
               </span>
+
+              {currentLangObj.isKnown && (
+                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-500/15 text-amber-600 dark:text-amber-400 border border-amber-500/30 animate-pulse">
+                  ⚡ Nisarg Knows This Language!
+                </span>
+              )}
             </div>
 
             {statusMessage && (
@@ -145,60 +151,87 @@ const Translate = ({ controls, isMaximized }) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {ALL_LANGUAGES.map((lang) => {
               const isSelected = currentLang === lang.code
+              const isKnown = lang.isKnown
+
               return (
                 <button
                   key={lang.code}
                   type="button"
                   data-clickable="true"
                   onClick={() => handleSelectLanguage(lang.code, lang.name)}
-                  className={`flex items-center justify-between p-3 rounded-xl border text-left transition-all cursor-pointer group focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none ${
+                  className={`flex flex-col justify-between p-3 rounded-xl border text-left transition-all cursor-pointer group focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none relative ${
                     isSelected
-                      ? 'bg-blue-50 dark:bg-blue-950/40 border-blue-400 dark:border-blue-500/60 shadow-sm'
+                      ? 'bg-blue-50 dark:bg-blue-950/40 border-blue-400 dark:border-blue-500/60 shadow-md ring-1 ring-blue-400/30'
+                      : isKnown
+                      ? 'bg-gradient-to-br from-amber-50/50 to-orange-50/30 dark:from-[#242120] dark:to-[#1e1e24] border-amber-300/60 dark:border-amber-500/30 hover:border-amber-400 dark:hover:border-amber-500/60 shadow-sm'
                       : 'bg-white dark:bg-[#222228] border-gray-200 dark:border-white/5 hover:border-gray-300 dark:hover:border-white/20 hover:bg-gray-50 dark:hover:bg-[#282830]'
                   }`}
                 >
-                  <div className="flex items-center gap-3 min-w-0">
-                    {/* Code Avatar */}
-                    <div
-                      className={`size-9 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0 transition-colors uppercase ${
-                        isSelected
-                          ? 'bg-blue-600 text-white'
-                          : 'bg-gray-100 dark:bg-[#2e2e36] text-gray-700 dark:text-gray-300 group-hover:bg-blue-600/10 group-hover:text-blue-600 dark:group-hover:text-blue-400'
-                      }`}
-                    >
-                      {lang.code.slice(0, 3)}
-                    </div>
-
-                    {/* Language Title & Script */}
-                    <div className="min-w-0">
-                      <p
-                        className={`text-xs sm:text-sm font-semibold truncate ${
+                  <div className="flex items-start justify-between w-full gap-2">
+                    <div className="flex items-center gap-2.5 min-w-0">
+                      {/* Code Avatar */}
+                      <div
+                        className={`size-9 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0 transition-colors uppercase ${
                           isSelected
-                            ? 'text-blue-700 dark:text-blue-300'
-                            : 'text-gray-800 dark:text-gray-100'
+                            ? 'bg-blue-600 text-white shadow-sm'
+                            : isKnown
+                            ? 'bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30'
+                            : 'bg-gray-100 dark:bg-[#2e2e36] text-gray-700 dark:text-gray-300 group-hover:bg-blue-600/10 group-hover:text-blue-600 dark:group-hover:text-blue-400'
                         }`}
                       >
-                        {lang.name}
-                      </p>
-                      {lang.nativeName && (
-                        <p className="text-[11px] text-gray-400 dark:text-gray-400 truncate">
-                          {lang.nativeName}
-                        </p>
-                      )}
+                        {lang.code.slice(0, 3)}
+                      </div>
+
+                      {/* Language Title & Script */}
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-1.5 flex-wrap">
+                          <p
+                            className={`text-xs sm:text-sm font-semibold truncate ${
+                              isSelected
+                                ? 'text-blue-700 dark:text-blue-300'
+                                : isKnown
+                                ? 'text-gray-900 dark:text-white font-bold'
+                                : 'text-gray-800 dark:text-gray-100'
+                            }`}
+                          >
+                            {lang.name}
+                          </p>
+
+                          {isKnown && (
+                            <span className="inline-flex items-center gap-0.5 px-1.5 py-0.5 rounded text-[9px] font-bold bg-amber-500/20 text-amber-700 dark:text-amber-300 border border-amber-500/30">
+                              ✨ {lang.badge}
+                            </span>
+                          )}
+                        </div>
+
+                        {lang.nativeName && (
+                          <p className="text-[11px] text-gray-400 dark:text-gray-400 truncate">
+                            {lang.nativeName}
+                          </p>
+                        )}
+                      </div>
                     </div>
+
+                    {/* Active State Checkmark */}
+                    {isSelected ? (
+                      <div className="size-6 rounded-full bg-blue-600 text-white flex items-center justify-center flex-shrink-0 ml-1 shadow-sm">
+                        <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
+                        </svg>
+                      </div>
+                    ) : (
+                      <span className="text-[10px] font-medium text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity ml-1">
+                        Select →
+                      </span>
+                    )}
                   </div>
 
-                  {/* Active State Checkmark */}
-                  {isSelected ? (
-                    <div className="size-6 rounded-full bg-blue-600 text-white flex items-center justify-center flex-shrink-0 ml-2 shadow-sm">
-                      <svg className="size-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
-                      </svg>
+                  {/* Humorous / Witty Tag for Known Languages */}
+                  {isKnown && lang.humor && (
+                    <div className="mt-2 pt-2 border-t border-amber-500/15 dark:border-amber-500/20 flex items-center gap-1.5 text-[11px] text-amber-700/90 dark:text-amber-300/90 font-medium">
+                      <span className="text-xs">💡</span>
+                      <span className="italic">{lang.humor}</span>
                     </div>
-                  ) : (
-                    <span className="text-[11px] font-medium text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2">
-                      Select →
-                    </span>
                   )}
                 </button>
               )
@@ -214,7 +247,9 @@ const Translate = ({ controls, isMaximized }) => {
             </svg>
             Powered by Google Translate
           </span>
-          <span>{ALL_LANGUAGES.length} Languages</span>
+          <span className="text-amber-600 dark:text-amber-400 font-semibold">
+            ✨ Nisarg knows 4 languages!
+          </span>
         </div>
       </div>
     </div>
