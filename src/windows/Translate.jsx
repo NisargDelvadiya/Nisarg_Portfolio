@@ -7,7 +7,6 @@ import { ALL_LANGUAGES } from '#constants'
 /**
  * macOS Translate & Language Selector Window
  * Powered by Google Translate for real-time translation across 22 languages.
- * Professionally mentions languages known by Nisarg.
  */
 const Translate = ({ controls, isMaximized }) => {
   const [currentLang, setCurrentLang] = useState('en')
@@ -131,9 +130,9 @@ const Translate = ({ controls, isMaximized }) => {
                 {currentLangObj.name} {currentLangObj.nativeName ? `(${currentLangObj.nativeName})` : ''}
               </span>
 
-              {currentLangObj.isKnown && (
-                <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-500/20">
-                  ✓ Known by Nisarg ({currentLangObj.proficiency})
+              {currentLangObj.badge && (
+                <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-500/20">
+                  {currentLangObj.badge}
                 </span>
               )}
             </div>
@@ -151,7 +150,7 @@ const Translate = ({ controls, isMaximized }) => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
             {ALL_LANGUAGES.map((lang) => {
               const isSelected = currentLang === lang.code
-              const isKnown = lang.isKnown
+              const hasBadge = Boolean(lang.badge)
 
               return (
                 <button
@@ -162,8 +161,6 @@ const Translate = ({ controls, isMaximized }) => {
                   className={`flex items-center justify-between p-3 rounded-xl border text-left transition-all cursor-pointer group focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:outline-none ${
                     isSelected
                       ? 'bg-blue-50 dark:bg-blue-950/40 border-blue-400 dark:border-blue-500/60 shadow-sm'
-                      : isKnown
-                      ? 'bg-white dark:bg-[#222228] border-emerald-500/30 dark:border-emerald-500/30 hover:border-emerald-500/50 hover:bg-emerald-50/30 dark:hover:bg-emerald-950/20'
                       : 'bg-white dark:bg-[#222228] border-gray-200 dark:border-white/5 hover:border-gray-300 dark:hover:border-white/20 hover:bg-gray-50 dark:hover:bg-[#282830]'
                   }`}
                 >
@@ -173,8 +170,6 @@ const Translate = ({ controls, isMaximized }) => {
                       className={`size-9 rounded-lg flex items-center justify-center font-bold text-xs flex-shrink-0 transition-colors uppercase ${
                         isSelected
                           ? 'bg-blue-600 text-white'
-                          : isKnown
-                          ? 'bg-emerald-500/10 text-emerald-600 dark:bg-emerald-500/20 dark:text-emerald-300'
                           : 'bg-gray-100 dark:bg-[#2e2e36] text-gray-700 dark:text-gray-300 group-hover:bg-blue-600/10 group-hover:text-blue-600 dark:group-hover:text-blue-400'
                       }`}
                     >
@@ -194,9 +189,9 @@ const Translate = ({ controls, isMaximized }) => {
                           {lang.name}
                         </p>
 
-                        {isKnown && (
+                        {hasBadge && (
                           <span className="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-medium bg-emerald-500/10 text-emerald-700 dark:bg-emerald-500/20 dark:text-emerald-300 border border-emerald-500/20">
-                            {lang.proficiency}
+                            {lang.badge}
                           </span>
                         )}
                       </div>
@@ -216,10 +211,6 @@ const Translate = ({ controls, isMaximized }) => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                  ) : isKnown ? (
-                    <span className="text-[10px] font-medium text-emerald-600 dark:text-emerald-400 ml-2">
-                      Known
-                    </span>
                   ) : (
                     <span className="text-[11px] font-medium text-gray-400 opacity-0 group-hover:opacity-100 transition-opacity ml-2">
                       Select →

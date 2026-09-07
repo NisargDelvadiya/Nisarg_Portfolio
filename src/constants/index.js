@@ -146,13 +146,7 @@ const gallery = [
 ];
 
 const ALL_LANGUAGES = [
-  {
-    code: "en",
-    name: "English",
-    nativeName: "English",
-    isKnown: true,
-    proficiency: "Fluent",
-  },
+  { code: "en", name: "English", nativeName: "English" },
   { code: "as", name: "Assamese", nativeName: "অসমীয়া" },
   { code: "bn", name: "Bengali", nativeName: "বাংলা" },
   { code: "doi", name: "Dogri", nativeName: "डोगरी" },
@@ -160,16 +154,9 @@ const ALL_LANGUAGES = [
     code: "gu",
     name: "Gujarati",
     nativeName: "ગુજરાતી",
-    isKnown: true,
-    proficiency: "Mother Tongue",
+    badge: "Mother Tongue",
   },
-  {
-    code: "hi",
-    name: "Hindi",
-    nativeName: "हिन्दी",
-    isKnown: true,
-    proficiency: "Fluent",
-  },
+  { code: "hi", name: "Hindi", nativeName: "हिन्दी" },
   { code: "kn", name: "Kannada", nativeName: "ಕನ್ನಡ" },
   { code: "ks", name: "Kashmiri", nativeName: "کٲشُر" },
   { code: "gom", name: "Konkani", nativeName: "कोंकणी" },
@@ -180,13 +167,7 @@ const ALL_LANGUAGES = [
   { code: "ne", name: "Nepali", nativeName: "नेपाली" },
   { code: "or", name: "Odia", nativeName: "ଓଡ଼ିଆ" },
   { code: "pa", name: "Punjabi", nativeName: "ਪੰਜਾਬੀ" },
-  {
-    code: "sa",
-    name: "Sanskrit",
-    nativeName: "संस्कृतम्",
-    isKnown: true,
-    proficiency: "Known",
-  },
+  { code: "sa", name: "Sanskrit", nativeName: "संस्कृतम्" },
   { code: "sat", name: "Santali", nativeName: "ᱥᱟᱱᱛᱟᱲᱤ" },
   { code: "sd", name: "Sindhi", nativeName: "سنڌي / सिन्धी" },
   { code: "ta", name: "Tamil", nativeName: "தமிழ்" },
