@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+US+Trad:wght@100..400&family=Sacramento&family=Dancing+Script:wght@400..700&family=Caveat:wght@400..700&family=Grand+Hotel&display=swap');
 @import url("https://fonts.googleapis.com/css2?family=Georama:ital,wght@0,100..900;1,100..900&family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
 
 @import "tailwindcss";
@@ -439,4 +440,11 @@ section[id],
 }
 .dark .window-scroll-body::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.35);
+}
+
+/* Apple "hello" iconic cursive script styling */
+.font-hello {
+  font-family: 'Playwrite US Trad', 'Sacramento', 'Dancing Script', 'Caveat', cursive !important;
+  font-weight: 400;
+  font-style: normal;
 }
