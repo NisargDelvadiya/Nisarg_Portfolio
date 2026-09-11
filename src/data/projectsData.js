@@ -58,4 +58,21 @@ export const projectsData = [
     video: "/Assets/Projects/destination.mp4",
     category: "3D / VFX",
   },
+  {
+    id: "08",
+    title: "PRIYANKA 3D BRAND REEL",
+    description:
+      "Dynamic commercial 3D animation, stylized rendering, and high-impact visual effects crafted for brand storytelling and engagement.",
+    video: "/Assets/Projects/priyanka.mp4",
+    category: "3D / VFX",
+  },
+  {
+    id: "09",
+    title: "ARTEZEN 3D PRODUCT COMMERCIAL",
+    description:
+      "Sophisticated 3D product visualization, elegant lighting composition, and seamless motion graphics showcasing premium aesthetics.",
+    video: "/Assets/Projects/artezen.mp4",
+    category: "3D / VFX",
+  },
 ];
+

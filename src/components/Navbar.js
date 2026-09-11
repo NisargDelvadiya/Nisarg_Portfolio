@@ -15,16 +15,33 @@ import { useTheme } from "@/context/ThemeContext";
  */
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { isVenomMode, toggleTheme } = useTheme();
 
   useEffect(() => {
+    let lastScrollY = window.scrollY;
+
     const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
+      const currentScrollY = window.scrollY;
+
+      // Determine if scrolled past threshold for glassmorphic styling
+      setIsScrolled(currentScrollY > 50);
+
+      // Determine floating visibility based on scroll direction
+      if (currentScrollY <= 10) {
+        // At the very top of page, always show
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY && currentScrollY > 60) {
+        // Scrolling down -> hide navbar & close mobile menu
+        setIsVisible(false);
+        setMobileMenuOpen(false);
+      } else if (currentScrollY < lastScrollY) {
+        // Scrolling up -> show navbar
+        setIsVisible(true);
       }
+
+      lastScrollY = currentScrollY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -44,7 +61,9 @@ export default function Navbar() {
   return (
     <nav
       aria-label="Main Navigation Header"
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 px-4 sm:px-8 md:px-12 flex items-center justify-between pointer-events-auto ${
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 transform px-4 sm:px-8 md:px-12 flex items-center justify-between ${
+        isVisible ? "translate-y-0" : "-translate-y-full pointer-events-none"
+      } ${
         isScrolled
           ? isVenomMode
             ? "bg-black/95 backdrop-blur-md border-b border-purple-900/60 py-3 shadow-[0_4px_30px_rgba(147,51,234,0.25)]"
