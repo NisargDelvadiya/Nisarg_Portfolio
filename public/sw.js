@@ -61,9 +61,14 @@ self.addEventListener('fetch', (event) => {
   const { request } = event
   const url = new URL(request.url)
 
-  // Skip non-GET requests and external chrome-extension / google translate live scripts
+  // Skip non-GET requests and unsupported protocols
   if (request.method !== 'GET') return
-  if (url.origin !== self.location.origin && !url.hostname.includes('fonts.gstatic.com')) {
+  if (!request.url.startsWith('http://') && !request.url.startsWith('https://')) return
+
+  // Skip cross-origin requests except allowed external hosts (exact hostname match for CodeQL)
+  const isSameOrigin = url.origin === self.location.origin
+  const isAllowedHost = url.hostname === 'fonts.gstatic.com'
+  if (!isSameOrigin && !isAllowedHost) {
     return
   }
 
