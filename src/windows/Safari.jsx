@@ -14,60 +14,48 @@ const Safari = ({ controls, isMaximized }) => {
     {
       id: 1,
       name: 'The Akshaya Patra Foundation',
-      category: 'Mid-Day Meals',
       description: 'Wholesome mid-day meals to millions of school children across India every day.',
       image: '/images/causes/akshaya_patra.jpg',
-      tagColor: 'text-blue-600 dark:text-blue-400 bg-blue-500/10 border-blue-500/20',
       btnGradient: 'from-blue-600 to-blue-500 shadow-blue-500/25',
       link: 'https://www.akshayapatra.org/donate-to-midday-meal-programme?utm_source=google&utm_medium=cpc&utm_campaign=gads&utm_content=lapsed-px-mdm-26&gad_source=1&gad_campaignid=23942140523&gbraid=0AAAAADtGwlyegnOx-VzkL8UHqs8vuzz7g&gclid=Cj0KCQjwteTUBhD4ARIsAEYjs3rUSyHEw9nWu5CbfvFXoTIkZdv4Ke30P2gYdi4b5n-ryB1I4cZs5BAaAukFEALw_wcB/',
     },
     {
       id: 2,
       name: 'Hindu Fund',
-      category: 'Heritage & Seva',
       description: 'Crowdfunding platform dedicated to supporting civilizational causes and temple restoration.',
       image: '/images/causes/hindu_fund.jpg',
-      tagColor: 'text-blue-600 dark:text-blue-400 bg-blue-500/10 border-blue-500/20',
       btnGradient: 'from-blue-600 to-blue-500 shadow-blue-500/25',
       link: 'https://hindu.fund/',
     },
     {
       id: 3,
       name: 'Veducation',
-      category: 'Vedic Wisdom',
       description: 'Preserving and spreading timeless Vedic knowledge, philosophy, and cultural values.',
       image: '/images/causes/veducation.jpg',
-      tagColor: 'text-blue-600 dark:text-blue-400 bg-blue-500/10 border-blue-500/20',
       btnGradient: 'from-blue-600 to-blue-500 shadow-blue-500/25',
       link: 'https://www.veducation.world/',
     },
     {
       id: 4,
       name: 'The Sanskrit Channel',
-      category: 'Sanskrit Revival',
       description: 'Making Sanskrit linguistics, meditative chants, and philosophical texts accessible globally.',
       image: '/images/causes/sanskrit_channel.jpg',
-      tagColor: 'text-blue-600 dark:text-blue-400 bg-blue-500/10 border-blue-500/20',
       btnGradient: 'from-blue-600 to-blue-500 shadow-blue-500/25',
       link: 'https://www.thesanskritchannel.org/',
     },
     {
       id: 5,
       name: 'Shivdhaam',
-      category: 'Pilgrim Welfare',
       description: 'Preserving sacred pilgrimage heritage sites, devotee assistance, and charitable seva.',
       image: '/images/causes/shivdhaam.jpg',
-      tagColor: 'text-blue-600 dark:text-blue-400 bg-blue-500/10 border-blue-500/20',
       btnGradient: 'from-blue-600 to-blue-500 shadow-blue-500/25',
       link: 'https://www.shivdhaam.org.in/?gad_source=1&gad_campaignid=23949023171&gbraid=0AAAAA-wKSMMO4ZiZthKTvahdFl4GIwcLA&gclid=CjwKCAjwqJXUBhBNEiwA8BgG7ieXXDG3WGkjFA0uEGe8yEg6NRAmmD_r6jHUKL3IaqTBgIR3aL-AjBoCq5wQAvD_BwE',
     },
     {
       id: 6,
       name: 'For The People Foundation',
-      category: 'Humanitarian Aid',
       description: 'Grassroots emergency medical relief, education support, and direct family assistance.',
       image: '/images/causes/for_people.jpg',
-      tagColor: 'text-blue-600 dark:text-blue-400 bg-blue-500/10 border-blue-500/20',
       btnGradient: 'from-blue-600 to-blue-500 shadow-blue-500/25',
       link: 'https://forthepeople.in/en',
     },
@@ -204,14 +192,9 @@ const Safari = ({ controls, isMaximized }) => {
                   </div>
 
                   <div className="min-w-0 flex-1 space-y-0.5 overflow-hidden">
-                    <div className="flex items-center gap-1.5 min-w-0">
-                      <h3 className="text-[11px] sm:text-xs font-bold text-gray-900 dark:text-white truncate group-hover:text-blue-500 transition-colors">
-                        {cause.name}
-                      </h3>
-                      <span className={`text-[9px] font-semibold px-1.5 py-0.2 rounded border flex-shrink-0 hidden xs:inline sm:inline ${cause.tagColor}`}>
-                        {cause.category}
-                      </span>
-                    </div>
+                    <h3 className="text-[11px] sm:text-xs font-bold text-gray-900 dark:text-white truncate group-hover:text-blue-500 transition-colors">
+                      {cause.name}
+                    </h3>
                     <p className="text-[10px] sm:text-[11px] text-gray-500 dark:text-gray-400 truncate leading-tight">
                       {cause.description}
                     </p>
