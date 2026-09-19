@@ -75,7 +75,78 @@ const subscribeConsent = (callback) => {
 export default function Footer() {
   const [currentLanguage, setCurrentLanguage] = useState("en");
   const [copiedEmail, setCopiedEmail] = useState(false);
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const { isVenomMode } = useTheme();
+
+  // Track and synchronize browser fullscreen state
+  useEffect(() => {
+    const updateFullscreenState = () => {
+      const isCurrentlyFullscreen = Boolean(
+        typeof document !== "undefined" &&
+          (document.fullscreenElement ||
+            document.webkitFullscreenElement ||
+            document.mozFullScreenElement ||
+            document.msFullscreenElement)
+      );
+      setIsFullscreen(isCurrentlyFullscreen);
+    };
+
+    if (typeof document !== "undefined") {
+      document.addEventListener("fullscreenchange", updateFullscreenState);
+      document.addEventListener("webkitfullscreenchange", updateFullscreenState);
+      document.addEventListener("mozfullscreenchange", updateFullscreenState);
+      document.addEventListener("MSFullscreenChange", updateFullscreenState);
+    }
+
+    return () => {
+      if (typeof document !== "undefined") {
+        document.removeEventListener("fullscreenchange", updateFullscreenState);
+        document.removeEventListener("webkitfullscreenchange", updateFullscreenState);
+        document.removeEventListener("mozfullscreenchange", updateFullscreenState);
+        document.removeEventListener("MSFullscreenChange", updateFullscreenState);
+      }
+    };
+  }, []);
+
+  /** Toggle Fullscreen mode to provide immersive full screen access */
+  const handleToggleFullscreen = async () => {
+    try {
+      if (typeof document === "undefined") return;
+
+      const doc = document;
+      const isFull = Boolean(
+        doc.fullscreenElement ||
+          doc.webkitFullscreenElement ||
+          doc.mozFullScreenElement ||
+          doc.msFullscreenElement
+      );
+
+      if (!isFull) {
+        const docEl = doc.documentElement;
+        if (docEl.requestFullscreen) {
+          await docEl.requestFullscreen();
+        } else if (docEl.webkitRequestFullscreen) {
+          await docEl.webkitRequestFullscreen();
+        } else if (docEl.mozRequestFullScreen) {
+          await docEl.mozRequestFullScreen();
+        } else if (docEl.msRequestFullscreen) {
+          await docEl.msRequestFullscreen();
+        }
+      } else {
+        if (doc.exitFullscreen) {
+          await doc.exitFullscreen();
+        } else if (doc.webkitExitFullscreen) {
+          await doc.webkitExitFullscreen();
+        } else if (doc.mozCancelFullScreen) {
+          await doc.mozCancelFullScreen();
+        } else if (doc.msExitFullscreen) {
+          await doc.msExitFullscreen();
+        }
+      }
+    } catch (err) {
+      console.warn("Footer: Fullscreen toggle error:", err);
+    }
+  };
 
   const showConsent = useSyncExternalStore(
     subscribeConsent,
@@ -427,10 +498,10 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Bottom Bar: Language Selector & Copyright */}
+          {/* Bottom Bar: Language Selector, Fullscreen Mode & Copyright */}
           <div className="border-t border-white/10 pt-6 flex flex-col items-center justify-center gap-4 text-xs sm:text-sm text-gray-400">
-            {/* Language Selector Dropdown */}
-            <div className="flex flex-row items-center justify-center gap-4">
+            {/* Controls: Language Selector & Fullscreen Access Button */}
+            <div className="flex flex-wrap items-center justify-center gap-3">
               <select
                 title="Select Website Language"
                 aria-label="Select Website Language"
@@ -452,6 +523,67 @@ export default function Footer() {
                   </option>
                 ))}
               </select>
+
+              {/* Fullscreen Access Toggle Button */}
+              <button
+                type="button"
+                id="fullscreen-toggle-btn"
+                onClick={handleToggleFullscreen}
+                title={
+                  isFullscreen
+                    ? "Exit Full Screen"
+                    : "Enter Full Screen (Hides browser search bar and chrome)"
+                }
+                aria-label={
+                  isFullscreen
+                    ? "Exit Full Screen"
+                    : "Enter Full Screen"
+                }
+                className={`group flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-white transition-all duration-200 active:scale-95 border cursor-pointer shadow-lg ${
+                  isVenomMode
+                    ? "bg-purple-950/40 hover:bg-purple-900/60 border-purple-800/60 hover:border-purple-500 focus:ring-2 focus:ring-purple-500 shadow-purple-950/40"
+                    : "bg-[#180505] hover:bg-[#a31515]/25 border-[#a31515]/50 hover:border-[#a31515] focus:ring-2 focus:ring-[#a31515] shadow-red-950/20"
+                }`}
+              >
+                {isFullscreen ? (
+                  <>
+                    <svg
+                      className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
+                        isVenomMode ? "text-purple-400" : "text-[#ff4d4d]"
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M4 14h6v6m10-10h-6V4m0 6 7-7M10 14l-7 7" />
+                    </svg>
+                    <span>Exit Full Screen</span>
+                  </>
+                ) : (
+                  <>
+                    <svg
+                      className={`w-4 h-4 shrink-0 transition-transform group-hover:scale-110 ${
+                        isVenomMode ? "text-purple-400" : "text-[#ff4d4d]"
+                      }`}
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2.2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
+                    </svg>
+                    <span>Full Screen</span>
+                  </>
+                )}
+              </button>
+
               <div
                 id="google_translate_element"
                 className="absolute w-0 h-0 overflow-hidden opacity-0 pointer-events-none"
