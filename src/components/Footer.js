@@ -507,7 +507,7 @@ export default function Footer() {
                 aria-label="Select Website Language"
                 onChange={(e) => changeLanguage(e.target.value)}
                 value={currentLanguage}
-                className={`notranslate bg-[#111111] text-white border rounded-xl px-4 py-2 text-xs sm:text-sm font-medium focus:outline-none focus:ring-2 cursor-pointer shadow-lg transition-all ${
+                className={`notranslate w-44 sm:w-48 h-11 bg-[#111111] text-white border rounded-xl px-3 sm:px-4 text-xs sm:text-sm font-bold text-center focus:outline-none focus:ring-2 cursor-pointer shadow-lg transition-all ${
                   isVenomMode
                     ? "border-purple-800/60 hover:border-purple-500 focus:ring-purple-500"
                     : "border-[#a31515]/50 hover:border-[#a31515] focus:ring-[#a31515]"
@@ -539,7 +539,7 @@ export default function Footer() {
                     ? "Exit Full Screen"
                     : "Enter Full Screen"
                 }
-                className={`group flex items-center gap-2 px-4 py-2 rounded-xl text-xs sm:text-sm font-bold text-white transition-all duration-200 active:scale-95 border cursor-pointer shadow-lg ${
+                className={`group w-44 sm:w-48 h-11 flex items-center justify-center gap-2 px-3 sm:px-4 rounded-xl text-xs sm:text-sm font-bold text-white transition-all duration-200 active:scale-95 border cursor-pointer shadow-lg ${
                   isVenomMode
                     ? "bg-purple-950/40 hover:bg-purple-900/60 border-purple-800/60 hover:border-purple-500 focus:ring-2 focus:ring-purple-500 shadow-purple-950/40"
                     : "bg-[#180505] hover:bg-[#a31515]/25 border-[#a31515]/50 hover:border-[#a31515] focus:ring-2 focus:ring-[#a31515] shadow-red-950/20"
