@@ -1,12 +1,17 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Enable gzip / brotli compression for static and rendered assets
+  compress: true,
   // Disable X-Powered-By header to prevent information disclosure
   poweredByHeader: false,
   reactStrictMode: true,
 
-  // Image optimization formats
+  // Image optimization formats and responsive breakpoints
   images: {
     formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 2592000, // 30 days
+    deviceSizes: [360, 480, 640, 750, 828, 1080, 1200, 1920],
+    imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     remotePatterns: [
       {
         protocol: "https",
@@ -74,6 +79,24 @@ const nextConfig = {
           {
             key: "X-DNS-Prefetch-Control",
             value: "on",
+          },
+        ],
+      },
+      {
+        source: "/Assets/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
+          },
+        ],
+      },
+      {
+        source: "/favicon/:path*",
+        headers: [
+          {
+            key: "Cache-Control",
+            value: "public, max-age=31536000, immutable",
           },
         ],
       },

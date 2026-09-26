@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useTheme } from "@/context/ThemeContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -11,141 +11,82 @@ gsap.registerPlugin(ScrollTrigger);
  * AboutSection Component
  * 
  * Features:
- * - GSAP ScrollTrigger physics: spider web lines drop with realistic bounce easing
+ * - GSAP ScrollTrigger physics: entrance animation with bounce easing
  * - Hanging pendulum animation on profile portrait (Mahin.jpeg)
- * - Detailed biography & academic background (ITM SLS Baroda University & ZICA VFX course)
- * - Interactive primary tech stack badge tags
- * - Theme transitions between Spider-Man Light and Venom Dark symbiote mode
+ * - Biography detailing full-stack engineering, Sarvam AI, Indology, and visionary leadership
+ * - Interactive profile picture frame with zoom hover dynamics
  */
 export default function AboutSection() {
   const sectionRef = useRef(null);
-  const leftWebRef = useRef(null);
-  const rightWebRef = useRef(null);
   const profileRef = useRef(null);
   const textContentRef = useRef(null);
-  const { isVenomMode } = useTheme();
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Timeline triggered when scrolling into AboutSection
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: sectionRef.current,
-          start: "top 75%",
-        },
-      });
-
-      // 1. Drop down Left Web with bounce physics
-      tl.fromTo(
-        leftWebRef.current,
-        { y: -350, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2, ease: "bounce.out" },
-        0
-      );
-
-      // 2. Drop down Right Web with bounce physics (staggered slightly)
-      tl.fromTo(
-        rightWebRef.current,
-        { y: -350, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.2, ease: "bounce.out" },
-        0.2
-      );
-
-      // 3. Drop down Main Profile Photo with bounce physics
-      tl.fromTo(
-        profileRef.current,
-        { y: -450, opacity: 0 },
-        { y: 0, opacity: 1, duration: 1.4, ease: "bounce.out" },
-        0.4
-      );
-
-      // 4. Slide in Left Text Content from the left
-      tl.fromTo(
-        textContentRef.current.children,
-        { x: -120, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.8, ease: "power3.out", stagger: 0.15 },
-        0.6
-      );
-
-      // Infinite web rotations after landing
-      if (leftWebRef.current) {
-        gsap.to(leftWebRef.current.querySelector(".web-img"), {
-          rotation: 360,
-          duration: 35,
-          repeat: -1,
-          ease: "none",
+    let ctx;
+    try {
+      ctx = gsap.context(() => {
+        // Timeline triggered when scrolling into AboutSection
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 75%",
+          },
         });
-      }
 
-      if (rightWebRef.current) {
-        gsap.to(rightWebRef.current.querySelector(".web-img"), {
-          rotation: -360,
-          duration: 40,
-          repeat: -1,
-          ease: "none",
-        });
-      }
+        // 1. Drop down Main Profile Photo with bounce physics
+        tl.fromTo(
+          profileRef.current,
+          { y: -450, opacity: 0 },
+          { y: 0, opacity: 1, duration: 1.4, ease: "bounce.out" },
+          0
+        );
 
-      // Pendulum swing animation for main profile photo
-      if (profileRef.current) {
-        gsap.to(profileRef.current, {
-          rotation: 3,
-          duration: 2.5,
-          repeat: -1,
-          yoyo: true,
-          ease: "sine.inOut",
-          transformOrigin: "top center",
-        });
-      }
-    }, sectionRef);
+        // 2. Slide in Left Text Content from the left
+        tl.fromTo(
+          textContentRef.current.children,
+          { x: -120, opacity: 0 },
+          { x: 0, opacity: 1, duration: 0.8, ease: "power3.out", stagger: 0.15 },
+          0.2
+        );
 
-    return () => ctx.revert();
+        // Pendulum swing animation for main profile photo
+        if (profileRef.current) {
+          gsap.to(profileRef.current, {
+            rotation: 3,
+            duration: 2.5,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut",
+            transformOrigin: "top center",
+          });
+        }
+      }, sectionRef);
+    } catch (err) {
+      console.warn("AboutSection GSAP initialization error:", err);
+    }
+
+    return () => {
+      try {
+        if (ctx) ctx.revert();
+      } catch (_) {}
+    };
   }, []);
 
   return (
     <section
       id="about"
       ref={sectionRef}
-      className={`relative w-full min-h-screen py-24 px-6 md:px-12 lg:px-20 flex items-center justify-center overflow-hidden select-none transition-colors duration-300 ${
-        isVenomMode ? "bg-[#07070c] text-white" : "bg-white text-gray-900"
-      }`}
+      className="relative w-full min-h-screen py-24 px-6 md:px-12 lg:px-20 flex items-center justify-center overflow-hidden select-none transition-colors duration-300 bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-white"
     >
-      {/* Hanging Left Spider Web with Line extending up */}
-      <div
-        ref={leftWebRef}
-        className="absolute top-0 left-4 md:left-12 z-0 flex flex-col items-center pointer-events-none opacity-0"
-      >
+      {/* Blurred Background Photo (Fixed to Viewport for Natural Scale & Framing) */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
         <div
-          className={`w-[1px] h-48 md:h-72 transition-colors duration-300 ${
-            isVenomMode ? "bg-purple-900/60" : "bg-gray-200/90"
-          }`}
-        ></div>
-        <img
-          src="/Assets/Web.png"
-          alt="Spider Web Left"
-          className={`web-img w-52 md:w-64 h-52 md:h-64 object-contain opacity-20 mix-blend-multiply -mt-20 transition-all duration-300 ${
-            isVenomMode ? "invert brightness-200" : ""
-          }`}
+          className="w-full h-full bg-cover bg-center bg-no-repeat md:bg-fixed filter blur-sm scale-105 opacity-75 select-none"
+          style={{
+            backgroundImage: "url('/Assets/2.jpg')",
+          }}
         />
-      </div>
-
-      {/* Hanging Right Spider Web with Line extending up */}
-      <div
-        ref={rightWebRef}
-        className="absolute top-0 right-4 md:right-12 z-0 flex flex-col items-center pointer-events-none opacity-0"
-      >
-        <div
-          className={`w-[1px] h-40 md:h-64 transition-colors duration-300 ${
-            isVenomMode ? "bg-purple-900/60" : "bg-gray-200/90"
-          }`}
-        ></div>
-        <img
-          src="/Assets/Web.png"
-          alt="Spider Web Right"
-          className={`web-img w-60 md:w-72 h-60 md:h-72 object-contain opacity-20 mix-blend-multiply -mt-24 transition-all duration-300 ${
-            isVenomMode ? "invert brightness-200" : ""
-          }`}
-        />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/85 via-white/60 to-white/40 dark:from-black/95 dark:via-black/75 dark:to-black/50" />
       </div>
 
       {/* Main Section Content Container */}
@@ -153,129 +94,53 @@ export default function AboutSection() {
         {/* Left Side: Bio & Tech Stack Text */}
         <div ref={textContentRef} className="flex-1 flex flex-col items-start gap-6 max-w-xl">
           <div className="flex items-center gap-2">
-            <div
-              className={`px-1.5 py-0.5 rounded-sm flex items-center justify-center shadow-sm transition-colors duration-300 ${
-                isVenomMode ? "bg-purple-600" : "bg-[#a31515]"
-              }`}
-            >
-              <img
-                src="/Assets/spidey_gif_1.png"
-                alt="Spidey Mask"
-                className={`w-3.5 h-3.5 object-contain ${
-                  isVenomMode
-                    ? "invert brightness-200 grayscale"
-                    : "invert brightness-200"
-                }`}
-              />
-            </div>
-            <span
-              className={`font-black uppercase text-xs md:text-sm tracking-[0.2em] transition-colors duration-300 ${
-                isVenomMode ? "text-purple-400" : "text-[#a31515]"
-              }`}
-            >
-              BEHIND THE MASK
+            <span className="font-black uppercase text-xs md:text-sm tracking-[0.2em] transition-colors duration-300 text-[#AA0505]">
+              SAME MASK SAME TASK
             </span>
           </div>
 
           <h2
-            className={`text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-none italic uppercase whitespace-normal sm:whitespace-nowrap transition-colors duration-300 ${
-              isVenomMode ? "text-white" : "text-gray-900"
-            }`}
+            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-none italic uppercase transition-colors duration-300 text-gray-900 dark:text-white"
             style={{
-              textShadow: isVenomMode
-                ? "3px 3px 0px #7e22ce, 6px 6px 0px #581c87"
-                : "3px 3px 0px #ef4444, 6px 6px 0px #a31515",
+              textShadow: "3px 3px 0px #AA0505, 6px 6px 0px #6A0C0B",
             }}
           >
-            MAHIN GUNJAL
+            NISARG JAYESH DELVADIYA
           </h2>
 
-          <p
-            className={`font-medium text-sm md:text-base leading-relaxed transition-colors duration-300 ${
-              isVenomMode ? "text-gray-300" : "text-gray-700"
-            }`}
-          >
-            I’m Mahin Gunjal, a passionate Web Designer and VFX Artist pursuing my Bachelor’s degree at ITM SLS Baroda University. I specialize in creating modern, responsive, and visually engaging websites that combine clean UI/UX design with interactive digital experiences.
+          <p className="font-medium text-sm md:text-base leading-relaxed transition-colors duration-300 text-gray-700 dark:text-gray-300">
+            I’m Nisarg Jayesh Delvadiya — an entrepreneur, full-stack engineer, and visionary leader driven by building high-impact digital products and meaningful ventures. Combining deep expertise in modern web technologies like Next.js, React, Node.js, and GSAP with Indian AI innovations like Sarvam AI, I bridge robust engineering with strategic leadership, networking, and philanthropic purpose.
           </p>
 
-          <p
-            className={`font-medium text-sm md:text-base leading-relaxed transition-colors duration-300 ${
-              isVenomMode ? "text-gray-300" : "text-gray-700"
-            }`}
-          >
-            Alongside my web design journey, I am currently pursuing a VFX course at ZICA (Zee Institute of Creative Art), developing skills in visual effects, motion graphics, compositing, video editing, 3D design, and digital storytelling.
+          <p className="font-medium text-sm md:text-base leading-relaxed transition-colors duration-300 text-gray-700 dark:text-gray-300">
+            Currently pursuing my B.Tech in Information Technology (IT) at Manipal University Jaipur (2024 – 2028), my journey is rooted in Indology, geopolitics, and patriotism, fueled by a passion for exploring and capturing Bharat through my own eyes. When I’m not architecting software or writing thoughtful blogs, you’ll find me analyzing global dynamics, enjoying cinema, driving, or diving into culinary arts.
           </p>
 
-          {/* Primary Tech Stack */}
-          <div className="w-full pt-3 flex flex-col items-start gap-3">
-            <span
-              className={`font-bold uppercase text-xs tracking-widest transition-colors duration-300 ${
-                isVenomMode ? "text-gray-300" : "text-gray-900"
-              }`}
-            >
-              PRIMARY TECH STACK
-            </span>
-            <div className="flex flex-wrap gap-2.5">
-              {[
-                "HTML",
-                "CSS",
-                "Wordpress",
-                "Figma",
-                "Canva",
-                "Adobe Photoshop",
-                "Adobe Premiere Pro",
-                "Adobe After Effects",
-                "Adobe Illustrator",
-                "Autodesk Maya",
-                "Blender",
-                "Davinci Resolve",
-                "Prompt Engineering",
-              ].map((tech) => (
-                <span
-                  key={tech}
-                  className={`px-4 py-2 rounded-2xl border font-bold text-xs tracking-wide shadow-sm active:scale-95 active:translate-y-0.5 cursor-pointer transition-all duration-150 ${
-                    isVenomMode
-                      ? "border-purple-800/80 bg-purple-950/40 text-purple-300 hover:border-purple-400 hover:text-white"
-                      : "border-red-200 bg-white text-[#a31515] hover:border-[#a31515]"
-                  }`}
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </div>
+
         </div>
 
         {/* Right Side: Hanging Profile Photo Pendulum */}
-        <div className="flex-1 flex justify-center lg:justify-center -translate-x-6 md:-translate-x-12 lg:-translate-x-20 relative w-full z-30">
+        <div className="flex-1 flex justify-center lg:justify-end translate-x-0 md:translate-x-4 lg:translate-x-8 lg:pr-6 relative w-full z-30">
           <div
             ref={profileRef}
             className="relative flex flex-col items-center pointer-events-auto opacity-0 origin-top"
           >
             {/* Hanging Thread Line */}
-            <div
-              className={`w-[1.5px] h-28 md:h-36 shadow-sm transition-colors duration-300 ${
-                isVenomMode ? "bg-purple-600" : "bg-[#a31515]"
-              }`}
-            ></div>
+            <div className="w-[2px] h-16 md:h-20 lg:h-24 shadow-sm transition-colors duration-300 bg-[#AA0505]"></div>
 
-            {/* Profile Picture Frame */}
+            {/* College / Profile Picture Frame */}
             <div
-              className={`group relative w-56 md:w-72 h-56 md:h-72 rounded-full p-2 border-4 shadow-2xl cursor-pointer transition-all duration-300 ${
-                isVenomMode
-                  ? "bg-purple-950 border-purple-600 shadow-purple-950/50"
-                  : "bg-white border-[#a31515] shadow-red-900/20"
-              }`}
+              title="Manipal University Jaipur Campus (2024 – 2028)"
+              aria-label="Manipal University Jaipur Campus (2024 – 2028)"
+              className="group relative w-64 sm:w-80 md:w-96 lg:w-[26rem] h-64 sm:h-80 md:h-96 lg:h-[26rem] rounded-full p-2.5 sm:p-3 border-4 md:border-[5px] shadow-2xl cursor-pointer transition-all duration-300 bg-white dark:bg-zinc-950 border-[#AA0505] shadow-[0_20px_50px_rgba(106,12,11,0.3)]"
             >
-              <div className="w-full h-full rounded-full overflow-hidden border-2 border-purple-100/10 bg-gray-100">
-                <img
-                  src="/Assets/Mahin.jpeg"
-                  alt="Mahin Gunjal Profile"
-                  className={`w-full h-full object-cover object-center transition-all duration-500 group-hover:grayscale-0 group-hover:scale-110 ${
-                    isVenomMode
-                      ? "grayscale-0 lg:grayscale contrast-125 brightness-90 lg:group-hover:brightness-100"
-                      : "grayscale-0 lg:grayscale contrast-110"
-                  }`}
+              <div className="relative w-full h-full rounded-full overflow-hidden border-2 sm:border-[3px] border-[#FBCA03]/50 bg-gray-100 dark:bg-zinc-900">
+                <Image
+                  src="/Assets/Manipal_University_Jaipur.jpg"
+                  alt="Manipal University Jaipur Campus"
+                  fill
+                  sizes="(max-width: 640px) 256px, (max-width: 768px) 320px, (max-width: 1024px) 384px, 416px"
+                  className="object-cover object-[center_60%] transition-all duration-500 group-hover:scale-110"
                 />
               </div>
             </div>

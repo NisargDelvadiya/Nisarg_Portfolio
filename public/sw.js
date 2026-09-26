@@ -1,18 +1,30 @@
-const CACHE_NAME = "mahin-gunjal-portfolio-v1";
-const ASSETS_TO_CACHE = [
+const CACHE_NAME = "nisarg-portfolio-pwa-v1";
+
+const CORE_ASSETS = [
   "/",
   "/manifest.json",
-  "/Assets/favicon/favicon.ico",
-  "/Assets/favicon/apple-touch-icon.png",
-  "/Assets/favicon/web-app-manifest-192x192.png",
-  "/Assets/favicon/web-app-manifest-512x512.png"
+  "/favicon/site.webmanifest",
+  "/favicon/favicon.ico",
+  "/favicon/favicon.svg",
+  "/favicon/favicon-96x96.png",
+  "/favicon/apple-touch-icon.png",
+  "/favicon/web-app-manifest-192x192.png",
+  "/favicon/web-app-manifest-512x512.png",
+  "/Assets/Iron_Man.png?v=clean-v1",
+  "/Assets/Iron_Man_Mask.png",
+  "/Assets/1.jpg",
+  "/Assets/2.jpg",
+  "/Assets/Duo_Brothers.png",
+  "/Assets/Manipal_University_Jaipur.jpg"
 ];
 
 // Install Event - Pre-cache core shell assets
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => {
-      return cache.addAll(ASSETS_TO_CACHE);
+      return cache.addAll(CORE_ASSETS).catch((err) => {
+        console.warn("PWA ServiceWorker: Non-critical pre-cache warning:", err);
+      });
     })
   );
   self.skipWaiting();
@@ -34,26 +46,39 @@ self.addEventListener("activate", (event) => {
   self.clients.claim();
 });
 
-// Fetch Event - Network First with Cache Fallback Strategy
+// Fetch Event - Network First with Cache Fallback for HTML, Stale-While-Revalidate for Assets
 self.addEventListener("fetch", (event) => {
   if (event.request.method !== "GET") return;
 
-  // Ignore cross-origin requests like Google Translate or analytics
+  // Ignore cross-origin requests like Google Translate or Vercel Analytics
   if (!event.request.url.startsWith(self.location.origin)) return;
 
+  // Avoid caching Next.js development hot-reloading chunks
+  if (event.request.url.includes("/_next/webpack-hmr") || event.request.url.includes(".hot-update.")) {
+    return;
+  }
+
   event.respondWith(
-    fetch(event.request)
-      .then((response) => {
-        if (response && response.status === 200 && response.type === "basic") {
-          const responseToCache = response.clone();
-          caches.open(CACHE_NAME).then((cache) => {
-            cache.put(event.request, responseToCache);
-          });
-        }
-        return response;
-      })
-      .catch(() => {
-        return caches.match(event.request);
-      })
+    caches.match(event.request).then((cachedResponse) => {
+      const fetchPromise = fetch(event.request)
+        .then((networkResponse) => {
+          if (
+            networkResponse &&
+            networkResponse.status === 200 &&
+            networkResponse.type === "basic"
+          ) {
+            const responseToCache = networkResponse.clone();
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseToCache);
+            });
+          }
+          return networkResponse;
+        })
+        .catch(() => {
+          return cachedResponse;
+        });
+
+      return cachedResponse || fetchPromise;
+    })
   );
 });

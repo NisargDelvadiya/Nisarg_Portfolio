@@ -1,97 +1,83 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useSyncExternalStore } from "react";
+import Image from "next/image";
 import gsap from "gsap";
-import TextType from "@/components/TextType";
-import { useTheme } from "@/context/ThemeContext";
+
+const subscribeTouch = (callback) => {
+  if (typeof window === "undefined") return () => {};
+  try {
+    const mql = window.matchMedia("(pointer: coarse)");
+    mql.addEventListener("change", callback);
+    return () => mql.removeEventListener("change", callback);
+  } catch (_) {
+    return () => {};
+  }
+};
+
+const getTouchSnapshot = () => {
+  if (typeof window === "undefined") return false;
+  return Boolean(
+    "ontouchstart" in window ||
+      (typeof navigator !== "undefined" && navigator.maxTouchPoints > 0) ||
+      window.matchMedia("(pointer: coarse)").matches
+  );
+};
+
+const getTouchServerSnapshot = () => false;
 
 /**
  * Hero Component
  * 
  * Features:
- * - Interactive Spider-Man mask cursor reveal via CSS radial-gradient mask
- * - Split hero layers: unmasked face (Mahin_Man.jpeg) and masked suit (Spider_Man.png)
- * - Dynamic typing banner with TextType component
- * - GSAP entrance animations & continuous rotating web background accents
- * - Action buttons: Smooth scroll to Projects & direct download for Mahin_Resume.pdf
- * - Full support for Spider-Man Red and Venom Symbiote Dark themes
+ * - High-impact hero visual layer featuring Iron Man suit armor
+ * - Dynamic cursor / touch unmask reveal showing Nisarg's photo beneath armor
+ * - Hall of Armor background with soft focus blur and gradient overlay
+ * - Arc Reactor HUD targeting lens indicator
+ * - GSAP entrance animations for typography
+ * - Action buttons: Explore Projects and Download Nisarg's Resume PDF
  */
 export default function Hero() {
-  const [maskPos, setMaskPos] = useState(null);
-  const [isTouchDevice, setIsTouchDevice] = useState(false);
-  const { isVenomMode } = useTheme();
-
   const heroRef = useRef(null);
   const titleRef = useRef(null);
-  const webTopRef = useRef(null);
-  const webBottomRef = useRef(null);
+  const [maskPos, setMaskPos] = useState(null);
+  const [isTouching, setIsTouching] = useState(false);
+
+  const isTouchDevice = useSyncExternalStore(
+    subscribeTouch,
+    getTouchSnapshot,
+    getTouchServerSnapshot
+  );
 
   useEffect(() => {
-    // Detect touch / non-hover devices (iPads, mobile phones)
-    if (typeof window !== "undefined") {
-      const checkTouch = () => {
-        const hasTouch =
-          "ontouchstart" in window ||
-          navigator.maxTouchPoints > 0 ||
-          window.matchMedia("(hover: none)").matches;
-        setIsTouchDevice(hasTouch);
-      };
-      checkTouch();
-      window.addEventListener("resize", checkTouch);
-      return () => window.removeEventListener("resize", checkTouch);
+    let ctx;
+    try {
+      ctx = gsap.context(() => {
+        // Title entrance animation
+        gsap.fromTo(
+          [titleRef.current],
+          {
+            x: -120,
+            opacity: 0,
+          },
+          {
+            x: 0,
+            opacity: 1,
+            duration: 0.9,
+            ease: "power3.out",
+            delay: 0.1,
+          }
+        );
+      }, heroRef);
+    } catch (err) {
+      console.warn("Hero GSAP initialization error:", err);
     }
-  }, []);
 
-  useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Title entrance animation
-      gsap.fromTo(
-        [titleRef.current],
-        {
-          x: -120,
-          opacity: 0,
-        },
-        {
-          x: 0,
-          opacity: 1,
-          duration: 0.9,
-          ease: "power3.out",
-          delay: 0.1,
-        }
-      );
-
-      // Top Web: Rotation & Shrink/Grow scale loop
-      gsap.to(webTopRef.current, {
-        rotation: 360,
-        duration: 35,
-        repeat: -1,
-        ease: "none",
-      });
-      gsap.to(webTopRef.current, {
-        scale: 1.15,
-        duration: 4,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-
-      // Bottom Web: Counter-clockwise rotation & Shrink/Grow scale loop
-      gsap.to(webBottomRef.current, {
-        rotation: -360,
-        duration: 40,
-        repeat: -1,
-        ease: "none",
-      });
-      gsap.to(webBottomRef.current, {
-        scale: 1.18,
-        duration: 5,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-      });
-    }, heroRef);
-
-    return () => ctx.revert();
+    return () => {
+      try {
+        if (ctx) ctx.revert();
+      } catch (_) {}
+    };
   }, []);
 
   /**
@@ -99,14 +85,18 @@ export default function Hero() {
    */
   const handleMouseMove = (e) => {
     if (isTouchDevice) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
+    try {
+      const rect = e.currentTarget.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
 
-    // Strict bounding check: trigger mask reveal only when cursor is fully within container
-    if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
-      setMaskPos({ x, y });
-    } else {
+      // Strict bounding check: trigger mask reveal only when cursor is within hero container
+      if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+        setMaskPos({ x, y });
+      } else {
+        setMaskPos(null);
+      }
+    } catch (_) {
       setMaskPos(null);
     }
   };
@@ -115,140 +105,146 @@ export default function Hero() {
     setMaskPos(null);
   };
 
+  /**
+   * Mobile touch drag tracking
+   */
+  const updateTouchPos = (e) => {
+    try {
+      if (!e.touches || e.touches.length === 0 || !heroRef.current) return;
+      const rect = heroRef.current.getBoundingClientRect();
+      const touch = e.touches[0];
+      const x = touch.clientX - rect.left;
+      const y = touch.clientY - rect.top;
+      if (x >= 0 && x <= rect.width && y >= 0 && y <= rect.height) {
+        setMaskPos({ x, y });
+      }
+    } catch (_) {}
+  };
+
+  const handleTouchStart = (e) => {
+    setIsTouching(true);
+    updateTouchPos(e);
+  };
+
+  const handleTouchMove = (e) => {
+    updateTouchPos(e);
+  };
+
+  const handleTouchEnd = () => {
+    setIsTouching(false);
+    setMaskPos(null);
+  };
+
   return (
     <section
       ref={heroRef}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      className={`relative w-full h-screen overflow-hidden flex items-center justify-center cursor-crosshair transition-colors duration-300 ${
-        isVenomMode ? "bg-[#050508]" : "bg-white"
-      }`}
+      onTouchStart={handleTouchStart}
+      onTouchMove={handleTouchMove}
+      onTouchEnd={handleTouchEnd}
+      className="relative w-full h-screen overflow-hidden flex items-center justify-center transition-colors duration-300 bg-white dark:bg-[#0a0a0a] cursor-crosshair select-none"
     >
-      {/* Bottom Identity Layer (Human Face / Unmasked Mahin_Man.jpeg) */}
-      <img
-        alt="Mahin Man Unmasked Layer"
-        className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none z-10 transition-all duration-300"
-        src="/Assets/Mahin_Man.jpeg"
-        fetchPriority="high"
+      {/* Bottom Identity Layer (Human Face / Unmasked Nisarg) */}
+      <div className="absolute inset-0 pointer-events-none z-15">
+        <Image
+          alt="Nisarg Jayesh Delvadiya Unmasked Layer"
+          src="/Assets/me.png"
+          fill
+          priority
+          sizes="100vw"
+          className="object-contain object-bottom pointer-events-none select-none scale-[0.9] sm:scale-[0.95] md:scale-[1.0] lg:scale-[1.0] translate-x-12 sm:translate-x-20 md:translate-x-28 lg:translate-x-40 origin-bottom -translate-y-12 sm:-translate-y-8 md:-translate-y-4 lg:translate-y-0"
+        />
+      </div>
+
+      
+
+      {/* Top Mask Layer (Iron Man Armor) - Rendered with dynamic radial reveal mask */}
+      <div
+        className="absolute inset-0 pointer-events-none z-20"
         style={
-          isVenomMode
-            ? { filter: "grayscale(100%) brightness(0.85) contrast(125%)" }
-            : {}
+          maskPos
+            ? {
+                maskImage: `radial-gradient(circle 220px at ${maskPos.x}px ${maskPos.y}px, transparent 0%, transparent 45%, rgba(0, 0, 0, 0.3) 75%, black 100%)`,
+                WebkitMaskImage: `radial-gradient(circle 220px at ${maskPos.x}px ${maskPos.y}px, transparent 0%, transparent 45%, rgba(0, 0, 0, 0.3) 75%, black 100%)`,
+              }
+            : {
+                maskImage: "none",
+                WebkitMaskImage: "none",
+              }
         }
-      />
+      >
+        <Image
+          alt="Iron Man Suit Layer"
+          src="/Assets/Iron_Man.png"
+          fill
+          priority
+          sizes="100vw"
+          className="object-contain object-bottom pointer-events-none select-none scale-115 sm:scale-[1.15] md:scale-[1.20] lg:scale-[1.25] xl:scale-[1.28] origin-bottom translate-y-8 sm:translate-y-12 md:translate-y-16 lg:translate-y-20 xl:translate-y-24 translate-x-0 sm:translate-x-6 md:translate-x-16 lg:translate-x-28 xl:translate-x-36"
+        />
+      </div>
 
-      {/* Top Mask Layer (Spider-Man Suit) - Displayed only on desktop hoverable screens */}
-      {!isTouchDevice && (
-        <img
-          alt="Top Mask Layer"
-          className="absolute inset-0 w-full h-full object-cover object-center pointer-events-none z-20 transition-all duration-150"
-          src="/Assets/Spider_Man.png"
-          style={
-            isVenomMode
-              ? {
-                  filter:
-                    "grayscale(100%) brightness(0.4) contrast(250%) drop-shadow(0 0 25px #9333ea)",
-                  ...(maskPos
-                    ? {
-                        maskImage: `radial-gradient(260px at ${maskPos.x}px ${maskPos.y}px, transparent 0%, transparent 45%, rgba(0, 0, 0, 0.3) 75%, black 100%)`,
-                        WebkitMaskImage: `radial-gradient(260px at ${maskPos.x}px ${maskPos.y}px, transparent 0%, transparent 45%, rgba(0, 0, 0, 0.3) 75%, black 100%)`,
-                      }
-                    : {
-                        maskImage: "none",
-                        WebkitMaskImage: "none",
-                      }),
-                }
-              : maskPos
-              ? {
-                  maskImage: `radial-gradient(260px at ${maskPos.x}px ${maskPos.y}px, transparent 0%, transparent 45%, rgba(0, 0, 0, 0.3) 75%, black 100%)`,
-                  WebkitMaskImage: `radial-gradient(260px at ${maskPos.x}px ${maskPos.y}px, transparent 0%, transparent 45%, rgba(0, 0, 0, 0.3) 75%, black 100%)`,
-                }
-              : {
-                  maskImage: "none",
-                  WebkitMaskImage: "none",
-                }
-          }
-        />
-      )}
 
-      {/* Spider Web Background Decor */}
-      <div className="absolute inset-0 pointer-events-none z-5 overflow-hidden">
-        <img
-          ref={webTopRef}
-          alt="Spider Web Top"
-          className={`absolute top-0 left-0 w-[250px] h-[250px] object-contain opacity-20 -translate-x-1/4 -translate-y-1/4 mix-blend-multiply pointer-events-none origin-center transition-all duration-300 ${
-            isVenomMode ? "invert brightness-200" : ""
-          }`}
-          src="/Assets/Web.png"
+
+      {/* Blurred Background Photo (1.jpg: Hall of Armor) */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <Image
+          alt="Hall of Armor Background"
+          src="/Assets/1.jpg"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center filter blur-sm scale-105 opacity-80 select-none"
         />
-        <img
-          ref={webBottomRef}
-          alt="Spider Web Bottom"
-          className={`absolute bottom-0 right-0 w-[300px] h-[300px] object-contain opacity-20 translate-x-1/4 translate-y-1/4 mix-blend-multiply pointer-events-none origin-center transition-all duration-300 ${
-            isVenomMode ? "invert brightness-200" : ""
-          }`}
-          src="/Assets/Web.png"
-        />
+        <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/40 to-white/20 dark:from-black/90 dark:via-black/60 dark:to-black/30" />
       </div>
 
       {/* Hero Overlay Content */}
       <div className="absolute top-1/2 -translate-y-1/2 left-4 md:left-6 lg:left-12 z-30 flex flex-col gap-3 pointer-events-none drop-shadow-md max-w-lg w-full">
-        <div
-          className={`font-extrabold uppercase text-sm md:text-base lg:text-lg tracking-[0.2em] flex flex-col items-start gap-1 transition-colors duration-300 ${
-            isVenomMode
-              ? "text-purple-400 drop-shadow-[0_0_10px_rgba(168,85,247,0.6)]"
-              : "text-[#a31515]"
-          }`}
+        <a
+          href="https://www.nisargjayeshdelvadiya.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          title="Visit Nisarg Jayesh Delvadiya Official Website"
+          aria-label="Visit Nisarg Jayesh Delvadiya Official Website"
+          className="pointer-events-auto group block"
         >
-          <span className="block">YOUR FRIENDLY NEIGHBORHOOD</span>
-          <TextType
-            text={["WEB DESIGNER", "VFX ARTIST"]}
-            typingSpeed={60}
-            deletingSpeed={40}
-            pauseDuration={1800}
-            showCursor={true}
-            cursorCharacter="|"
-            loop={true}
-          />
-        </div>
-        <h1
-          ref={titleRef}
-          className={`text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-none italic uppercase opacity-0 transition-colors duration-300 ${
-            isVenomMode ? "text-white" : "text-gray-900"
-          }`}
-          style={{
-            textShadow: isVenomMode
-              ? "4px 4px 0px #7e22ce, 7px 7px 0px #581c87"
-              : "4px 4px 0px #ef4444, 7px 7px 0px #a31515",
-          }}
-        >
-          <span className="block">MAHIN</span>
-          <span className="block">GUNJAL</span>
-        </h1>
+          <div ref={titleRef} className="opacity-0 flex flex-col items-start gap-1">
+            <span className="font-black uppercase italic text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-wider text-[#AA0505] block pl-1.5 sm:pl-2">
+              I AM
+            </span>
+            <h1
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-none italic uppercase transition-transform duration-200 text-gray-900 dark:text-white group-hover:scale-[1.01]"
+              style={{
+                textShadow: "4px 4px 0px #AA0505, 7px 7px 0px #6A0C0B",
+              }}
+            >
+              <span className="block">NISARG</span>
+              <span className="block">JAYESH</span>
+              <span className="block">DELVADIYA</span>
+            </h1>
+          </div>
+        </a>
         <div className="flex flex-col items-start gap-3 mt-6 pointer-events-auto">
           <a
             href="#projects"
             title="Explore Projects Section"
             aria-label="Explore Projects Section"
-            className={`px-6 py-3 font-bold text-xs md:text-sm tracking-wider uppercase rounded-md shadow-lg inline-flex items-center justify-center transition-all duration-150 active:scale-95 active:translate-y-0.5 cursor-pointer select-none ${
-              isVenomMode
-                ? "bg-[#7e22ce] hover:bg-[#6b21a8] text-white shadow-purple-950/50"
-                : "bg-[#a31515] hover:bg-[#821010] text-white"
-            }`}
+            className="px-6 py-3 font-bold text-xs md:text-sm tracking-wider uppercase rounded-md shadow-lg inline-flex items-center justify-center transition-all duration-150 active:scale-95 active:translate-y-0.5 cursor-pointer select-none bg-[#AA0505] hover:bg-[#6A0C0B] text-white border border-[#B97D10]/40 shadow-[0_4px_20px_rgba(170,5,5,0.35)] hover:shadow-[0_4px_25px_rgba(251,202,3,0.35)]"
           >
             EXPLORE PROJECTS
           </a>
           <a
-            href="/Assets/files/Mahin_Resume.pdf"
-            download="Mahin_Resume.pdf"
+            href="/Assets/files/Nisarg_Jayesh_Delvadiya_Resume.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            title="Download Mahin Gunjal's Resume PDF"
-            aria-label="Download Mahin Gunjal's Resume PDF"
-            className="px-6 py-3 bg-[#111111] hover:bg-[#282828] text-white font-bold text-xs md:text-sm tracking-wider uppercase rounded-md shadow-lg inline-flex items-center gap-2 transition-colors duration-200 active:scale-95 active:translate-y-0.5 cursor-pointer select-none"
+            download="Nisarg_Jayesh_Delvadiya_Resume.pdf"
+            title="Download Nisarg Jayesh Delvadiya Resume (PDF)"
+            aria-label="Download Nisarg Jayesh Delvadiya Resume"
+            className="px-6 py-3 font-bold text-xs md:text-sm tracking-wider uppercase rounded-md shadow-md inline-flex items-center gap-2 transition-all duration-150 active:scale-95 active:translate-y-0.5 cursor-pointer select-none bg-black/70 hover:bg-[#AA0505] text-white border border-white/20 hover:border-[#AA0505] shadow-[0_4px_15px_rgba(0,0,0,0.3)] hover:shadow-[0_4px_20px_rgba(170,5,5,0.4)] backdrop-blur-sm"
           >
-            <span>MAHIN_RESUME.PDF</span>
-            <svg className="w-4 h-4 fill-current" viewBox="0 0 20 20">
+            <span>RESUME.PDF</span>
+            <svg className="w-4 h-4 fill-current opacity-80" viewBox="0 0 20 20">
               <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
             </svg>
           </a>

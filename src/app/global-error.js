@@ -11,7 +11,6 @@ import Link from "next/link";
  */
 export default function GlobalError({ error, reset }) {
   useEffect(() => {
-    // Log exception safely without crashing
     try {
       console.error("Critical Root Exception caught by global-error.js:", error);
     } catch {
@@ -28,7 +27,7 @@ export default function GlobalError({ error, reset }) {
       }
     } catch {
       if (typeof window !== "undefined") {
-        window.location.href = "/";
+        window.location.reload();
       }
     }
   };
@@ -36,7 +35,7 @@ export default function GlobalError({ error, reset }) {
   return (
     <html lang="en">
       <head>
-        <title>Application Error | Mahin Gunjal</title>
+        <title>Application Error | Nisarg Jayesh Delvadiya</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
       </head>
       <body
@@ -59,10 +58,10 @@ export default function GlobalError({ error, reset }) {
             maxWidth: "600px",
             width: "100%",
             backgroundColor: "#0d0d14",
-            border: "3px solid #a31515",
+            border: "3px solid #AA0505",
             borderRadius: "24px",
             padding: "32px",
-            boxShadow: "0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(163, 21, 21, 0.3)",
+            boxShadow: "0 20px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(170, 5, 5, 0.3)",
             textAlign: "center",
           }}
         >
@@ -71,8 +70,8 @@ export default function GlobalError({ error, reset }) {
               display: "inline-block",
               padding: "6px 14px",
               borderRadius: "9999px",
-              backgroundColor: "rgba(163, 21, 21, 0.2)",
-              border: "1px solid #a31515",
+              backgroundColor: "rgba(170, 5, 5, 0.2)",
+              border: "1px solid #AA0505",
               color: "#ff6b6b",
               fontWeight: 800,
               fontSize: "12px",
@@ -119,9 +118,11 @@ export default function GlobalError({ error, reset }) {
             <button
               type="button"
               onClick={handleReload}
+              title="Reload Application"
+              aria-label="Reload Application"
               style={{
                 padding: "12px 24px",
-                backgroundColor: "#fbbf24",
+                backgroundColor: "#FBCA03",
                 color: "#000000",
                 fontWeight: 900,
                 fontSize: "13px",
@@ -137,9 +138,11 @@ export default function GlobalError({ error, reset }) {
 
             <Link
               href="/"
+              title="Return to Home Page"
+              aria-label="Return to Home Page"
               style={{
                 padding: "12px 24px",
-                backgroundColor: "#a31515",
+                backgroundColor: "#AA0505",
                 color: "#ffffff",
                 fontWeight: 900,
                 fontSize: "13px",

@@ -1,4 +1,22 @@
 @import "tailwindcss";
+@custom-variant dark (&:is(.dark *));
+
+
+@theme {
+  --color-iron-red: #AA0505;
+  --color-iron-darkred: #6A0C0B;
+  --color-iron-bronze: #B97D10;
+  --color-iron-gold: #FBCA03;
+  --color-iron-cyan: #67C7EB;
+}
+
+:root {
+  --iron-red: #AA0505;
+  --iron-darkred: #6A0C0B;
+  --iron-bronze: #B97D10;
+  --iron-gold: #FBCA03;
+  --iron-cyan: #67C7EB;
+}
 
 /* Smooth scrolling for anchor jumps and keyboard navigation */
 html {
@@ -16,6 +34,60 @@ body {
   top: 0px !important;
   position: static !important;
   margin-top: 0px !important;
+}
+
+/* ==========================================================================
+   GLOBAL FOCUS OUTLINE & TAP HIGHLIGHT SUPPRESSION
+   Completely suppresses the browser's default blue focus rings, outlines, 
+   and tap highlight overlays on all interactive elements across the website.
+   ========================================================================== */
+*,
+*::before,
+*::after {
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+*:focus,
+*:focus-visible,
+*:focus-within {
+  outline: none !important;
+  outline-color: transparent !important;
+  outline-style: none !important;
+  outline-width: 0px !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+button,
+a,
+input,
+select,
+textarea,
+[tabindex],
+[role="button"] {
+  outline: none !important;
+  -webkit-tap-highlight-color: transparent !important;
+}
+
+button:focus,
+button:focus-visible,
+a:focus,
+a:focus-visible,
+input:focus,
+input:focus-visible,
+select:focus,
+select:focus-visible,
+textarea:focus,
+textarea:focus-visible,
+div:focus,
+div:focus-visible,
+[tabindex]:focus,
+[tabindex]:focus-visible,
+[role="button"]:focus,
+[role="button"]:focus-visible {
+  outline: none !important;
+  outline-color: transparent !important;
+  outline-style: none !important;
+  outline-width: 0px !important;
 }
 
 /* ==========================================================================
@@ -128,3 +200,61 @@ body > .skiptranslate,
   backface-visibility: hidden;
   perspective: 1000px;
 }
+
+/* ==========================================================================
+   JARVIS AUDIO WAVEFORM ANIMATIONS
+   ========================================================================== */
+@keyframes jarvisWave1 {
+  0%, 100% { height: 4px; }
+  50% { height: 18px; }
+}
+
+@keyframes jarvisWave2 {
+  0%, 100% { height: 14px; }
+  50% { height: 5px; }
+}
+
+@keyframes jarvisWave3 {
+  0%, 100% { height: 6px; }
+  50% { height: 20px; }
+}
+
+@keyframes jarvisWave4 {
+  0%, 100% { height: 18px; }
+  50% { height: 6px; }
+}
+
+@keyframes jarvisWave5 {
+  0%, 100% { height: 5px; }
+  50% { height: 16px; }
+}
+
+@keyframes jarvisWave6 {
+  0%, 100% { height: 12px; }
+  50% { height: 4px; }
+}
+
+.animate-jarvis-wave-1 {
+  animation: jarvisWave1 0.7s ease-in-out infinite;
+}
+
+.animate-jarvis-wave-2 {
+  animation: jarvisWave2 0.55s ease-in-out infinite 0.1s;
+}
+
+.animate-jarvis-wave-3 {
+  animation: jarvisWave3 0.8s ease-in-out infinite 0.2s;
+}
+
+.animate-jarvis-wave-4 {
+  animation: jarvisWave4 0.65s ease-in-out infinite 0.15s;
+}
+
+.animate-jarvis-wave-5 {
+  animation: jarvisWave5 0.75s ease-in-out infinite 0.05s;
+}
+
+.animate-jarvis-wave-6 {
+  animation: jarvisWave6 0.6s ease-in-out infinite 0.25s;
+}
+

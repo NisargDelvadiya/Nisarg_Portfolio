@@ -1,214 +1,251 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useTheme } from "@/context/ThemeContext";
 
 gsap.registerPlugin(ScrollTrigger);
 
 /**
- * List of technical proficiencies across design, 3D, VFX, and web development
+ * Management, leadership & strategic domains in exact specified order
  */
-const skillsData = [
-  { name: "HTML", category: "FRONTEND", level: "ADVANCED" },
-  { name: "CSS", category: "FRONTEND", level: "ADVANCED" },
-  { name: "WORDPRESS", category: "CMS & WEB", level: "ADVANCED" },
-  { name: "FIGMA", category: "UI/UX DESIGN", level: "ADVANCED" },
-  { name: "CANVA", category: "DESIGN TOOLS", level: "ADVANCED" },
-  { name: "ADOBE PHOTOSHOP", category: "GRAPHICS & EDITING", level: "ADVANCED" },
-  { name: "ADOBE PREMIERE PRO", category: "VIDEO EDITING", level: "ADVANCED" },
-  { name: "ADOBE AFTER EFFECTS", category: "VFX & MOTION", level: "ADVANCED" },
-  { name: "ADOBE ILLUSTRATOR", category: "VECTOR DESIGN", level: "ADVANCED" },
-  { name: "AUTODESK MAYA", category: "3D MODELING", level: "ADVANCED" },
-  { name: "BLENDER", category: "3D MODELING & VFX", level: "ADVANCED" },
-  { name: "DAVINCI RESOLVE", category: "POST PRODUCTION", level: "BASIC" },
-  { name: "PROMPT ENGINEERING", category: "AI & AUTOMATION", level: "ADVANCED" },
+const managementSkillsData = [
+  { name: "LEADERSHIP", category: "VISION & EXECUTION" },
+  { name: "COMMUNICATION", category: "RELATIONS & COLLABORATION" },
+  { name: "NETWORKING", category: "PARTNERSHIPS & ALLIANCES" },
+];
+
+/**
+ * Technical skills dataset in exact specified order
+ */
+const technicalSkillsData = [
+  { name: "SARVAM AI", category: "INDIC AI & LLMS" },
+  { name: "NEXT.JS", category: "FULL-STACK & SSR" },
+  { name: "REACT.JS", category: "FRONTEND FRAMEWORK" },
+  { name: "NODEMAILER", category: "EMAIL & AUTOMATION" },
+  { name: "CLERK", category: "AUTH & USER MANAGEMENT" },
+  { name: "PAYLOAD CMS", category: "HEADLESS CMS" },
+  { name: "MONGOOSE ODM", category: "SCHEMA & MODELING" },
+  { name: "MONGODB", category: "NOSQL DATABASE" },
+  { name: "NODE.JS", category: "BACKEND RUNTIME" },
+  { name: "GREENSOCK ANIMATION PLATFORM (GSAP)", category: "CREATIVE ANIMATIONS" },
+  { name: "JAVASCRIPT", category: "CORE LANGUAGE" },
+  { name: "SHADCN", category: "UI COMPONENT SYSTEM" },
+  { name: "TAILWIND CSS", category: "MODERN STYLING" },
+  { name: "HTML5", category: "SEMANTIC STRUCTURE" },
+  { name: "GITHUB", category: "VERSION CONTROL & CI/CD" },
+  { name: "GOOGLE ANTIGRAVITY", category: "AGENTIC WORKFLOWS" },
+  { name: "MICROSOFT VS CODE", category: "DEV ENVIRONMENT" },
+  { name: "JAVA", category: "OBJECT-ORIENTED PROGRAMMING" },
 ];
 
 /**
  * SkillsSection Component
  * 
  * Features:
- * - Hanging upside-down Spider-Man / Venom pendulum swing animation
+ * - Displays Management Skills first, followed by Technical Skills
+ * - Interactive filter tabs (All, Management Skills, Technical Skills)
  * - 2-column interactive skills matrix with smooth origin-left hover expansion
- * - Background rotating web motif
- * - Full dark / light mode responsive styling
  */
 export default function SkillsSection() {
   const sectionRef = useRef(null);
-  const webBgRef = useRef(null);
-  const spideyRef = useRef(null);
-  const cardsRef = useRef(null);
-  const { isVenomMode } = useTheme();
+  const headerRef = useRef(null);
+  const tabsRef = useRef(null);
+  const containerRef = useRef(null);
+  const [activeTab, setActiveTab] = useState("management");
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // 1. Hanging Spidey Pendulum Animation
-      gsap.to(spideyRef.current, {
-        rotation: 5,
-        duration: 2.8,
-        repeat: -1,
-        yoyo: true,
-        ease: "sine.inOut",
-        transformOrigin: "top center",
-      });
+    let ctx;
+    try {
+      ctx = gsap.context(() => {
+        const tl = gsap.timeline({
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top 80%",
+          },
+        });
 
-      // 2. Background Web Slow Rotation
-      gsap.to(webBgRef.current, {
-        rotation: 360,
-        duration: 50,
-        repeat: -1,
-        ease: "none",
-      });
-    }, sectionRef);
+        // Animate Header
+        if (headerRef.current) {
+          tl.fromTo(
+            headerRef.current,
+            { y: 50, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" },
+            0
+          );
+        }
 
-    return () => ctx.revert();
-  }, []);
+        // Animate Tabs
+        if (tabsRef.current) {
+          tl.fromTo(
+            tabsRef.current.children,
+            { scale: 0.8, opacity: 0 },
+            { scale: 1, opacity: 1, duration: 0.5, ease: "back.out(1.7)", stagger: 0.1 },
+            0.2
+          );
+        }
+
+        // Animate Skills Container
+        if (containerRef.current) {
+          tl.fromTo(
+            containerRef.current.children,
+            { y: 30, opacity: 0 },
+            { y: 0, opacity: 1, duration: 0.6, ease: "power2.out", stagger: 0.05 },
+            0.4
+          );
+        }
+      }, sectionRef);
+    } catch (err) {
+      console.warn("SkillsSection GSAP error:", err);
+    }
+    return () => {
+      try { if (ctx) ctx.revert(); } catch (_) {}
+    };
+  }, [activeTab]);
+
+  const showManagement = activeTab === "management";
+  const showTechnical = activeTab === "technical";
 
   return (
     <section
       id="skills"
       ref={sectionRef}
-      className={`relative w-full min-h-screen py-24 px-6 md:px-12 lg:px-20 flex flex-col items-center justify-center overflow-hidden select-none transition-colors duration-300 ${
-        isVenomMode ? "bg-[#0a0a10] text-white" : "bg-white text-gray-900"
-      }`}
+      className="relative w-full min-h-screen py-24 px-6 md:px-12 lg:px-20 flex flex-col items-center justify-center overflow-hidden select-none transition-colors duration-300 bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-white"
     >
-      {/* Background Rotating Web Accent */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
-        <img
-          ref={webBgRef}
-          src="/Assets/Web.png"
-          alt="Background Spider Web"
-          className={`w-[650px] md:w-[900px] h-[650px] md:h-[900px] object-contain opacity-15 mix-blend-multiply transition-all duration-300 ${
-            isVenomMode ? "invert brightness-200" : ""
-          }`}
+      {/* Blurred Background Photo (Fixed to Viewport for Natural Scale & Framing) */}
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
+        <div
+          className="w-full h-full bg-cover bg-center bg-no-repeat md:bg-fixed filter blur-sm scale-105 opacity-75 select-none"
+          style={{
+            backgroundImage: "url('/Assets/1.jpg')",
+          }}
         />
-      </div>
-
-      {/* Hanging Upside-Down Spider-Man Pendulum on the Right */}
-      <div
-        ref={spideyRef}
-        className="absolute top-0 right-2 md:right-4 lg:right-6 z-30 pointer-events-none origin-top"
-      >
-        <img
-          src="/Assets/spidey_gif_1.png"
-          alt="Hanging Spider-Man"
-          className={`w-32 md:w-40 lg:w-48 h-auto object-contain drop-shadow-2xl opacity-90 lg:opacity-100 transition-all duration-300 ${
-            isVenomMode
-              ? "grayscale brightness-[0.4] contrast-[220%] drop-shadow-[0_0_15px_#9333ea]"
-              : ""
-          }`}
-        />
+        <div className="absolute inset-0 bg-white/50 dark:bg-black/85 backdrop-blur-[1px]" />
       </div>
 
       {/* Section Header */}
-      <div className="relative z-20 flex flex-col items-center gap-2 mb-14 text-center max-w-2xl">
-        <div className="flex items-center gap-2">
-          <div
-            className={`px-1.5 py-0.5 rounded-sm flex items-center justify-center shadow-sm transition-colors duration-300 ${
-              isVenomMode ? "bg-purple-600" : "bg-[#a31515]"
-            }`}
-          >
-            <img
-              src="/Assets/spidey_gif_1.png"
-              alt="Spidey Mask"
-              className={`w-3.5 h-3.5 object-contain ${
-                isVenomMode
-                  ? "invert brightness-200 grayscale"
-                  : "invert brightness-200"
-              }`}
-            />
-          </div>
-          <span
-            className={`font-black uppercase text-xs md:text-sm tracking-[0.25em] transition-colors duration-300 ${
-              isVenomMode ? "text-purple-400" : "text-[#a31515]"
-            }`}
-          >
-            ARSENAL & EXPERTISE
-          </span>
-        </div>
+      <div ref={headerRef} className="relative z-20 flex flex-col items-center gap-2 mb-10 text-center max-w-2xl opacity-0">
+        <span className="font-black uppercase text-xs md:text-sm tracking-[0.25em] transition-colors duration-300 text-[#AA0505]">
+          ARSENAL & EXPERTISE
+        </span>
         <h2
-          className={`text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter italic uppercase transition-colors duration-300 ${
-            isVenomMode ? "text-white" : "text-gray-900"
-          }`}
+          className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter italic uppercase transition-colors duration-300 text-gray-900 dark:text-white"
           style={{
-            textShadow: isVenomMode
-              ? "3px 3px 0px #7e22ce, 5px 5px 0px #581c87"
-              : "3px 3px 0px #ef4444, 5px 5px 0px #a31515",
+            textShadow: "3px 3px 0px #AA0505, 5px 5px 0px #6A0C0B",
           }}
         >
-          TECHNICAL SKILLS
+          SKILLS
         </h2>
-        <div
-          className={`w-16 h-1 rounded-full mt-1 transition-colors duration-300 ${
-            isVenomMode ? "bg-purple-500" : "bg-[#a31515]"
-          }`}
-        ></div>
+        <div className="w-16 h-1 rounded-full mt-1 transition-colors duration-300 bg-gradient-to-r from-[#AA0505] via-[#FBCA03] to-[#AA0505]"></div>
       </div>
 
-      {/* Skills Grid Container */}
-      <div
-        ref={cardsRef}
-        className="relative z-20 max-w-4xl lg:max-w-5xl w-full mx-auto grid grid-cols-1 md:grid-cols-2 gap-3.5 md:gap-4.5"
-      >
-        {skillsData.map((skill, index) => (
-          <div
-            key={index}
-            className={`group relative backdrop-blur-sm border rounded-2xl p-3.5 md:p-4.5 flex items-center justify-between overflow-hidden transition-all duration-300 ${
-              isVenomMode
-                ? "bg-[#12121c]/90 border-purple-900/50 shadow-md shadow-purple-950/40 hover:border-purple-500 hover:shadow-purple-950/60"
-                : "bg-white/90 border-gray-200/80 shadow-md shadow-gray-200/40 hover:border-[#a31515] hover:shadow-red-900/15"
-            }`}
-          >
-            {/* Smooth Color Fading Left-to-Right Hover Overlay */}
-            <div
-              className={`absolute inset-0 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out pointer-events-none rounded-2xl ${
-                isVenomMode ? "bg-[#7e22ce]" : "bg-[#a31515]"
-              }`}
-            ></div>
+      {/* Category Filter Tabs (Management & Technical) */}
+      <div ref={tabsRef} className="relative z-20 flex flex-wrap items-center justify-center gap-2.5 sm:gap-3 mb-12 max-w-xl mx-auto">
 
-            {/* Left Content: Dot + Skill Name & Category */}
-            <div className="relative z-10 flex items-center gap-3.5">
-              <span
-                className={`w-3 h-3 rounded-full shrink-0 group-hover:bg-white transition-colors duration-300 ${
-                  isVenomMode ? "bg-purple-500" : "bg-[#a31515]"
-                }`}
-              ></span>
-              <div className="flex flex-col items-start">
-                <span
-                  className={`font-extrabold text-sm md:text-base tracking-wide uppercase group-hover:text-white transition-colors duration-300 ${
-                    isVenomMode ? "text-white" : "text-gray-900"
-                  }`}
-                >
-                  {skill.name}
-                </span>
-                <span
-                  className={`font-bold text-[10px] md:text-xs uppercase tracking-wider transition-colors duration-300 ${
-                    isVenomMode
-                      ? "text-purple-300/70 group-hover:text-purple-100"
-                      : "text-gray-400 group-hover:text-red-100"
-                  }`}
-                >
-                  {skill.category}
-                </span>
-              </div>
+        <button
+          type="button"
+          onClick={() => setActiveTab("management")}
+          title="Show Management & Leadership Skills"
+          aria-label="Show Management & Leadership Skills"
+          className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider transition-all duration-200 active:scale-95 cursor-pointer border ${
+            activeTab === "management"
+              ? "bg-[#AA0505] text-white border-[#AA0505] shadow-md shadow-red-950/20"
+              : "bg-white/90 dark:bg-zinc-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-zinc-800 hover:border-[#AA0505] hover:text-[#AA0505] dark:hover:text-[#AA0505]"
+          }`}
+        >
+          MANAGEMENT SKILLS
+        </button>
+
+        <button
+          type="button"
+          onClick={() => setActiveTab("technical")}
+          title="Show Technical & Engineering Skills"
+          aria-label="Show Technical & Engineering Skills"
+          className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-black uppercase tracking-wider transition-all duration-200 active:scale-95 cursor-pointer border ${
+            activeTab === "technical"
+              ? "bg-[#AA0505] text-white border-[#AA0505] shadow-md shadow-red-950/20"
+              : "bg-white/90 dark:bg-zinc-900 text-gray-700 dark:text-gray-300 border-gray-200 dark:border-zinc-800 hover:border-[#AA0505] hover:text-[#AA0505] dark:hover:text-[#AA0505]"
+          }`}
+        >
+          TECHNICAL SKILLS
+        </button>
+      </div>
+
+      {/* Main Container */}
+      <div ref={containerRef} className="relative z-20 max-w-4xl lg:max-w-5xl w-full mx-auto flex flex-col gap-12">
+        {/* 1. Management Skills Sub-Section (First) */}
+        {showManagement && (
+          <div className="flex flex-col gap-5">
+            <div className="flex items-center gap-3 border-b border-gray-200 dark:border-zinc-800 pb-3">
+              <span className="w-3 h-3 rounded-full bg-[#B97D10] shadow-sm"></span>
+              <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-gray-900 dark:text-white">
+                MANAGEMENT SKILLS
+              </h3>
             </div>
 
-            {/* Right Content: Level Tag Pill */}
-            <div className="relative z-10">
-              <span
-                className={`px-3.5 py-1.5 rounded-full border text-font-extrabold text-[10px] md:text-xs tracking-widest uppercase transition-all duration-300 group-hover:bg-black group-hover:text-white group-hover:border-black ${
-                  isVenomMode
-                    ? "border-purple-800/80 text-purple-300"
-                    : "border-gray-200 text-gray-700"
-                }`}
-              >
-                {skill.level}
-              </span>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 md:gap-4.5">
+              {managementSkillsData.map((skill, index) => (
+                <div
+                  key={index}
+                  title={`${skill.name} (${skill.category})`}
+                  aria-label={`${skill.name} (${skill.category})`}
+                  className="group relative backdrop-blur-sm border rounded-2xl p-4 md:p-4.5 flex items-center overflow-hidden transition-all duration-300 bg-white/90 dark:bg-zinc-900/90 border-gray-200/80 dark:border-zinc-800 shadow-md shadow-gray-200/40 dark:shadow-none hover:border-[#AA0505] hover:shadow-[0_8px_25px_rgba(170,5,5,0.2)] cursor-pointer"
+                >
+                  <div className="absolute inset-0 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out pointer-events-none rounded-2xl bg-gradient-to-r from-[#AA0505] to-[#6A0C0B]"></div>
+
+                  <div className="relative z-10 flex items-center gap-3.5 min-w-0 flex-1">
+                    <span className="w-3 h-3 rounded-full shrink-0 group-hover:bg-[#FBCA03] transition-colors duration-300 bg-[#B97D10]"></span>
+                    <div className="flex flex-col items-start min-w-0">
+                      <span className="font-extrabold text-sm md:text-base tracking-wide uppercase group-hover:text-white transition-colors duration-300 text-gray-900 dark:text-white leading-tight">
+                        {skill.name}
+                      </span>
+                      <span className="font-bold text-[10px] md:text-xs uppercase tracking-wider transition-colors duration-300 text-gray-400 group-hover:text-[#FBCA03] mt-0.5">
+                        {skill.category}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        ))}
+        )}
+
+        {/* 2. Technical Skills Sub-Section (Second) */}
+        {showTechnical && (
+          <div className="flex flex-col gap-5">
+            <div className="flex items-center gap-3 border-b border-gray-200 dark:border-zinc-800 pb-3">
+              <span className="w-3 h-3 rounded-full bg-[#AA0505] shadow-sm"></span>
+              <h3 className="text-xl sm:text-2xl font-black uppercase tracking-tight text-gray-900 dark:text-white">
+                TECHNICAL SKILLS
+              </h3>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 md:gap-4.5">
+              {technicalSkillsData.map((skill, index) => (
+                <div
+                  key={index}
+                  title={`${skill.name} (${skill.category})`}
+                  aria-label={`${skill.name} (${skill.category})`}
+                  className="group relative backdrop-blur-sm border rounded-2xl p-4 md:p-4.5 flex items-center overflow-hidden transition-all duration-300 bg-white/90 dark:bg-zinc-900/90 border-gray-200/80 dark:border-zinc-800 shadow-md shadow-gray-200/40 dark:shadow-none hover:border-[#AA0505] hover:shadow-[0_8px_25px_rgba(170,5,5,0.2)] cursor-pointer"
+                >
+                  <div className="absolute inset-0 origin-left scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out pointer-events-none rounded-2xl bg-gradient-to-r from-[#AA0505] to-[#6A0C0B]"></div>
+
+                  <div className="relative z-10 flex items-center gap-3.5 min-w-0 flex-1">
+                    <span className="w-3 h-3 rounded-full shrink-0 group-hover:bg-[#FBCA03] transition-colors duration-300 bg-[#AA0505]"></span>
+                    <div className="flex flex-col items-start min-w-0">
+                      <span className="font-extrabold text-sm md:text-base tracking-wide uppercase group-hover:text-white transition-colors duration-300 text-gray-900 dark:text-white leading-tight">
+                        {skill.name}
+                      </span>
+                      <span className="font-bold text-[10px] md:text-xs uppercase tracking-wider transition-colors duration-300 text-gray-400 group-hover:text-[#FBCA03] mt-0.5">
+                        {skill.category}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

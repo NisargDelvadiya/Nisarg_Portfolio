@@ -6,7 +6,7 @@ import Link from "next/link";
  * Visual HTML Sitemap Page
  * 
  * Provides an accessible, search-engine-friendly, and interactive directory of all portfolio sections,
- * legal documentation, downloads, and external connections.
+ * legal documentation, downloads, and external connections for Nisarg Jayesh Delvadiya.
  */
 export default function SitemapPage() {
   const sections = [
@@ -14,20 +14,20 @@ export default function SitemapPage() {
       category: "Main Portfolio Sections",
       description: "Interactive single-page landing components and milestones",
       links: [
-        { name: "Hero & Mask Reveal", url: "/#hero", desc: "Interactive Spider-Man suit mask cursor reveal" },
-        { name: "Skills Ticker Marquee", url: "/#skills", desc: "Dual angled high-speed skill banner" },
-        { name: "About & Credentials", url: "/#about", desc: "Bio, academic background at ITM SLS Baroda & ZICA" },
-        { name: "Technical Skills Matrix", url: "/#skills-matrix", desc: "Core stack, frontend frameworks, VFX & tools" },
-        { name: "Featured Projects Showcase", url: "/#projects", desc: "SaaS, payment gateways, portals & extensions" },
-        { name: "Career Journey & Milestones", url: "/#experience", desc: "Work history, internships & leadership" },
-        { name: "Contact & Work With Me", url: "/#contact", desc: "Email copy, 20-language translator & socials" },
+        { name: "Hero & Suit Reveal", url: "/#hero", desc: "Interactive Iron Man suit & Arc Reactor reveal" },
+        { name: "Skills Ticker Marquee", url: "/#skills", desc: "Dual angled high-speed tech & cultural marquee" },
+        { name: "About & Credentials", url: "/#about", desc: "Bio, full-stack engineering, Indology & vision" },
+        { name: "Technical Skills Matrix", url: "/#skills-matrix", desc: "Next.js, Sarvam AI, React, Node.js & core tools" },
+        { name: "Featured Projects Showcase", url: "/#projects", desc: "Bookified, Artezen, Priyanka & web apps" },
+        { name: "Career Journey & Milestones", url: "/#experiences", desc: "Freelance Web Developer & Co-Founder at Duo Brothers" },
+        { name: "Contact & Work With Me", url: "/#contact", desc: "Direct email copy, 20-language translator & NGO philanthropy" },
       ],
     },
     {
       category: "Pages & Legal Documents",
       description: "Official legal guidelines, cookie disclosures, and terms",
       links: [
-        { name: "All Projects Archive", url: "/projects", desc: "Complete 3D animation, CGI & VFX portfolio showcase" },
+        { name: "Featured Projects Section", url: "/#projects", desc: "Showcase of projects and live website links" },
         { name: "Privacy Policy", url: "/PrivacyPolicy", desc: "DPDP Act 2023 compliance & data handling" },
         { name: "Terms & Conditions", url: "/T&C", desc: "Terms of service, usage licenses & IP rules" },
         { name: "Visual HTML Sitemap", url: "/sitemap", desc: "Directory index of all website routes" },
@@ -36,38 +36,38 @@ export default function SitemapPage() {
     },
     {
       category: "Downloads & External Resources",
-      description: "Resume and professional developer profiles",
+      description: "Resume, blog, and professional developer profiles",
       links: [
-        { name: "Curriculum Vitae (Resume PDF)", url: "/Assets/files/Mahin_Resume.pdf", desc: "Official professional resume download" },
-        { name: "GitHub Profile", url: "https://github.com/mahingunjal", desc: "Open-source code repositories & contributions", external: true },
-        { name: "LinkedIn Profile", url: "https://www.linkedin.com/in/mahin-gunjal-669006275/", desc: "Professional network & career updates", external: true },
-        { name: "Instagram (@mahingunjal)", url: "https://www.instagram.com/mahingunjal", desc: "Visual designs & creative highlights", external: true },
+        { name: "Curriculum Vitae (Resume PDF)", url: "/Assets/files/Nisarg_Jayesh_Delvadiya_Resume.pdf", desc: "Official professional resume download" },
+        { name: "GitHub Profile", url: "https://github.com/NisargDelvadiya", desc: "Open-source code repositories & contributions", external: true },
+        { name: "The Nisarg Critic (Blog)", url: "https://thenisargcritic.blogspot.com", desc: "Cinema, geopolitics, philosophy & essays", external: true },
+        { name: "Duo Brothers Co-Partner (Mahin)", url: "https://mahin-portfolio-spidey.vercel.app", desc: "Mahin Sidhartha Gunjal — Web Designer & VFX Artist", external: true },
       ],
     },
   ];
 
   return (
     <div className="min-h-screen bg-white text-gray-900 font-sans p-6 sm:p-12 md:p-16 flex flex-col items-center justify-center select-none">
-      <div className="max-w-5xl w-full bg-white border-4 border-black rounded-3xl p-6 sm:p-12 shadow-[10px_10px_0px_#a31515] flex flex-col gap-10 relative overflow-hidden">
+      <div className="max-w-5xl w-full bg-white border-4 border-black rounded-3xl p-6 sm:p-12 shadow-[10px_10px_0px_#AA0505] flex flex-col gap-10 relative overflow-hidden">
         {/* Header Bar */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b-2 border-gray-200 pb-6">
           <div className="flex items-center gap-4">
-            <div className="w-12 h-12 bg-[#a31515] rounded-2xl border-2 border-black flex items-center justify-center shadow-[3px_3px_0px_#000000]">
-              <span className="text-white font-black italic text-2xl">🕸️</span>
+            <div className="w-12 h-12 bg-[#AA0505] rounded-2xl border-2 border-black flex items-center justify-center shadow-[3px_3px_0px_#000000]">
+              <span className="text-white font-black italic text-2xl">N</span>
             </div>
             <div>
               <h1 className="text-2xl sm:text-4xl font-black italic tracking-tighter uppercase text-gray-900">
                 Portfolio Sitemap
               </h1>
-              <p className="text-xs uppercase tracking-widest text-[#a31515] font-extrabold">
-                Directory Index & Navigation Architecture
+              <p className="text-xs uppercase tracking-widest text-[#AA0505] font-extrabold">
+                Nisarg Jayesh Delvadiya — Directory Index & Architecture
               </p>
             </div>
           </div>
 
           <Link
             href="/"
-            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#a31515] hover:bg-[#821010] text-white font-black text-xs uppercase tracking-wider transition-all border-2 border-black shadow-[3px_3px_0px_#000000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#000000] cursor-pointer"
+            className="group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#AA0505] hover:bg-[#6A0C0B] text-white font-black text-xs uppercase tracking-wider transition-all border-2 border-black shadow-[3px_3px_0px_#000000] active:translate-x-0.5 active:translate-y-0.5 active:shadow-[1px_1px_0px_#000000] cursor-pointer"
           >
             ← Back to Home
           </Link>
@@ -97,14 +97,14 @@ export default function SitemapPage() {
                         href={item.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm font-black text-[#a31515] hover:text-[#821010] underline flex items-center gap-1.5"
+                        className="text-sm font-black text-[#AA0505] hover:text-[#6A0C0B] underline flex items-center gap-1.5"
                       >
                         {item.name} <span className="text-xs">↗</span>
                       </a>
                     ) : (
                       <Link
                         href={item.url}
-                        className="text-sm font-black text-[#a31515] hover:text-[#821010] underline"
+                        className="text-sm font-black text-[#AA0505] hover:text-[#6A0C0B] underline"
                       >
                         {item.name}
                       </Link>
@@ -121,13 +121,13 @@ export default function SitemapPage() {
 
         {/* Footer Note */}
         <div className="border-t-2 border-gray-200 pt-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-500 font-bold">
-          <p>© 2026 Mahin Gunjal Portfolio • All rights reserved.</p>
+          <p>© 2026 Nisarg Jayesh Delvadiya • All Rights Reserved.</p>
           <div className="flex gap-4">
             <a
               href="/sitemap.xml"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#a31515] underline"
+              className="hover:text-[#AA0505] underline"
             >
               XML Feed
             </a>
@@ -136,7 +136,7 @@ export default function SitemapPage() {
               href="/robots.txt"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-[#a31515] underline"
+              className="hover:text-[#AA0505] underline"
             >
               Robots.txt
             </a>

@@ -1,14 +1,12 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useTheme } from "@/context/ThemeContext";
 
 /**
  * Navbar Component
  * 
  * Features:
  * - Dynamic scroll listener providing glassmorphic backdrop on page scroll
- * - Integrated theme toggle switch (Spider-Man Red Light Mode vs. Venom Dark Mode)
  * - Brand logo linking to official domain
  * - Smooth section navigation on anchor clicks
  * - Mobile responsive sliding hamburger menu
@@ -17,7 +15,34 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { isVenomMode, toggleTheme } = useTheme();
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  // Initialize Dark Mode from localStorage or system preference
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme");
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
+      setIsDarkMode(true);
+      document.documentElement.classList.add("dark");
+    } else {
+      setIsDarkMode(false);
+      document.documentElement.classList.remove("dark");
+    }
+  }, []);
+
+  const toggleDarkMode = () => {
+    setIsDarkMode((prev) => {
+      const newTheme = !prev;
+      if (newTheme) {
+        document.documentElement.classList.add("dark");
+        localStorage.setItem("theme", "dark");
+      } else {
+        document.documentElement.classList.remove("dark");
+        localStorage.setItem("theme", "light");
+      }
+      return newTheme;
+    });
+  };
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -51,10 +76,14 @@ export default function Navbar() {
   const handleNavClick = (e, item) => {
     e.preventDefault();
     setMobileMenuOpen(false);
-    const targetId = item.toLowerCase();
-    const element = document.getElementById(targetId);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
+    try {
+      const targetId = item.toLowerCase();
+      const element = document.getElementById(targetId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    } catch (err) {
+      console.warn("Navbar navigation scroll error:", err);
     }
   };
 
@@ -65,62 +94,53 @@ export default function Navbar() {
         isVisible ? "translate-y-0" : "-translate-y-full pointer-events-none"
       } ${
         isScrolled
-          ? isVenomMode
-            ? "bg-black/95 backdrop-blur-md border-b border-purple-900/60 py-3 shadow-[0_4px_30px_rgba(147,51,234,0.25)]"
-            : "bg-black/90 backdrop-blur-md border-b border-red-900/50 py-3 shadow-[0_4px_30px_rgba(220,38,38,0.15)]"
+          ? "bg-black/90 backdrop-blur-md border-b border-[#6A0C0B]/60 py-3 shadow-[0_4px_30px_rgba(170,5,5,0.2)]"
           : "bg-transparent py-4 sm:py-5 border-b border-transparent"
       }`}
     >
-      {/* Left Container: Brand Logo + High Contrast Theme Toggle Switch */}
+      {/* Left Container: Brand Logo */}
       <div className="flex items-center gap-3 sm:gap-4">
         <a
-          href="https://mahingunjal.com"
+          href="https://www.nisargjayeshdelvadiya.com"
           target="_blank"
           rel="noopener noreferrer"
-          title="Mahin Gunjal Official Website"
-          aria-label="Mahin Gunjal Official Website"
+          title="Nisarg Jayesh Delvadiya Official Website"
+          aria-label="Nisarg Jayesh Delvadiya Official Website"
           className="group inline-flex items-center gap-2 cursor-pointer select-none active:scale-95 active:translate-y-0.5 transition-transform duration-150"
         >
           <span
-            className={`text-xl sm:text-2xl font-black italic tracking-tighter transition-colors duration-200 ${
-              isVenomMode
-                ? "text-white group-hover:text-purple-400"
-                : isScrolled
-                ? "text-white group-hover:text-[#a31515]"
-                : "text-black group-hover:text-[#a31515]"
+            className={`inline-flex items-center gap-1.5 sm:gap-2 text-base sm:text-xl md:text-2xl font-black italic tracking-tight uppercase whitespace-nowrap transition-colors duration-200 ${
+              isScrolled || isDarkMode
+                ? "text-white group-hover:text-[#FBCA03]"
+                : "text-black group-hover:text-[#AA0505]"
             }`}
           >
-            <span className={isVenomMode ? "text-purple-500" : "text-[#a31515]"}>
-              M
-            </span>
-            AHIN
+            <span><span className="text-[#AA0505]">N</span>ISARG</span>
+            <span><span className="text-[#AA0505]">J</span>AYESH</span>
+            <span>DELVADIYA</span>
           </span>
         </a>
-
-        {/* High Contrast Theme Toggle Switch (After MAHIN Logo) */}
-        <label
-          className="relative inline-flex items-center cursor-pointer select-none active:scale-95 transition-transform ml-1"
-          title={
-            isVenomMode
-              ? "Switch to Spider-Man Red Mode"
-              : "Switch to Venom Symbiote Dark Mode"
-          }
-          aria-label={
-            isVenomMode
-              ? "Switch to Spider-Man Red Mode"
-              : "Switch to Venom Symbiote Dark Mode"
-          }
+        
+        {/* Dark Mode Toggle */}
+        <button
+          type="button"
+          onClick={toggleDarkMode}
+          className={`p-2 rounded-full transition-colors active:scale-95 cursor-pointer ${
+            isScrolled || isDarkMode ? "text-white hover:bg-white/10" : "text-black hover:bg-black/5"
+          }`}
+          title="Toggle Dark Mode"
+          aria-label="Toggle Dark Mode"
         >
-          <input
-            type="checkbox"
-            className="sr-only peer"
-            checked={isVenomMode}
-            onChange={toggleTheme}
-          />
-          <div
-            className="w-14 h-7 sm:w-16 sm:h-8 rounded-full bg-gradient-to-r from-red-600 to-[#a31515] peer-checked:from-purple-600 peer-checked:to-purple-900 transition-all duration-500 after:content-['☀️'] after:absolute after:top-0.5 after:left-0.5 after:bg-white after:rounded-full after:h-6 after:w-6 sm:after:h-7 sm:after:w-7 after:flex after:items-center after:justify-center after:transition-all after:duration-500 peer-checked:after:translate-x-7 sm:peer-checked:after:translate-x-8 peer-checked:after:content-['🌙'] after:shadow-md after:text-xs sm:after:text-sm border border-white/20 shadow-md"
-          ></div>
-        </label>
+          {isDarkMode ? (
+            <svg className="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 24 24">
+              <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z" />
+            </svg>
+          ) : (
+            <svg className="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 24 24">
+              <path d="M6.995 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007-2.246-5.007-5.007-5.007S6.995 9.239 6.995 12zM11 5.25V1h2v4.25h-2zm0 13.5V23h2v-4.25h-2zM17.5 11H23v2h-5.5v-2zM1 11h5.5v2H1v-2zm14.222-5.364l3.004-3.004 1.414 1.414-3.004 3.004-1.414-1.414zM4.364 18.222l3.004-3.004 1.414 1.414-3.004 3.004-1.414-1.414zM18.222 19.636l-3.004-3.004 1.414-1.414 3.004 3.004-1.414 1.414zM5.778 7.05L2.774 4.046 4.188 2.632l3.004 3.004-1.414 1.414z" />
+            </svg>
+          )}
+        </button>
       </div>
 
       {/* Right Side Controls */}
@@ -128,7 +148,7 @@ export default function Navbar() {
         {/* Desktop Navigation Links */}
         <div
           className={`hidden md:flex items-center gap-6 lg:gap-8 text-xs lg:text-sm font-extrabold tracking-widest uppercase transition-colors duration-200 ${
-            isVenomMode ? "text-gray-200" : isScrolled ? "text-white" : "text-black"
+            isScrolled || isDarkMode ? "text-white" : "text-black"
           }`}
         >
           {["ABOUT", "SKILLS", "PROJECTS", "EXPERIENCES"].map((item) => (
@@ -138,11 +158,7 @@ export default function Navbar() {
               title={`Scroll to ${item} section`}
               aria-label={`Scroll to ${item} section`}
               onClick={(e) => handleNavClick(e, item)}
-              className={`relative inline-block pb-0.5 transition-all duration-150 active:scale-95 active:translate-y-0.5 cursor-pointer ${
-                isVenomMode ? "hover:text-purple-400" : "hover:text-[#a31515]"
-              } after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] ${
-                isVenomMode ? "after:bg-purple-500" : "after:bg-[#a31515]"
-              } after:opacity-0 after:scale-x-0 hover:after:opacity-100 hover:after:scale-x-100 after:transition-all after:duration-200 after:origin-left`}
+              className="relative inline-block pb-0.5 transition-all duration-150 active:scale-95 active:translate-y-0.5 cursor-pointer hover:text-[#AA0505] after:content-[''] after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2px] after:bg-gradient-to-r after:from-[#AA0505] after:via-[#FBCA03] after:to-[#67C7EB] after:opacity-0 after:scale-x-0 hover:after:opacity-100 hover:after:scale-x-100 after:transition-all after:duration-200 after:origin-left"
             >
               {item}
             </a>
@@ -154,7 +170,7 @@ export default function Navbar() {
           type="button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           className={`md:hidden p-2 rounded-lg transition-colors active:scale-95 cursor-pointer ${
-            isVenomMode ? "text-white" : isScrolled ? "text-white" : "text-black"
+            isScrolled || isDarkMode ? "text-white" : "text-black"
           }`}
           title="Toggle Mobile Navigation Menu"
           aria-label="Toggle Navigation Menu"
@@ -179,13 +195,7 @@ export default function Navbar() {
 
       {/* Mobile Glassmorphic Dropdown Menu */}
       {mobileMenuOpen && (
-        <div
-          className={`absolute top-full left-0 w-full backdrop-blur-xl border-b py-6 px-6 flex flex-col gap-4 shadow-2xl md:hidden ${
-            isVenomMode
-              ? "bg-black/95 border-purple-900/60"
-              : "bg-black/95 border-red-900/50"
-          }`}
-        >
+        <div className="absolute top-full left-0 w-full backdrop-blur-xl border-b py-6 px-6 flex flex-col gap-4 shadow-2xl md:hidden bg-black/95 border-[#6A0C0B]/60">
           {["ABOUT", "SKILLS", "PROJECTS", "EXPERIENCES"].map((item) => (
             <a
               key={item}
@@ -193,11 +203,7 @@ export default function Navbar() {
               title={`Scroll to ${item} section`}
               aria-label={`Scroll to ${item} section`}
               onClick={(e) => handleNavClick(e, item)}
-              className={`text-white font-extrabold text-sm tracking-widest uppercase transition-all duration-150 py-2 border-b border-white/5 active:scale-95 active:translate-y-0.5 origin-left cursor-pointer ${
-                isVenomMode
-                  ? "hover:text-purple-400 active:text-purple-400"
-                  : "hover:text-[#a31515]"
-              }`}
+              className="text-white font-extrabold text-sm tracking-widest uppercase transition-all duration-150 py-2 border-b border-white/5 active:scale-95 active:translate-y-0.5 origin-left cursor-pointer hover:text-[#FBCA03]"
             >
               {item}
             </a>

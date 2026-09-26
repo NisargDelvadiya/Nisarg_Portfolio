@@ -43,7 +43,7 @@ export default class ErrorBoundary extends Component {
 
       return (
         <div className="w-full py-12 px-6 flex flex-col items-center justify-center text-center select-none">
-          <div className="max-w-md w-full p-6 rounded-2xl bg-red-50/80 dark:bg-red-950/30 border-2 border-red-300 dark:border-red-800 text-red-900 dark:text-red-200 flex flex-col items-center gap-3">
+          <div className="max-w-md w-full p-6 rounded-2xl bg-red-50/80 border-2 border-red-300 text-red-900 flex flex-col items-center gap-3">
             <span className="text-2xl">⚠️</span>
             <h3 className="font-extrabold text-sm uppercase tracking-wider">
               {this.props.sectionName || "Section"} Temporarily Unavailable
@@ -54,7 +54,9 @@ export default class ErrorBoundary extends Component {
             <button
               type="button"
               onClick={this.handleRetry}
-              className="mt-2 px-4 py-2 bg-[#a31515] text-white font-extrabold text-xs uppercase tracking-wider rounded-xl hover:bg-[#821010] active:scale-95 transition-all cursor-pointer"
+              title="Retry loading this section"
+              aria-label="Retry loading this section"
+              className="mt-2 px-4 py-2 bg-[#AA0505] text-white font-extrabold text-xs uppercase tracking-wider rounded-xl hover:bg-[#6A0C0B] active:scale-95 transition-all cursor-pointer"
             >
               🔄 Retry Section
             </button>

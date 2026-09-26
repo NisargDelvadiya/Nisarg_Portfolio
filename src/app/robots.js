@@ -4,7 +4,7 @@
  * Directs search engine crawlers, protects private assets/sourcemaps, and specifies the sitemap index.
  */
 export default function robots() {
-  const baseUrl = "https://mahingunjal.com";
+  const baseUrl = "https://nisargjayeshdelvadiya.com";
 
   try {
     return {

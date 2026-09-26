@@ -1,78 +1,57 @@
 /**
- * Centralized Projects & VFX Reels Showcase Dataset
+ * Centralized Projects Showcase Dataset
+ *
+ * Each project contains:
+ * - id: unique identifier
+ * - title: project name / heading
+ * - description: project summary
+ * - link: website link URL
+ * - category: category badge
  */
 export const projectsData = [
   {
     id: "01",
-    title: "TATA SAFARI 3D COMMERCIAL",
+    title: "BOOKIFIED",
     description:
-      "High-octane commercial 3D animation, vehicle rendering, and cinematic visual effects highlighting rugged aesthetics and performance.",
-    video: "/Assets/Projects/tata safari.mp4",
-    category: "3D / VFX",
+      "Empowering knowledge seekers through AI-powered conversational reading. Turn your books into live, interactive voice sessions.",
+    link: "https://bookified-now.vercel.app",
+    github: "https://github.com/NisargDelvadiya/Bookified",
+    category: "AI / FULL STACK",
   },
   {
     id: "02",
-    title: "NIKE DYNAMIC PRODUCT REEL",
+    title: "MAHIN GUNJAL PORTFOLIO",
     description:
-      "Dynamic 3D footwear motion graphics and product visualization showcasing kinetic energy, material textures, and fluid physics.",
-    video: "/Assets/Projects/nike.mp4",
-    category: "3D / VFX",
+      "The Mahin Gunjal portfolio is a high-performance, interactive web application designed to showcase the work of a Web Designer and VFX Artist.",
+    link: "https://mahin-portfolio-spidey.vercel.app",
+    category: "WEB / UI",
   },
   {
     id: "03",
-    title: "LAY'S 3D BRAND ADVERTISING",
+    title: "PRIYANKA GUNJAL PORTFOLIO",
+    isClientProject: true,
     description:
-      "Vibrant photorealistic product animation with dynamic particle effects, crisp lighting, and commercial broadcast composition.",
-    video: "/Assets/Projects/lays.mp4",
-    category: "3D / VFX",
+      "The Priyanka Gunjal portfolio is a high-performance, interactive web application designed to showcase the expertise of a Business Developer and Marketing Strategist.",
+    link: "https://priyanka-portfolio-luxury.vercel.app",
+    category: "CLIENT / LUXURY",
   },
   {
     id: "04",
-    title: "HEADS CHARACTER VFX & MOTION",
+    title: "ARTEZEN",
+    isClientProject: true,
     description:
-      "Stylized character motion design and lighting composition exploring surreal 3D sculpting, animation, and visual storytelling.",
-    video: "/Assets/Projects/heads.mp4",
-    category: "3D / VFX",
+      "Artezen is a state-of-the-art, performance-driven digital marketing agency web application engineered for maximum visual impact and high conversion efficiency.",
+    link: "https://www.artezen.co",
+    category: "CLIENT / FULL STACK",
   },
   {
     id: "05",
-    title: "FASHION APPAREL 3D VISUALS",
+    title: "REAL ESTATE PLATFORM",
+    isClientProject: true,
     description:
-      "Sleek high-fashion 3D cloth simulation, aesthetic lighting, and motion design tailored for luxury apparel campaigns.",
-    video: "/Assets/Projects/fashion .mp4",
-    category: "3D / VFX",
-  },
-  {
-    id: "06",
-    title: "DREAM CINEMATIC CONCEPT",
-    description:
-      "Atmospheric VFX concept environment featuring cinematic camera sequencing, volumetric lighting, and surreal ambient mood.",
-    video: "/Assets/Projects/dream.mp4",
-    category: "3D / VFX",
-  },
-  {
-    id: "07",
-    title: "DESTINATION CINEMATIC 3D REEL",
-    description:
-      "Immersive 3D environment visualization and cinematic camera direction capturing atmospheric depth, architectural details, and scenic lighting.",
-    video: "/Assets/Projects/destination.mp4",
-    category: "3D / VFX",
-  },
-  {
-    id: "08",
-    title: "PRIYANKA 3D BRAND REEL",
-    description:
-      "Dynamic commercial 3D animation, stylized rendering, and high-impact visual effects crafted for brand storytelling and engagement.",
-    video: "/Assets/Projects/priyanka.mp4",
-    category: "3D / VFX",
-  },
-  {
-    id: "09",
-    title: "ARTEZEN 3D PRODUCT COMMERCIAL",
-    description:
-      "Sophisticated 3D product visualization, elegant lighting composition, and seamless motion graphics showcasing premium aesthetics.",
-    video: "/Assets/Projects/artezen.mp4",
-    category: "3D / VFX",
+      "Comprehensive real estate marketplace application featuring dynamic property listings, robust schema architecture, and high-performance querying.",
+    link: "https://real-estate-business1.vercel.app",
+    category: "CLIENT / FULL STACK",
   },
 ];
 

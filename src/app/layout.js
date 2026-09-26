@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { ThemeProvider } from "@/context/ThemeContext";
 import PWARegistration from "@/components/PWARegistration";
+import CookieConsent from "@/components/CookieConsent";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 
@@ -18,43 +18,47 @@ const geistMono = Geist_Mono({
 });
 
 export const viewport = {
-  themeColor: "#a31515",
+  themeColor: "#AA0505",
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
 };
 
 export const metadata = {
-  metadataBase: new URL("https://mahingunjal.com"),
+  metadataBase: new URL("https://nisargjayeshdelvadiya.com"),
   title: {
-    default: "Mahin Gunjal — Web Designer & VFX Artist",
-    template: "%s | Mahin Gunjal",
+    default: "Nisarg Jayesh Delvadiya — Full-Stack Web Developer & Engineer",
+    template: "%s | Nisarg Jayesh Delvadiya",
   },
   description:
-    "Official Portfolio of Mahin Gunjal — Web Designer, Frontend Developer, and VFX Artist specializing in modern UI/UX, GSAP animations, 3D design, motion graphics, and digital storytelling.",
-  applicationName: "Mahin Gunjal Portfolio",
-  authors: [{ name: "Mahin Gunjal", url: "https://mahingunjal.com" }],
+    "Official Portfolio of Nisarg Jayesh Delvadiya — Full-Stack Engineer and Co-Founder at Duo Brothers, specializing in Next.js, Sarvam AI, React, Node.js, GSAP animations, UI/UX architecture, and modern web applications.",
+  applicationName: "Nisarg Jayesh Delvadiya Portfolio",
+  authors: [{ name: "Nisarg Jayesh Delvadiya", url: "https://nisargjayeshdelvadiya.com" }],
   generator: "Next.js",
   keywords: [
-    "Mahin Gunjal",
-    "Mahin",
-    "Web Designer",
-    "VFX Artist",
+    "Nisarg Delvadiya",
+    "Nisarg Jayesh Delvadiya",
+    "Nisarg",
+    "Full-Stack Engineer",
+    "Next.js Developer",
+    "Sarvam AI",
+    "React.js Developer",
     "Frontend Developer",
-    "UI UX Designer",
-    "3D Designer",
-    "Motion Graphics",
-    "React",
-    "Next.js",
-    "Tailwind CSS",
+    "Backend Developer",
+    "Duo Brothers",
+    "Bookified",
+    "Node.js",
     "GSAP Animations",
+    "Tailwind CSS",
+    "UI UX Architecture",
     "Portfolio",
     "Vadodara",
     "Gujarat",
     "India",
+    "Bharat",
   ],
-  creator: "Mahin Gunjal",
-  publisher: "Mahin Gunjal",
+  creator: "Nisarg Jayesh Delvadiya",
+  publisher: "Nisarg Jayesh Delvadiya",
   formatDetection: {
     email: false,
     address: false,
@@ -64,17 +68,17 @@ export const metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "Mahin Gunjal — Web Designer & VFX Artist",
+    title: "Nisarg Jayesh Delvadiya — Full-Stack Web Developer & Engineer",
     description:
-      "Explore the creative portfolio of Mahin Gunjal. Featuring modern web design, interactive GSAP animations, VFX projects, and 3D modeling.",
-    url: "https://mahingunjal.com",
-    siteName: "Mahin Gunjal Portfolio",
+      "Explore the official portfolio of Nisarg Jayesh Delvadiya. Showcasing Bookified, freelance web solutions with Duo Brothers, Next.js, Sarvam AI, and cutting-edge UI/UX design.",
+    url: "https://nisargjayeshdelvadiya.com",
+    siteName: "Nisarg Jayesh Delvadiya Portfolio",
     images: [
       {
         url: "/Assets/Mahin.jpeg",
         width: 1200,
         height: 630,
-        alt: "Mahin Gunjal — Web Designer & VFX Artist",
+        alt: "Nisarg Jayesh Delvadiya Portfolio",
       },
     ],
     locale: "en_US",
@@ -82,11 +86,11 @@ export const metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Mahin Gunjal — Web Designer & VFX Artist",
+    title: "Nisarg Jayesh Delvadiya — Full-Stack Web Developer & Engineer",
     description:
-      "Explore the creative portfolio of Mahin Gunjal. Featuring modern web design, interactive GSAP animations, VFX projects, and 3D modeling.",
+      "Explore the official portfolio of Nisarg Jayesh Delvadiya. Next.js, Sarvam AI, React, and Duo Brothers full-stack web engineering.",
     images: ["/Assets/Mahin.jpeg"],
-    creator: "@mahingunjal",
+    creator: "@NisargDelvadiya",
   },
   robots: {
     index: true,
@@ -103,19 +107,19 @@ export const metadata = {
   },
   icons: {
     icon: [
-      { url: "/Assets/favicon/favicon-96x96.png?v=20260817", sizes: "96x96", type: "image/png" },
-      { url: "/Assets/favicon/favicon.svg?v=20260817", type: "image/svg+xml" },
+      { url: "/favicon/favicon-96x96.png?v=20260925", sizes: "96x96", type: "image/png" },
+      { url: "/favicon/favicon.svg?v=20260925", type: "image/svg+xml" },
     ],
-    shortcut: "/Assets/favicon/favicon.ico?v=20260817",
+    shortcut: "/favicon/favicon.ico?v=20260925",
     apple: [
-      { url: "/Assets/favicon/apple-touch-icon.png?v=20260817", sizes: "180x180", type: "image/png" },
+      { url: "/favicon/apple-touch-icon.png?v=20260925", sizes: "180x180", type: "image/png" },
     ],
   },
-  manifest: "/manifest.json",
+  manifest: "/favicon/site.webmanifest?v=20260925",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Mahin Gunjal",
+    title: "Nisarg Jayesh Delvadiya Portfolio",
   },
 };
 
@@ -125,51 +129,54 @@ const jsonLd = {
   "@graph": [
     {
       "@type": "Person",
-      "@id": "https://mahingunjal.com/#person",
-      "name": "Mahin Gunjal",
-      "jobTitle": "Web Designer & VFX Artist",
-      "url": "https://mahingunjal.com",
-      "image": "https://mahingunjal.com/Assets/Mahin.jpeg",
+      "@id": "https://nisargjayeshdelvadiya.com/#person",
+      "name": "Nisarg Jayesh Delvadiya",
+      "jobTitle": "Full-Stack Web Developer & Engineer",
+      "url": "https://nisargjayeshdelvadiya.com",
+      "image": "https://nisargjayeshdelvadiya.com/Assets/Iron_Man.png",
       "description":
-        "Passionate Web Designer and VFX Artist specializing in modern UI/UX design, interactive web experiences, and visual effects.",
+        "Full-Stack Engineer and Co-Founder of Duo Brothers specializing in Next.js, Sarvam AI, React, Node.js, and high-performance modern web applications.",
       "alumniOf": {
         "@type": "CollegeOrUniversity",
-        "name": "ITM SLS Baroda University",
+        "name": "Manipal University Jaipur",
       },
       "knowsAbout": [
-        "Web Design",
-        "Frontend Development",
-        "VFX & Motion Graphics",
-        "UI/UX Design",
-        "3D Modeling",
-        "React",
+        "Sarvam AI",
         "Next.js",
-        "GSAP",
-        "Blender",
-        "Adobe Creative Suite",
+        "React.js",
+        "Full-Stack Web Development",
+        "Node.js",
+        "GSAP Animations",
+        "MongoDB & Mongoose",
+        "Tailwind CSS",
+        "UI/UX Architecture",
+        "Leadership",
+        "Communication",
+        "Networking",
       ],
       "sameAs": [
         "https://github.com/NisargDelvadiya",
-        "https://www.linkedin.com/in/mahin-gunjal-1a133528b",
+        "https://thenisargcritic.blogspot.com",
+        "https://www.linkedin.com/in/nisarg-delvadiya",
       ],
     },
     {
       "@type": "WebSite",
-      "@id": "https://mahingunjal.com/#website",
-      "url": "https://mahingunjal.com",
-      "name": "Mahin Gunjal Portfolio",
-      "description": "Official Web Designer & VFX Artist Portfolio of Mahin Gunjal",
+      "@id": "https://nisargjayeshdelvadiya.com/#website",
+      "url": "https://nisargjayeshdelvadiya.com",
+      "name": "Nisarg Jayesh Delvadiya Portfolio",
+      "description": "Official Web Development & Engineering Portfolio of Nisarg Jayesh Delvadiya",
       "publisher": {
-        "@id": "https://mahingunjal.com/#person",
+        "@id": "https://nisargjayeshdelvadiya.com/#person",
       },
     },
     {
       "@type": "ProfilePage",
-      "@id": "https://mahingunjal.com/#profilepage",
-      "url": "https://mahingunjal.com",
-      "name": "Mahin Gunjal Portfolio Profile",
+      "@id": "https://nisargjayeshdelvadiya.com/#profilepage",
+      "url": "https://nisargjayeshdelvadiya.com",
+      "name": "Nisarg Jayesh Delvadiya Portfolio Profile",
       "mainEntity": {
-        "@id": "https://mahingunjal.com/#person",
+        "@id": "https://nisargjayeshdelvadiya.com/#person",
       },
     },
   ],
@@ -182,34 +189,33 @@ export default function RootLayout({ children }) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
-        <link rel="icon" type="image/png" href="/Assets/favicon/favicon-96x96.png?v=20260817" sizes="96x96" />
-        <link rel="icon" type="image/svg+xml" href="/Assets/favicon/favicon.svg?v=20260817" />
-        <link rel="shortcut icon" href="/Assets/favicon/favicon.ico?v=20260817" />
-        <link rel="apple-touch-icon" sizes="180x180" href="/Assets/favicon/apple-touch-icon.png?v=20260817" />
-        <meta name="theme-color" content="#a31515" />
+        <link rel="icon" type="image/png" href="/favicon/favicon-96x96.png?v=20260925" sizes="96x96" />
+        <link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg?v=20260925" />
+        <link rel="shortcut icon" href="/favicon/favicon.ico?v=20260925" />
+        <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png?v=20260925" />
+        <meta name="theme-color" content="#AA0505" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <meta name="apple-mobile-web-app-title" content="Mahin Gunjal" />
-        <link rel="manifest" href="/manifest.json" />
+        <meta name="apple-mobile-web-app-title" content="Nisarg Portfolio" />
+        <link rel="manifest" href="/favicon/site.webmanifest?v=20260925" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
       <body className="min-h-full flex flex-col relative transition-colors duration-300">
-        <ThemeProvider>
-          <a
-            href="#main-content"
-            className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100000] focus:px-5 focus:py-2.5 focus:bg-[#a31515] focus:text-white focus:font-black focus:rounded-xl focus:shadow-2xl focus:outline-none"
-          >
-            Skip to main content
-          </a>
-          {children}
-          <PWARegistration />
-          <Analytics />
-          <SpeedInsights />
-        </ThemeProvider>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100000] focus:px-5 focus:py-2.5 focus:bg-[#AA0505] focus:text-white focus:font-black focus:rounded-xl focus:shadow-2xl focus:outline-none"
+        >
+          Skip to main content
+        </a>
+        {children}
+        <PWARegistration />
+        <CookieConsent />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

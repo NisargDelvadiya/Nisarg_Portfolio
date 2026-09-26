@@ -5,7 +5,7 @@
  * Generates standards-compliant XML sitemap entries for all portfolio routes with error resiliency.
  */
 export default function sitemap() {
-  const baseUrl = "https://mahingunjal.com";
+  const baseUrl = "https://nisargjayeshdelvadiya.com";
 
   try {
     const now = new Date();
@@ -16,13 +16,7 @@ export default function sitemap() {
         lastModified: now,
         changeFrequency: "weekly",
         priority: 1.0,
-        images: [`${baseUrl}/Assets/Mahin.jpeg`],
-      },
-      {
-        url: `${baseUrl}/projects`,
-        lastModified: now,
-        changeFrequency: "weekly",
-        priority: 0.9,
+        images: [`${baseUrl}/Assets/Iron_Man.png`],
       },
       {
         url: `${baseUrl}/sitemap`,

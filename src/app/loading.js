@@ -6,13 +6,13 @@ export default function Loading() {
       {/* Spider-Man Pulsing Spinner Icon */}
       <div className="flex flex-col items-center gap-4 mb-8">
         <div className="relative w-20 h-20 flex items-center justify-center">
-          <div className="absolute inset-0 rounded-full border-4 border-red-100 border-t-[#a31515] animate-spin"></div>
-          <div className="w-12 h-12 bg-[#a31515] rounded-2xl flex items-center justify-center shadow-lg animate-pulse">
-            <span className="text-white font-black italic text-2xl">M</span>
+          <div className="absolute inset-0 rounded-full border-4 border-red-100 border-t-[#AA0505] animate-spin"></div>
+          <div className="w-12 h-12 bg-[#AA0505] rounded-2xl flex items-center justify-center shadow-lg shadow-red-950/20 animate-pulse border border-[#B97D10]/40">
+            <span className="text-white font-black italic text-2xl">N</span>
           </div>
         </div>
-        <span className="text-[#a31515] font-black uppercase text-xs md:text-sm tracking-[0.3em] animate-pulse">
-          SWINGING INTO ACTION...
+        <span className="text-[#AA0505] font-black uppercase text-xs md:text-sm tracking-[0.3em] animate-pulse">
+          INITIALIZING BARNDOOR PROTOCOLS...
         </span>
       </div>
 
