@@ -226,24 +226,16 @@ export default function ProjectsSection() {
             {projectsData.map((project, index) => (
               <div key={project.id || index} className="w-full shrink-0 px-2 sm:px-4 py-2">
                 <div className="group relative backdrop-blur-md border-2 rounded-3xl px-8 sm:px-14 md:px-16 py-6 sm:py-8 md:py-10 flex flex-col gap-6 overflow-hidden transition-all duration-300 bg-white/95 dark:bg-zinc-900/90 border-gray-200/90 dark:border-zinc-800 shadow-2xl shadow-gray-300/40 dark:shadow-none hover:border-[#AA0505] hover:shadow-[0_15px_40px_rgba(170,5,5,0.18)] min-h-[380px] sm:min-h-[400px] justify-between">
-                  {/* Top Bar: Project ID, Client Badge & Category */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-gray-100 dark:border-zinc-800">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider bg-[#AA0505] text-white shadow-sm">
-                        PROJECT {project.id || `0${index + 1}`}
-                      </span>
-
-                      {project.isClientProject && (
+                  {/* Top Bar: Client Badge */}
+                  {project.isClientProject && (
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-gray-100 dark:border-zinc-800">
+                      <div className="flex items-center gap-2 flex-wrap">
                         <span className="px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider border border-emerald-600/30 dark:border-emerald-500/30 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-800 dark:text-emerald-400 shadow-xs">
                           ★ CLIENT PROJECT
                         </span>
-                      )}
-
-                      <span className="text-xs font-bold text-gray-400">
-                        {index + 1} of {projectsData.length}
-                      </span>
+                      </div>
                     </div>
-                  </div>
+                  )}
 
                   {/* Project Main Details: Title & Description */}
                   <div className="flex flex-col gap-3 flex-1">

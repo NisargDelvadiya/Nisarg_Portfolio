@@ -152,8 +152,9 @@ export default function Hero() {
           src="/Assets/me.png"
           fill
           priority
+          quality={60}
           sizes="100vw"
-          className="object-contain object-bottom pointer-events-none select-none scale-[0.9] sm:scale-[0.95] md:scale-[1.0] lg:scale-[1.0] translate-x-12 sm:translate-x-20 md:translate-x-28 lg:translate-x-40 origin-bottom -translate-y-12 sm:-translate-y-8 md:-translate-y-4 lg:translate-y-0"
+          className="object-contain object-bottom pointer-events-none select-none scale-100 [@media(max-aspect-ratio:7/10)]:scale-[1.75] lg:!scale-100 translate-x-0 lg:!translate-x-40 origin-bottom translate-y-0 lg:!translate-y-0"
         />
       </div>
 
@@ -179,8 +180,9 @@ export default function Hero() {
           src="/Assets/Iron_Man.png"
           fill
           priority
+          quality={60}
           sizes="100vw"
-          className="object-contain object-bottom pointer-events-none select-none scale-115 sm:scale-[1.15] md:scale-[1.20] lg:scale-[1.25] xl:scale-[1.28] origin-bottom translate-y-8 sm:translate-y-12 md:translate-y-16 lg:translate-y-20 xl:translate-y-24 translate-x-0 sm:translate-x-6 md:translate-x-16 lg:translate-x-28 xl:translate-x-36"
+          className="object-contain object-bottom pointer-events-none select-none scale-125 [@media(max-aspect-ratio:7/10)]:scale-[2.18] lg:!scale-125 xl:!scale-125 origin-bottom translate-y-20 [@media(max-aspect-ratio:7/10)]:-translate-y-[12rem] lg:!translate-y-20 xl:!translate-y-24 -translate-x-4 [@media(max-aspect-ratio:7/10)]:-translate-x-[0.57rem] lg:!translate-x-28 xl:!translate-x-36"
         />
       </div>
 
@@ -200,7 +202,7 @@ export default function Hero() {
       </div>
 
       {/* Hero Overlay Content */}
-      <div className="absolute top-1/2 -translate-y-1/2 left-4 md:left-6 lg:left-12 z-30 flex flex-col gap-3 pointer-events-none drop-shadow-md max-w-lg w-full">
+      <div className="absolute top-[38%] lg:top-1/2 -translate-y-1/2 left-4 md:left-6 lg:left-12 z-30 flex flex-col gap-3 pointer-events-none drop-shadow-md max-w-lg w-full">
         <a
           href="https://www.nisargjayeshdelvadiya.com"
           target="_blank"

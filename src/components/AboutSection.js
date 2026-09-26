@@ -93,11 +93,7 @@ export default function AboutSection() {
       <div className="relative z-20 max-w-7xl w-full flex flex-col-reverse lg:flex-row items-center justify-between gap-12 lg:gap-12">
         {/* Left Side: Bio & Tech Stack Text */}
         <div ref={textContentRef} className="flex-1 flex flex-col items-start gap-6 max-w-xl">
-          <div className="flex items-center gap-2">
-            <span className="font-black uppercase text-xs md:text-sm tracking-[0.2em] transition-colors duration-300 text-[#AA0505]">
-              SAME MASK SAME TASK
-            </span>
-          </div>
+
 
           <h2
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter leading-none italic uppercase transition-colors duration-300 text-gray-900 dark:text-white"

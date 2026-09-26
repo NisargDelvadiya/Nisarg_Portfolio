@@ -40,7 +40,7 @@ const SectionNavigation = dynamic(() => import("@/components/SectionNavigation")
 export default function Home() {
   return (
     <div
-      className="relative w-full min-h-screen font-sans select-none overflow-x-hidden transition-colors duration-300 bg-white text-gray-900"
+      className="relative w-full min-h-screen font-sans select-none overflow-x-hidden transition-colors duration-300 bg-white dark:bg-[#0a0a0a] text-gray-900 dark:text-gray-100"
     >
       <ErrorBoundary sectionName="Navigation Bar">
         <Navbar />

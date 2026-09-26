@@ -101,7 +101,7 @@ export default function CookieConsent() {
       role="dialog"
       aria-live="polite"
       aria-label="Cookie Consent Banner"
-      className="fixed bottom-6 left-1/2 -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 z-[100000] w-[calc(100%-2.5rem)] max-w-sm sm:max-w-md border-4 rounded-3xl p-5 sm:p-6 flex flex-col gap-4 select-none transition-all duration-300 bg-white border-[#AA0505] shadow-[8px_8px_0px_#6A0C0B] text-gray-900 animate-in fade-in slide-in-from-bottom-4"
+      className="fixed bottom-6 left-1/2 -translate-x-1/2 sm:left-auto sm:right-6 sm:translate-x-0 z-[100000] w-[calc(100%-2.5rem)] max-w-sm sm:max-w-md border-4 rounded-3xl p-5 sm:p-6 flex flex-col gap-4 select-none transition-all duration-300 bg-white dark:bg-zinc-950 border-[#AA0505] shadow-[8px_8px_0px_#6A0C0B] text-gray-900 dark:text-gray-100 animate-in fade-in slide-in-from-bottom-4"
     >
       {/* Header Row: Cookie Icon + Title + Close Cross (✕) Button */}
       <div className="flex items-center justify-between">
@@ -109,7 +109,7 @@ export default function CookieConsent() {
           <span className="text-2xl" aria-hidden="true">
             🍪
           </span>
-          <h3 className="font-black text-xl italic tracking-tight uppercase text-gray-900">
+          <h3 className="font-black text-xl italic tracking-tight uppercase text-gray-900 dark:text-gray-100">
             COOKIE CONSENT
           </h3>
         </div>
@@ -118,7 +118,7 @@ export default function CookieConsent() {
         <button
           type="button"
           onClick={handleClose}
-          className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-lg cursor-pointer transition-colors text-gray-500 hover:text-[#AA0505] hover:bg-red-50 active:scale-95"
+          className="w-8 h-8 rounded-full flex items-center justify-center font-bold text-lg cursor-pointer transition-colors text-gray-500 dark:text-gray-400 hover:text-[#AA0505] hover:bg-red-50 dark:hover:bg-red-950/30 active:scale-95"
           title="Dismiss for 30 seconds"
           aria-label="Close cookie consent (will remind in 30 seconds)"
         >
@@ -127,7 +127,7 @@ export default function CookieConsent() {
       </div>
 
       {/* Consent Explanation Body */}
-      <p className="font-extrabold text-sm sm:text-base leading-snug text-gray-800">
+      <p className="font-extrabold text-sm sm:text-base leading-snug text-gray-800 dark:text-gray-300">
         We use essential cookies to maintain system security and functional preferences. No invasive tracking. Read our{" "}
         <Link
           href="/PrivacyPolicy"

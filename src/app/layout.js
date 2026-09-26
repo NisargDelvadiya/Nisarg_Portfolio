@@ -204,7 +204,7 @@ export default function RootLayout({ children }) {
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="min-h-full flex flex-col relative transition-colors duration-300">
+      <body className="min-h-full flex flex-col relative overflow-x-hidden transition-colors duration-300 bg-white dark:bg-[#0a0a0a]">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100000] focus:px-5 focus:py-2.5 focus:bg-[#AA0505] focus:text-white focus:font-black focus:rounded-xl focus:shadow-2xl focus:outline-none"

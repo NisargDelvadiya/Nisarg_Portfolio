@@ -318,7 +318,7 @@ export default function Footer() {
           {/* Main Side-by-Side Responsive Grid Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start w-full">
             {/* Left Side: Work With Me / Copy Email Column */}
-            <div className="lg:col-span-4 xl:col-span-4 flex flex-col items-start gap-3 text-left w-full">
+            <div className="lg:col-span-4 xl:col-span-4 flex flex-col items-center lg:items-start gap-3 text-center lg:text-left w-full mb-8 lg:mb-0">
               <span className="font-black uppercase text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 text-[#AA0505]">
                 WORK WITH ME
               </span>
@@ -358,7 +358,7 @@ export default function Footer() {
             {/* Right Side: Connect, Legal, NGOS & Donations Links */}
             <div className="lg:col-span-8 xl:col-span-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 w-full min-w-0">
               {/* Connect Column */}
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col items-start text-left gap-3">
                 <h3 className="text-base font-bold text-white border-b pb-1.5 w-max transition-colors duration-300 border-[#B97D10]/40">
                   Connect
                 </h3>
@@ -385,7 +385,7 @@ export default function Footer() {
               </div>
 
               {/* Legal Column */}
-              <div className="flex flex-col gap-3">
+              <div className="flex flex-col items-start text-left gap-3">
                 <h3 className="text-base font-bold text-white border-b pb-1.5 w-max transition-colors duration-300 border-[#B97D10]/40">
                   Legal
                 </h3>
@@ -422,7 +422,7 @@ export default function Footer() {
               </div>
 
               {/* NGOS Column */}
-              <div className="flex flex-col gap-3 min-w-0">
+              <div className="flex flex-col items-start text-left gap-3 min-w-0">
                 <h3 className="text-base font-bold text-white border-b pb-1.5 w-max transition-colors duration-300 border-[#B97D10]/40 uppercase">
                   NGOS
                 </h3>
@@ -459,7 +459,7 @@ export default function Footer() {
               </div>
 
               {/* DONATIONS Column */}
-              <div className="flex flex-col gap-3 min-w-0">
+              <div className="flex flex-col items-start text-left gap-3 min-w-0">
                 <h3 className="text-base font-bold text-white border-b pb-1.5 w-max transition-colors duration-300 border-[#B97D10]/40 uppercase">
                   DONATIONS
                 </h3>
