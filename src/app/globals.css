@@ -179,7 +179,7 @@ body > .skiptranslate,
   flex-shrink: 0;
   width: max-content;
   white-space: nowrap;
-  animation: marqueeLeft 40s linear infinite;
+  animation: marqueeLeft 60s linear infinite;
   will-change: transform;
   transform: translateZ(0);
 }
@@ -189,7 +189,7 @@ body > .skiptranslate,
   flex-shrink: 0;
   width: max-content;
   white-space: nowrap;
-  animation: marqueeRight 40s linear infinite;
+  animation: marqueeRight 60s linear infinite;
   will-change: transform;
   transform: translateZ(0);
 }
