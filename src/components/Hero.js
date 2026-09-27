@@ -161,29 +161,31 @@ export default function Hero() {
       
 
       {/* Top Mask Layer (Iron Man Armor) - Rendered with dynamic radial reveal mask */}
-      <div
-        className="absolute inset-0 pointer-events-none z-20"
-        style={
-          maskPos
-            ? {
-                maskImage: `radial-gradient(circle 220px at ${maskPos.x}px ${maskPos.y}px, transparent 0%, transparent 45%, rgba(0, 0, 0, 0.3) 75%, black 100%)`,
-                WebkitMaskImage: `radial-gradient(circle 220px at ${maskPos.x}px ${maskPos.y}px, transparent 0%, transparent 45%, rgba(0, 0, 0, 0.3) 75%, black 100%)`,
-              }
-            : {
-                maskImage: "none",
-                WebkitMaskImage: "none",
-              }
-        }
-      >
-        <Image
-          alt="Iron Man Suit Layer"
-          src="/Assets/Iron_Man.png"
-          fill
-          priority
-          quality={60}
-          sizes="100vw"
-          className="object-contain object-bottom pointer-events-none select-none scale-125 [@media(max-aspect-ratio:7/10)]:scale-[2.18] lg:!scale-125 xl:!scale-125 origin-bottom translate-y-20 [@media(max-aspect-ratio:7/10)]:-translate-y-[12rem] lg:!translate-y-20 xl:!translate-y-24 -translate-x-4 [@media(max-aspect-ratio:7/10)]:-translate-x-[0.57rem] lg:!translate-x-28 xl:!translate-x-36"
-        />
+      <div className="hidden lg:block absolute inset-0 pointer-events-none z-20">
+        <div
+          className="hidden [@media(hover:hover)]:block absolute inset-0 pointer-events-none"
+          style={
+            maskPos
+              ? {
+                  maskImage: `radial-gradient(circle 220px at ${maskPos.x}px ${maskPos.y}px, transparent 0%, transparent 45%, rgba(0, 0, 0, 0.3) 75%, black 100%)`,
+                  WebkitMaskImage: `radial-gradient(circle 220px at ${maskPos.x}px ${maskPos.y}px, transparent 0%, transparent 45%, rgba(0, 0, 0, 0.3) 75%, black 100%)`,
+                }
+              : {
+                  maskImage: "none",
+                  WebkitMaskImage: "none",
+                }
+          }
+        >
+          <Image
+            alt="Iron Man Suit Layer"
+            src="/Assets/Iron_Man.png"
+            fill
+            priority
+            quality={60}
+            sizes="100vw"
+            className="object-contain object-bottom pointer-events-none select-none scale-125 [@media(max-aspect-ratio:7/10)]:scale-[2.18] lg:!scale-125 origin-bottom translate-y-20 [@media(max-aspect-ratio:7/10)]:-translate-y-[12rem] lg:!translate-y-20 -translate-x-4 [@media(max-aspect-ratio:7/10)]:-translate-x-[0.57rem] lg:!translate-x-[9.5rem]"
+          />
+        </div>
       </div>
 
 
@@ -212,11 +214,11 @@ export default function Hero() {
           className="pointer-events-auto group block"
         >
           <div ref={titleRef} className="opacity-0 flex flex-col items-start gap-1">
-            <span className="font-black uppercase italic text-lg sm:text-xl md:text-2xl lg:text-3xl tracking-wider text-[#AA0505] block pl-1.5 sm:pl-2">
+            <span className="font-black uppercase italic text-xl sm:text-xl md:text-2xl lg:text-3xl tracking-wider text-[#AA0505] block pl-1.5 sm:pl-2">
               I AM
             </span>
             <h1
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter leading-none italic uppercase transition-transform duration-200 text-gray-900 dark:text-white group-hover:scale-[1.01]"
+              className="text-[3rem] leading-[0.9] sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tighter italic uppercase transition-transform duration-200 text-gray-900 dark:text-white group-hover:scale-[1.01]"
               style={{
                 textShadow: "4px 4px 0px #AA0505, 7px 7px 0px #6A0C0B",
               }}
