@@ -210,14 +210,10 @@ export default function ProjectsSection() {
       >
         {/* Carousel Track Viewport */}
         <div
-          className="w-full overflow-hidden cursor-grab active:cursor-grabbing rounded-3xl"
+          className="w-full overflow-hidden rounded-3xl"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEndHandler}
-          onMouseDown={onMouseDown}
-          onMouseMove={onMouseMove}
-          onMouseUp={onMouseUp}
-          onMouseLeave={onMouseLeave}
         >
           <div
             className="flex transition-transform duration-500 ease-out will-change-transform"
@@ -318,7 +314,7 @@ export default function ProjectsSection() {
           onClick={handlePrev}
           title="Previous Project (Arrow Left)"
           aria-label="Previous Project"
-          className="absolute left-4 sm:left-7 top-1/2 -translate-y-1/2 z-30 group flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 transition-all duration-200 active:scale-90 cursor-pointer shadow-lg bg-white/95 border-gray-200 hover:border-[#AA0505] hover:bg-[#AA0505] hover:text-white text-gray-900 shadow-gray-300/50 backdrop-blur-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#AA0505] select-none"
+          className="hidden sm:flex absolute left-4 sm:left-7 top-1/2 -translate-y-1/2 z-30 group items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 transition-all duration-200 active:scale-90 cursor-pointer shadow-lg bg-white/95 border-gray-200 hover:border-[#AA0505] hover:bg-[#AA0505] hover:text-white text-gray-900 shadow-gray-300/50 backdrop-blur-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#AA0505] select-none"
         >
           <svg
             className="w-4 h-4 sm:w-5 sm:h-5 stroke-current stroke-3 fill-none transition-transform group-hover:-translate-x-0.5"
@@ -334,7 +330,7 @@ export default function ProjectsSection() {
           onClick={handleNext}
           title="Next Project (Arrow Right)"
           aria-label="Next Project"
-          className="absolute right-4 sm:right-7 top-1/2 -translate-y-1/2 z-30 group flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 transition-all duration-200 active:scale-90 cursor-pointer shadow-lg bg-white/95 border-gray-200 hover:border-[#AA0505] hover:bg-[#AA0505] hover:text-white text-gray-900 shadow-gray-300/50 backdrop-blur-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#AA0505] select-none"
+          className="hidden sm:flex absolute right-4 sm:right-7 top-1/2 -translate-y-1/2 z-30 group items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 transition-all duration-200 active:scale-90 cursor-pointer shadow-lg bg-white/95 border-gray-200 hover:border-[#AA0505] hover:bg-[#AA0505] hover:text-white text-gray-900 shadow-gray-300/50 backdrop-blur-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#AA0505] select-none"
         >
           <svg
             className="w-4 h-4 sm:w-5 sm:h-5 stroke-current stroke-3 fill-none transition-transform group-hover:translate-x-0.5"
