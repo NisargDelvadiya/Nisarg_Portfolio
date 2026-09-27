@@ -548,7 +548,7 @@ export default function Footer() {
                 aria-label="Visit Nisarg Jayesh Delvadiya Official Website"
                 className="text-gray-200 hover:text-[#FBCA03] transition-colors underline underline-offset-4 decoration-[#AA0505] hover:decoration-[#FBCA03] font-bold"
               >
-                Nisarg Jayesh Delvadiya&trade;
+                Nisarg Jayesh Delvadiya;
               </a>{" "}
               • All Rights Reserved
             </p>
