@@ -319,9 +319,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start w-full">
             {/* Left Side: Work With Me / Copy Email Column */}
             <div className="lg:col-span-4 xl:col-span-4 flex flex-col items-center lg:items-start gap-3 text-center lg:text-left w-full mb-8 lg:mb-0">
-              <span className="font-black uppercase text-xs sm:text-sm tracking-[0.25em] transition-colors duration-300 text-[#AA0505]">
-                WORK WITH ME
-              </span>
+
               <h2 className="text-white text-2xl sm:text-3xl lg:text-4xl font-black italic tracking-tight uppercase leading-tight">
                 HAVE A PROJECT IN MIND?
               </h2>

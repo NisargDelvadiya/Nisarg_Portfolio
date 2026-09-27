@@ -15,34 +15,6 @@ export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false);
-
-  // Initialize Dark Mode from localStorage or system preference
-  useEffect(() => {
-    const savedTheme = localStorage.getItem("theme");
-    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    if (savedTheme === "dark" || (!savedTheme && prefersDark)) {
-      setIsDarkMode(true);
-      document.documentElement.classList.add("dark");
-    } else {
-      setIsDarkMode(false);
-      document.documentElement.classList.remove("dark");
-    }
-  }, []);
-
-  const toggleDarkMode = () => {
-    setIsDarkMode((prev) => {
-      const newTheme = !prev;
-      if (newTheme) {
-        document.documentElement.classList.add("dark");
-        localStorage.setItem("theme", "dark");
-      } else {
-        document.documentElement.classList.remove("dark");
-        localStorage.setItem("theme", "light");
-      }
-      return newTheme;
-    });
-  };
 
   useEffect(() => {
     let lastScrollY = window.scrollY;
@@ -109,47 +81,20 @@ export default function Navbar() {
           className="group inline-flex items-center gap-2 cursor-pointer select-none active:scale-95 active:translate-y-0.5 transition-transform duration-150"
         >
           <span
-            className={`inline-flex items-center gap-1.5 sm:gap-2 text-base sm:text-xl md:text-2xl font-black italic tracking-tight uppercase whitespace-nowrap transition-colors duration-200 ${
-              isScrolled || isDarkMode
-                ? "text-white group-hover:text-[#FBCA03]"
-                : "text-black group-hover:text-[#AA0505]"
-            }`}
+            className="inline-flex items-center gap-1.5 sm:gap-2 text-base sm:text-xl md:text-2xl font-black italic tracking-tight uppercase whitespace-nowrap transition-colors duration-200 text-white group-hover:text-[#FBCA03]"
           >
             <span><span className="text-[#AA0505]">N</span>ISARG</span>
             <span><span className="text-[#AA0505]">J</span>AYESH</span>
             <span>DELVADIYA</span>
           </span>
         </a>
-        
-        {/* Dark Mode Toggle */}
-        <button
-          type="button"
-          onClick={toggleDarkMode}
-          className={`p-2 rounded-full transition-colors active:scale-95 cursor-pointer ${
-            isScrolled || isDarkMode ? "text-white hover:bg-white/10" : "text-black hover:bg-black/5"
-          }`}
-          title="Toggle Dark Mode"
-          aria-label="Toggle Dark Mode"
-        >
-          {isDarkMode ? (
-            <svg className="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 24 24">
-              <path d="M12 3a9 9 0 1 0 9 9c0-.46-.04-.92-.1-1.36a5.389 5.389 0 0 1-4.4 2.26 5.403 5.403 0 0 1-3.14-9.8c-.44-.06-.9-.1-1.36-.1z" />
-            </svg>
-          ) : (
-            <svg className="w-5 h-5 sm:w-6 sm:h-6 fill-current" viewBox="0 0 24 24">
-              <path d="M6.995 12c0 2.761 2.246 5.007 5.007 5.007s5.007-2.246 5.007-5.007-2.246-5.007-5.007-5.007S6.995 9.239 6.995 12zM11 5.25V1h2v4.25h-2zm0 13.5V23h2v-4.25h-2zM17.5 11H23v2h-5.5v-2zM1 11h5.5v2H1v-2zm14.222-5.364l3.004-3.004 1.414 1.414-3.004 3.004-1.414-1.414zM4.364 18.222l3.004-3.004 1.414 1.414-3.004 3.004-1.414-1.414zM18.222 19.636l-3.004-3.004 1.414-1.414 3.004 3.004-1.414 1.414zM5.778 7.05L2.774 4.046 4.188 2.632l3.004 3.004-1.414 1.414z" />
-            </svg>
-          )}
-        </button>
       </div>
 
       {/* Right Side Controls */}
       <div className="flex items-center gap-3 sm:gap-6">
         {/* Desktop Navigation Links */}
         <div
-          className={`hidden md:flex items-center gap-6 lg:gap-8 text-xs lg:text-sm font-extrabold tracking-widest uppercase transition-colors duration-200 ${
-            isScrolled || isDarkMode ? "text-white" : "text-black"
-          }`}
+          className="hidden md:flex items-center gap-6 lg:gap-8 text-xs lg:text-sm font-extrabold tracking-widest uppercase transition-colors duration-200 text-white"
         >
           {["ABOUT", "SKILLS", "PROJECTS", "EXPERIENCES"].map((item) => (
             <a
@@ -169,9 +114,7 @@ export default function Navbar() {
         <button
           type="button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className={`md:hidden p-2 rounded-lg transition-colors active:scale-95 cursor-pointer ${
-            isScrolled || isDarkMode ? "text-white" : "text-black"
-          }`}
+          className="md:hidden p-2 rounded-lg transition-colors active:scale-95 cursor-pointer text-white"
           title="Toggle Mobile Navigation Menu"
           aria-label="Toggle Navigation Menu"
         >

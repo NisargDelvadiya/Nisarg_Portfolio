@@ -125,9 +125,7 @@ export default function SkillsSection() {
 
       {/* Section Header */}
       <div ref={headerRef} className="relative z-20 flex flex-col items-center gap-2 mb-10 text-center max-w-2xl opacity-0">
-        <span className="font-black uppercase text-xs md:text-sm tracking-[0.25em] transition-colors duration-300 text-[#AA0505]">
-          ARSENAL & EXPERTISE
-        </span>
+
         <h2
           className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter italic uppercase transition-colors duration-300 text-gray-900 dark:text-white"
           style={{

@@ -187,9 +187,7 @@ export default function ProjectsSection() {
 
       {/* Section Header */}
       <div ref={headerRef} className="relative z-20 flex flex-col items-center gap-2 mb-10 text-center max-w-2xl opacity-0">
-        <span className="font-black uppercase text-xs md:text-sm tracking-[0.25em] transition-colors duration-300 text-[#AA0505]">
-          FEATURED WORK
-        </span>
+
         <h2
           className="text-4xl md:text-5xl lg:text-6xl font-black tracking-tighter italic uppercase transition-colors duration-300 text-gray-900 dark:text-white"
           style={{
@@ -314,7 +312,7 @@ export default function ProjectsSection() {
           onClick={handlePrev}
           title="Previous Project (Arrow Left)"
           aria-label="Previous Project"
-          className="hidden sm:flex absolute left-4 sm:left-7 top-1/2 -translate-y-1/2 z-30 group items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 transition-all duration-200 active:scale-90 cursor-pointer shadow-lg bg-white/95 border-gray-200 hover:border-[#AA0505] hover:bg-[#AA0505] hover:text-white text-gray-900 shadow-gray-300/50 backdrop-blur-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#AA0505] select-none"
+          className="hidden lg:flex absolute left-4 sm:left-7 top-1/2 -translate-y-1/2 z-30 group items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 transition-all duration-200 active:scale-90 cursor-pointer shadow-lg bg-white/95 border-gray-200 hover:border-[#AA0505] hover:bg-[#AA0505] hover:text-white text-gray-900 shadow-gray-300/50 backdrop-blur-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#AA0505] select-none"
         >
           <svg
             className="w-4 h-4 sm:w-5 sm:h-5 stroke-current stroke-3 fill-none transition-transform group-hover:-translate-x-0.5"
@@ -330,7 +328,7 @@ export default function ProjectsSection() {
           onClick={handleNext}
           title="Next Project (Arrow Right)"
           aria-label="Next Project"
-          className="hidden sm:flex absolute right-4 sm:right-7 top-1/2 -translate-y-1/2 z-30 group items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 transition-all duration-200 active:scale-90 cursor-pointer shadow-lg bg-white/95 border-gray-200 hover:border-[#AA0505] hover:bg-[#AA0505] hover:text-white text-gray-900 shadow-gray-300/50 backdrop-blur-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#AA0505] select-none"
+          className="hidden lg:flex absolute right-4 sm:right-7 top-1/2 -translate-y-1/2 z-30 group items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-full border-2 transition-all duration-200 active:scale-90 cursor-pointer shadow-lg bg-white/95 border-gray-200 hover:border-[#AA0505] hover:bg-[#AA0505] hover:text-white text-gray-900 shadow-gray-300/50 backdrop-blur-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#AA0505] select-none"
         >
           <svg
             className="w-4 h-4 sm:w-5 sm:h-5 stroke-current stroke-3 fill-none transition-transform group-hover:translate-x-0.5"
