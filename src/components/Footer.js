@@ -536,7 +536,7 @@ export default function Footer() {
           </div>
 
           {/* Bottom Bar: Copyright on Left, Controls on Right in One Line */}
-          <div className="border-t border-white/10 pt-6 pb-2 sm:pb-3 flex flex-col md:flex-row items-center justify-between gap-4 text-xs sm:text-sm text-gray-400 w-full">
+          <div className="border-t border-white/10 pt-6 pb-2 sm:pb-3 flex flex-col-reverse md:flex-row items-center justify-between gap-6 text-xs sm:text-sm text-gray-400 w-full">
             {/* Copyright, UI Design Credit & Developer Watermark Line (Left) */}
             <p className="text-center md:text-left text-[11px] sm:text-xs md:text-sm text-gray-400 font-medium leading-relaxed">
               &copy; 2026 • Made with ❤️ in Bharat 🇮🇳 |{" "}

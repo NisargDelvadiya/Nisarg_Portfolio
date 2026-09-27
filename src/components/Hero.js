@@ -204,7 +204,7 @@ export default function Hero() {
       </div>
 
       {/* Hero Overlay Content */}
-      <div className="absolute top-[65%] lg:top-1/2 -translate-y-1/2 left-4 md:left-6 lg:left-12 z-30 flex flex-col gap-3 pointer-events-none drop-shadow-md max-w-lg w-full">
+      <div className="absolute top-[58%] lg:top-1/2 -translate-y-1/2 left-4 md:left-6 lg:left-12 z-30 flex flex-col gap-3 pointer-events-none drop-shadow-md max-w-lg w-full">
         <a
           href="https://www.nisargjayeshdelvadiya.com"
           target="_blank"
